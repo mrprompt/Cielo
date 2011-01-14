@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Cielo
  *
@@ -169,6 +168,12 @@ class Cielo
      * @var integer
      */
     private $_validade;
+    /**
+     * Descricao da transação
+     *
+     * @var string 
+     */
+    private $_descricao;
     /**
      * Ambiente (teste ou producao)
      *
@@ -808,6 +813,31 @@ class Cielo
 
         return $this;
     }
+    
+    /**
+     * Informa a descrição da operação
+     *
+     * @access public
+     * @param  string $_descricao
+     * @return Cielo 
+     */
+    public function setDescricao($_descricao)
+    {
+        $this->_descricao = $_descricao;
+        
+        return $this;
+    }
+    
+    /**
+     * Retorna a descrição configurada para a transação
+     *
+     * @access public
+     * @return string 
+     */
+    public function getDescricao()
+    {
+        return $this->_descricao;
+    }
 
     /**
      * Retorna o status do debug
@@ -1220,6 +1250,7 @@ class Cielo
         $dp->addChild('valor', $this->_valorPedido);
         $dp->addChild('moeda', $this->_moeda);
         $dp->addChild('data-hora', $this->_dataHora);
+        $dp->addChild('descricao', $this->_descricao);
         $dp->addChild('idioma', $this->_idioma);
 
         // forma-pagamento
