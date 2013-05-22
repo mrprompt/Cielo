@@ -217,11 +217,11 @@ class Transacao
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $moeda)) {
             throw new Exception('Moeda inválida');
-        } else {
-            $this->moeda = (integer) substr($moeda, 0, 3);
-
-            return $this;
         }
+
+        $this->moeda = (integer) substr($moeda, 0, 3);
+
+        return $this;
     }
 
     /**
@@ -320,11 +320,11 @@ class Transacao
     {
         if (strlen($dataHora) !== 19) {
             throw new Exception('Formato inválido.');
-        } else {
-            $this->dataHora = $dataHora;
-
-            return $this;
         }
+
+        $this->dataHora = $dataHora;
+
+        return $this;
     }
 
     /**
@@ -349,11 +349,11 @@ class Transacao
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $numero)) {
             throw new Exception('Número do pedido inválido.');
-        } else {
-            $this->numeroPedido = substr($numero, 0, 50);
-
-            return $this;
         }
+
+        $this->numeroPedido = substr($numero, 0, 50);
+
+        return $this;
     }
 
     /**
@@ -381,11 +381,11 @@ class Transacao
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $valor)) {
             throw new Exception('Valor inválido.');
-        } else {
-            $this->valorPedido = substr($valor, 0, 12);
-
-            return $this;
         }
+
+        $this->valorPedido = substr($valor, 0, 12);
+
+        return $this;
     }
 
     /**

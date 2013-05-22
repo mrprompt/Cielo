@@ -163,11 +163,11 @@ class Cartao
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $codigo)) {
             throw new Exception('Código de segurança inválido.');
-        } else {
-            $this->codigoSeguranca = filter_var($codigo, FILTER_SANITIZE_STRING);
-
-            return $this;
         }
+
+        $this->codigoSeguranca = filter_var($codigo, FILTER_SANITIZE_STRING);
+
+        return $this;
     }
 
     /**
@@ -194,9 +194,9 @@ class Cartao
             $this->nomePortador = substr($nomePortador, 0, 50);
 
             return $this;
-        } else {
-            throw new Exception('Caracteres inválidos no nome do portador.');
         }
+
+        throw new Exception('Caracteres inválidos no nome do portador.');
     }
 
     /**
@@ -260,8 +260,8 @@ class Cartao
             $this->bandeira = strtolower($bandeira);
 
             return $this;
-        } else {
-            throw new Exception('Bandeira inválida.');
         }
+
+        throw new Exception('Bandeira inválida.');
     }
 }
