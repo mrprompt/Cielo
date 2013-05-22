@@ -461,11 +461,16 @@ class Cliente
      */
     public function autorizacao(Transacao $transacao)
     {
-        $tipo = $this->_xml->addChild(self::AUTORIZACAO_HEADER, '');
-        $tipo->addAttribute('id', self::AUTORIZACAO_ID);
-        $tipo->addAttribute('versao', self::VERSAO);
-        $tipo->addChild('tid', $transacao->getTid());
-        $tipo->addChild('dados-ec', $this->dadosEC());
+        $xml = sprintf(
+            '<%s id="%d" versao="%s"></%s>', 
+            self::AUTORIZACAO_HEADER, 
+            self::AUTORIZACAO_ID,
+            self::VERSAO,
+            self::AUTORIZACAO_HEADER
+        );
+        $this->_xml = new \SimpleXMLElement($xml);
+        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->dadosEC();
     }
 
     /**
@@ -488,11 +493,16 @@ class Cliente
      */
     public function captura(Transacao $transacao)
     {
-        $tipo = $this->_xml->addChild(self::CAPTURA_HEADER, '');
-        $tipo->addAttribute('id', self::CAPTURA_ID);
-        $tipo->addAttribute('versao', self::VERSAO);
-        $tipo->addChild('tid', $transacao->getTid());
-        $tipo->addChild($this->dadosEC());
+        $xml = sprintf(
+            '<%s id="%d" versao="%s"></%s>', 
+            self::CAPTURA_HEADER, 
+            self::CAPTURA_ID,
+            self::VERSAO,
+            self::CAPTURA_HEADER
+        );
+        $this->_xml = new \SimpleXMLElement($xml);
+        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->dadosEC();
     }
 
     /**
@@ -560,13 +570,16 @@ class Cliente
      */
     public function tid(Transacao $transacao, Cartao $cartao)
     {
-        $tipo = $this->_xml->addChild(self::TID_HEADER);
-        $tipo->addAttribute('id', self::TID);
-        $tipo->addAttribute('versao', self::VERSAO);
-        $tipo->addChild($this->dadosEC());
-        $tipo->addChild($this->pagamento($transacao, $cartao));
-
-        return $tipo;
+        $xml = sprintf(
+            '<%s id="%d" versao="%s"></%s>', 
+            self::TID_HEADER, 
+            self::TID_ID,
+            self::VERSAO,
+            self::TID_HEADER
+        );
+        $this->_xml = new \SimpleXMLElement($xml);
+        $this->dadosEC();
+        $this->pagamento($transacao, $cartao);
     }
 
     /**
@@ -593,17 +606,22 @@ class Cliente
      */
     public function autorizacaoPortador(Transacao $trans, Cartao $card)
     {
-        $tipo = $this->_xml->addChild(self::AUTORIZACAO_PORTADOR_HEADER);
-        $tipo->addAttribute('id', self::AUTORIZACAO_PORTADOR);
-        $tipo->addAttribute('versao', self::VERSAO);
-        $tipo->addChild('tid', $trans->getTid());
-        $tipo->addChild($this->dadosEC());
-        $this->addChild($this->dadosPortador($card));
-        $this->addChild($this->pedido($trans));
-        $this->addChild($this->pagamento($trans, $card));
-        $this->addChild('capturar-automaticamente', $trans->getCapturar());
-        
-        return $tipo;
+        $xml = sprintf(
+            '<%s id="%d" versao="%s"></%s>', 
+            self::AUTORIZACAO_PORTADOR_HEADER, 
+            self::AUTORIZACAO_PORTADOR_ID,
+            self::VERSAO,
+            self::AUTORIZACAO_PORTADOR_HEADER
+        );
+        $this->_xml = new \SimpleXMLElement($xml);
+        $this->_xml
+             ->addChild('tid', $trans->getTid());
+        $this->dadosEC();
+        $this->dadosPortador($card);
+        $this->pedido($trans);
+        $this->pagamento($trans, $card);
+        $this->_xml
+             ->addChild('capturar-automaticamente', $trans->getCapturar());
     }
     
     /**
