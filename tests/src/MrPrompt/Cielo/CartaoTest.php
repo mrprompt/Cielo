@@ -31,26 +31,32 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers MrPrompt\Cielo\Cartao::getCartao
-     * @todo   Implement testGetCartao().
      */
     public function testGetCartao()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $cartao = '4557759360725444';
+        $this->object->setCartao($cartao);
+        
+        $this->assertEquals($cartao, $this->object->getCartao());
     }
 
     /**
      * @covers MrPrompt\Cielo\Cartao::setCartao
-     * @todo   Implement testSetCartao().
      */
     public function testSetCartao()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $cartao = '4557759360725444';
+        $this->assertTrue($this->object->setCartao($cartao) instanceof \MrPrompt\Cielo\Cartao);
+    }
+
+    /**
+     * @covers MrPrompt\Cielo\Cartao::setCartao
+     */
+    public function testSetCartaoInvalido()
+    {
+        $cartao = '455775936072';
+        $this->setExpectedException('\Exception');
+        $this->assertFalse($this->object->setCartao($cartao) instanceof \MrPrompt\Cielo\Cartao);
     }
 
     /**

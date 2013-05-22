@@ -20,6 +20,11 @@ namespace MrPrompt\Cielo;
  */
 use MrPrompt\Cielo\Cartao\Exception;
 
+/**
+ * @uses Respect\Validation\Validator
+ */
+use Respect\Validation\Validator as v;
+
 class Cartao
 {
     /**
@@ -84,14 +89,20 @@ class Cartao
      * Configura o número do cartão
      *
      * @access public
-     * @param  integer $_cartao
+     * @param  integer $cartao
      * @return Cielo
      */
-    public function setCartao($_cartao)
+    public function setCartao($cartao)
     {
-        $this->_cartao = preg_replace('/[^[:digit:]]/', '', $_cartao);
+        try {
+            v::notEmpty()->creditCard()->check($cartao);
+                
+            $this->_cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
 
-        return $this;
+            return $this;
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
