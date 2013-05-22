@@ -1,6 +1,6 @@
 {
     "name": "mrprompt/cielo",
-    "description": "Description of project Db.",
+    "description": "Integration with Cielo gateway.",
     "type": "library",
     "license": "GPL-3.0+",
     "keywords": ["cielo", "payment", "gateway", "credit", "card"],

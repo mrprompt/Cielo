@@ -30,29 +30,29 @@ class Cliente
      *
      * @var string
      */
-    private $_urlRetorno;
-    
+    private $urlRetorno;
+
     /**
      * Número de registro
      *
      * @var integer
      */
-    private $_numero;
-    
+    private $numero;
+
     /**
      * Chave de registro
      *
      * @var string
      */
-    private $_chave;
-    
+    private $chave;
+
     /**
      * XML da menasgem de chamada ao serviço
      *
      * @var \SimpleXMLElement
      */
-    private $_xml;
-    
+    private $xml;
+
     /**
      * Idioma do pedido
      *
@@ -66,15 +66,15 @@ class Cliente
      *
      * @var string
      */
-    private $_idioma = 'PT';
-    
+    private $idioma = 'PT';
+
     /**
      * Certificado SSL
      *
      * @var string
      */
-    private $_sslCertificate;
-    
+    private $sslCertificate;
+
     /**
      * Ambiente (teste ou producao)
      *
@@ -82,109 +82,109 @@ class Cliente
      *
      * @var string
      */
-    private $_ambiente = 'producao';
-    
+    private $ambiente = 'producao';
+
     /**
      * Identificador de chamada do tipo transacao
-     * 
+     *
      * @const integer
      */
     const TRANSACAO_ID     = 1;
-    
+
     /**
      * Cabeçalho xml de chamada do tipo transacao
-     * 
+     *
      * @const string
      */
     const TRANSACAO_HEADER = 'requisicao-transacao';
-    
+
     /**
      * Identificador de chamada do tipo transacao
-     * 
+     *
      * @const integer
      */
     const AUTORIZACAO_ID     = 2;
-    
+
     /**
      * Cabeçalho xml de chamada do tipo transacao
-     * 
+     *
      * @const string
      */
     const AUTORIZACAO_HEADER = 'requisicao-autorizacao-tid';
-    
+
     /**
      * Identificador para transação de captura
-     * 
+     *
      * @const integer
      */
     const CAPTURA_ID = 3;
-    
+
     /**
      * Cabeçalho xml para transação de captura
-     * 
+     *
      * @const string
      */
     const CAPTURA_HEADER = 'requisicao-captura';
-    
+
     /**
      * Identificador de chamada do tipo cancelamento
-     * 
+     *
      * @const integer
      */
     const CANCELAMENTO_ID = 4;
-    
+
     /**
      * Cabeçalho xml de chamada do tipo cancelamento
-     * 
+     *
      * @const string
      */
     const CANCELAMENTO_HEADER = 'requisicao-cancelamento';
-    
+
     /**
      * Identificador de chamada do tipo consulta
-     * 
+     *
      * @const integer
      */
     const CONSULTA_ID = 5;
-    
+
     /**
      * Cabeçalho xml de chamada do tipo consulta
-     * 
+     *
      * @const string
      */
     const CONSULTA_HEADER = 'requisicao-consulta';
-    
+
     /**
      * Identificador de chamada para requisição de um TID
-     * 
+     *
      * @const integer
      */
     const TID_ID = 6;
-    
+
     /**
      * Cabeçalho xml de chamada para requisição de um TID
-     * 
+     *
      * @const string
      */
     const TID_HEADER = 'requisicao-tid';
-    
+
     /**
      * Transação com autorização ao portador
-     * 
+     *
      * @const integer
      */
     const AUTORIZACAO_PORTADOR_ID = 7;
-    
+
     /**
      * Cabeçalho xml da chamada de captura com autorização ao portador
-     * 
+     *
      * @const string
      */
     const AUTORIZACAO_PORTADOR_HEADER = 'requisicao-autorizacao-portador';
-    
+
     /**
      * Versão do web service em uso pelo cliente.
-     * 
+     *
      * @const float
      */
     const VERSAO       = '1.1.0';
@@ -200,8 +200,8 @@ class Cliente
      */
     public function __construct($numero = null, $chave = null)
     {
-        $this->_numero = substr($numero, 0, 20);
-        $this->_chave  = substr($chave, 0, 100);
+        $this->numero = substr($numero, 0, 20);
+        $this->chave  = substr($chave, 0, 100);
     }
 
     /**
@@ -212,26 +212,29 @@ class Cliente
      */
     public function getUrlRetorno()
     {
-        return $this->_urlRetorno;
+        return $this->urlRetorno;
     }
 
     /**
      * Define a URL de Retorno da transação
      *
      * @access public
-     * @param  string $_url
+     * @param  string $url
      * @return Cielo
      */
-    public function setUrlRetorno($_url = null)
+    public function setUrlRetorno($url = null)
     {
-        $valida = filter_var($_url, FILTER_VALIDATE_URL,
-                        FILTER_FLAG_SCHEME_REQUIRED);
+        $valida = filter_var(
+            $url,
+            FILTER_VALIDATE_URL,
+            FILTER_FLAG_SCHEME_REQUIRED
+        );
 
         if ($valida == false) {
             throw new Exception('URL de retorno inválida.');
         }
 
-        $this->_urlRetorno = substr($_url, 0, 1024);
+        $this->urlRetorno = substr($url, 0, 1024);
 
         return $this;
     }
@@ -244,7 +247,7 @@ class Cliente
      */
     public function getXML()
     {
-        return $this->_xml;
+        return $this->xml;
     }
 
     /**
@@ -255,7 +258,7 @@ class Cliente
      */
     public function getIdioma()
     {
-        return $this->_idioma;
+        return $this->idioma;
     }
 
     /**
@@ -270,19 +273,18 @@ class Cliente
      * Caso não preenchido, assume-se PT.
      *
      * @access public
-     * @param  string $_idioma
+     * @param  string $idioma
      * @return Cielo
      */
-    public function setIdioma($_idioma)
+    public function setIdioma($idioma)
     {
-        switch ($_idioma) {
+        switch ($idioma) {
             case 'PT':
             case 'EN':
             case 'ES':
-                $this->_idioma = $_idioma;
+                $this->idioma = $idioma;
 
                 return $this;
-                break;
             default:
                 throw new Exception('Idioma inválido.');
         }
@@ -296,136 +298,136 @@ class Cliente
      */
     public function getAmbiente()
     {
-        return $this->_ambiente;
+        return $this->ambiente;
     }
 
     /**
      * Configura o ambiente a ser utilizado nas chamadas de transações
      *
      * @access public
-     * @param  string $_ambiente teste | produção (default)
+     * @param  string $ambiente teste | produção (default)
      * @return Cielo
      */
-    public function setAmbiente($_ambiente)
+    public function setAmbiente($ambiente)
     {
-        switch ($_ambiente) {
+        switch ($ambiente) {
             case 'teste':
             case 'produção':
             case 'producao':
-                $this->_ambiente = $_ambiente;
+                $this->ambiente = $ambiente;
 
                 return $this;
             default:
                 throw new Exception('Ambiente inválido.');
         }
     }
-    
+
     /**
-	 * Retorna o caminho do certificado SSL
-	 *
-	 * @access public
-	 * @return string
-	 */
-	public function getSslCertificate()
-	{
-		return $this->_sslCertificate;
-	}
+     * Retorna o caminho do certificado SSL
+     *
+     * @access public
+     * @return string
+     */
+    public function getSslCertificate()
+    {
+        return $this->sslCertificate;
+    }
 
-	/**
-	 * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
-	 *
-	 * @access public
-	 * @param  string $_sslCertificate
-	 * @return Cielo
-	 */
-	public function setSslCertificate($_sslCertificate = '')
-	{
-		if (!is_string($_sslCertificate)) {
-			throw new Exception('Parâmetro inválido.');
-		}
+    /**
+     * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
+     *
+     * @access public
+     * @param  string $sslCertificate
+     * @return Cielo
+     */
+    public function setSslCertificate($sslCertificate = '')
+    {
+        if (!is_string($sslCertificate)) {
+            throw new Exception('Parâmetro inválido.');
+        }
 
-		$this->_sslCertificate = $_sslCertificate;
+        $this->sslCertificate = $sslCertificate;
 
-		return $this;
-	}
+        return $this;
+    }
 
     /**
      * Cria o nó com os dados de acesso.
-     * 
+     *
      */
     private function dadosEC()
     {
-        $ec  = $this->_xml->addChild('dados-ec', '');
-        $ec->addChild('numero', $this->_numero);
-        $ec->addChild('chave', $this->_chave);
+        $ec  = $this->xml->addChild('dados-ec', '');
+        $ec->addChild('numero', $this->numero);
+        $ec->addChild('chave', $this->chave);
     }
-    
+
     /**
      * Cria o nó com dados do portador do cartão de crédito
-     * 
+     *
      * @param \MrPrompt\Cielo\Cartao $cartao
      */
     private function dadosPortador(Cartao $cartao)
     {
-        $dc = $this->_xml->addChild('dados-portador', '');
+        $dc = $this->xml->addChild('dados-portador', '');
         $dc->addChild('numero', $cartao->getCartao());
         $dc->addChild('validade', $cartao->getValidade());
         $dc->addChild('indicador', $cartao->getIndicador());
         $dc->addChild('codigo-seguranca', $cartao->getCodigoSeguranca());
         $dc->addChild('nome-portador', $cartao->getNomePortador());
-        
+
         return $dc;
     }
-    
+
     /**
      * Cria o nó com dados do portador do cartão de crédito
-     * 
+     *
      * @param \MrPrompt\Cielo\Cartao $cartao
      */
     private function dadosCartao(Cartao $cartao)
     {
-        $dc = $this->_xml->addChild('dados-cartao', '');
+        $dc = $this->xml->addChild('dados-cartao', '');
         $dc->addChild('numero', $cartao->getCartao());
         $dc->addChild('validade', $cartao->getValidade());
         $dc->addChild('indicador', $cartao->getIndicador());
         $dc->addChild('codigo-seguranca', $cartao->getCodigoSeguranca());
         $dc->addChild('nome-portador', $cartao->getNomePortador());
-        
+
         return $dc;
     }
 
     /**
      * Cria os dados do pedido
-     * 
+     *
      * @param \MrPrompt\Cielo\Transacao $transacao
      * @return \SimpleXMLElement
      */
     private function pedido(Transacao $transacao)
     {
-        $dp = $this->_xml->addChild('dados-pedido', '');
+        $dp = $this->xml->addChild('dados-pedido', '');
         $dp->addChild('numero', $transacao->getTid());
         $dp->addChild('valor', $transacao->getValor());
         $dp->addChild('moeda', $transacao->getMoeda());
         $dp->addChild('data-hora', $transacao->getDataHora());
         $dp->addChild('descricao', $transacao->getDescricao());
-        $dp->addChild('idioma', $this->_idioma);
-        
+        $dp->addChild('idioma', $this->idioma);
+
         return $dp;
     }
-    
+
     /**
      * Cria o nó com os campos de pagamento a serem utilizados pelo cliente.
-     * 
+     *
      * @param \MrPrompt\Cielo\Transacao $transacao
      * @param \MrPrompt\Cielo\Cartao $cartao
      */
     private function pagamento(Transacao $transacao, Cartao $cartao)
     {
-        $fp  = $this->_xml->addChild('forma-pagamento', '');
+        $fp  = $this->xml->addChild('forma-pagamento', '');
         $fp->addChild('bandeira', $cartao->getBandeira());
         $fp->addChild('produto', $transacao->getProduto());
         $fp->addChild('parcelas', $transacao->getParcelas());
-        
+
         return $fp;
     }
 
@@ -441,22 +443,22 @@ class Cliente
     public function transacao(Transacao $transacao, Cartao $cartao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::TRANSACAO_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::TRANSACAO_HEADER,
             self::TRANSACAO_ID,
             self::VERSAO,
             self::TRANSACAO_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
+        $this->xml = new \SimpleXMLElement($xml);
         $this->dadosEC();
         $this->dadosPortador($cartao);
         $this->pedido($transacao);
         $this->pagamento($transacao, $cartao);
-        $this->_xml->addChild('url-retorno', $this->_urlRetorno);
-        $this->_xml->addChild('autorizar', $transacao->getAutorizar());
-        $this->_xml->addChild('capturar', $transacao->getCapturar());
-        $this->_xml->addChild('campo-livre', '');
-        $this->_xml->addChild('bin', substr($cartao->getCartao(), 0, 6));
+        $this->xml->addChild('url-retorno', $this->urlRetorno);
+        $this->xml->addChild('autorizar', $transacao->getAutorizar());
+        $this->xml->addChild('capturar', $transacao->getCapturar());
+        $this->xml->addChild('campo-livre', '');
+        $this->xml->addChild('bin', substr($cartao->getCartao(), 0, 6));
     }
 
     /**
@@ -482,14 +484,14 @@ class Cliente
     public function autorizacao(Transacao $transacao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::AUTORIZACAO_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::AUTORIZACAO_HEADER,
             self::AUTORIZACAO_ID,
             self::VERSAO,
             self::AUTORIZACAO_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
-        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
 
@@ -514,14 +516,14 @@ class Cliente
     public function captura(Transacao $transacao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::CAPTURA_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::CAPTURA_HEADER,
             self::CAPTURA_ID,
             self::VERSAO,
             self::CAPTURA_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
-        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
 
@@ -544,14 +546,14 @@ class Cliente
     public function cancelamento(Transacao $transacao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::CANCELAMENTO_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::CANCELAMENTO_HEADER,
             self::CANCELAMENTO_ID,
             self::VERSAO,
             self::CANCELAMENTO_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
-        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
 
@@ -567,14 +569,14 @@ class Cliente
     public function consulta(Transacao $transacao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::CONSULTA_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::CONSULTA_HEADER,
             self::CONSULTA_ID,
             self::VERSAO,
             self::CONSULTA_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
-        $this->_xml->addChild('tid', $transacao->getTid());
+        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
 
@@ -591,13 +593,13 @@ class Cliente
     public function tid(Transacao $transacao, Cartao $cartao)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::TID_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::TID_HEADER,
             self::TID_ID,
             self::VERSAO,
             self::TID_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
+        $this->xml = new \SimpleXMLElement($xml);
         $this->dadosEC();
         $this->pagamento($transacao, $cartao);
     }
@@ -627,25 +629,25 @@ class Cliente
     public function autorizacaoPortador(Transacao $trans, Cartao $card)
     {
         $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>', 
-            self::AUTORIZACAO_PORTADOR_HEADER, 
+            '<%s id="%d" versao="%s"></%s>',
+            self::AUTORIZACAO_PORTADOR_HEADER,
             self::AUTORIZACAO_PORTADOR_ID,
             self::VERSAO,
             self::AUTORIZACAO_PORTADOR_HEADER
         );
-        $this->_xml = new \SimpleXMLElement($xml);
-        $this->_xml
+        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml
              ->addChild('tid', $trans->getTid());
         $this->dadosEC();
         $this->dadosCartao($card);
         $this->pedido($trans);
         $this->pagamento($trans, $card);
-        $this->_xml
+        $this->xml
              ->addChild('capturar-automaticamente', $trans->getCapturar());
-        $this->_xml
+        $this->xml
              ->addChild('campo-livre', '');
     }
-    
+
     /**
      * Envia a chamada para o Web Service da Cielo
      *
@@ -654,73 +656,73 @@ class Cliente
      */
     public function enviaChamada()
     {
-        if (!$this->_xml instanceof \SimpleXMLElement) {
+        if (!$this->xml instanceof \SimpleXMLElement) {
             throw new Exception('XML não criado.');
         }
-        
+
         // URL para o ambiente de produção
         $url = 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
 
         // URL para o ambiente de teste
-        if ($this->_ambiente === 'teste') {
+        if ($this->ambiente === 'teste') {
             $url = 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
         }
 
         // Iniciando o objeto Curl
-        $_curl = curl_init();
+        $curl = curl_init();
 
         // Retornar a transferência ao objeto
-        curl_setopt($_curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         // Sempre utilizar uma nova conexão
-        curl_setopt($_curl, CURLOPT_FRESH_CONNECT, 1);
+        curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
 
         // Retornar Header
-        curl_setopt($_curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
 
         // Modo verboso
-        curl_setopt($_curl, CURLOPT_VERBOSE, 0);
+        curl_setopt($curl, CURLOPT_VERBOSE, 0);
 
         // Mostrar o corpo da requisição
-        curl_setopt($_curl, CURLOPT_NOBODY, 0);
+        curl_setopt($curl, CURLOPT_NOBODY, 0);
 
         // Seguir redirecionamentos
-        curl_setopt($_curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
 
         // Abrindo a url
-        curl_setopt($_curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_URL, $url);
 
         // Habilitando o método POST
-        curl_setopt($_curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POST, true);
 
         // envio os campos
-        curl_setopt($_curl, CURLOPT_POSTFIELDS, "mensagem={$this->_xml->asXML()}");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, "mensagem={$this->xml->asXML()}");
 
         //  o tempo em segundos de espera para obter uma conexão
-		curl_setopt($_curl, CURLOPT_CONNECTTIMEOUT, 10);
-	
-		//  o tempo máximo em segundos de espera para a execução da requisição (curl_exec)
-		curl_setopt($_curl, CURLOPT_TIMEOUT, 40);
-		
-		if ($this->getSslCertificate() != '') {
-			// verifica a validade do certificado
-			curl_setopt($_curl, CURLOPT_SSL_VERIFYPEER, true);
-	
-			// verifica se a identidade do servidor bate com aquela informada no certificado
-			curl_setopt($_curl, CURLOPT_SSL_VERIFYHOST, 2);
-		
-			// informa a localização do certificado para verificação com o peer
-			curl_setopt($_curl, CURLOPT_CAINFO, $this->getSslCertificate());
-			curl_setopt($_curl, CURLOPT_SSLVERSION, 3);
-		}
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+
+        //  o tempo máximo em segundos de espera para a execução da requisição (curl_exec)
+        curl_setopt($curl, CURLOPT_TIMEOUT, 40);
+
+        if ($this->getSslCertificate() != '') {
+            // verifica a validade do certificado
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+
+            // verifica se a identidade do servidor bate com aquela informada no certificado
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+
+            // informa a localização do certificado para verificação com o peer
+            curl_setopt($curl, CURLOPT_CAINFO, $this->getSslCertificate());
+            curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+        }
 
         // Faz a requisição HTTP
-        $result     = curl_exec($_curl);
-        $this->_xml = new \SimpleXMLElement($result);
+        $result     = curl_exec($curl);
+        $this->xml = new \SimpleXMLElement($result);
 
         // Fecho a conexão
-        curl_close($_curl);
-        
-        return $this->_xml;
+        curl_close($curl);
+
+        return $this->xml;
     }
 }

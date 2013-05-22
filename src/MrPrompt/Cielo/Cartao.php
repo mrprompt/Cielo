@@ -32,8 +32,8 @@ class Cartao
      *
      * @var integer
      */
-    private $_cartao;
-    
+    private $cartao;
+
     /**
      * Bandeira do cartão
      *
@@ -41,8 +41,8 @@ class Cartao
      *
      * @var string
      */
-    private $_bandeira = 'visa';
-    
+    private $bandeira = 'visa';
+
     /**
      * Indicador do código de segurança:
      *
@@ -53,27 +53,27 @@ class Cartao
      *
      * @var integer
      */
-    private $_indicador = 0;
+    private $indicador = 0;
     /**
      * Código de segurança do cartão, obrigatório se o indicador for 1
      *
      * @var string
      */
-    private $_codigoSeguranca;
+    private $codigoSeguranca;
     /**
      * Nome impresso no cartão.
      *
      * @var string
      */
-    private $_nomePortador;
+    private $nomePortador;
     /**
      * Validade do cartão no formato aaaamm.
      * Exemplos: 201212 (dez 2012).
      *
      * @var integer
      */
-    private $_validade;
-    
+    private $validade;
+
     /**
      * Retorna o número do cartão
      *
@@ -82,7 +82,7 @@ class Cartao
      */
     public function getCartao()
     {
-        return $this->_cartao;
+        return $this->cartao;
     }
 
     /**
@@ -96,8 +96,8 @@ class Cartao
     {
         try {
             v::notEmpty()->creditCard()->check($cartao);
-                
-            $this->_cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
+
+            $this->cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
 
             return $this;
         } catch (\Exception $e) {
@@ -113,7 +113,7 @@ class Cartao
      */
     public function getIndicador()
     {
-        return $this->_indicador;
+        return $this->indicador;
     }
 
     /**
@@ -126,17 +126,16 @@ class Cartao
      *
      * @var integer
      */
-    public function setIndicador($_indicador)
+    public function setIndicador($indicador)
     {
-        switch ((integer) $_indicador) {
+        switch ((integer) $indicador) {
             case 0:
             case 1:
             case 2:
             case 9:
-                $this->_indicador = (integer) substr($_indicador, 0, 1);
+                $this->indicador = (integer) substr($indicador, 0, 1);
 
                 return $this;
-                break;
             default:
                 throw new Exception('Indicador de segurança inválido.');
         }
@@ -150,22 +149,22 @@ class Cartao
      */
     public function getCodigoSeguranca()
     {
-        return $this->_codigoSeguranca;
+        return $this->codigoSeguranca;
     }
 
     /**
      * Seta o código de segurança do cartão
      *
      * @access public
-     * @param  string $_codigo
+     * @param  string $codigo
      * @return Cielo
      */
-    public function setCodigoSeguranca($_codigo)
+    public function setCodigoSeguranca($codigo)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_codigo)) {
+        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $codigo)) {
             throw new Exception('Código de segurança inválido.');
         } else {
-            $this->_codigoSeguranca = filter_var($_codigo, FILTER_SANITIZE_STRING);
+            $this->codigoSeguranca = filter_var($codigo, FILTER_SANITIZE_STRING);
 
             return $this;
         }
@@ -179,20 +178,20 @@ class Cartao
      */
     public function getNomePortador()
     {
-        return $this->_nomePortador;
+        return $this->nomePortador;
     }
 
     /**
      * Seta o nome do portador do cartão
      *
      * @access public
-     * @param  string $_nomePortador
+     * @param  string $nomePortador
      * @return Cielo
      */
-    public function setNomePortador($_nomePortador)
+    public function setNomePortador($nomePortador)
     {
-        if (preg_match('/[[:alnum:]]/i', $_nomePortador)) {
-            $this->_nomePortador = substr($_nomePortador, 0, 50);
+        if (preg_match('/[[:alnum:]]/i', $nomePortador)) {
+            $this->nomePortador = substr($nomePortador, 0, 50);
 
             return $this;
         } else {
@@ -208,35 +207,35 @@ class Cartao
      */
     public function getValidade()
     {
-        return $this->_validade;
+        return $this->validade;
     }
 
     /**
      * Configura a data de validade do cartão
      *
      * @access public
-     * @param  integer $_validade AAAAMM
+     * @param  integer $validade AAAAMM
      * @return Cielo
      */
-    public function setValidade($_validade)
+    public function setValidade($validade)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_validade)) {
+        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $validade)) {
             throw new Exception('Data de validade inválida.');
         }
 
-        if (strlen($_validade) != 6) {
+        if (strlen($validade) != 6) {
             throw new Exception('Data de validade inválida.');
         }
 
-        if ($_validade < date('Ym')) {
+        if ($validade < date('Ym')) {
             throw new Exception('Cartão com validade ultrapassada.');
         }
 
-        $this->_validade = substr($_validade, 0, 6);
+        $this->validade = substr($validade, 0, 6);
 
         return $this;
     }
-    
+
     /**
      * Retorna a bandeira do cartão
      *
@@ -245,20 +244,20 @@ class Cartao
      */
     public function getBandeira()
     {
-        return $this->_bandeira;
+        return $this->bandeira;
     }
 
     /**
      * Configura a bandeira do cartão
      *
      * @access public
-     * @param  string $_bandeira
+     * @param  string $bandeira
      * @return Cielo
      */
-    public function setBandeira($_bandeira)
+    public function setBandeira($bandeira)
     {
-        if (preg_match('/(visa|mastercard)/i', $_bandeira)) {
-            $this->_bandeira = strtolower($_bandeira);
+        if (preg_match('/(visa|mastercard)/i', $bandeira)) {
+            $this->bandeira = strtolower($bandeira);
 
             return $this;
         } else {
