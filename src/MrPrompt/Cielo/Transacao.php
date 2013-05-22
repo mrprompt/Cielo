@@ -1,7 +1,7 @@
 <?php
 /**
  * Transacao
- * 
+ *
  * Transação a ser utilizada pelo cliente.
  *
  * Licença
@@ -27,8 +27,8 @@ class Transacao
      *
      * @var integer
      */
-    private $_tid;
-    
+    private $tid;
+
     /**
      * Tipo de compra
      *
@@ -40,30 +40,30 @@ class Transacao
      *
      * @var string
      */
-    private $_produto = 1;
+    private $produto = 1;
 
     /**
      * Número de parcelas da venda
      *
      * @var integer
      */
-    private $_parcelas = 1;
+    private $parcelas = 1;
 
     /**
      * Código numérico da moeda na ISO 4217 (R$ é 986 - default)
      *
      * @var integer
      */
-    private $_moeda = 986;
-    
+    private $moeda = 986;
+
     /**
      * Define se a transação será automaticamente capturada caso
      * seja autorizada.
      *
      * @var string
      */
-    private $_capturar = 'false';
-    
+    private $capturar = 'false';
+
     /**
      * Indicador de autorização automática:
      *
@@ -74,8 +74,8 @@ class Transacao
      *
      * @var integer
      */
-    private $_autorizar = 0;
-    
+    private $autorizar = 0;
+
     /**
      * Data hora do pedido.
      *
@@ -83,29 +83,29 @@ class Transacao
      *
      * @var datetime
      */
-    private $_dataHora;
-    
+    private $dataHora;
+
     /**
      * Número do pedido da loja.
      *
      * @var integer
      */
-    private $_numeroPedido;
-    
+    private $numeroPedido;
+
     /**
      * Valor do pedido
      *
      * @var integer
      */
-    private $_valorPedido;
+    private $valorPedido;
 
     /**
      * Descricao da transação
      *
-     * @var string 
+     * @var string
      */
-    private $_descricao;
-    
+    private $descricao;
+
     /**
      * Configura o valor do TID
      *
@@ -114,23 +114,23 @@ class Transacao
      */
     public function getTid()
     {
-        return $this->_tid;
+        return $this->tid;
     }
 
     /**
      * Configura o TID
      *
      * @access public
-     * @param  string $_tid
+     * @param  string $tid
      * @return Cielo
      */
-    public function setTid($_tid)
+    public function setTid($tid)
     {
-        $this->_tid = $_tid;
+        $this->tid = $tid;
 
         return $this;
     }
-    
+
     /**
      * Retorna o tipo de compra/produto
      *
@@ -139,7 +139,7 @@ class Transacao
      */
     public function getProduto()
     {
-        return $this->_produto;
+        return $this->produto;
     }
 
     /**
@@ -152,22 +152,21 @@ class Transacao
      * A (Débito)
      *
      * @access public
-     * @param  mixed $_produto
+     * @param  mixed $produto
      * @return Cielo
      */
-    public function setProduto($_produto)
+    public function setProduto($produto)
     {
-        switch ($_produto) {
+        switch ($produto) {
             case '1':
             case '2':
             case '3':
             case 'A':
-                $this->_produto = $_produto;
+                $this->produto = $produto;
 
                 return $this;
             default:
                 throw new Exception('Tipo de produto inválido.');
-                break;
         }
     }
 
@@ -179,19 +178,19 @@ class Transacao
      */
     public function getParcelas()
     {
-        return $this->_parcelas;
+        return $this->parcelas;
     }
 
     /**
      * Configura o número de parcelas da venda
      *
      * @access public
-     * @param  integer $_parcelas
+     * @param  integer $parcelas
      * @return Cielo
      */
-    public function setParcelas($_parcelas)
+    public function setParcelas($parcelas)
     {
-        $this->_parcelas = (integer) $_parcelas;
+        $this->parcelas = (integer) $parcelas;
 
         return $this;
     }
@@ -204,27 +203,27 @@ class Transacao
      */
     public function getMoeda()
     {
-        return $this->_moeda;
+        return $this->moeda;
     }
 
     /**
      * Código numérico da moeda na ISO 4217 (R$ é 986 - default)
      *
      * @access public
-     * @param  integer $_moeda
+     * @param  integer $moeda
      * @return Cielo
      */
-    public function setMoeda($_moeda = 986)
+    public function setMoeda($moeda = 986)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_moeda)) {
+        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $moeda)) {
             throw new Exception('Moeda inválida');
-        } else {
-            $this->_moeda = (integer) substr($_moeda, 0, 3);
-
-            return $this;
         }
+
+        $this->moeda = (integer) substr($moeda, 0, 3);
+
+        return $this;
     }
-    
+
     /**
      * Retorna se é ou não para capturar automaticamente a venda
      *
@@ -233,25 +232,24 @@ class Transacao
      */
     public function getCapturar()
     {
-        return $this->_capturar;
+        return $this->capturar;
     }
 
     /**
      * Informa se é para capturar automaticamente a venda
      *
      * @access public
-     * @param  string $_capturar
+     * @param  string $capturar
      * @return Cielo
      */
-    public function setCapturar($_capturar)
+    public function setCapturar($capturar)
     {
-        switch ($_capturar) {
+        switch ($capturar) {
             case 'true':
             case 'false':
-                $this->_capturar = $_capturar;
+                $this->capturar = $capturar;
 
                 return $this;
-                break;
             default:
                 throw new Exception('Parâmetro inválido.');
         }
@@ -270,7 +268,7 @@ class Transacao
      */
     public function getAutorizar()
     {
-        return $this->_autorizar;
+        return $this->autorizar;
     }
 
     /**
@@ -282,17 +280,17 @@ class Transacao
      * 3 (autorizar sem passar por autenticação – válido somente para crédito)
      *
      * @access public
-     * @param  integer $_autorizar
+     * @param  integer $autorizar
      * @return integer
      */
-    public function setAutorizar($_autorizar)
+    public function setAutorizar($autorizar)
     {
-        switch ((integer) $_autorizar) {
+        switch ((integer) $autorizar) {
             case 0:
             case 1:
             case 2:
             case 3:
-                $this->_autorizar = (integer) $_autorizar;
+                $this->autorizar = (integer) $autorizar;
 
                 return $this;
             default:
@@ -308,25 +306,25 @@ class Transacao
      */
     public function getDataHora()
     {
-        return $this->_dataHora;
+        return $this->dataHora;
     }
 
     /**
      * Seta a data e hora da venda
      *
      * @access public
-     * @param datetime $_dataHora AAAA-MM-DDTHH:MM:SS
+     * @param datetime $dataHora AAAA-MM-DDTHH:MM:SS
      * @return Cielo
      */
-    public function setDataHora($_dataHora)
+    public function setDataHora($dataHora)
     {
-        if (strlen($_dataHora) !== 19) {
+        if (strlen($dataHora) !== 19) {
             throw new Exception('Formato inválido.');
-        } else {
-            $this->_dataHora = $_dataHora;
-
-            return $this;
         }
+
+        $this->dataHora = $dataHora;
+
+        return $this;
     }
 
     /**
@@ -337,25 +335,25 @@ class Transacao
      */
     public function getNumero()
     {
-        return $this->_numeroPedido;
+        return $this->numeroPedido;
     }
 
     /**
      * Configura o número do pedido
      *
      * @access public
-     * @param  integer $_numero
+     * @param  integer $numero
      * @return Cielo
      */
-    public function setNumero($_numero)
+    public function setNumero($numero)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_numero)) {
+        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $numero)) {
             throw new Exception('Número do pedido inválido.');
-        } else {
-            $this->_numeroPedido = substr($_numero, 0, 50);
-
-            return $this;
         }
+
+        $this->numeroPedido = substr($numero, 0, 50);
+
+        return $this;
     }
 
     /**
@@ -366,7 +364,7 @@ class Transacao
      */
     public function getValor()
     {
-        return $this->_valorPedido;
+        return $this->valorPedido;
     }
 
     /**
@@ -376,42 +374,42 @@ class Transacao
      * digitos referem-se aos centavos. Ex.: 1200 = R$ 12,00
      *
      * @access public
-     * @param  integer $_valor
+     * @param  integer $valor
      * @return Cielo
      */
-    public function setValor($_valor)
+    public function setValor($valor)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_valor)) {
+        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $valor)) {
             throw new Exception('Valor inválido.');
-        } else {
-            $this->_valorPedido = substr($_valor, 0, 12);
-
-            return $this;
         }
+
+        $this->valorPedido = substr($valor, 0, 12);
+
+        return $this;
     }
 
     /**
      * Informa a descrição da operação
      *
      * @access public
-     * @param  string $_descricao
-     * @return Cielo 
+     * @param  string $descricao
+     * @return Cielo
      */
-    public function setDescricao($_descricao)
+    public function setDescricao($descricao)
     {
-        $this->_descricao = $_descricao;
-        
+        $this->descricao = $descricao;
+
         return $this;
     }
-    
+
     /**
      * Retorna a descrição configurada para a transação
      *
      * @access public
-     * @return string 
+     * @return string
      */
     public function getDescricao()
     {
-        return $this->_descricao;
+        return $this->descricao;
     }
 }

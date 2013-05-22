@@ -1,9 +1,6 @@
 <?php
-define('NUMERO_CIELO', getenv('NUMERO_CIELO'));
-define('CHAVE_CIELO', getenv('CHAVE_CIELO'));
-
-$load = require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-$load->add('MrPrompt', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src');
+require_once __DIR__ . '/resources/config.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
@@ -28,7 +25,7 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201512');
 
-$cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);  
+$cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);
 $cielo->setAmbiente('teste');
 $cielo->setUrlRetorno('http://google.com.br');
 $cielo->transacao($transacao, $cartao);
