@@ -18,6 +18,7 @@
  */
 namespace MrPrompt\Cielo;
 
+use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\Requisicao;
@@ -110,20 +111,6 @@ class Cliente
      * @const string
      */
     const CAPTURA_HEADER = 'requisicao-captura';
-
-    /**
-     * Identificador de chamada do tipo cancelamento
-     *
-     * @const integer
-     */
-    const CANCELAMENTO_ID = 4;
-
-    /**
-     * Cabeçalho xml de chamada do tipo cancelamento
-     *
-     * @const string
-     */
-    const CANCELAMENTO_HEADER = 'requisicao-cancelamento';
 
     /**
      * Identificador de chamada do tipo consulta
@@ -510,11 +497,18 @@ class Cliente
      * cancelá-la, o pedido de cancelamento não é de fato necessário:
      * vencido o prazo de captura, ela é cancelada automaticamente.
      *
-     * @param \MrPrompt\Cielo\Transacao $transacao
      * @access public
+     * @param Transacao $transacao
+     * @return CancelamentoTransacao
      */
-    public function cancelamento(Transacao $transacao)
+    public function cancela(Transacao $transacao)
     {
+        $requisicao = new CancelamentoTransacao($this->autorizacao, $transacao);
+
+        $this->enviaRequisicao($requisicao);
+
+        return $requisicao;
+
         $xml = sprintf(
             '<%s id="%d" versao="%s"></%s>',
             self::CANCELAMENTO_HEADER,
