@@ -33,6 +33,12 @@ use MrPrompt\Cielo\Cliente\Exception;
  */
 use SimpleXMLElement;
 
+/**
+ * Cliente de integração com a Cielo
+ *
+ * @author Thiago Paes <mrprompt@gmail.com>
+ * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
+ */
 class Cliente
 {
     /**
@@ -43,18 +49,11 @@ class Cliente
     private $urlRetorno;
 
     /**
-     * Número de registro
+     * Dados de autorização na Cielo
      *
-     * @var integer
+     * @var Autorizacao
      */
-    private $numero;
-
-    /**
-     * Chave de registro
-     *
-     * @var string
-     */
-    private $chave;
+    private $autorizacao;
 
     /**
      * XML da menasgem de chamada ao serviço
@@ -195,7 +194,7 @@ class Cliente
      *
      * @const float
      */
-    const VERSAO       = '1.1.0';
+    const VERSAO = '1.1.0';
 
     /**
      * Construtor da aplicação
@@ -207,12 +206,10 @@ class Cliente
      * @param  mixed $chave
      */
     public function __construct(
-        $numero = null,
-        $chave = null,
+        Autorizacao $autorizacao,
         Client $httpClient = null
     ) {
-        $this->numero = substr($numero, 0, 20);
-        $this->chave  = substr($chave, 0, 100);
+        $this->autorizacao = $autorizacao;
         $this->httpClient = $httpClient ?: new Client();
     }
 
@@ -368,8 +365,8 @@ class Cliente
     private function dadosEC()
     {
         $ec  = $this->xml->addChild('dados-ec', '');
-        $ec->addChild('numero', $this->numero);
-        $ec->addChild('chave', $this->chave);
+        $ec->addChild('numero', $this->autorizacao->getNumero());
+        $ec->addChild('chave', $this->autorizacao->getChave());
     }
 
     /**

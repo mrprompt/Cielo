@@ -2,6 +2,7 @@
 require_once __DIR__ . '/resources/config.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
@@ -25,7 +26,7 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201512');
 
-$cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);
+$cielo = new Cliente(new Autorizacao(NUMERO_CIELO, CHAVE_CIELO));
 $cielo->setAmbiente('teste');
 $cielo->autorizacaoPortador($transacao, $cartao);
 
