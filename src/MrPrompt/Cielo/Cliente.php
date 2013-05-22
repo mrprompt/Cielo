@@ -18,6 +18,8 @@
  */
 namespace MrPrompt\Cielo;
 
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 
 use MrPrompt\Cielo\Requisicao\Consulta;
@@ -40,13 +42,6 @@ use SimpleXMLElement;
  */
 class Cliente
 {
-    /**
-     * URL de retorno para a página da loja
-     *
-     * @var string
-     */
-    private $urlRetorno;
-
     /**
      * Dados de autorização na Cielo
      *
@@ -91,34 +86,6 @@ class Cliente
     private $httpClient;
 
     /**
-     * Identificador de chamada do tipo transacao
-     *
-     * @const integer
-     */
-    const TRANSACAO_ID     = 1;
-
-    /**
-     * Cabeçalho xml de chamada do tipo transacao
-     *
-     * @const string
-     */
-    const TRANSACAO_HEADER = 'requisicao-transacao';
-
-    /**
-     * Identificador de chamada para requisição de um TID
-     *
-     * @const integer
-     */
-    const TID_ID = 6;
-
-    /**
-     * Cabeçalho xml de chamada para requisição de um TID
-     *
-     * @const string
-     */
-    const TID_HEADER = 'requisicao-tid';
-
-    /**
      * Versão do web service em uso pelo cliente.
      *
      * @const float
@@ -131,8 +98,8 @@ class Cliente
      * Aqui é configurada o número e a chave de acesso do afiliado a Cielo
      *
      * @access public
-     * @param  integer $numero
-     * @param  mixed $chave
+     * @param Autorizacao $autorizacao
+     * @param Client $httpClient
      */
     public function __construct(
         Autorizacao $autorizacao,
@@ -140,41 +107,6 @@ class Cliente
     ) {
         $this->autorizacao = $autorizacao;
         $this->httpClient = $httpClient ?: new Client();
-    }
-
-    /**
-     * Retorna a URL de Retorno setada para a transação
-     *
-     * @acess public
-     * @return string
-     */
-    public function getUrlRetorno()
-    {
-        return $this->urlRetorno;
-    }
-
-    /**
-     * Define a URL de Retorno da transação
-     *
-     * @access public
-     * @param  string $url
-     * @return Cielo
-     */
-    public function setUrlRetorno($url = null)
-    {
-        $valida = filter_var(
-            $url,
-            FILTER_VALIDATE_URL,
-            FILTER_FLAG_SCHEME_REQUIRED
-        );
-
-        if ($valida == false) {
-            throw new Exception('URL de retorno inválida.');
-        }
-
-        $this->urlRetorno = substr($url, 0, 1024);
-
-        return $this;
     }
 
     /**
@@ -372,29 +304,23 @@ class Cliente
      *
      * Inicia uma transação de venda, retornando seu TID e demais valores
      *
+     * @access public
      * @param Transacao $transacao
      * @param Cartao $cartao
-     * @access public
+     * @param string $urlRetorno
+     * @return SolicitacaoTransacao
      */
-    public function transacao(Transacao $transacao, Cartao $cartao)
+    public function transacao(Transacao $transacao, Cartao $cartao, $urlRetorno)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::TRANSACAO_HEADER,
-            self::TRANSACAO_ID,
-            self::VERSAO,
-            self::TRANSACAO_HEADER
+        return $this->enviaRequisicao(
+            new SolicitacaoTransacao(
+                $this->autorizacao,
+                $transacao,
+                $cartao,
+                $urlRetorno,
+                $this->idioma
+            )
         );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->dadosEC();
-        $this->dadosPortador($cartao);
-        $this->pedido($transacao);
-        $this->pagamento($transacao, $cartao);
-        $this->xml->addChild('url-retorno', $this->urlRetorno);
-        $this->xml->addChild('autorizar', $transacao->getAutorizar());
-        $this->xml->addChild('capturar', $transacao->getCapturar());
-        $this->xml->addChild('campo-livre', '');
-        $this->xml->addChild('bin', substr($cartao->getCartao(), 0, 6));
     }
 
     /**
