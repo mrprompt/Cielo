@@ -9,11 +9,11 @@ use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
 
 $transacao = new Transacao;
-$transacao->setTid(100);
+$transacao->setTid('10017348980059031001');
 
 $cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);  
 $cielo->setAmbiente('teste');
 $cielo->consulta($transacao);
-$cielo->enviaChamada();
 
-echo $cielo->getXml()->asXML();
+echo 'XML GERADO: ', $cielo->getXml()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $cielo->enviaChamada()->asXML(), PHP_EOL;
