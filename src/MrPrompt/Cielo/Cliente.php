@@ -18,6 +18,8 @@
  */
 namespace MrPrompt\Cielo;
 
+use MrPrompt\Cielo\Requisicao\Captura;
+
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
@@ -97,20 +99,6 @@ class Cliente
      * @const string
      */
     const TRANSACAO_HEADER = 'requisicao-transacao';
-
-    /**
-     * Identificador para transação de captura
-     *
-     * @const integer
-     */
-    const CAPTURA_ID = 3;
-
-    /**
-     * Cabeçalho xml para transação de captura
-     *
-     * @const string
-     */
-    const CAPTURA_HEADER = 'requisicao-captura';
 
     /**
      * Identificador de chamada do tipo consulta
@@ -467,21 +455,17 @@ class Cliente
      * de Débito não existe essa abertura: toda transação de débito autorizada
      * é automaticamente capturada.
      *
-     * @param \MrPrompt\Cielo\Transacao $transacao
      * @access public
+     * @param Transacao $transacao
+     * @return Captura
      */
     public function captura(Transacao $transacao)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::CAPTURA_HEADER,
-            self::CAPTURA_ID,
-            self::VERSAO,
-            self::CAPTURA_HEADER
-        );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->xml->addChild('tid', $transacao->getTid());
-        $this->dadosEC();
+        $requisicao = new Captura($this->autorizacao, $transacao);
+
+        $this->enviaRequisicao($requisicao);
+
+        return $requisicao;
     }
 
     /**
