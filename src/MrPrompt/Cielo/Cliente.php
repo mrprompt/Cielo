@@ -18,19 +18,10 @@
  */
 namespace MrPrompt\Cielo;
 
-/**
- * @uses \Guzzle\Http\Client
- */
-use Guzzle\Http\Client;
-
-/**
- * @uses \MrPrompt\Cielo\Cliente\Exception
- */
+use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
+use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Cliente\Exception;
-
-/**
- * @uses \SimpleXMLElement
- */
+use Guzzle\Http\Client;
 use SimpleXMLElement;
 
 /**
@@ -104,20 +95,6 @@ class Cliente
      * @const string
      */
     const TRANSACAO_HEADER = 'requisicao-transacao';
-
-    /**
-     * Identificador de chamada do tipo transacao
-     *
-     * @const integer
-     */
-    const AUTORIZACAO_ID     = 2;
-
-    /**
-     * Cabeçalho xml de chamada do tipo transacao
-     *
-     * @const string
-     */
-    const AUTORIZACAO_HEADER = 'requisicao-autorizacao-tid';
 
     /**
      * Identificador para transação de captura
@@ -488,18 +465,16 @@ class Cliente
      * @param \MrPrompt\Cielo\Transacao $transacao
      * @access public
      */
-    public function autorizacao(Transacao $transacao)
+    public function autoriza(Transacao $transacao)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::AUTORIZACAO_HEADER,
-            self::AUTORIZACAO_ID,
-            self::VERSAO,
-            self::AUTORIZACAO_HEADER
+        $requisicao = new AutorizacaoTransacao(
+            $this->autorizacao,
+            $transacao
         );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->xml->addChild('tid', $transacao->getTid());
-        $this->dadosEC();
+
+        $this->enviaRequisicao($requisicao);
+
+        return $requisicao;
     }
 
     /**
@@ -681,5 +656,36 @@ class Cliente
         $response = $request->send();
 
         return $this->xml = $response->xml();
+    }
+
+    /**
+     * Realiza o envio da requisição à Cielo
+     *
+     * @param Requisicao $requisicao
+     */
+    protected function enviaRequisicao(Requisicao $requisicao)
+    {
+        $request = $this->httpClient->post($this->getEndpoint())
+                                    ->addPostFields(
+                                        array(
+                                            'mensagem' => $requisicao->getEnvio()->asXML()
+                                        )
+                                    );
+
+        $requisicao->setResposta($request->send()->xml());
+    }
+
+    /**
+     * Retorna o endereço de destino das requisições
+     *
+     * @return string
+     */
+    protected function getEndpoint()
+    {
+        if ($this->ambiente === 'teste') {
+            return 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
+        }
+
+        return 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
     }
 }
