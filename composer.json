@@ -1,6 +1,6 @@
 {
     "name": "mrprompt/cielo",
-    "description": "Description of project Db.",
+    "description": "Integration with Cielo gateway.",
     "type": "library",
     "license": "GPL-3.0+",
     "keywords": ["cielo", "payment", "gateway", "credit", "card"],
@@ -24,7 +24,8 @@
     },
     "require": {
         "php": ">=5.3",
-        "respect/validation": "dev-develop"
+        "respect/validation": "dev-develop",
+        "guzzle/guzzle": "3.5.*"
     },
     "minimum-stability": "dev"
 }

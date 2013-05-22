@@ -13,7 +13,6 @@
  */
 namespace MrPrompt\Cielo\Cliente;
 
-class Exception extends \Exception 
+class Exception extends \Exception
 {
-    //
 }

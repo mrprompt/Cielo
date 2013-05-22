@@ -1,9 +1,6 @@
 <?php
-define('NUMERO_CIELO', getenv('NUMERO_CIELO'));
-define('CHAVE_CIELO', getenv('CHAVE_CIELO'));
-
-$load = require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-$load->add('MrPrompt', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src');
+require_once __DIR__ . '/resources/config.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
@@ -11,7 +8,7 @@ use MrPrompt\Cielo\Cliente;
 $transacao = new Transacao;
 $transacao->setTid('10017348980059031001');
 
-$cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);  
+$cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);
 $cielo->setAmbiente('teste');
 $cielo->captura($transacao);
 

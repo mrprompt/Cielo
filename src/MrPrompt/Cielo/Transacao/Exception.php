@@ -13,7 +13,6 @@
  */
 namespace MrPrompt\Cielo\Transacao;
 
-class Exception extends \Exception 
+class Exception extends \Exception
 {
-    //
 }
