@@ -13,7 +13,7 @@ $transacao->setTid('10017348980059031001');
 
 $cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);  
 $cielo->setAmbiente('teste');
-$cielo->cancelamento($transacao);
+$cielo->captura($transacao);
 
 echo 'XML GERADO: ', $cielo->getXml()->asXML(), PHP_EOL;
 echo 'RETORNO: ', $cielo->enviaChamada()->asXML(), PHP_EOL;

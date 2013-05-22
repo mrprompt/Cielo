@@ -6,22 +6,14 @@ $load = require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR 
 $load->add('MrPrompt', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src');
 
 use MrPrompt\Cielo\Transacao;
-use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Cliente;
 
 $transacao = new Transacao;
-$transacao->setTid(123123);
-
-$cartao = new Cartao;
-$cartao->setBandeira('visa');
-$cartao->setCartao('00000000');
-$cartao->setCodigoSeguranca(000);
-$cartao->setIndicador(0);
-$cartao->setNomePortador('Teste');
-$cartao->setValidade('201512');
+$transacao->setTid('10017348980059031001');
 
 $cielo = new Cliente(NUMERO_CIELO, CHAVE_CIELO);  
 $cielo->setAmbiente('teste');
-$cielo->captura($transacao);
+$cielo->autorizacao($transacao);
 
-var_dump($cielo->getXml()->asXML());
+echo 'XML GERADO: ', $cielo->getXml()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $cielo->enviaChamada()->asXML(), PHP_EOL;
