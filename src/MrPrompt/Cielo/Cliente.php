@@ -18,6 +18,8 @@
  */
 namespace MrPrompt\Cielo;
 
+use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
+
 use MrPrompt\Cielo\Requisicao\Consulta;
 
 use MrPrompt\Cielo\Requisicao\Captura;
@@ -496,23 +498,16 @@ class Cliente
      *
      * Requisita um TID (Identificador de transação) ao Web Service
      *
-     * @param \MrPrompt\Cielo\Transacao $transacao
-     * @param \MrPrompt\Cielo\Cartao $cartao
      * @access public
-     * @return SimpleXMLElement
+     * @param Transacao $transacao
+     * @param Cartao $cartao
+     * @return IdentificacaoTransacao
      */
     public function tid(Transacao $transacao, Cartao $cartao)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::TID_HEADER,
-            self::TID_ID,
-            self::VERSAO,
-            self::TID_HEADER
+        return $this->enviaRequisicao(
+            new IdentificacaoTransacao($this->autorizacao, $transacao, $cartao)
         );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->dadosEC();
-        $this->pagamento($transacao, $cartao);
     }
 
     /**

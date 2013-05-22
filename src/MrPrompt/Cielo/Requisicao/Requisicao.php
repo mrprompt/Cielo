@@ -91,7 +91,7 @@ abstract class Requisicao
      */
     protected function configuraTransacao()
     {
-        if ($this->transacao->getTid() === null) {
+        if (!$this->deveAdicionarTid()) {
             return ;
         }
 
@@ -134,6 +134,16 @@ abstract class Requisicao
     protected function configuraEnvio()
     {
         // Fazer override quando necessário
+    }
+
+    /**
+     * Verificação se deve ser enviado o TID na requisição
+     *
+     * @return boolean
+     */
+    protected function deveAdicionarTid()
+    {
+        return true;
     }
 
     /**
