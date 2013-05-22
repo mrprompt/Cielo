@@ -15,6 +15,11 @@
  */
 namespace MrPrompt\Cielo;
 
+/**
+ * @uses MrPrompt\Cielo\Cartao\Exception
+ */
+use MrPrompt\Cielo\Cartao\Exception;
+
 class Cartao
 {
     /**
