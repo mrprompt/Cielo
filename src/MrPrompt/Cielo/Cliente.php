@@ -50,13 +50,6 @@ class Cliente
     private $autorizacao;
 
     /**
-     * XML da menasgem de chamada ao serviço
-     *
-     * @var SimpleXMLElement
-     */
-    private $xml;
-
-    /**
      * Idioma do pedido
      *
      * PT (português)
@@ -107,17 +100,6 @@ class Cliente
     ) {
         $this->autorizacao = $autorizacao;
         $this->httpClient = $httpClient ?: new Client();
-    }
-
-    /**
-     * Retorna o último XML configurado
-     *
-     * @access public
-     * @return SimpleXMLElement
-     */
-    public function getXML()
-    {
-        return $this->xml;
     }
 
     /**
@@ -220,86 +202,6 @@ class Cliente
     }
 
     /**
-     * Cria o nó com os dados de acesso.
-     *
-     */
-    private function dadosEC()
-    {
-        $ec  = $this->xml->addChild('dados-ec', '');
-        $ec->addChild('numero', $this->autorizacao->getNumero());
-        $ec->addChild('chave', $this->autorizacao->getChave());
-    }
-
-    /**
-     * Cria o nó com dados do portador do cartão de crédito
-     *
-     * @param \MrPrompt\Cielo\Cartao $cartao
-     */
-    private function dadosPortador(Cartao $cartao)
-    {
-        $dc = $this->xml->addChild('dados-portador', '');
-        $dc->addChild('numero', $cartao->getCartao());
-        $dc->addChild('validade', $cartao->getValidade());
-        $dc->addChild('indicador', $cartao->getIndicador());
-        $dc->addChild('codigo-seguranca', $cartao->getCodigoSeguranca());
-        $dc->addChild('nome-portador', $cartao->getNomePortador());
-
-        return $dc;
-    }
-
-    /**
-     * Cria o nó com dados do portador do cartão de crédito
-     *
-     * @param \MrPrompt\Cielo\Cartao $cartao
-     */
-    private function dadosCartao(Cartao $cartao)
-    {
-        $dc = $this->xml->addChild('dados-cartao', '');
-        $dc->addChild('numero', $cartao->getCartao());
-        $dc->addChild('validade', $cartao->getValidade());
-        $dc->addChild('indicador', $cartao->getIndicador());
-        $dc->addChild('codigo-seguranca', $cartao->getCodigoSeguranca());
-        $dc->addChild('nome-portador', $cartao->getNomePortador());
-
-        return $dc;
-    }
-
-    /**
-     * Cria os dados do pedido
-     *
-     * @param \MrPrompt\Cielo\Transacao $transacao
-     * @return SimpleXMLElement
-     */
-    private function pedido(Transacao $transacao)
-    {
-        $dp = $this->xml->addChild('dados-pedido', '');
-        $dp->addChild('numero', $transacao->getTid());
-        $dp->addChild('valor', $transacao->getValor());
-        $dp->addChild('moeda', $transacao->getMoeda());
-        $dp->addChild('data-hora', $transacao->getDataHora());
-        $dp->addChild('descricao', $transacao->getDescricao());
-        $dp->addChild('idioma', $this->idioma);
-
-        return $dp;
-    }
-
-    /**
-     * Cria o nó com os campos de pagamento a serem utilizados pelo cliente.
-     *
-     * @param \MrPrompt\Cielo\Transacao $transacao
-     * @param \MrPrompt\Cielo\Cartao $cartao
-     */
-    private function pagamento(Transacao $transacao, Cartao $cartao)
-    {
-        $fp  = $this->xml->addChild('forma-pagamento', '');
-        $fp->addChild('bandeira', $cartao->getBandeira());
-        $fp->addChild('produto', $transacao->getProduto());
-        $fp->addChild('parcelas', $transacao->getParcelas());
-
-        return $fp;
-    }
-
-    /**
      * Transacao
      *
      * Inicia uma transação de venda, retornando seu TID e demais valores
@@ -310,7 +212,7 @@ class Cliente
      * @param string $urlRetorno
      * @return SolicitacaoTransacao
      */
-    public function transacao(Transacao $transacao, Cartao $cartao, $urlRetorno)
+    public function iniciaTransacao(Transacao $transacao, Cartao $cartao, $urlRetorno)
     {
         return $this->enviaRequisicao(
             new SolicitacaoTransacao(
@@ -468,34 +370,6 @@ class Cliente
                 $this->idioma
             )
         );
-    }
-
-    /**
-     * Envia a chamada para o Web Service da Cielo
-     *
-     * @access public
-     * @return SimpleXMLElement
-     */
-    public function enviaChamada()
-    {
-        if (!$this->xml instanceof SimpleXMLElement) {
-            throw new Exception('XML não criado.');
-        }
-
-        // URL para o ambiente de produção
-        $url = 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
-
-        // URL para o ambiente de teste
-        if ($this->ambiente === 'teste') {
-            $url = 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
-        }
-
-        $request = $this->httpClient->post($url)
-                                    ->addPostFields(array('mensagem' => $this->xml->asXML()));
-
-        $response = $request->send();
-
-        return $this->xml = $response->xml();
     }
 
     /**

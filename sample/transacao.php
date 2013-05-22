@@ -28,7 +28,7 @@ $cartao->setValidade('201512');
 
 $cielo = new Cliente(new Autorizacao(NUMERO_CIELO, CHAVE_CIELO));
 $cielo->setAmbiente('teste');
-$requisicao = $cielo->transacao($transacao, $cartao, 'http://google.com.br');
+$requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
 
 echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
 echo 'RETORNO: ', $requisicao->getResposta()->asXML(), PHP_EOL;
