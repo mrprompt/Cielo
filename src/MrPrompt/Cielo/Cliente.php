@@ -19,9 +19,19 @@
 namespace MrPrompt\Cielo;
 
 /**
+ * @uses \Guzzle\Http\Client
+ */
+use Guzzle\Http\Client;
+
+/**
  * @uses \MrPrompt\Cielo\Cliente\Exception
  */
 use MrPrompt\Cielo\Cliente\Exception;
+
+/**
+ * @uses \SimpleXMLElement
+ */
+use SimpleXMLElement;
 
 class Cliente
 {
@@ -49,7 +59,7 @@ class Cliente
     /**
      * XML da menasgem de chamada ao serviço
      *
-     * @var \SimpleXMLElement
+     * @var SimpleXMLElement
      */
     private $xml;
 
@@ -83,6 +93,11 @@ class Cliente
      * @var string
      */
     private $ambiente = 'producao';
+
+    /**
+     * @var Client
+     */
+    private $httpClient;
 
     /**
      * Identificador de chamada do tipo transacao
@@ -198,10 +213,14 @@ class Cliente
      * @param  integer $numero
      * @param  mixed $chave
      */
-    public function __construct($numero = null, $chave = null)
-    {
+    public function __construct(
+        $numero = null,
+        $chave = null,
+        Client $httpClient = null
+    ) {
         $this->numero = substr($numero, 0, 20);
         $this->chave  = substr($chave, 0, 100);
+        $this->httpClient = $httpClient ?: new Client();
     }
 
     /**
@@ -243,7 +262,7 @@ class Cliente
      * Retorna o último XML configurado
      *
      * @access public
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function getXML()
     {
@@ -400,7 +419,7 @@ class Cliente
      * Cria os dados do pedido
      *
      * @param \MrPrompt\Cielo\Transacao $transacao
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     private function pedido(Transacao $transacao)
     {
@@ -449,7 +468,7 @@ class Cliente
             self::VERSAO,
             self::TRANSACAO_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->dadosEC();
         $this->dadosPortador($cartao);
         $this->pedido($transacao);
@@ -490,7 +509,7 @@ class Cliente
             self::VERSAO,
             self::AUTORIZACAO_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
@@ -522,7 +541,7 @@ class Cliente
             self::VERSAO,
             self::CAPTURA_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
@@ -552,7 +571,7 @@ class Cliente
             self::VERSAO,
             self::CANCELAMENTO_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
@@ -575,7 +594,7 @@ class Cliente
             self::VERSAO,
             self::CONSULTA_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->xml->addChild('tid', $transacao->getTid());
         $this->dadosEC();
     }
@@ -588,7 +607,7 @@ class Cliente
      * @param \MrPrompt\Cielo\Transacao $transacao
      * @param \MrPrompt\Cielo\Cartao $cartao
      * @access public
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function tid(Transacao $transacao, Cartao $cartao)
     {
@@ -599,7 +618,7 @@ class Cliente
             self::VERSAO,
             self::TID_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->dadosEC();
         $this->pagamento($transacao, $cartao);
     }
@@ -624,7 +643,7 @@ class Cliente
      * @param Transacao $trans
      * @param Cartao $cartao
      * @access public
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function autorizacaoPortador(Transacao $trans, Cartao $card)
     {
@@ -635,7 +654,7 @@ class Cliente
             self::VERSAO,
             self::AUTORIZACAO_PORTADOR_HEADER
         );
-        $this->xml = new \SimpleXMLElement($xml);
+        $this->xml = new SimpleXMLElement($xml);
         $this->xml
              ->addChild('tid', $trans->getTid());
         $this->dadosEC();
@@ -652,11 +671,11 @@ class Cliente
      * Envia a chamada para o Web Service da Cielo
      *
      * @access public
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function enviaChamada()
     {
-        if (!$this->xml instanceof \SimpleXMLElement) {
+        if (!$this->xml instanceof SimpleXMLElement) {
             throw new Exception('XML não criado.');
         }
 
@@ -668,61 +687,19 @@ class Cliente
             $url = 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
         }
 
-        // Iniciando o objeto Curl
-        $curl = curl_init();
-
-        // Retornar a transferência ao objeto
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-        // Sempre utilizar uma nova conexão
-        curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-
-        // Retornar Header
-        curl_setopt($curl, CURLOPT_HEADER, 0);
-
-        // Modo verboso
-        curl_setopt($curl, CURLOPT_VERBOSE, 0);
-
-        // Mostrar o corpo da requisição
-        curl_setopt($curl, CURLOPT_NOBODY, 0);
-
-        // Seguir redirecionamentos
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-
-        // Abrindo a url
-        curl_setopt($curl, CURLOPT_URL, $url);
-
-        // Habilitando o método POST
-        curl_setopt($curl, CURLOPT_POST, true);
-
-        // envio os campos
-        curl_setopt($curl, CURLOPT_POSTFIELDS, "mensagem={$this->xml->asXML()}");
-
-        //  o tempo em segundos de espera para obter uma conexão
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
-
-        //  o tempo máximo em segundos de espera para a execução da requisição (curl_exec)
-        curl_setopt($curl, CURLOPT_TIMEOUT, 40);
-
         if ($this->getSslCertificate() != '') {
-            // verifica a validade do certificado
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-
-            // verifica se a identidade do servidor bate com aquela informada no certificado
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-
-            // informa a localização do certificado para verificação com o peer
-            curl_setopt($curl, CURLOPT_CAINFO, $this->getSslCertificate());
-            curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+            $this->httpClient->setSslVerification(
+                $this->getSslCertificate(),
+                true,
+                2
+            );
         }
 
-        // Faz a requisição HTTP
-        $result     = curl_exec($curl);
-        $this->xml = new \SimpleXMLElement($result);
+        $request = $this->httpClient->post($url)
+                                    ->addPostFields(array('mensagem' => $this->xml->asXML()));
 
-        // Fecho a conexão
-        curl_close($curl);
+        $response = $request->send();
 
-        return $this->xml;
+        return $this->xml = $response->xml();
     }
 }

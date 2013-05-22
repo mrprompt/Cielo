@@ -24,7 +24,8 @@
     },
     "require": {
         "php": ">=5.3",
-        "respect/validation": "dev-develop"
+        "respect/validation": "dev-develop",
+        "guzzle/guzzle": "3.5.*"
     },
     "minimum-stability": "dev"
 }
