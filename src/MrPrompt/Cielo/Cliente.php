@@ -18,6 +18,8 @@
  */
 namespace MrPrompt\Cielo;
 
+use MrPrompt\Cielo\Requisicao\Consulta;
+
 use MrPrompt\Cielo\Requisicao\Captura;
 
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
@@ -99,20 +101,6 @@ class Cliente
      * @const string
      */
     const TRANSACAO_HEADER = 'requisicao-transacao';
-
-    /**
-     * Identificador de chamada do tipo consulta
-     *
-     * @const integer
-     */
-    const CONSULTA_ID = 5;
-
-    /**
-     * Cabeçalho xml de chamada do tipo consulta
-     *
-     * @const string
-     */
-    const CONSULTA_HEADER = 'requisicao-consulta';
 
     /**
      * Identificador de chamada para requisição de um TID
@@ -492,17 +480,6 @@ class Cliente
         $this->enviaRequisicao($requisicao);
 
         return $requisicao;
-
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::CANCELAMENTO_HEADER,
-            self::CANCELAMENTO_ID,
-            self::VERSAO,
-            self::CANCELAMENTO_HEADER
-        );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->xml->addChild('tid', $transacao->getTid());
-        $this->dadosEC();
     }
 
     /**
@@ -513,19 +490,16 @@ class Cliente
      * É sempre utilizada após a loja ter recebido o retorno do fluxo da Cielo.
      *
      * @access public
+     * @param Transacao $transacao
+     * @return Consulta
      */
     public function consulta(Transacao $transacao)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::CONSULTA_HEADER,
-            self::CONSULTA_ID,
-            self::VERSAO,
-            self::CONSULTA_HEADER
-        );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->xml->addChild('tid', $transacao->getTid());
-        $this->dadosEC();
+        $requisicao = new Consulta($this->autorizacao, $transacao);
+
+        $this->enviaRequisicao($requisicao);
+
+        return $requisicao;
     }
 
     /**
