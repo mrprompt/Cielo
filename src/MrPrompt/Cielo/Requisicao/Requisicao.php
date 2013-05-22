@@ -64,10 +64,8 @@ abstract class Requisicao
      * @param Autorizacao $autorizacao
      * @param Transacao $transacao
      */
-    public function __construct(
-        Autorizacao $autorizacao,
-        Transacao $transacao = null
-    ) {
+    public function __construct(Autorizacao $autorizacao, Transacao $transacao)
+    {
         $this->autorizacao = $autorizacao;
         $this->transacao = $transacao;
 
@@ -93,7 +91,7 @@ abstract class Requisicao
      */
     protected function configuraTransacao()
     {
-        if ($this->transacao === null) {
+        if ($this->transacao->getTid() === null) {
             return ;
         }
 

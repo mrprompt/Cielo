@@ -19,8 +19,6 @@
 
 namespace MrPrompt\Cielo\Requisicao;
 
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
 
 /**
@@ -36,17 +34,6 @@ class Captura extends Requisicao
      * @const integer
      */
     const ID = 3;
-
-    /**
-     * Inicializa o objeto
-     *
-     * @param Autorizacao $autorizacao
-     * @param Transacao $transacao
-     */
-    public function __construct(Autorizacao $autorizacao, Transacao $transacao)
-    {
-        parent::__construct($autorizacao, $transacao);
-    }
 
     /**
      * {@inheritdoc}
