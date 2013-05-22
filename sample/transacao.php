@@ -11,7 +11,7 @@ use MrPrompt\Cielo\Cliente;
 
 $transacao = new Transacao;
 $transacao->setTid('100');
-$transacao->setAutorizar('false');
+$transacao->setAutorizar(0);
 $transacao->setCapturar('false');
 $transacao->setDataHora(date('Y-m-d\Th:i:s'));
 $transacao->setDescricao('teste');

@@ -387,6 +387,7 @@ class Cliente
         $dp->addChild('valor', $transacao->getValor());
         $dp->addChild('moeda', $transacao->getMoeda());
         $dp->addChild('data-hora', $transacao->getDataHora());
+        $dp->addChild('descricao', $transacao->getDescricao());
         $dp->addChild('idioma', $this->_idioma);
         
         return $dp;
@@ -428,14 +429,14 @@ class Cliente
         );
         $this->_xml = new \SimpleXMLElement($xml);
         $this->dadosEC();
+        $this->dadosPortador($cartao);
         $this->pedido($transacao);
         $this->pagamento($transacao, $cartao);
+        $this->_xml->addChild('url-retorno', $this->_urlRetorno);
         $this->_xml->addChild('autorizar', $transacao->getAutorizar());
         $this->_xml->addChild('capturar', $transacao->getCapturar());
-        $this->_xml->addChild('url-retorno', $this->_urlRetorno);
         $this->_xml->addChild('campo-livre', '');
-        $this->_xml->addChild('bin', substr($cartao->getNomePortador(), 6));
-        $this->dadosPortador($cartao);
+        $this->_xml->addChild('bin', substr($cartao->getCartao(), 0, 6));
     }
 
     /**
