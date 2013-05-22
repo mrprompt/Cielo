@@ -418,14 +418,9 @@ class Cliente
      */
     public function autoriza(Transacao $transacao)
     {
-        $requisicao = new AutorizacaoTransacao(
-            $this->autorizacao,
-            $transacao
+        return $this->enviaRequisicao(
+            new AutorizacaoTransacao($this->autorizacao, $transacao)
         );
-
-        $this->enviaRequisicao($requisicao);
-
-        return $requisicao;
     }
 
     /**
@@ -449,11 +444,9 @@ class Cliente
      */
     public function captura(Transacao $transacao)
     {
-        $requisicao = new Captura($this->autorizacao, $transacao);
-
-        $this->enviaRequisicao($requisicao);
-
-        return $requisicao;
+        return $this->enviaRequisicao(
+            new Captura($this->autorizacao, $transacao)
+        );
     }
 
     /**
@@ -475,11 +468,9 @@ class Cliente
      */
     public function cancela(Transacao $transacao)
     {
-        $requisicao = new CancelamentoTransacao($this->autorizacao, $transacao);
-
-        $this->enviaRequisicao($requisicao);
-
-        return $requisicao;
+        return $this->enviaRequisicao(
+            new CancelamentoTransacao($this->autorizacao, $transacao)
+        );
     }
 
     /**
@@ -495,11 +486,9 @@ class Cliente
      */
     public function consulta(Transacao $transacao)
     {
-        $requisicao = new Consulta($this->autorizacao, $transacao);
-
-        $this->enviaRequisicao($requisicao);
-
-        return $requisicao;
+        return $this->enviaRequisicao(
+            new Consulta($this->autorizacao, $transacao)
+        );
     }
 
     /**
@@ -550,16 +539,14 @@ class Cliente
      */
     public function autorizaPortador(Transacao $transacao, Cartao $cartao)
     {
-        $requisicao = new AutorizacaoPortador(
-            $this->autorizacao,
-            $transacao,
-            $cartao,
-            $this->idioma
+        return $this->enviaRequisicao(
+            new AutorizacaoPortador(
+                $this->autorizacao,
+                $transacao,
+                $cartao,
+                $this->idioma
+            )
         );
-
-        $this->enviaRequisicao($requisicao);
-
-        return $requisicao;
     }
 
     /**
@@ -605,6 +592,8 @@ class Cliente
                                     );
 
         $requisicao->setResposta($request->send()->xml());
+
+        return $requisicao;
     }
 
     /**
