@@ -16,7 +16,9 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2010
  * @license    MIT
  */
-class Cielo
+namespace MrPrompt\Cielo;
+
+class Cliente
 {
     /**
      * URL de retorno para a página da loja
@@ -203,19 +205,19 @@ class Cielo
     public function __construct($numero = null, $chave = null)
     {
         if (strlen($numero) === 0 || strlen($chave) === 0) {
-            throw new Exception('Número/Chave inválidos.');
+            throw new Exception\Cliente('Número/Chave inválidos.');
         }
 
         if (strlen($numero) > 20) {
-            throw new Exception('Número inválido.');
+            throw new Exception\Cliente('Número inválido.');
         }
 
         if (strlen($chave) > 100) {
-            throw new Exception('Chave inválida.');
+            throw new Exception\Cliente('Chave inválida.');
         }
 
         if (!class_exists('SimpleXmlElement')) {
-            throw new Exception('Classe SimpleXmlElement inexistente.');
+            throw new Exception\Cliente('Classe SimpleXmlElement inexistente.');
         }
 
         $this->_numero = substr($numero, 0, 20);
@@ -239,11 +241,11 @@ class Cielo
      * @access public
      * @param  string $nome
      * @param  mixed  $argumentos
-     * @return Exception
+     * @return Exception\Cliente
      */
     public function __call($nome, $argumentos)
     {
-        throw new Exception("Método inexistente: {$nome}.");
+        throw new Exception\Cliente("Método inexistente: {$nome}.");
     }
 
     /**
@@ -270,7 +272,7 @@ class Cielo
                         FILTER_FLAG_SCHEME_REQUIRED);
 
         if ($valida == false) {
-            throw new Exception('URL de retorno inválida.');
+            throw new Exception\Cliente('URL de retorno inválida.');
         }
 
         $this->_urlRetorno = substr($_url, 0, 1024);
@@ -363,7 +365,7 @@ class Cielo
 
                 return $this;
             default:
-                throw new Exception('Tipo de produto inválido.');
+                throw new Exception\Cliente('Tipo de produto inválido.');
                 break;
         }
     }
@@ -418,7 +420,7 @@ class Cielo
 
             return $this;
         } else {
-            throw new Exception('Bandeira inválida.');
+            throw new Exception\Cliente('Bandeira inválida.');
         }
     }
 
@@ -443,7 +445,7 @@ class Cielo
     public function setMoeda($_moeda = 986)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_moeda)) {
-            throw new Exception('Moeda inválida');
+            throw new Exception\Cliente('Moeda inválida');
         } else {
             $this->_moeda = (integer) substr($_moeda, 0, 3);
 
@@ -488,7 +490,7 @@ class Cielo
                 return $this;
                 break;
             default:
-                throw new Exception('Idioma inválido.');
+                throw new Exception\Cliente('Idioma inválido.');
         }
     }
 
@@ -520,7 +522,7 @@ class Cielo
                 return $this;
                 break;
             default:
-                throw new Exception('Parâmetro inválido.');
+                throw new Exception\Cliente('Parâmetro inválido.');
         }
     }
 
@@ -563,7 +565,7 @@ class Cielo
 
                 return $this;
             default:
-                throw new Exception('Indicador de autorização inválido.');
+                throw new Exception\Cliente('Indicador de autorização inválido.');
         }
     }
 
@@ -588,7 +590,7 @@ class Cielo
     public function setDataHora($_dataHora)
     {
         if (strlen($_dataHora) !== 19) {
-            throw new Exception('Formato inválido.');
+            throw new Exception\Cliente('Formato inválido.');
         } else {
             $this->_dataHora = $_dataHora;
 
@@ -617,7 +619,7 @@ class Cielo
     public function setNumero($_numero)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_numero)) {
-            throw new Exception('Número do pedido inválido.');
+            throw new Exception\Cliente('Número do pedido inválido.');
         } else {
             $this->_numeroPedido = substr($_numero, 0, 50);
 
@@ -649,7 +651,7 @@ class Cielo
     public function setValor($_valor)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_valor)) {
-            throw new Exception('Valor inválido.');
+            throw new Exception\Cliente('Valor inválido.');
         } else {
             $this->_valorPedido = substr($_valor, 0, 12);
 
@@ -715,7 +717,7 @@ class Cielo
                 return $this;
                 break;
             default:
-                throw new Exception('Indicador de segurança inválido.');
+                throw new Exception\Cliente('Indicador de segurança inválido.');
         }
     }
 
@@ -740,7 +742,7 @@ class Cielo
     public function setCodigoSeguranca($_codigo)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_codigo)) {
-            throw new Exception('Código de segurança inválido.');
+            throw new Exception\Cliente('Código de segurança inválido.');
         } else {
             $this->_codigoSeguranca = (integer) substr($_codigo, 0, 3);
 
@@ -773,7 +775,7 @@ class Cielo
 
             return $this;
         } else {
-            throw new Exception('Caracteres inválidos no nome do portador.');
+            throw new Exception\Cliente('Caracteres inválidos no nome do portador.');
         }
     }
 
@@ -798,15 +800,15 @@ class Cielo
     public function setValidade($_validade)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_validade)) {
-            throw new Exception('Data de validade inválida.');
+            throw new Exception\Cliente('Data de validade inválida.');
         }
 
         if (strlen($_validade) != 6) {
-            throw new Exception('Data de validade inválida.');
+            throw new Exception\Cliente('Data de validade inválida.');
         }
 
         if ($_validade < date('Ym')) {
-            throw new Exception('Cartão com validade ultrapassada.');
+            throw new Exception\Cliente('Cartão com validade ultrapassada.');
         }
 
         $this->_validade = substr($_validade, 0, 6);
@@ -861,7 +863,7 @@ class Cielo
     public function setDebug($_debug = true)
     {
         if (!is_bool($_debug)) {
-            throw new Exception('Parâmetro inválido.');
+            throw new Exception\Cliente('Parâmetro inválido.');
         }
 
         $this->_debug = $_debug;
@@ -897,7 +899,7 @@ class Cielo
 
                 return $this;
             default:
-                throw new Exception('Ambiente inválido.');
+                throw new Exception\Cliente('Ambiente inválido.');
         }
     }
 

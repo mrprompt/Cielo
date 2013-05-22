@@ -1,0 +1,29 @@
+{
+    "name": "mrprompt/cielo",
+    "description": "Description of project Db.",
+    "type": "library",
+    "license": "GPL-3.0+",
+    "keywords": ["cielo", "payment", "gateway", "credit", "card"],
+    "authors": [
+        {
+            "name": "Thiago Paes",
+            "email": "mrprompt@gmail.com",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "email": "mrprompt@gmail.com",
+        "issues": "https://github.com/mrprompt/Cielo/issues",
+        "source": "https://github.com/mrprompt/Cielo",
+        "wiki": "https://github.com/mrprompt/Cielo/wiki"
+    },
+    "autoload": {
+        "psr-0": {
+            "MrPrompt\\Cielo": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3"
+    },
+    "minimum-stability": "dev"
+}
