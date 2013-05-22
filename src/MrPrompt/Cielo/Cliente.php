@@ -79,13 +79,6 @@ class Cliente
     private $idioma = 'PT';
 
     /**
-     * Certificado SSL
-     *
-     * @var string
-     */
-    private $sslCertificate;
-
-    /**
      * Ambiente (teste ou producao)
      *
      * Default: producao
@@ -342,17 +335,6 @@ class Cliente
     }
 
     /**
-     * Retorna o caminho do certificado SSL
-     *
-     * @access public
-     * @return string
-     */
-    public function getSslCertificate()
-    {
-        return $this->sslCertificate;
-    }
-
-    /**
      * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
      *
      * @access public
@@ -361,11 +343,20 @@ class Cliente
      */
     public function setSslCertificate($sslCertificate = '')
     {
-        if (!is_string($sslCertificate)) {
+        if (!is_string($sslCertificate)
+            || (trim($sslCertificate) != '' && !is_readable($sslCertificate))) {
             throw new Exception('Parâmetro inválido.');
         }
 
-        $this->sslCertificate = $sslCertificate;
+        if ($sslCertificate != '') {
+            $this->httpClient->setSslVerification(
+                $sslCertificate,
+                true,
+                2
+            );
+        } else {
+            $this->httpClient->setSslVerification(false);
+        }
 
         return $this;
     }
@@ -685,14 +676,6 @@ class Cliente
         // URL para o ambiente de teste
         if ($this->ambiente === 'teste') {
             $url = 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
-        }
-
-        if ($this->getSslCertificate() != '') {
-            $this->httpClient->setSslVerification(
-                $this->getSslCertificate(),
-                true,
-                2
-            );
         }
 
         $request = $this->httpClient->post($url)
