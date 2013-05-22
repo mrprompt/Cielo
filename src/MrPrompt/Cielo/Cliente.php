@@ -18,6 +18,9 @@
  */
 namespace MrPrompt\Cielo;
 
+/**
+ * @uses \MrPrompt\Cielo\Cliente\Exception
+ */
 use MrPrompt\Cielo\Cliente\Exception;
 
 class Cliente
@@ -373,6 +376,23 @@ class Cliente
         
         return $dc;
     }
+    
+    /**
+     * Cria o nó com dados do portador do cartão de crédito
+     * 
+     * @param \MrPrompt\Cielo\Cartao $cartao
+     */
+    private function dadosCartao(Cartao $cartao)
+    {
+        $dc = $this->_xml->addChild('dados-cartao', '');
+        $dc->addChild('numero', $cartao->getCartao());
+        $dc->addChild('validade', $cartao->getValidade());
+        $dc->addChild('indicador', $cartao->getIndicador());
+        $dc->addChild('codigo-seguranca', $cartao->getCodigoSeguranca());
+        $dc->addChild('nome-portador', $cartao->getNomePortador());
+        
+        return $dc;
+    }
 
     /**
      * Cria os dados do pedido
@@ -617,11 +637,13 @@ class Cliente
         $this->_xml
              ->addChild('tid', $trans->getTid());
         $this->dadosEC();
-        $this->dadosPortador($card);
+        $this->dadosCartao($card);
         $this->pedido($trans);
         $this->pagamento($trans, $card);
         $this->_xml
              ->addChild('capturar-automaticamente', $trans->getCapturar());
+        $this->_xml
+             ->addChild('campo-livre', '');
     }
     
     /**
@@ -632,6 +654,10 @@ class Cliente
      */
     public function enviaChamada()
     {
+        if (!$this->_xml instanceof \SimpleXMLElement) {
+            throw new Exception('XML não criado.');
+        }
+        
         // URL para o ambiente de produção
         $url = 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
 
