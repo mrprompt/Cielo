@@ -152,7 +152,7 @@ class Cielo
     /**
      * Código de segurança do cartão, obrigatório se o indicador for 1
      *
-     * @var integer
+     * @var mixed
      */
     private $_codigoSeguranca;
     /**
@@ -190,7 +190,12 @@ class Cielo
      * @var boolean
      */
     private $_debug = false;
-
+    /**
+     * Certificado SSL
+     *
+     * @var string
+     */
+    private $_sslCertificate;
     /**
      * Construtor da aplicação
      *
@@ -723,7 +728,7 @@ class Cielo
      * Retorna o código de segurança configurado para cartão
      *
      * @access public
-     * @return integer
+     * @return mixed
      */
     public function getCodigoSeguranca()
     {
@@ -734,7 +739,7 @@ class Cielo
      * Seta o código de segurança do cartão
      *
      * @access public
-     * @param  integer $_codigo
+     * @param  mixed $_codigo
      * @return Cielo
      */
     public function setCodigoSeguranca($_codigo)
@@ -899,8 +904,36 @@ class Cielo
             default:
                 throw new Exception('Ambiente inválido.');
         }
-    }
+   }
 
+   /**
+	 * Retorna o caminho do certificado SSL
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getSslCertificate()
+	{
+		return $this->_sslCertificate;
+	}
+
+	/**
+	 * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
+	 *
+	 * @access public
+	 * @param  string $_sslCertificate
+	 * @return Cielo
+	 */
+	public function setSslCertificate($_sslCertificate = '')
+	{
+		if (!is_string($_sslCertificate)) {
+			throw new Exception('Parâmetro inválido.');
+		}
+
+		$this->_sslCertificate = $_sslCertificate;
+
+		return $this;
+	} 
     /**
      * Envia a chamada para o Web Service da Cielo
      *
@@ -950,6 +983,24 @@ class Cielo
 
         // envio os campos
         curl_setopt($_curl, CURLOPT_POSTFIELDS, "mensagem={$this->_xml}");
+
+		//  o tempo em segundos de espera para obter uma conexão
+		curl_setopt($_curl, CURLOPT_CONNECTTIMEOUT, 10);
+	
+		//  o tempo máximo em segundos de espera para a execução da requisição (curl_exec)
+		curl_setopt($_curl, CURLOPT_TIMEOUT, 40);
+		
+		if ($this->getSslCertificate() != '') {
+			// verifica a validade do certificado
+			curl_setopt($_curl, CURLOPT_SSL_VERIFYPEER, true);
+	
+			// verifica se a identidade do servidor bate com aquela informada no certificado
+			curl_setopt($_curl, CURLOPT_SSL_VERIFYHOST, 2);
+		
+			// informa a localização do certificado para verificação com o peer
+			curl_setopt($_curl, CURLOPT_CAINFO, $this->getSslCertificate());
+			curl_setopt($_curl, CURLOPT_SSLVERSION, 3);
+		}
 
         // Faz a requisição HTTP
         $this->setXml(curl_exec($_curl));
