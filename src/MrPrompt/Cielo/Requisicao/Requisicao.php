@@ -62,6 +62,7 @@ abstract class Requisicao
      * Inicializa o objeto
      *
      * @param Autorizacao $autorizacao
+     * @param Transacao $transacao
      */
     public function __construct(
         Autorizacao $autorizacao,
@@ -73,6 +74,7 @@ abstract class Requisicao
         $this->envio = new SimpleXMLElement($this->getXmlInicial());
         $this->configuraTransacao();
         $this->configuraAutenticacao();
+        $this->configuraEnvio();
     }
 
     /**
@@ -126,6 +128,14 @@ abstract class Requisicao
     public function setResposta(SimpleXMLElement $resposta)
     {
         $this->resposta = $resposta;
+    }
+
+    /**
+     * Configura o objeto de envio de acordo com as requisições
+     */
+    protected function configuraEnvio()
+    {
+        // Fazer override quando necessário
     }
 
     /**

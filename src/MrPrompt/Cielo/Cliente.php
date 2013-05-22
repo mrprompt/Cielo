@@ -19,6 +19,7 @@
 namespace MrPrompt\Cielo;
 
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
+use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Cliente\Exception;
 use Guzzle\Http\Client;
@@ -151,20 +152,6 @@ class Cliente
      * @const string
      */
     const TID_HEADER = 'requisicao-tid';
-
-    /**
-     * Transação com autorização ao portador
-     *
-     * @const integer
-     */
-    const AUTORIZACAO_PORTADOR_ID = 7;
-
-    /**
-     * Cabeçalho xml da chamada de captura com autorização ao portador
-     *
-     * @const string
-     */
-    const AUTORIZACAO_PORTADOR_HEADER = 'requisicao-autorizacao-portador';
 
     /**
      * Versão do web service em uso pelo cliente.
@@ -462,8 +449,9 @@ class Cliente
      * Nota: é nessa etapa que o saldo disponível do cartão do comprador é
      * sensibilizado caso a transação tenha sido autorizada.
      *
-     * @param \MrPrompt\Cielo\Transacao $transacao
      * @access public
+     * @param Transacao $transacao
+     * @return AutorizacaoTransacao
      */
     public function autoriza(Transacao $transacao)
     {
@@ -603,31 +591,23 @@ class Cliente
      * antes de tentar submeter uma nova. Pois num caso como esse, há
      * possibilidade da transação ter sido autorizada.
      *
-     * @param Transacao $trans
+     * @param Transacao $transacao
      * @param Cartao $cartao
      * @access public
-     * @return SimpleXMLElement
+     * @return AutorizacaoPortador
      */
-    public function autorizacaoPortador(Transacao $trans, Cartao $card)
+    public function autorizaPortador(Transacao $transacao, Cartao $cartao)
     {
-        $xml = sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            self::AUTORIZACAO_PORTADOR_HEADER,
-            self::AUTORIZACAO_PORTADOR_ID,
-            self::VERSAO,
-            self::AUTORIZACAO_PORTADOR_HEADER
+        $requisicao = new AutorizacaoPortador(
+            $this->autorizacao,
+            $transacao,
+            $cartao,
+            $this->idioma
         );
-        $this->xml = new SimpleXMLElement($xml);
-        $this->xml
-             ->addChild('tid', $trans->getTid());
-        $this->dadosEC();
-        $this->dadosCartao($card);
-        $this->pedido($trans);
-        $this->pagamento($trans, $card);
-        $this->xml
-             ->addChild('capturar-automaticamente', $trans->getCapturar());
-        $this->xml
-             ->addChild('campo-livre', '');
+
+        $this->enviaRequisicao($requisicao);
+
+        return $requisicao;
     }
 
     /**

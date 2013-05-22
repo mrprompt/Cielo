@@ -41,6 +41,7 @@ class AutorizacaoTransacao extends Requisicao
      * Inicializa o objeto
      *
      * @param Autorizacao $autorizacao
+     * @param Transacao $transacao
      */
     public function __construct(Autorizacao $autorizacao, Transacao $transacao)
     {
