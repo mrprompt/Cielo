@@ -154,7 +154,7 @@ class Cliente
     /**
      * Código de segurança do cartão, obrigatório se o indicador for 1
      *
-     * @var integer
+     * @var string
      */
     private $_codigoSeguranca;
     /**
@@ -176,6 +176,12 @@ class Cliente
      * @var string 
      */
     private $_descricao;
+    /**
+     * Certificado SSL
+     *
+     * @var string
+     */
+    private $_sslCertificate;
     /**
      * Ambiente (teste ou producao)
      *
@@ -725,7 +731,7 @@ class Cliente
      * Retorna o código de segurança configurado para cartão
      *
      * @access public
-     * @return integer
+     * @return string
      */
     public function getCodigoSeguranca()
     {
@@ -736,7 +742,7 @@ class Cliente
      * Seta o código de segurança do cartão
      *
      * @access public
-     * @param  integer $_codigo
+     * @param  string $_codigo
      * @return Cielo
      */
     public function setCodigoSeguranca($_codigo)
@@ -744,7 +750,7 @@ class Cliente
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_codigo)) {
             throw new Exception\Cliente('Código de segurança inválido.');
         } else {
-            $this->_codigoSeguranca = (integer) substr($_codigo, 0, 3);
+            $this->_codigoSeguranca = filter_var($_codigo, FILTER_SANITIZE_STRING);
 
             return $this;
         }
@@ -902,6 +908,37 @@ class Cliente
                 throw new Exception\Cliente('Ambiente inválido.');
         }
     }
+    
+/**
+	 * Retorna o caminho do certificado SSL
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getSslCertificate()
+	{
+		return $this->_sslCertificate;
+	}
+
+
+	/**
+	 * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
+	 *
+	 * @access public
+	 * @param  string $_sslCertificate
+	 * @return Cielo
+	 */
+	public function setSslCertificate($_sslCertificate = '')
+	{
+		if (!is_string($_sslCertificate)) {
+			throw new Exception('Parâmetro inválido.');
+		}
+
+		$this->_sslCertificate = $_sslCertificate;
+
+		return $this;
+	}
+
 
     /**
      * Envia a chamada para o Web Service da Cielo
@@ -952,6 +989,24 @@ class Cliente
 
         // envio os campos
         curl_setopt($_curl, CURLOPT_POSTFIELDS, "mensagem={$this->_xml}");
+        
+        //  o tempo em segundos de espera para obter uma conexão
+		curl_setopt($_curl, CURLOPT_CONNECTTIMEOUT, 10);
+	
+		//  o tempo máximo em segundos de espera para a execução da requisição (curl_exec)
+		curl_setopt($_curl, CURLOPT_TIMEOUT, 40);
+		
+		if ($this->getSslCertificate() != '') {
+			//  verifica a validade do certificado
+			curl_setopt($_curl, CURLOPT_SSL_VERIFYPEER, true);
+	
+			//  verifica se a identidade do servidor bate com aquela informada no certificado
+			curl_setopt($_curl, CURLOPT_SSL_VERIFYHOST, 2);
+		
+			//  informa a localização do certificado para verificação com o peer
+			curl_setopt($_curl, CURLOPT_CAINFO, $this->getSslCertificate());
+			curl_setopt($_curl, CURLOPT_SSLVERSION, 3);
+		}
 
         // Faz a requisição HTTP
         $this->setXml(curl_exec($_curl));
