@@ -10,7 +10,7 @@ use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Cliente;
 
 $transacao = new Transacao;
-$transacao->setTid('100');
+$transacao->setTid('10017348980059039999');
 $transacao->setAutorizar(0);
 $transacao->setCapturar('false');
 $transacao->setDataHora(date('Y-m-d\Th:i:s'));
