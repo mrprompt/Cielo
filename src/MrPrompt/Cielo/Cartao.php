@@ -15,15 +15,8 @@
  */
 namespace MrPrompt\Cielo;
 
-/**
- * @uses MrPrompt\Cielo\Cartao\Exception
- */
-use MrPrompt\Cielo\Cartao\Exception;
-
-/**
- * @uses Respect\Validation\Validator
- */
 use Respect\Validation\Validator as v;
+use InvalidArgumentException;
 
 class Cartao
 {
@@ -89,20 +82,18 @@ class Cartao
      * Configura o número do cartão
      *
      * @access public
-     * @param  integer $cartao
-     * @return Cielo
+     * @param  string $cartao
+     * @return Cartao
      */
     public function setCartao($cartao)
     {
-        try {
-            v::notEmpty()->creditCard()->check($cartao);
-
-            $this->cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
-
-            return $this;
-        } catch (\Exception $e) {
-            throw $e;
+        if (!v::notEmpty()->creditCard()->validate($cartao)) {
+            throw new InvalidArgumentException('O número do cartão deve ser válido.');
         }
+
+        $this->cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
+
+        return $this;
     }
 
     /**
@@ -125,20 +116,17 @@ class Cartao
      * 9 (inexistente)
      *
      * @var integer
+     * @return Cartao
      */
     public function setIndicador($indicador)
     {
-        switch ((integer) $indicador) {
-            case 0:
-            case 1:
-            case 2:
-            case 9:
-                $this->indicador = (integer) substr($indicador, 0, 1);
-
-                return $this;
-            default:
-                throw new Exception('Indicador de segurança inválido.');
+        if (!v::in(array(0, 1, 2, 9), true)->validate($indicador)) {
+            throw new InvalidArgumentException('Indicador de código de segurança inválido.');
         }
+
+        $this->indicador = (int) $indicador;
+
+        return $this;
     }
 
     /**
@@ -157,12 +145,12 @@ class Cartao
      *
      * @access public
      * @param  string $codigo
-     * @return Cielo
+     * @return Cartao
      */
     public function setCodigoSeguranca($codigo)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $codigo)) {
-            throw new Exception('Código de segurança inválido.');
+        if (!v::digit()->notEmpty()->noWhitespace()->validate($codigo)) {
+            throw new InvalidArgumentException('Código de segurança inválido.');
         }
 
         $this->codigoSeguranca = filter_var($codigo, FILTER_SANITIZE_STRING);
@@ -186,17 +174,17 @@ class Cartao
      *
      * @access public
      * @param  string $nomePortador
-     * @return Cielo
+     * @return Cartao
      */
     public function setNomePortador($nomePortador)
     {
-        if (preg_match('/[[:alnum:]]/i', $nomePortador)) {
-            $this->nomePortador = substr($nomePortador, 0, 50);
-
-            return $this;
+        if (!v::alnum()->notEmpty()->validate($nomePortador)) {
+            throw new InvalidArgumentException('Caracteres inválidos no nome do portador.');
         }
 
-        throw new Exception('Caracteres inválidos no nome do portador.');
+        $this->nomePortador = substr($nomePortador, 0, 50);
+
+        return $this;
     }
 
     /**
@@ -215,23 +203,22 @@ class Cartao
      *
      * @access public
      * @param  integer $validade AAAAMM
-     * @return Cielo
+     * @param  integer $referencia
+     * @return Cartao
      */
-    public function setValidade($validade)
+    public function setValidade($validade, $referencia = null)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $validade)) {
-            throw new Exception('Data de validade inválida.');
+        if (!v::digit()->notEmpty()->noWhitespace()->length(6)->validate($validade)) {
+            throw new InvalidArgumentException('Data de validade inválida.');
         }
 
-        if (strlen($validade) != 6) {
-            throw new Exception('Data de validade inválida.');
+        $referencia = $referencia ?: date('Ym');
+
+        if ($validade < $referencia) {
+            throw new InvalidArgumentException('Cartão com validade ultrapassada.');
         }
 
-        if ($validade < date('Ym')) {
-            throw new Exception('Cartão com validade ultrapassada.');
-        }
-
-        $this->validade = substr($validade, 0, 6);
+        $this->validade = $validade;
 
         return $this;
     }
@@ -252,16 +239,16 @@ class Cartao
      *
      * @access public
      * @param  string $bandeira
-     * @return Cielo
+     * @return Cartao
      */
     public function setBandeira($bandeira)
     {
-        if (preg_match('/(visa|mastercard)/i', $bandeira)) {
-            $this->bandeira = strtolower($bandeira);
-
-            return $this;
+        if (!v::string()->regex('/(visa|mastercard)/i')->validate($bandeira)) {
+            throw new InvalidArgumentException('Bandeira inválida.');
         }
 
-        throw new Exception('Bandeira inválida.');
+        $this->bandeira = strtolower($bandeira);
+
+        return $this;
     }
 }
