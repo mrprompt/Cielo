@@ -9,10 +9,10 @@
          stopOnFailure="false"
          syntaxCheck="false"
          verbose="true"
-         bootstrap="./bootstrap.php">
+         bootstrap="../vendor/autoload.php">
     <testsuites>
         <testsuite name="API Test Suite">
-            <directory>./src/</directory>
+            <directory>./MrPrompt/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
