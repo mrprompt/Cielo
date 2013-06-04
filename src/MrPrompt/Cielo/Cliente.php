@@ -18,20 +18,16 @@
  */
 namespace MrPrompt\Cielo;
 
-use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
-
-use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
-
-use MrPrompt\Cielo\Requisicao\Consulta;
-
-use MrPrompt\Cielo\Requisicao\Captura;
-
-use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
-use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
-use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
-use MrPrompt\Cielo\Requisicao\Requisicao;
-use MrPrompt\Cielo\Cliente\Exception;
 use Guzzle\Http\Client;
+use InvalidArgumentException;
+use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
+use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
+use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
+use MrPrompt\Cielo\Requisicao\Captura;
+use MrPrompt\Cielo\Requisicao\Consulta;
+use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
+use MrPrompt\Cielo\Requisicao\Requisicao;
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use SimpleXMLElement;
 
 /**
@@ -130,15 +126,16 @@ class Cliente
      */
     public function setIdioma($idioma)
     {
-        switch ($idioma) {
+    	$idiomaUpperCase = strtoupper($idioma);
+
+        switch ($idiomaUpperCase) {
             case 'PT':
             case 'EN':
             case 'ES':
-                $this->idioma = $idioma;
-
+                $this->idioma = $idiomaUpperCase;
                 return $this;
             default:
-                throw new Exception('Idioma inválido.');
+                throw new InvalidArgumentException('Idioma inválido.');
         }
     }
 
@@ -158,6 +155,7 @@ class Cliente
      *
      * @access public
      * @param  string $ambiente teste | produção (default)
+     * @throws InvalidArgumentException
      * @return Cielo
      */
     public function setAmbiente($ambiente)
@@ -167,10 +165,9 @@ class Cliente
             case 'produção':
             case 'producao':
                 $this->ambiente = $ambiente;
-
                 return $this;
             default:
-                throw new Exception('Ambiente inválido.');
+                throw new InvalidArgumentException('Ambiente inválido.');
         }
     }
 
@@ -185,7 +182,7 @@ class Cliente
     {
         if (!is_string($sslCertificate)
             || (trim($sslCertificate) != '' && !is_readable($sslCertificate))) {
-            throw new Exception('Parâmetro inválido.');
+            throw new InvalidArgumentException('Parâmetro inválido.');
         }
 
         if ($sslCertificate != '') {
