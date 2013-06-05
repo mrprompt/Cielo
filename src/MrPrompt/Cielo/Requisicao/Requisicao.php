@@ -62,7 +62,7 @@ abstract class Requisicao
      * Inicializa o objeto
      *
      * @param Autorizacao $autorizacao
-     * @param Transacao $transacao
+     * @param Transacao   $transacao
      */
     public function __construct(Autorizacao $autorizacao, Transacao $transacao)
     {

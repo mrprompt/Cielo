@@ -67,7 +67,7 @@ class Autorizacao
     /**
      * Configura o número de autorização
      *
-     * @param string $chave
+     * @param  string                   $chave
      * @throws InvalidArgumentException
      */
     public function setNumero($numero)
@@ -92,7 +92,7 @@ class Autorizacao
     /**
      * Configura a chave de autorização
      *
-     * @param string $chave
+     * @param  string                   $chave
      * @throws InvalidArgumentException
      */
     public function setChave($chave)
