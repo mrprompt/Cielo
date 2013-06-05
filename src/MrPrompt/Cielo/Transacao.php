@@ -313,7 +313,7 @@ class Transacao
      * Seta a data e hora da venda
      *
      * @access public
-     * @param datetime $dataHora AAAA-MM-DDTHH:MM:SS
+     * @param  datetime $dataHora AAAA-MM-DDTHH:MM:SS
      * @return Cielo
      */
     public function setDataHora($dataHora)

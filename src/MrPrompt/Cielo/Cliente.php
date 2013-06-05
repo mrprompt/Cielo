@@ -28,7 +28,6 @@ use MrPrompt\Cielo\Requisicao\Consulta;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
-use SimpleXMLElement;
 
 /**
  * Cliente de integração com a Cielo
@@ -88,7 +87,7 @@ class Cliente
      *
      * @access public
      * @param Autorizacao $autorizacao
-     * @param Client $httpClient
+     * @param Client      $httpClient
      */
     public function __construct(
         Autorizacao $autorizacao,
@@ -126,13 +125,14 @@ class Cliente
      */
     public function setIdioma($idioma)
     {
-    	$idiomaUpperCase = strtoupper($idioma);
+        $idiomaUpperCase = strtoupper($idioma);
 
         switch ($idiomaUpperCase) {
             case 'PT':
             case 'EN':
             case 'ES':
                 $this->idioma = $idiomaUpperCase;
+
                 return $this;
             default:
                 throw new InvalidArgumentException('Idioma inválido.');
@@ -154,7 +154,7 @@ class Cliente
      * Configura o ambiente a ser utilizado nas chamadas de transações
      *
      * @access public
-     * @param  string $ambiente teste | produção (default)
+     * @param  string                   $ambiente teste | produção (default)
      * @throws InvalidArgumentException
      * @return Cielo
      */
@@ -165,6 +165,7 @@ class Cliente
             case 'produção':
             case 'producao':
                 $this->ambiente = $ambiente;
+
                 return $this;
             default:
                 throw new InvalidArgumentException('Ambiente inválido.');
@@ -204,9 +205,9 @@ class Cliente
      * Inicia uma transação de venda, retornando seu TID e demais valores
      *
      * @access public
-     * @param Transacao $transacao
-     * @param Cartao $cartao
-     * @param string $urlRetorno
+     * @param  Transacao            $transacao
+     * @param  Cartao               $cartao
+     * @param  string               $urlRetorno
      * @return SolicitacaoTransacao
      */
     public function iniciaTransacao(Transacao $transacao, Cartao $cartao, $urlRetorno)
@@ -240,7 +241,7 @@ class Cliente
      * sensibilizado caso a transação tenha sido autorizada.
      *
      * @access public
-     * @param Transacao $transacao
+     * @param  Transacao            $transacao
      * @return AutorizacaoTransacao
      */
     public function autoriza(Transacao $transacao)
@@ -266,7 +267,7 @@ class Cliente
      * é automaticamente capturada.
      *
      * @access public
-     * @param Transacao $transacao
+     * @param  Transacao $transacao
      * @return Captura
      */
     public function captura(Transacao $transacao)
@@ -290,7 +291,7 @@ class Cliente
      * vencido o prazo de captura, ela é cancelada automaticamente.
      *
      * @access public
-     * @param Transacao $transacao
+     * @param  Transacao             $transacao
      * @return CancelamentoTransacao
      */
     public function cancela(Transacao $transacao)
@@ -308,7 +309,7 @@ class Cliente
      * É sempre utilizada após a loja ter recebido o retorno do fluxo da Cielo.
      *
      * @access public
-     * @param Transacao $transacao
+     * @param  Transacao $transacao
      * @return Consulta
      */
     public function consulta(Transacao $transacao)
@@ -324,8 +325,8 @@ class Cliente
      * Requisita um TID (Identificador de transação) ao Web Service
      *
      * @access public
-     * @param Transacao $transacao
-     * @param Cartao $cartao
+     * @param  Transacao              $transacao
+     * @param  Cartao                 $cartao
      * @return IdentificacaoTransacao
      */
     public function tid(Transacao $transacao, Cartao $cartao)
@@ -353,7 +354,7 @@ class Cliente
      * possibilidade da transação ter sido autorizada.
      *
      * @param Transacao $transacao
-     * @param Cartao $cartao
+     * @param Cartao    $cartao
      * @access public
      * @return AutorizacaoPortador
      */

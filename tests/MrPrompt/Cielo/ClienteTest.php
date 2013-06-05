@@ -14,7 +14,7 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-    	$mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
         $this->object = new Cliente($mockAutorizacao);
     }
 
@@ -28,75 +28,75 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider ambientesValidos
      */
-	public function ambienteDeveSerValido($valor)
-	{
-		$this->object->setAmbiente($valor);
-		$this->assertEquals($valor, $this->object->getAmbiente());
-	}
+    public function ambienteDeveSerValido($valor)
+    {
+        $this->object->setAmbiente($valor);
+        $this->assertEquals($valor, $this->object->getAmbiente());
+    }
 
-	public function ambientesValidos()
-	{
-		return array(
-			array('teste'),
-			array('producao'),
-			array('produção')
-		);
-	}
+    public function ambientesValidos()
+    {
+        return array(
+            array('teste'),
+            array('producao'),
+            array('produção')
+        );
+    }
 
-	/**
-	 * @test
-	 * @dataProvider ambientesInvalidos
-	 * @expectedException \InvalidArgumentException
-	 */
-	public function deveLancarErroCasoRecebaAmbienteInvalido($valor)
-	{
-		$this->object->setAmbiente($valor);
-	}
+    /**
+     * @test
+     * @dataProvider ambientesInvalidos
+     * @expectedException \InvalidArgumentException
+     */
+    public function deveLancarErroCasoRecebaAmbienteInvalido($valor)
+    {
+        $this->object->setAmbiente($valor);
+    }
 
-	public function ambientesInvalidos()
-	{
-		return array(
-			array(''),
-			array(null),
-			array('test')
-		);
-	}
+    public function ambientesInvalidos()
+    {
+        return array(
+            array(''),
+            array(null),
+            array('test')
+        );
+    }
 
-	/**
-	 * @test
-	 * @dataProvider idiomasValidos
-	 */
-	public function idiomaDeveSerValido($valor, $expected)
-	{
-		$this->object->setIdioma($valor);
-		$this->assertEquals($expected, $this->object->getIdioma());
-	}
+    /**
+     * @test
+     * @dataProvider idiomasValidos
+     */
+    public function idiomaDeveSerValido($valor, $expected)
+    {
+        $this->object->setIdioma($valor);
+        $this->assertEquals($expected, $this->object->getIdioma());
+    }
 
-	public function idiomasValidos()
-	{
-		return array(
-			array('pt', 'PT'),
-			array('En', 'EN'),
-			array('eS', 'ES')
-		);
-	}
+    public function idiomasValidos()
+    {
+        return array(
+            array('pt', 'PT'),
+            array('En', 'EN'),
+            array('eS', 'ES')
+        );
+    }
 
-	/**
-	 * @test
-	 * @dataProvider idiomasInvalidos
-	 * @expectedException \InvalidArgumentException
-	 */
-	public function deveLancarErroCasoRecebaIdiomaInvalido($valor)
-	{
-		$this->object->setAmbiente($valor);
-	}
+    /**
+     * @test
+     * @dataProvider idiomasInvalidos
+     * @expectedException \InvalidArgumentException
+     */
+    public function deveLancarErroCasoRecebaIdiomaInvalido($valor)
+    {
+        $this->object->setAmbiente($valor);
+    }
 
-	public function idiomasInvalidos()
-	{
-		return array(
-			array(''),
-			array(null),
-			array('pt-br')
-		);
-	}
+    public function idiomasInvalidos()
+    {
+        return array(
+            array(''),
+            array(null),
+            array('pt-br')
+        );
+    }
 }
