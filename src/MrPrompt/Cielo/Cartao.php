@@ -202,7 +202,7 @@ class Cartao
      * Configura a data de validade do cartão
      *
      * @access public
-     * @param  integer $validade AAAAMM
+     * @param  integer $validade   AAAAMM
      * @param  integer $referencia
      * @return Cartao
      */

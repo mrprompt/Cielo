@@ -66,10 +66,10 @@ class SolicitacaoTransacao extends Requisicao
      * Inicializa o objeto
      *
      * @param Autorizacao $autorizacao
-     * @param Transacao $transacao
-     * @param Cartao $cartao
-     * @param string $urlRetorno
-     * @param string $idioma
+     * @param Transacao   $transacao
+     * @param Cartao      $cartao
+     * @param string      $urlRetorno
+     * @param string      $idioma
      */
     public function __construct(
         Autorizacao $autorizacao,
