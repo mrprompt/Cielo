@@ -30,242 +30,202 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getTid
      * @todo   Implement testGetTid().
      */
-    public function testGetTid()
+    public function getTid()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setTid
      * @todo   Implement testSetTid().
      */
-    public function testSetTid()
+    public function setTid()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getProduto
      * @todo   Implement testGetProduto().
      */
-    public function testGetProduto()
+    public function getProduto()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setProduto
      * @todo   Implement testSetProduto().
      */
-    public function testSetProduto()
+    public function setProduto()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getParcelas
      * @todo   Implement testGetParcelas().
      */
-    public function testGetParcelas()
+    public function getParcelas()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setParcelas
      * @todo   Implement testSetParcelas().
      */
-    public function testSetParcelas()
+    public function setParcelas()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getMoeda
      * @todo   Implement testGetMoeda().
      */
-    public function testGetMoeda()
+    public function getMoeda()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setMoeda
      * @todo   Implement testSetMoeda().
      */
-    public function testSetMoeda()
+    public function setMoeda()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getCapturar
      * @todo   Implement testGetCapturar().
      */
-    public function testGetCapturar()
+    public function getCapturar()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setCapturar
      * @todo   Implement testSetCapturar().
      */
-    public function testSetCapturar()
+    public function setCapturar()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getAutorizar
      * @todo   Implement testGetAutorizar().
      */
-    public function testGetAutorizar()
+    public function getAutorizar()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setAutorizar
      * @todo   Implement testSetAutorizar().
      */
-    public function testSetAutorizar()
+    public function setAutorizar()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getDataHora
      * @todo   Implement testGetDataHora().
      */
-    public function testGetDataHora()
+    public function getDataHora()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setDataHora
      * @todo   Implement testSetDataHora().
      */
-    public function testSetDataHora()
+    public function setDataHora()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getNumero
      * @todo   Implement testGetNumero().
      */
-    public function testGetNumero()
+    public function getNumero()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setNumero
      * @todo   Implement testSetNumero().
      */
-    public function testSetNumero()
+    public function setNumero()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getValor
      * @todo   Implement testGetValor().
      */
-    public function testGetValor()
+    public function getValor()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setValor
      * @todo   Implement testSetValor().
      */
-    public function testSetValor()
+    public function setValor()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::setDescricao
      * @todo   Implement testSetDescricao().
      */
-    public function testSetDescricao()
+    public function setDescricao()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
+     * @test
      * @covers MrPrompt\Cielo\Transacao::getDescricao
      * @todo   Implement testGetDescricao().
      */
-    public function testGetDescricao()
+    public function getDescricao()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 }
