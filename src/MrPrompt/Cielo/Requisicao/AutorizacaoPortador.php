@@ -65,7 +65,7 @@ class AutorizacaoPortador extends Requisicao
         Autorizacao $autorizacao,
         Transacao $transacao,
         Cartao $cartao,
-        $idioma
+        $idioma = 'PT'
     ) {
         $this->cartao = $cartao;
         $this->idioma = $idioma;
