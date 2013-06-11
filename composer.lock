@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ce0b69ee7b20f9bbb9131fd41c95d607",
+    "hash": "966c76dc1c55b2bcbabc306a2ea5d0e2",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "8a14a60dcc2483e09de6a3456f4c05aedc686e7b"
+                "reference": "v3.7.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8a14a60dcc2483e09de6a3456f4c05aedc686e7b",
-                "reference": "8a14a60dcc2483e09de6a3456f4c05aedc686e7b",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.7.0",
+                "reference": "v3.7.0",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.7-dev"
                 }
             },
             "autoload": {
@@ -95,7 +95,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-05-19 01:16:38"
+            "time": "2013-06-11 00:24:07"
         },
         {
             "name": "respect/validation",
