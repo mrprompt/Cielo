@@ -19,13 +19,11 @@
 
 namespace MrPrompt\Cielo\Requisicao;
 
-use MrPrompt\Cielo\Cliente\Exception;
-
 use MrPrompt\Cielo\Cartao;
-
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
+use InvalidArgumentException;
 
 /**
  * Requisição de autorizacao de portador
@@ -79,7 +77,7 @@ class SolicitacaoTransacao extends Requisicao
         $idioma
     ) {
         if (filter_var($urlRetorno, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) == false) {
-            throw new Exception('URL de retorno inválida.');
+            throw new InvalidArgumentException('URL de retorno inválida.');
         }
 
         $this->cartao = $cartao;
