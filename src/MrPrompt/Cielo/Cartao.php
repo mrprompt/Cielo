@@ -30,11 +30,11 @@ class Cartao
     /**
      * Bandeira do cartão
      *
-     * vista ou mastercard (sempre minúsculo)
+     * sempre minúsculo
      *
      * @var string
      */
-    private $bandeira = 'visa';
+    private $bandeira;
 
     /**
      * Indicador do código de segurança:
@@ -243,7 +243,7 @@ class Cartao
      */
     public function setBandeira($bandeira)
     {
-        if (!v::string()->regex('/(visa|mastercard)/i')->validate($bandeira)) {
+        if (!v::string()->notEmpty()->lowercase()->alnum()->validate($bandeira)) {
             throw new InvalidArgumentException('Bandeira inválida.');
         }
 
