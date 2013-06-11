@@ -1,11 +1,13 @@
 <?php
 /**
- * Cielo
+ * Cliente
  *
  * Cliente para o Web Service da Cielo.
  *
- * O Web Service permite efetuar vendas com cartões de bandeira
- * VISA e Mastercard, tanto no débito quanto em compras a vista ou parceladas.
+ * O Web Service permite efetuar vendas com cartões de crédito de várias 
+ * bandeiras, homologadas pela Cielo.
+ * Com a integração, é possível efetuar vendas através do crédito ou 
+ * débito, em compras a vista ou parceladas.
  *
  * Licença
  * Este código fonte está sob a licença GPL-3.0+
@@ -61,13 +63,13 @@ class Cliente
     private $idioma = 'PT';
 
     /**
-     * Ambiente (teste ou producao)
+     * Ambiente (teste ou produção)
      *
-     * Default: producao
+     * Default: produção
      *
      * @var string
      */
-    private $ambiente = 'producao';
+    private $ambiente = 'produção';
 
     /**
      * @var Client
@@ -87,6 +89,13 @@ class Cliente
      * @var array 
      */
     private $idiomas = array('PT', 'EN', 'ES');
+    
+    /**
+     * Ambientes válidos
+     * 
+     * @var array
+     */
+    private $ambientes = array('teste', 'produção');
 
     /**
      * Construtor da aplicação
@@ -123,23 +132,23 @@ class Cliente
      * EN (inglês)
      * ES (espanhol).
      *
-     * Com base nessa informação é definida a
-     * língua a ser utilizada nas telas da Cielo.
+     * Com base nessa informação é definida a língua a ser utilizada nas telas 
+     * da Cielo.
      * Caso não preenchido, assume-se PT.
      *
-     * @access public
      * @param  string $idioma
      * @return Cielo
      */
     public function setIdioma($idioma)
     {
+        $idioma = strtoupper($idioma);
         $regras = v::string()->notEmpty()
-                             ->in($this->idiomas)
-                             ->uppercase()
-                             ->alpha();
+                             ->in($this->idiomas);
         
         if (!$regras->validate($idioma)) {
-            throw new InvalidArgumentException('Idioma inválido.');
+            throw new InvalidArgumentException(
+                sprintf('Idioma inválido: %s.', $idioma)
+            );
         }
         
         $this->idioma = $idioma;
@@ -168,16 +177,16 @@ class Cliente
      */
     public function setAmbiente($ambiente)
     {
-        switch ($ambiente) {
-            case 'teste':
-            case 'produção':
-            case 'producao':
-                $this->ambiente = $ambiente;
-
-                return $this;
-            default:
-                throw new InvalidArgumentException('Ambiente inválido.');
+        $regras = v::string()->notEmpty()
+                             ->in($this->ambientes);
+        
+        if (!$regras->validate($ambiente)) {
+            throw new InvalidArgumentException('Ambiente inválido.');
         }
+        
+        $this->ambiente = $ambiente;
+
+        return $this;
     }
 
     /**
@@ -419,5 +428,15 @@ class Cliente
     public function getIdiomas()
     {
         return $this->idiomas;
+    }
+    
+    /**
+     * Recupera os ambientes válidos
+     * 
+     * @return array
+     */
+    public function getAmbientes()
+    {
+        return $this->ambientes;
     }
 }

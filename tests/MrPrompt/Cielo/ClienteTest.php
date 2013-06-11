@@ -37,9 +37,8 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     public function ambientesValidos()
     {
         return array(
-            array('teste'),
-            array('producao'),
-            array('produção')
+            array('teste', 'teste'),
+            array('produção', 'produção'),
         );
     }
 
@@ -69,15 +68,25 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     public function idiomaDeveSerValido($valor, $expected)
     {
         $this->object->setIdioma($valor);
+        
         $this->assertEquals($expected, $this->object->getIdioma());
     }
 
     public function idiomasValidos()
     {
         return array(
+            array('PT', 'PT'),
             array('pt', 'PT'),
+            array('Pt', 'PT'),
+            array('pt', 'PT'),
+            array('EN', 'EN'),
             array('En', 'EN'),
-            array('eS', 'ES')
+            array('eN', 'EN'),
+            array('en', 'EN'),
+            array('ES', 'ES'),
+            array('Es', 'ES'),
+            array('eS', 'ES'),
+            array('es', 'ES'),
         );
     }
 
@@ -98,5 +107,21 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
             array(null),
             array('pt-br')
         );
+    }
+    
+    /**
+     * @test
+     */
+    public function getIdiomasDeveRetornarArray()
+    {
+        $this->assertTrue(is_array($this->object->getIdiomas()));
+    }
+    
+    /**
+     * @test
+     */
+    public function getAmbientesDeveRetornarArray()
+    {
+        $this->assertTrue(is_array($this->object->getAmbientes()));
     }
 }
