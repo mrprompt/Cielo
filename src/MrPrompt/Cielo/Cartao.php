@@ -68,6 +68,22 @@ class Cartao
     private $validade;
 
     /**
+     * Bandeiras válidas
+     *
+     * @var array
+     */
+    private $bandeiras = array(
+        'visa',
+        'mastercard',
+        'diners',
+        'discover',
+        'elo',
+        'amex',
+        'jcb',
+        'aura',
+    );
+
+    /**
      * Retorna o número do cartão
      *
      * @access public
@@ -245,12 +261,27 @@ class Cartao
      */
     public function setBandeira($bandeira)
     {
-        if (!v::string()->notEmpty()->length(4)->lowercase()->alnum()->validate($bandeira)) {
+        $regras = v::string()->notEmpty()
+                             ->in($this->bandeiras)
+                             ->lowercase()
+                             ->alnum();
+        
+        if (!$regras->validate($bandeira)) {
             throw new InvalidArgumentException('Bandeira inválida.');
         }
 
         $this->bandeira = $bandeira;
 
         return $this;
+    }
+    
+    /**
+     * Recupera as bandeiras permitidas.
+     * 
+     * @return array
+     */
+    public function getBandeiras()
+    {
+        return $this->bandeiras;
     }
 }
