@@ -5,7 +5,7 @@ class RequisicaoExtendida extends Requisicao
 {
     public function getXmlInicial()
     {
-        parent::getXmlInicial();
+        //return parent::getXmlInicial();
     }
 }
 
@@ -23,7 +23,13 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new RequisicaoExtendida;
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        
+        $this->object = new RequisicaoExtendida(
+            $mockAutorizacao,
+            $mockTransacao
+        );
     }
 
     /**

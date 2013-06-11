@@ -15,7 +15,15 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new IdentificacaoTransacao;
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        
+        $this->object = new IdentificacaoTransacao(
+            $mockAutorizacao,
+            $mockTransacao,
+            $mockCartao
+        );
     }
 
     /**

@@ -15,7 +15,13 @@ class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new CancelamentoTransacao;
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        
+        $this->object = new CancelamentoTransacao(
+            $mockAutorizacao,
+            $mockTransacao
+        );
     }
 
     /**
