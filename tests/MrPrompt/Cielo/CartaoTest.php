@@ -238,8 +238,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
      */
-    public function bandeiraDeveConverterParaMinusculos()
+    public function bandeiraDeveReceberApenasMinusculos()
     {
         $cartao = new Cartao();
         $cartao->setBandeira('MASTERCARD');
@@ -266,7 +267,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
             array(null),
             array('d'),
             array(array('d')),
-            array((object) array('d' => 'asdad')),
+            array((object) array('d' => 'ADSFS')),
         );
     }
 }

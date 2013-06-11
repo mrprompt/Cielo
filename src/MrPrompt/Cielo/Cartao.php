@@ -236,6 +236,8 @@ class Cartao
 
     /**
      * Configura a bandeira do cartão
+     * 
+     * Obs.: A bandeira do cartão aceita somente caracteres minúsculos.
      *
      * @access public
      * @param  string $bandeira
@@ -243,11 +245,11 @@ class Cartao
      */
     public function setBandeira($bandeira)
     {
-        if (!v::string()->notEmpty()->lowercase()->alnum()->validate($bandeira)) {
+        if (!v::string()->notEmpty()->length(4)->lowercase()->alnum()->validate($bandeira)) {
             throw new InvalidArgumentException('Bandeira inválida.');
         }
 
-        $this->bandeira = strtolower($bandeira);
+        $this->bandeira = $bandeira;
 
         return $this;
     }
