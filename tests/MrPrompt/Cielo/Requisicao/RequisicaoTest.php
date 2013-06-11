@@ -1,11 +1,17 @@
 <?php
 namespace MrPrompt\Cielo\Requisicao;
 
-class RequisicaoExtendida extends Requisicao 
+class ExtendRequisicao extends Requisicao
 {
-    public function getXmlInicial()
+    protected function getXmlInicial()
     {
-        //return parent::getXmlInicial();
+        return sprintf(
+            '<%s id="%d" versao="%s"></%s>',
+            'requisicao-test',
+            1,
+            1.0,
+            'requisicao-test'
+        );
     }
 }
 
@@ -26,7 +32,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
         $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
         $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
         
-        $this->object = new RequisicaoExtendida(
+        $this->object = new ExtendRequisicao(
             $mockAutorizacao,
             $mockTransacao
         );
