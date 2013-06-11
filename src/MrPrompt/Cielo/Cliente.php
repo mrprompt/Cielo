@@ -28,6 +28,7 @@ use MrPrompt\Cielo\Requisicao\Consulta;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+use Respect\Validation\Validator as v;
 
 /**
  * Cliente de integração com a Cielo
@@ -79,6 +80,13 @@ class Cliente
      * @const float
      */
     const VERSAO = '1.1.0';
+    
+    /**
+     * Idiomas válidos
+     *
+     * @var array 
+     */
+    private $idiomas = array('PT', 'EN', 'ES');
 
     /**
      * Construtor da aplicação
@@ -125,18 +133,18 @@ class Cliente
      */
     public function setIdioma($idioma)
     {
-        $idiomaUpperCase = strtoupper($idioma);
-
-        switch ($idiomaUpperCase) {
-            case 'PT':
-            case 'EN':
-            case 'ES':
-                $this->idioma = $idiomaUpperCase;
-
-                return $this;
-            default:
-                throw new InvalidArgumentException('Idioma inválido.');
+        $regras = v::string()->notEmpty()
+                             ->in($this->idiomas)
+                             ->uppercase()
+                             ->alpha();
+        
+        if (!$regras->validate($idioma)) {
+            throw new InvalidArgumentException('Idioma inválido.');
         }
+        
+        $this->idioma = $idioma;
+
+        return $this;
     }
 
     /**
@@ -401,5 +409,15 @@ class Cliente
         }
 
         return 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
+    }
+    
+    /**
+     * Recupera os idiomas válidos
+     * 
+     * @return array
+     */
+    public function getIdiomas()
+    {
+        return $this->idiomas;
     }
 }
