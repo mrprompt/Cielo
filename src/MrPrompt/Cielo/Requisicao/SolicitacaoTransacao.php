@@ -132,11 +132,18 @@ class SolicitacaoTransacao extends Requisicao
     {
         $dadosPortador = $this->getEnvio()->addChild('dados-portador', '');
 
-        $dadosPortador->addChild('numero', $this->cartao->getCartao());
-        $dadosPortador->addChild('validade', $this->cartao->getValidade());
-        $dadosPortador->addChild('indicador', $this->cartao->getIndicador());
-        $dadosPortador->addChild('codigo-seguranca', $this->cartao->getCodigoSeguranca());
-        $dadosPortador->addChild('nome-portador', $this->cartao->getNomePortador());
+        if ( ! $this->cartao->hasToken() )
+        {
+            $dadosPortador->addChild('numero', $this->cartao->getCartao());
+            $dadosPortador->addChild('validade', $this->cartao->getValidade());
+            $dadosPortador->addChild('indicador', $this->cartao->getIndicador());
+            $dadosPortador->addChild('nome-portador', $this->cartao->getNomePortador());
+            $dadosPortador->addChild('codigo-seguranca', $this->cartao->getCodigoSeguranca());
+        }
+        else
+        {
+            $dadosPortador->addChild('token', $this->cartao->getToken());
+        }
     }
 
     /**

@@ -68,6 +68,13 @@ class Cartao
     private $validade;
 
     /**
+     * Token que liga o cartão ao estabelecimento
+     *
+     * @var string
+     */
+    private $token = null;
+
+    /**
      * Bandeiras válidas
      *
      * @var array
@@ -284,4 +291,37 @@ class Cartao
     {
         return $this->bandeiras;
     }
+
+    /**
+     * Recupera o token.
+     * 
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }    
+
+    /**
+     * Configura o token.
+     * 
+     * @return string
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $token;
+    }
+
+    /**
+     * Verifica se o token está configurado.
+     * 
+     * @return boolean
+     */
+    public function hasToken()
+    {
+        return ! empty($this->token);
+    }
+
 }

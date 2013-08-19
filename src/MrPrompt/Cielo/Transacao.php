@@ -383,6 +383,8 @@ class Transacao
             throw new Exception('Valor inválido.');
         }
 
+        $valor = number_format ( (float) $valor, 2, '' , '' );
+
         $this->valorPedido = substr($valor, 0, 12);
 
         return $this;
