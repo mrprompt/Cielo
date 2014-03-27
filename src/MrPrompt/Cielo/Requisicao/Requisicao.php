@@ -83,6 +83,15 @@ abstract class Requisicao
     }
 
     /**
+     * Retorna a modalidade de integração definida na autorização.
+     * @return integer
+     */
+    public function getModalidadeIntegracao()
+    {
+        return $this->autorizacao->getModalidade();
+    }
+
+    /**
      * Adiciona os dados de autenticação à requisição
      */
     protected function configuraAutenticacao()

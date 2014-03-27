@@ -41,6 +41,8 @@ class SolicitacaoTransacao extends Requisicao
 
     /**
      * Cartão a ser utilizado
+     * 
+     * Para modalidade Cielo, basta que o atributo Cartao::bandeira seja informado.
      *
      * @var Cartao
      */
@@ -114,7 +116,10 @@ class SolicitacaoTransacao extends Requisicao
         $this->getEnvio()->addChild('autorizar', $this->transacao->getAutorizar());
         $this->getEnvio()->addChild('capturar', $this->transacao->getCapturar());
         $this->getEnvio()->addChild('campo-livre', '');
-        $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
+
+        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA === $this->getModalidadeIntegracao()) {
+            $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
+        }
     }
 
     /**
@@ -130,6 +135,9 @@ class SolicitacaoTransacao extends Requisicao
      */
     protected function adicionaPortador()
     {
+        if (Autorizacao::MODALIDADE_BUY_PAGE_CIELO === $this->getModalidadeIntegracao())
+            return;
+
         $dadosPortador = $this->getEnvio()->addChild('dados-portador', '');
 
         if ( ! $this->cartao->hasToken() )
@@ -153,7 +161,7 @@ class SolicitacaoTransacao extends Requisicao
     {
         $dadosTransacao = $this->getEnvio()->addChild('dados-pedido', '');
 
-        $dadosTransacao->addChild('numero', $this->transacao->getTid());
+        $dadosTransacao->addChild('numero', $this->transacao->getNumero());
         $dadosTransacao->addChild('valor', $this->transacao->getValor());
         $dadosTransacao->addChild('moeda', $this->transacao->getMoeda());
         $dadosTransacao->addChild('data-hora', $this->transacao->getDataHora());

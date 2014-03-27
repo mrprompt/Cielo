@@ -121,7 +121,7 @@ class AutorizacaoPortador extends Requisicao
     {
         $dadosTransacao = $this->getEnvio()->addChild('dados-pedido', '');
 
-        $dadosTransacao->addChild('numero', $this->transacao->getTid());
+        $dadosTransacao->addChild('numero', $this->transacao->getNumero());
         $dadosTransacao->addChild('valor', $this->transacao->getValor());
         $dadosTransacao->addChild('moeda', $this->transacao->getMoeda());
         $dadosTransacao->addChild('data-hora', $this->transacao->getDataHora());
