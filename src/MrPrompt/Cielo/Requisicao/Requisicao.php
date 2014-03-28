@@ -59,6 +59,13 @@ abstract class Requisicao
     private $resposta;
 
     /**
+     * Deve adicionar o TID?
+     *
+     * @var boolean
+     */
+    private $adicionarTid = true;
+
+    /**
      * Inicializa o objeto
      *
      * @param Autorizacao $autorizacao
@@ -73,6 +80,15 @@ abstract class Requisicao
         $this->configuraTransacao();
         $this->configuraAutenticacao();
         $this->configuraEnvio();
+    }
+
+    /**
+     * Retorna a modalidade de integração definida na autorização.
+     * @return integer
+     */
+    public function getModalidadeIntegracao()
+    {
+        return $this->autorizacao->getModalidade();
     }
 
     /**
@@ -129,6 +145,26 @@ abstract class Requisicao
     }
 
     /**
+     * Retorna adicionarTid
+     *
+     * @return boolean
+     */
+    public function getAdicionarTid()
+    {
+        return $this->adicionarTid;
+    }
+
+    /**
+     * Configura adicionarTid
+     *
+     * @param SimpleXMLElement $resposta
+     */
+    public function setAdicionarTid($deve)
+    {
+        $this->adicionarTid = $deve;
+    }
+
+    /**
      * Configura o objeto de envio de acordo com as requisições
      */
     protected function configuraEnvio()
@@ -143,7 +179,7 @@ abstract class Requisicao
      */
     protected function deveAdicionarTid()
     {
-        return true;
+        return $this->getAdicionarTid();
     }
 
     /**

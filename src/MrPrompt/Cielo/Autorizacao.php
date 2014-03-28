@@ -29,6 +29,15 @@ use InvalidArgumentException;
 class Autorizacao
 {
     /**
+     * Indica que a digitação dos dados do cartão ocorrerá no ambiente da Cielo.
+     */
+    const MODALIDADE_BUY_PAGE_CIELO = 1;
+
+    /**
+     * Indica que a digitação dos dados do cartão ocorrerá no ambiente da loja.
+     */
+    const MODALIDADE_BUY_PAGE_LOJA = 2;
+    /**
      * Número de autorização
      *
      * @var string
@@ -43,15 +52,33 @@ class Autorizacao
     private $chave;
 
     /**
+     * Modalidade de integração.
+     * @var integer
+     */
+    private $modalidade = self::MODALIDADE_BUY_PAGE_LOJA;
+
+    /**
+     * Modalidades válidas.
+     * @var array
+     */
+    private $modalidades = array(
+        self::MODALIDADE_BUY_PAGE_CIELO,
+        self::MODALIDADE_BUY_PAGE_LOJA
+    );
+
+    /**
      * Inicializa o objeto
      *
      * @param string $numero
      * @param string $chave
      */
-    public function __construct($numero, $chave)
+    public function __construct($numero, $chave, $modalidade = null)
     {
         $this->setNumero($numero);
         $this->setChave($chave);
+
+        if ($modalidade)
+            $this->setModalidade($modalidade);
     }
 
     /**
@@ -102,5 +129,34 @@ class Autorizacao
         }
 
         $this->chave = substr($chave, 0, 100);
+    }
+
+    /**
+     * Define a modalidade de integração.
+     *
+     * @return integer
+     */
+    public function getModalidade()
+    {
+        return $this->modalidade;
+    }
+    
+    /**
+     * Define a modalidade de integração.
+     *
+     * @param integer $modalidade the modalidade
+     * @throws InvalidArgumentException
+     */
+    public function setModalidade($modalidade)
+    {
+        $regras = v::int()->notEmpty()->in($this->modalidades);
+        
+        if (!$regras->validate($modalidade)) {
+            throw new InvalidArgumentException('Modalidade de integração inválida.');
+        }
+
+        $this->modalidade = $modalidade;
+
+        return $this;
     }
 }

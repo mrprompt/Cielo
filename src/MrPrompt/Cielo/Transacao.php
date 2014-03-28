@@ -15,10 +15,7 @@
  */
 namespace MrPrompt\Cielo;
 
-/**
- * @uses \MrPrompt\Cielo\Transacao\Exception
- */
-use MrPrompt\Cielo\Transacao\Exception;
+use InvalidArgumentException;
 
 class Transacao
 {
@@ -166,7 +163,7 @@ class Transacao
 
                 return $this;
             default:
-                throw new Exception('Tipo de produto inválido.');
+                throw new InvalidArgumentException('Tipo de produto inválido.');
         }
     }
 
@@ -216,7 +213,7 @@ class Transacao
     public function setMoeda($moeda = 986)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $moeda)) {
-            throw new Exception('Moeda inválida');
+            throw new InvalidArgumentException('Moeda inválida');
         }
 
         $this->moeda = (integer) substr($moeda, 0, 3);
@@ -251,7 +248,7 @@ class Transacao
 
                 return $this;
             default:
-                throw new Exception('Parâmetro inválido.');
+                throw new InvalidArgumentException('Parâmetro inválido.');
         }
     }
 
@@ -294,7 +291,7 @@ class Transacao
 
                 return $this;
             default:
-                throw new Exception('Indicador de autorização inválido.');
+                throw new InvalidArgumentException('Indicador de autorização inválido.');
         }
     }
 
@@ -319,7 +316,7 @@ class Transacao
     public function setDataHora($dataHora)
     {
         if (strlen($dataHora) !== 19) {
-            throw new Exception('Formato inválido.');
+            throw new InvalidArgumentException('Formato inválido.');
         }
 
         $this->dataHora = $dataHora;
@@ -348,7 +345,7 @@ class Transacao
     public function setNumero($numero)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $numero)) {
-            throw new Exception('Número do pedido inválido.');
+            throw new InvalidArgumentException('Número do pedido inválido.');
         }
 
         $this->numeroPedido = substr($numero, 0, 50);
@@ -380,8 +377,10 @@ class Transacao
     public function setValor($valor)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $valor)) {
-            throw new Exception('Valor inválido.');
+            throw new InvalidArgumentException('Valor inválido.');
         }
+
+        $valor = number_format ( (float) $valor, 2, '' , '' );
 
         $this->valorPedido = substr($valor, 0, 12);
 

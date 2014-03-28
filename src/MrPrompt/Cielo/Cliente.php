@@ -30,6 +30,7 @@ use MrPrompt\Cielo\Requisicao\Consulta;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
 use Respect\Validation\Validator as v;
 
 /**
@@ -237,6 +238,21 @@ class Cliente
                 $urlRetorno,
                 $this->idioma
             )
+        );
+    }
+
+    /**
+     * Solicita Token
+     *
+     * Solicita um Token para trasações futuras com um determinado Cartão de Crédito
+     *
+     * @access public
+     * @param  Cartao               $cartao
+     */
+    public function solicitaToken(Transacao $transacao, Cartao $cartao)
+    {
+        return $this->enviaRequisicao(
+            new SolicitacaoToken($this->autorizacao, $transacao, $cartao)
         );
     }
 
