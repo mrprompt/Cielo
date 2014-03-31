@@ -368,7 +368,7 @@ class Transacao
      * Configura o valor da venda
      *
      * O valor da venda é um inteiro sem separador, onde os dois últimos
-     * digitos referem-se aos centavos. Ex.: 1200 = R$ 12,00
+     * digitos referem-se aos centavos. Ex.: 1237 = R$ 12,37
      *
      * @access public
      * @param  integer $valor
@@ -377,12 +377,14 @@ class Transacao
     public function setValor($valor)
     {
         if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $valor)) {
-            throw new InvalidArgumentException('Valor inválido.');
+            throw new InvalidArgumentException('Valor inválido. Deve conter apenas números inteiros.');
         }
 
-        $valor = number_format ( (float) $valor, 2, '' , '' );
+        if (!preg_match('/^[[:digit:]]{1,12}$/', $valor)) {
+            throw new InvalidArgumentException('Valor inválido. Deve conter de 1 à 12 digitos.');
+        }
 
-        $this->valorPedido = substr($valor, 0, 12);
+        $this->valorPedido = $valor;
 
         return $this;
     }
