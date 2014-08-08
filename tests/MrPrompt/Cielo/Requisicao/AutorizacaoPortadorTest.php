@@ -39,7 +39,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::getXmlInicial()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
@@ -49,7 +49,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::configuraEnvio()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::configuraEnvio()
      * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
@@ -59,7 +59,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::adicionaCartao()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaCartao()
      * @todo   Implement adicionaCartao().
      */
     public function adicionaCartao()
@@ -69,7 +69,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::adicionaTransacao()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaTransacao()
      * @todo   Implement adicionaTransacao().
      */
     public function adicionaTransacao()
@@ -79,7 +79,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::adicionaFormaPagamento()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaFormaPagamento()
      * @todo   Implement adicionaFormaPagamento().
      */
     public function adicionaFormaPagamento()

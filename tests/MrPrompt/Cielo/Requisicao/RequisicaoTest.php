@@ -49,7 +49,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::configuraAutenticacao()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::configuraAutenticacao()
      * @todo   Implement configuraAutenticacao().
      */
     public function configuraAutenticacao()
@@ -59,7 +59,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::configuraTransacao()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::configuraTransacao()
      * @todo   Implement configuraTransacao().
      */
     public function configuraTransacao()
@@ -69,7 +69,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::getEnvio()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::getEnvio()
      * @todo   Implement getEnvio().
      */
     public function getEnvio()
@@ -79,7 +79,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::getResposta()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::getResposta()
      * @todo   Implement getResposta().
      */
     public function getResposta()
@@ -89,7 +89,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::setResposta()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::setResposta()
      * @todo   Implement setResposta().
      */
     public function setResposta()
@@ -99,7 +99,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::configuraEnvio()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::configuraEnvio()
      * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
@@ -109,7 +109,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::deveAdicionarTid()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
      * @todo   Implement deveAdicionarTid().
      */
     public function deveAdicionarTid()
@@ -119,7 +119,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Requisicao::getXmlInicial()
+     * @covers MrPrompt\Cielo\Requisicao\Requisicao::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
