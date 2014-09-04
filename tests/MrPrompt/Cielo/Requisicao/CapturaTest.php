@@ -35,7 +35,7 @@ class CapturaTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers Captura::getXmlInicial()
+     * @covers MrPrompt\Cielo\Requisicao\Captura::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()

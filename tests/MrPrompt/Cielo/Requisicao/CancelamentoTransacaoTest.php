@@ -35,7 +35,7 @@ class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers AutorizacaoPortador::getXmlInicial()
+     * @covers MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
