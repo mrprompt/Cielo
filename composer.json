@@ -39,8 +39,8 @@
     },
     "require": {
         "php": ">=5.3",
-        "respect/validation": "dev-develop",
-        "guzzle/guzzle": "3.5.*"
+        "respect/validation": "0.6.*",
+        "guzzle/guzzle": ">=3.5.0, <4.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1",
