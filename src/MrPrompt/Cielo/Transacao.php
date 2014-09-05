@@ -15,6 +15,7 @@
  */
 namespace MrPrompt\Cielo;
 
+use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
 class Transacao
@@ -123,6 +124,10 @@ class Transacao
      */
     public function setTid($tid)
     {
+        if (!v::alnum()->notEmpty()->validate($tid)) {
+            throw new InvalidArgumentException('Caracteres inválidos no TID.');
+        }
+        
         $this->tid = $tid;
 
         return $this;

@@ -32,21 +32,35 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::getTid
-     * @todo   Implement testGetTid().
      */
     public function getTid()
     {
+        $tid    = uniqid();
+        $result = $this->object->setTid($tid);
         
+        $this->assertEquals($tid, $this->object->getTid());
+    }
+    
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setTid
+     * @expectedException InvalidArgumentException
+     */
+    public function setTidDisparaExcessaoQuandoVazio()
+    {
+        $this->object->setTid('');
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setTid
-     * @todo   Implement testSetTid().
      */
     public function setTid()
     {
+        $tid    = uniqid();
+        $result = $this->object->setTid($tid);
         
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
     /**
