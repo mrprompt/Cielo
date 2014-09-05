@@ -20,6 +20,8 @@ use InvalidArgumentException;
 
 class Transacao
 {
+    const PARCELAS_MINIMAS = 1;
+    
     /**
      * TID da transação
      *
@@ -45,7 +47,7 @@ class Transacao
      *
      * @var integer
      */
-    private $parcelas = 1;
+    private $parcelas = self::PARCELAS_MINIMAS;
 
     /**
      * Código numérico da moeda na ISO 4217 (R$ é 986 - default)
@@ -190,8 +192,12 @@ class Transacao
      * @param  integer $parcelas
      * @return Cielo
      */
-    public function setParcelas($parcelas)
+    public function setParcelas($parcelas = self::PARCELAS_MINIMAS)
     {
+        if (!v::digit()->notEmpty()->min(self::PARCELAS_MINIMAS, self::PARCELAS_MINIMAS)->validate($parcelas)) {
+            throw new InvalidArgumentException('Número de parcelas inválido.');
+        }
+        
         $this->parcelas = (integer) $parcelas;
 
         return $this;

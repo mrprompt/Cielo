@@ -115,27 +115,73 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
         
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
-
+    
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::getParcelas
-     * @todo   Implement testGetParcelas().
+     * data provider de parcelas válidas
+     * 
+     * @return array
      */
-    public function getParcelas()
+    public function parcelasValidas()
     {
-        
+        return array(
+            array(1),
+            array(3),
+            array(6),
+            array(12),
+            array(24),
+        );
+    }
+    
+    /**
+     * data provider de parcelas inválidas
+     *
+     * @return array
+     */
+    public function parcelasInvalidas()
+    {
+        return array(
+            array(0),
+            array('A'),
+            array('ADFSSF'),
+        );
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setParcelas
-     * @todo   Implement testSetParcelas().
+     * @covers MrPrompt\Cielo\Transacao::getParcelas
+     * @dataProvider parcelasValidas
      */
-    public function setParcelas()
+    public function getParcelas($parcelas)
     {
+        $this->object->setParcelas($parcelas);
         
+        $this->assertEquals($parcelas, $this->object->getParcelas());
     }
 
+    /**
+     * @test
+     * @dataProvider parcelasValidas
+     * @covers MrPrompt\Cielo\Transacao::setParcelas
+     */
+    public function setParcelas($parcelas)
+    {
+        $result = $this->object->setParcelas($parcelas);
+        
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider parcelasInvalidas
+     * @covers MrPrompt\Cielo\Transacao::setParcelas
+     * @expectedException InvalidArgumentException
+     */
+    public function setParcelasDisparaExcessaoComParcelasInvalidas($parcelas)
+    {
+        $this->object->setParcelas($parcelas);
+    }
+    
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::getMoeda
