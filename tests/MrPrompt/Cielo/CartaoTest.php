@@ -5,6 +5,8 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setCartao
+     * @covers MrPrompt\Cielo\Cartao::getCartao
      */
     public function numeroDoCartaoDeveSerValido()
     {
@@ -16,6 +18,8 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setCartao
+     * @covers MrPrompt\Cielo\Cartao::getCartao
      */
     public function caracteresNaoNumericosDevemSerRemovidosAoConfigurarOCartao()
     {
@@ -27,6 +31,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
     public function numeroDoCartaoNaoPodeSerVazio()
@@ -37,6 +42,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
     public function numeroDoCartaoSerUmNumeroInvalido()
@@ -47,6 +53,8 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setIndicador
+     * @covers MrPrompt\Cielo\Cartao::getIndicador
      * @dataProvider indicadoresValidos
      */
     public function indicadorDeCodigoDeSegurancaDeveSerValido($valor)
@@ -57,6 +65,11 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($valor, $cartao->getIndicador());
     }
 
+    /**
+     * data provider
+     * 
+     * @return array
+     */
     public function indicadoresValidos()
     {
         return array(
