@@ -405,6 +405,10 @@ class Transacao
      */
     public function setDescricao($descricao)
     {
+        if (!v::notEmpty()->validate($descricao)) {
+            throw new InvalidArgumentException(sprintf('Descrição %s é inválido.', $descricao));
+        }
+
         $this->descricao = $descricao;
 
         return $this;

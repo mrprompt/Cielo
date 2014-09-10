@@ -559,22 +559,65 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::setDescricao
-     * @todo   Implement testSetDescricao().
+     * Data provider de descrições válidas
+     *
+     * @return mixed
      */
-    public function setDescricao()
+    public function descricoesValidas()
     {
+        return array(
+            array('Teste'),
+            array('Teste com Espaço'),
+            array('xxxxx'),
+        );
+    }
 
+    /**
+     * Data provider de descrições inválidas
+     *
+     * @return mixed
+     */
+    public function descricoesInvalidas()
+    {
+        return array(
+            array(null),
+            array(''),
+        );
     }
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::getDescricao
-     * @todo   Implement testGetDescricao().
+     * @covers MrPrompt\Cielo\Transacao::setDescricao
+     * @dataProvider descricoesValidas
      */
-    public function getDescricao()
+    public function setDescricao($descricao)
     {
+        $result = $this->object->setDescricao($descricao);
 
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setDescricao
+     * @dataProvider descricoesInvalidas
+     * @expectedException InvalidArgumentException
+     */
+    public function setDescricaoDisparaExcessaoComDescricaoInvalida($descricao)
+    {
+        $this->object->setDescricao($descricao);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setDescricao
+     * @covers MrPrompt\Cielo\Transacao::getDescricao
+     * @dataProvider descricoesValidas
+     */
+    public function getDescricao($descricao)
+    {
+        $this->object->setDescricao($descricao);
+
+        $this->assertEquals($descricao, $this->object->getDescricao());
     }
 }
