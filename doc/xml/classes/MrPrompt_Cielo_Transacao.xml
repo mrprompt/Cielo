@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao" abstract="false" final="false" start="21" end="427">
+  <file path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo" file="Transacao.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Transacao.php" size="9186" time="2014-09-10T10:19:28-03:00" unixtime="1410355168" sha1="32e9b48af027d6a961803d41f48af1d5aa0a91ca" relative="MrPrompt/Cielo/Transacao.php"/>
+  <constant name="PARCELAS_MINIMAS" value="1"/>
+  <constant name="MOEDA_PADRAO" value="986"/>
+  <member name="tid" type="{unknown}" visibility="private" line="31">
+    <docblock>
+      <description compact="TID da transação"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="produto" type="integer" default="1" visibility="private" line="44">
+    <docblock>
+      <description compact="Tipo de compra">Código do produto:
+1 (Crédito à Vista)
+2 (Parcelado loja)
+3 (Parcelado administradora)
+A (Débito)</description>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="parcelas" type="{unknown}" default="self::PARCELAS_MINIMAS" visibility="private" line="51">
+    <docblock>
+      <description compact="Número de parcelas da venda"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="moeda" type="{unknown}" default="self::MOEDA_PADRAO" visibility="private" line="58">
+    <docblock>
+      <description compact="Código numérico da moeda na ISO 4217 (R$ é 986 - default)"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="capturar" type="string" default="'false'" visibility="private" line="66">
+    <docblock>
+      <description compact="Define se a transação será automaticamente capturada caso seja autorizada."/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="autorizar" type="integer" default="0" visibility="private" line="78">
+    <docblock>
+      <description compact="Indicador de autorização automática:">0 (não autorizar)
+1 (autorizar somente se autenticada)
+2 (autorizar autenticada e não-autenticada)
+3 (autorizar sem passar por autenticação – válido somente para crédito)</description>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="dataHora" type="{unknown}" visibility="private" line="87">
+    <docblock>
+      <description compact="Data hora do pedido.">Formato: AAAA-MM-DDTHH:MM:SS</description>
+      <var type="object">
+        <type full="MrPrompt\Cielo\datetime" namespace="MrPrompt\Cielo" name="datetime"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="numeroPedido" type="{unknown}" visibility="private" line="94">
+    <docblock>
+      <description compact="Número do pedido da loja."/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="valorPedido" type="{unknown}" visibility="private" line="101">
+    <docblock>
+      <description compact="Valor do pedido"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="descricao" type="{unknown}" visibility="private" line="108">
+    <docblock>
+      <description compact="Descricao da transação"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="getTid" start="116" end="119" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o valor do TID"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setTid" start="128" end="137" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o TID"/>
+      <access value="public"/>
+      <param type="string" variable="$tid"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="tid" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getProduto" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o tipo de compra/produto"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setProduto" start="163" end="176" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o Tipo de compra/produto">Código do produto:
+1 (Crédito à Vista)
+2 (Parcelado loja)
+3 (Parcelado administradora)
+A (Débito)</description>
+      <access value="public"/>
+      <param type="mixed" variable="$produto"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="produto" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getParcelas" start="184" end="187" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o número de parcelas"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setParcelas" start="196" end="205" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o número de parcelas da venda"/>
+      <access value="public"/>
+      <param type="integer" variable="$parcelas"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="parcelas" byreference="false" type="{unknown}" default="self::PARCELAS_MINIMAS"/>
+  </method>
+  <method name="getMoeda" start="213" end="216" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o tipo de moeda utilizado na venda"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setMoeda" start="225" end="234" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Código numérico da moeda na ISO 4217 (R$ é 986 - default)"/>
+      <access value="public"/>
+      <param type="integer" variable="$moeda"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="moeda" byreference="false" type="{unknown}" default="self::MOEDA_PADRAO"/>
+  </method>
+  <method name="getCapturar" start="242" end="245" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna se é ou não para capturar automaticamente a venda"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setCapturar" start="254" end="265" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Informa se é para capturar automaticamente a venda"/>
+      <access value="public"/>
+      <param description="(true|false)" type="string" variable="$capturar"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="capturar" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAutorizar" start="278" end="281" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o Indicador de autorização automática:">0 (não autorizar)
+1 (autorizar somente se autenticada)
+2 (autorizar autenticada e não-autenticada)
+3 (autorizar sem passar por autenticação – válido somente para crédito)</description>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setAutorizar" start="295" end="306" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Seta o Indicador de autorização automática:">0 (não autorizar)
+1 (autorizar somente se autenticada)
+2 (autorizar autenticada e não-autenticada)
+3 (autorizar sem passar por autenticação – válido somente para crédito)</description>
+      <access value="public"/>
+      <param type="integer" variable="$autorizar"/>
+      <return type="integer"/>
+    </docblock>
+    <parameter name="autorizar" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDataHora" start="314" end="317" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a data e hora configurada para a transação"/>
+      <access value="public"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\datetime" namespace="MrPrompt\Cielo" name="datetime"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setDataHora" start="326" end="335" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Seta a data e hora da venda"/>
+      <access value="public"/>
+      <param description="AAAA-MM-DDTHH:MM:SS" type="object" variable="$dataHora">
+        <type full="MrPrompt\Cielo\datetime" namespace="MrPrompt\Cielo" name="datetime"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="dataHora" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getNumero" start="343" end="346" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o número do pedido"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setNumero" start="356" end="365" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o número do pedido"/>
+      <access value="public"/>
+      <param type="integer" variable="$numero"/>
+      <throws type="object">
+        <type full="InvalidArgumentException" namespace="" name="InvalidArgumentException"/>
+      </throws>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="numero" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getValor" start="373" end="376" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o valo da venda"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setValor" start="388" end="397" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o valor da venda">O valor da venda é um inteiro sem separador, onde os dois últimos
+digitos referem-se aos centavos. Ex.: 1237 = R$ 12,37</description>
+      <access value="public"/>
+      <param type="integer" variable="$valor"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="valor" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setDescricao" start="406" end="415" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Informa a descrição da operação"/>
+      <access value="public"/>
+      <param type="string" variable="$descricao"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="descricao" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDescricao" start="423" end="426" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a descrição configurada para a transação"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+</class>

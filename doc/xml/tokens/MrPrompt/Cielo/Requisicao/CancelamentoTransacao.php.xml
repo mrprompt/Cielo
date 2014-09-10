@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token#">
+  <file xmlns="http://xml.phpdox.net/src#" path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Requisicao" file="CancelamentoTransacao.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Requisicao/CancelamentoTransacao.php" size="1092" time="2014-09-04T14:32:03-03:00" unixtime="1409851923" sha1="b0e4105ddfde3967fab8b0b772d60596b4c900e9" relative="MrPrompt/Cielo/Requisicao/CancelamentoTransacao.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="3">
+    <token name="T_DOC_COMMENT"> * Cielo</token>
+  </line>
+  <line no="4">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="5">
+    <token name="T_DOC_COMMENT"> * Cliente para o Web Service da Cielo.</token>
+  </line>
+  <line no="6">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="7">
+    <token name="T_DOC_COMMENT"> * O Web Service permite efetuar vendas com cart&#xF5;es de bandeira</token>
+  </line>
+  <line no="8">
+    <token name="T_DOC_COMMENT"> * VISA e Mastercard, tanto no d&#xE9;bito quanto em compras a vista ou parceladas.</token>
+  </line>
+  <line no="9">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="10">
+    <token name="T_DOC_COMMENT"> * Licen&#xE7;a</token>
+  </line>
+  <line no="11">
+    <token name="T_DOC_COMMENT"> * Este c&#xF3;digo fonte est&#xE1; sob a licen&#xE7;a GPL-3.0+</token>
+  </line>
+  <line no="12">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="13">
+    <token name="T_DOC_COMMENT"> * @category   Library</token>
+  </line>
+  <line no="14">
+    <token name="T_DOC_COMMENT"> * @package    MrPrompt\Cielo</token>
+  </line>
+  <line no="15">
+    <token name="T_DOC_COMMENT"> * @subpackage Cliente</token>
+  </line>
+  <line no="16">
+    <token name="T_DOC_COMMENT"> * @copyright  Thiago Paes &lt;mrprompt@gmail.com&gt; (c) 2013</token>
+  </line>
+  <line no="17">
+    <token name="T_DOC_COMMENT"> * @license    GPL-3.0+</token>
+  </line>
+  <line no="18">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="19"/>
+  <line no="20">
+    <token name="T_NAMESPACE">namespace</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">MrPrompt</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Cielo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Requisicao</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="21"/>
+  <line no="22">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">MrPrompt</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Cielo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Cliente</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="23"/>
+  <line no="24">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="25">
+    <token name="T_DOC_COMMENT"> * Requisi&#xE7;&#xE3;o de cancelamento de transa&#xE7;&#xE3;o</token>
+  </line>
+  <line no="26">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="27">
+    <token name="T_DOC_COMMENT"> * @author Lu&#xED;s Ot&#xE1;vio Cobucci Oblonczyk &lt;lcobucci@gmail.com&gt;</token>
+  </line>
+  <line no="28">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="29">
+    <token name="T_CLASS">class</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">CancelamentoTransacao</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_EXTENDS">extends</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Requisicao</token>
+  </line>
+  <line no="30">
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="31">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="32">
+    <token name="T_DOC_COMMENT">     * Identificador de chamada do tipo transacao</token>
+  </line>
+  <line no="33">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="34">
+    <token name="T_DOC_COMMENT">     * @const integer</token>
+  </line>
+  <line no="35">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="36">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_CONST">const</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">ID</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_LNUMBER">4</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="37"/>
+  <line no="38">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="39">
+    <token name="T_DOC_COMMENT">     * {@inheritdoc}</token>
+  </line>
+  <line no="40">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="41">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PROTECTED">protected</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getXmlInicial</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="42">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="43">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">sprintf</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="44">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'&lt;%s id="%d" versao="%s"&gt;&lt;/%s&gt;'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="45">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'requisicao-cancelamento'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="46">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_STRING">self</token>
+    <token name="T_DOUBLE_COLON">::</token>
+    <token name="T_STRING">ID</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="47">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_STRING">Cliente</token>
+    <token name="T_DOUBLE_COLON">::</token>
+    <token name="T_STRING">VERSAO</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="48">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'requisicao-cancelamento'</token>
+  </line>
+  <line no="49">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="50">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="51">
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="52"/>
+</source>

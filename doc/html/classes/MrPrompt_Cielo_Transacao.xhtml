@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - MrPrompt\Cielo\Transacao</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports/index.xhtml">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#MrPrompt_Cielo">MrPrompt\Cielo</a>
+          </li>
+          <li class="separator">Transacao</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/MrPrompt/Cielo/Transacao.php.xhtml#line21">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>MrPrompt\Cielo\</small>Transacao</h1>
+        <h4/>
+        <p/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Transacao
+            {<br/><ul class="none"><li>// constants</li><li>const PARCELAS_MINIMAS = 1;</li><li>const MOEDA_PADRAO = 986;</li></ul><ul class="none"><li>// members</li><li>private integer <a href="#members">$tid</a>;
+                    </li><li>private integer <a href="#members">$produto</a>;
+                    </li><li>private integer <a href="#members">$parcelas</a>;
+                    </li><li>private integer <a href="#members">$moeda</a>;
+                    </li><li>private string <a href="#members">$capturar</a>;
+                    </li><li>private integer <a href="#members">$autorizar</a>;
+                    </li><li>private <span title="MrPrompt\Cielo\datetime">datetime</span> <a href="#members">$dataHora</a>;
+                    </li><li>private integer <a href="#members">$numeroPedido</a>;
+                    </li><li>private integer <a href="#members">$valorPedido</a>;
+                    </li><li>private string <a href="#members">$descricao</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public string <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getTid.xhtml">getTid</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setTid.xhtml">setTid</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getProduto.xhtml">getProduto</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setProduto.xhtml">setProduto</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getParcelas.xhtml">getParcelas</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setParcelas.xhtml">setParcelas</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getMoeda.xhtml">getMoeda</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setMoeda.xhtml">setMoeda</a>()
+                    </li><li>public string <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getCapturar.xhtml">getCapturar</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setCapturar.xhtml">setCapturar</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getAutorizar.xhtml">getAutorizar</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setAutorizar.xhtml">setAutorizar</a>()
+                    </li><li>public datetime <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getDataHora.xhtml">getDataHora</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setDataHora.xhtml">setDataHora</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getNumero.xhtml">getNumero</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setNumero.xhtml">setNumero</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getValor.xhtml">getValor</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setValor.xhtml">setValor</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setDescricao.xhtml">setDescricao</a>()
+                    </li><li>public string <a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getDescricao.xhtml">getDescricao</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="PARCELAS_MINIMAS">PARCELAS_MINIMAS</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td id="MOEDA_PADRAO">MOEDA_PADRAO</td>
+              <td>986</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>private</h4>
+          <ul class="members">
+            <li id="autorizar"><strong>$autorizar</strong>
+                —
+                integer<br/><span class="indent">Indicador de autorização automática:</span></li>
+            <li id="capturar"><strong>$capturar</strong>
+                —
+                string<br/><span class="indent">Define se a transação será automaticamente capturada caso seja autorizada.</span></li>
+            <li id="dataHora"><strong>$dataHora</strong>
+                —
+                <a href="#">MrPrompt\Cielo\datetime</a><br/><span class="indent">Data hora do pedido.</span></li>
+            <li id="descricao"><strong>$descricao</strong>
+                —
+                string<br/><span class="indent">Descricao da transação</span></li>
+            <li id="moeda"><strong>$moeda</strong>
+                —
+                integer<br/><span class="indent">Código numérico da moeda na ISO 4217 (R$ é 986 - default)</span></li>
+            <li id="numeroPedido"><strong>$numeroPedido</strong>
+                —
+                integer<br/><span class="indent">Número do pedido da loja.</span></li>
+            <li id="parcelas"><strong>$parcelas</strong>
+                —
+                integer<br/><span class="indent">Número de parcelas da venda</span></li>
+            <li id="produto"><strong>$produto</strong>
+                —
+                string<br/><span class="indent">Tipo de compra</span></li>
+            <li id="tid"><strong>$tid</strong>
+                —
+                integer<br/><span class="indent">TID da transação</span></li>
+            <li id="valorPedido"><strong>$valorPedido</strong>
+                —
+                integer<br/><span class="indent">Valor do pedido</span></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getAutorizar"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getAutorizar.xhtml">getAutorizar()</a>
+                — Retorna o Indicador de autorização automática:</li>
+            <li id="getCapturar"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getCapturar.xhtml">getCapturar()</a>
+                — Retorna se é ou não para capturar automaticamente a venda</li>
+            <li id="getDataHora"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getDataHora.xhtml">getDataHora()</a>
+                — Retorna a data e hora configurada para a transação</li>
+            <li id="getDescricao"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getDescricao.xhtml">getDescricao()</a>
+                — Retorna a descrição configurada para a transação</li>
+            <li id="getMoeda"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getMoeda.xhtml">getMoeda()</a>
+                — Retorna o tipo de moeda utilizado na venda</li>
+            <li id="getNumero"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getNumero.xhtml">getNumero()</a>
+                — Retorna o número do pedido</li>
+            <li id="getParcelas"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getParcelas.xhtml">getParcelas()</a>
+                — Retorna o número de parcelas</li>
+            <li id="getProduto"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getProduto.xhtml">getProduto()</a>
+                — Retorna o tipo de compra/produto</li>
+            <li id="getTid"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getTid.xhtml">getTid()</a>
+                — Configura o valor do TID</li>
+            <li id="getValor"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/getValor.xhtml">getValor()</a>
+                — Retorna o valo da venda</li>
+            <li id="setAutorizar"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setAutorizar.xhtml">setAutorizar()</a>
+                — Seta o Indicador de autorização automática:</li>
+            <li id="setCapturar"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setCapturar.xhtml">setCapturar()</a>
+                — Informa se é para capturar automaticamente a venda</li>
+            <li id="setDataHora"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setDataHora.xhtml">setDataHora()</a>
+                — Seta a data e hora da venda</li>
+            <li id="setDescricao"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setDescricao.xhtml">setDescricao()</a>
+                — Informa a descrição da operação</li>
+            <li id="setMoeda"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setMoeda.xhtml">setMoeda()</a>
+                — Código numérico da moeda na ISO 4217 (R$ é 986 - default)</li>
+            <li id="setNumero"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setNumero.xhtml">setNumero()</a>
+                — Configura o número do pedido</li>
+            <li id="setParcelas"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setParcelas.xhtml">setParcelas()</a>
+                — Configura o número de parcelas da venda</li>
+            <li id="setProduto"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setProduto.xhtml">setProduto()</a>
+                — Configura o Tipo de compra/produto</li>
+            <li id="setTid"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setTid.xhtml">setTid()</a>
+                — Configura o TID</li>
+            <li id="setValor"><a title="MrPrompt\Cielo\Transacao" href="../classes/MrPrompt_Cielo_Transacao/setValor.xhtml">setValor()</a>
+                — Configura o valor da venda</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span/>
+    </footer>
+  </body>
+</html>

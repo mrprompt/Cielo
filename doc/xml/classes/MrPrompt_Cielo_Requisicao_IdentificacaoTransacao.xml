@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="MrPrompt\Cielo\Requisicao\IdentificacaoTransacao" namespace="MrPrompt\Cielo\Requisicao" name="IdentificacaoTransacao" abstract="false" final="false" start="33" end="108">
+  <file path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Requisicao" file="IdentificacaoTransacao.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Requisicao/IdentificacaoTransacao.php" size="2354" time="2014-09-04T14:32:03-03:00" unixtime="1409851923" sha1="29bb0e7428e5fea2217581d8a1b665890d99e983" relative="MrPrompt/Cielo/Requisicao/IdentificacaoTransacao.php"/>
+  <docblock>
+    <description compact="Requisição de autorizacao de portador"/>
+    <author value="Luís Otávio Cobucci Oblonczyk &lt;lcobucci@gmail.com&gt;"/>
+  </docblock>
+  <extends full="MrPrompt\Cielo\Requisicao\Requisicao" namespace="MrPrompt\Cielo\Requisicao" name="Requisicao"/>
+  <constant name="ID" value="6">
+    <docblock>
+      <description compact="Identificador de chamada do tipo transacao"/>
+      <const value="integer"/>
+    </docblock>
+  </constant>
+  <member name="cartao" type="{unknown}" visibility="private" line="47">
+    <docblock>
+      <description compact="Cartão a ser utilizado"/>
+      <var type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </var>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="57" end="65" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inicializa o objeto"/>
+      <param type="object" variable="$autorizacao">
+        <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+      </param>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <param type="object" variable="$cartao">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </param>
+      <param type="string" variable="$idioma"/>
+    </docblock>
+    <parameter name="autorizacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+    </parameter>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+    <parameter name="cartao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+    </parameter>
+  </constructor>
+  <method name="getXmlInicial" start="70" end="79" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="{@inheritdoc}"/>
+    </docblock>
+  </method>
+  <method name="configuraEnvio" start="84" end="87" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="{@inheritdoc}"/>
+    </docblock>
+  </method>
+  <method name="deveAdicionarTid" start="92" end="95" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="{@inheritdoc}"/>
+    </docblock>
+  </method>
+  <method name="adicionaFormaPagamento" start="100" end="107" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Adiciona os dados da forma de pagamento à requisição"/>
+    </docblock>
+  </method>
+  <parent full="MrPrompt\Cielo\Requisicao\Requisicao" namespace="MrPrompt\Cielo\Requisicao" name="Requisicao">
+    <member name="transacao" type="{unknown}" visibility="protected" line="45">
+      <docblock>
+        <description compact="Transação a ser enviada"/>
+        <var type="object">
+          <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+        </var>
+      </docblock>
+    </member>
+    <constructor name="__construct" start="74" end="83" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Inicializa o objeto"/>
+        <param type="object" variable="$autorizacao">
+          <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+        </param>
+        <param type="object" variable="$transacao">
+          <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+        </param>
+      </docblock>
+      <parameter name="autorizacao" byreference="false" type="object">
+        <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+      </parameter>
+      <parameter name="transacao" byreference="false" type="object">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </parameter>
+    </constructor>
+    <method name="getModalidadeIntegracao" start="89" end="92" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Retorna a modalidade de integração definida na autorização."/>
+        <return type="integer"/>
+      </docblock>
+    </method>
+    <method name="configuraAutenticacao" start="97" end="103" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Adiciona os dados de autenticação à requisição"/>
+      </docblock>
+    </method>
+    <method name="configuraTransacao" start="108" end="115" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Adiciona os dados da transacao à requisição"/>
+      </docblock>
+    </method>
+    <method name="getEnvio" start="122" end="125" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Retorna o objeto XML de requisição"/>
+        <return type="object">
+          <type full="\SimpleXMLElement" namespace="" name="SimpleXMLElement"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getResposta" start="132" end="135" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Retorna o objeto XML de resposta"/>
+        <return type="object">
+          <type full="\SimpleXMLElement" namespace="" name="SimpleXMLElement"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="setResposta" start="142" end="145" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Configura o objeto de resposta"/>
+        <param type="object" variable="$resposta">
+          <type full="SimpleXMLElement" namespace="" name="SimpleXMLElement"/>
+        </param>
+      </docblock>
+      <parameter name="resposta" byreference="false" type="object">
+        <type full="SimpleXMLElement" namespace="" name="SimpleXMLElement"/>
+      </parameter>
+    </method>
+    <method name="getAdicionarTid" start="152" end="155" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Retorna adicionarTid"/>
+        <return type="boolean"/>
+      </docblock>
+    </method>
+    <method name="setAdicionarTid" start="162" end="165" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Configura adicionarTid"/>
+        <param type="object" variable="$resposta">
+          <type full="SimpleXMLElement" namespace="" name="SimpleXMLElement"/>
+        </param>
+      </docblock>
+      <parameter name="deve" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="configuraEnvio" start="170" end="173" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Configura o objeto de envio de acordo com as requisições"/>
+      </docblock>
+    </method>
+    <method name="deveAdicionarTid" start="180" end="183" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Verificação se deve ser enviado o TID na requisição"/>
+        <return type="boolean"/>
+      </docblock>
+    </method>
+    <method name="getXmlInicial" start="190" end="190" abstract="true" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Retorna o XML inicial da requisição"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

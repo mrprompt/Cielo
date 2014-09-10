@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index xmlns="http://xml.phpdox.net/src#" basedir="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src">
+  <namespace name="MrPrompt\Cielo">
+    <class name="Autorizacao" src="MrPrompt/Cielo/Autorizacao.php" description="Dados de autorização da requisição" xml="classes/MrPrompt_Cielo_Autorizacao.xml"/>
+    <class name="Cartao" src="MrPrompt/Cielo/Cartao.php" xml="classes/MrPrompt_Cielo_Cartao.xml"/>
+    <class name="Cliente" src="MrPrompt/Cielo/Cliente.php" description="Cliente de integração com a Cielo" xml="classes/MrPrompt_Cielo_Cliente.xml"/>
+    <class name="Transacao" src="MrPrompt/Cielo/Transacao.php" xml="classes/MrPrompt_Cielo_Transacao.xml"/>
+  </namespace>
+  <namespace name="MrPrompt\Cielo\Requisicao">
+    <class name="AutorizacaoPortador" src="MrPrompt/Cielo/Requisicao/AutorizacaoPortador.php" description="Requisição de autorizacao de portador" xml="classes/MrPrompt_Cielo_Requisicao_AutorizacaoPortador.xml"/>
+    <class name="AutorizacaoTransacao" src="MrPrompt/Cielo/Requisicao/AutorizacaoTransacao.php" description="Requisição de autorizacao de transação" xml="classes/MrPrompt_Cielo_Requisicao_AutorizacaoTransacao.xml"/>
+    <class name="CancelamentoTransacao" src="MrPrompt/Cielo/Requisicao/CancelamentoTransacao.php" description="Requisição de cancelamento de transação" xml="classes/MrPrompt_Cielo_Requisicao_CancelamentoTransacao.xml"/>
+    <class name="Captura" src="MrPrompt/Cielo/Requisicao/Captura.php" description="Requisição de captura de transação" xml="classes/MrPrompt_Cielo_Requisicao_Captura.xml"/>
+    <class name="Consulta" src="MrPrompt/Cielo/Requisicao/Consulta.php" description="Requisição de consulta de transação" xml="classes/MrPrompt_Cielo_Requisicao_Consulta.xml"/>
+    <class name="IdentificacaoTransacao" src="MrPrompt/Cielo/Requisicao/IdentificacaoTransacao.php" description="Requisição de autorizacao de portador" xml="classes/MrPrompt_Cielo_Requisicao_IdentificacaoTransacao.xml"/>
+    <class name="Requisicao" src="MrPrompt/Cielo/Requisicao/Requisicao.php" description="Cada chamada ao webservice representa uma requisição" xml="classes/MrPrompt_Cielo_Requisicao_Requisicao.xml"/>
+    <class name="SolicitacaoToken" src="MrPrompt/Cielo/Requisicao/SolicitacaoToken.php" description="Requisição do token para um determinado cartão de crédito" xml="classes/MrPrompt_Cielo_Requisicao_SolicitacaoToken.xml"/>
+    <class name="SolicitacaoTransacao" src="MrPrompt/Cielo/Requisicao/SolicitacaoTransacao.php" description="Requisição de autorizacao de portador" xml="classes/MrPrompt_Cielo_Requisicao_SolicitacaoTransacao.xml"/>
+  </namespace>
+</index>
