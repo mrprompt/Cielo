@@ -69,16 +69,15 @@ class Autorizacao
     /**
      * Inicializa o objeto
      *
-     * @param string $numero
-     * @param string $chave
+     * @param string  $numero
+     * @param string  $chave
+     * @param integer $modalidade 
      */
-    public function __construct($numero, $chave, $modalidade = null)
+    public function __construct($numero, $chave, $modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
     {
         $this->setNumero($numero);
         $this->setChave($chave);
-
-        if ($modalidade)
-            $this->setModalidade($modalidade);
+        $this->setModalidade($modalidade);
     }
 
     /**
@@ -119,7 +118,7 @@ class Autorizacao
     /**
      * Configura a chave de autorização
      *
-     * @param  string                   $chave
+     * @param  string $chave
      * @throws InvalidArgumentException
      */
     public function setChave($chave)
@@ -147,7 +146,7 @@ class Autorizacao
      * @param integer $modalidade the modalidade
      * @throws InvalidArgumentException
      */
-    public function setModalidade($modalidade)
+    public function setModalidade($modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
     {
         $regras = v::int()->notEmpty()->in($this->modalidades);
         
