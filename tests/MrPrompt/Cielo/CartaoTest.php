@@ -82,6 +82,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers MrPrompt\Cielo\Cartao::setIndicador
      * @dataProvider indicadoresInvalidos
      * @expectedException \InvalidArgumentException
      */

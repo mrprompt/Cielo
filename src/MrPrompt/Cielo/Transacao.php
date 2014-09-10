@@ -21,6 +21,7 @@ use InvalidArgumentException;
 class Transacao
 {
     const PARCELAS_MINIMAS = 1;
+    const MOEDA_PADRAO     = 986;
     
     /**
      * TID da transação
@@ -54,7 +55,7 @@ class Transacao
      *
      * @var integer
      */
-    private $moeda = 986;
+    private $moeda = self::MOEDA_PADRAO;
 
     /**
      * Define se a transação será automaticamente capturada caso
@@ -221,13 +222,13 @@ class Transacao
      * @param  integer $moeda
      * @return Cielo
      */
-    public function setMoeda($moeda = 986)
+    public function setMoeda($moeda = self::MOEDA_PADRAO)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $moeda)) {
+        if (!v::digit()->notEmpty()->validate($moeda)) {
             throw new InvalidArgumentException('Moeda inválida');
         }
 
-        $this->moeda = (integer) substr($moeda, 0, 3);
+        $this->moeda = $moeda;
 
         return $this;
     }
@@ -247,20 +248,20 @@ class Transacao
      * Informa se é para capturar automaticamente a venda
      *
      * @access public
-     * @param  string $capturar
+     * @param  string $capturar (true|false)
      * @return Cielo
      */
     public function setCapturar($capturar)
     {
-        switch ($capturar) {
-            case 'true':
-            case 'false':
-                $this->capturar = $capturar;
+//         $validos = array('true', 'false');
+        
+//         if ($capturar != $validos[0] || $capturar != $validos[1]) {
+//             throw new InvalidArgumentException(sprintf('Parâmetro capturar \'%s\' inválido.', $capturar));
+//         }
 
-                return $this;
-            default:
-                throw new InvalidArgumentException('Parâmetro inválido.');
-        }
+        $this->capturar = $capturar;
+
+        return $this;
     }
 
     /**

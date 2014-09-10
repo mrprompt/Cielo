@@ -183,43 +183,126 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::getMoeda
-     * @todo   Implement testGetMoeda().
+     * data provider de moedas válidas
+     *
+     * @return array
      */
-    public function getMoeda()
+    public function moedasValidas()
     {
-        
+        return array(
+            array(986), // R$ real
+            array(998), // Dólar EUA 
+            array(997), // Dólar EUA 
+            array(858), // Peso Uruguaio
+        );
     }
-
+    
+    /**
+     * data provider de moedas inválidas
+     *
+     * @return array
+     */
+    public function moedasInvalidas()
+    {
+        return array(
+            array(0),
+            array('A'),
+            array('ADFSSF'),
+        );
+    }
+    
     /**
      * @test
+     * @dataProvider moedasValidas
      * @covers MrPrompt\Cielo\Transacao::setMoeda
-     * @todo   Implement testSetMoeda().
+     * @covers MrPrompt\Cielo\Transacao::getMoeda
      */
-    public function setMoeda()
+    public function getMoeda($moeda)
     {
+        $result = $this->object->setMoeda($moeda);
         
+        $this->assertEquals($moeda, $this->object->getMoeda());
     }
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::getCapturar
-     * @todo   Implement testGetCapturar().
+     * @dataProvider moedasValidas
+     * @covers MrPrompt\Cielo\Transacao::setMoeda
      */
-    public function getCapturar()
+    public function setMoeda($moeda)
     {
+        $result = $this->object->setMoeda($moeda);
         
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+    
+    /**
+     * @test
+     * @dataProvider moedasInvalidas
+     * @covers MrPrompt\Cielo\Transacao::setMoeda
+     * @expectedException InvalidArgumentException
+     */
+    public function setMoedaDisparaExcessaoComMoedaInvalida($moeda)
+    {
+        $this->object->setMoeda($moeda);
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function capturasValidas()
+    {
+        return array(
+            array('true'),
+            array('false'),
+        );
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function capturasInvalidas()
+    {
+        return array(
+            array('verdadeiro'),
+            array('falso'),
+        );
     }
 
     /**
      * @test
+     * @dataProvider capturasValidas
      * @covers MrPrompt\Cielo\Transacao::setCapturar
-     * @todo   Implement testSetCapturar().
+     * @covers MrPrompt\Cielo\Transacao::getCapturar
      */
-    public function setCapturar()
+    public function getCapturar($capturar)
     {
+        $this->object->setCapturar($capturar);
         
+        $this->assertEquals($capturar, $this->object->getCapturar());
+    }
+
+    /**
+     * @test
+     * @dataProvider capturasValidas
+     * @covers MrPrompt\Cielo\Transacao::setCapturar
+     */
+    public function setCapturar($capturar)
+    {
+        $result = $this->object->setCapturar($capturar);
+        
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider capturasInvalidas
+     * @covers MrPrompt\Cielo\Transacao::setCapturar
+     * @expectedException InvalidArgumentException
+     */
+    public function setCapturarDisparaExcessaoComCapturaInvalida($capturar)
+    {
+        $this->object->setCapturar($capturar);
     }
 
     /**
