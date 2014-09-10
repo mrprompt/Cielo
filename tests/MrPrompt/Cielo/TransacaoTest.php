@@ -18,15 +18,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
-
-    /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setTid
      * @covers MrPrompt\Cielo\Transacao::getTid
@@ -35,10 +26,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $tid    = uniqid();
         $result = $this->object->setTid($tid);
-        
+
         $this->assertEquals($tid, $this->object->getTid());
     }
-    
+
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setTid
@@ -57,10 +48,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $tid    = uniqid();
         $result = $this->object->setTid($tid);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
-    
+
     /**
      * data provider
      *
@@ -75,7 +66,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array('A')
         );
     }
-    
+
     /**
      * data provider
      *
@@ -112,13 +103,13 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setProduto($produto)
     {
         $result = $this->object->setProduto($produto);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
-    
+
     /**
      * data provider de parcelas válidas
-     * 
+     *
      * @return array
      */
     public function parcelasValidas()
@@ -131,7 +122,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array(24),
         );
     }
-    
+
     /**
      * data provider de parcelas inválidas
      *
@@ -155,7 +146,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getParcelas($parcelas)
     {
         $this->object->setParcelas($parcelas);
-        
+
         $this->assertEquals($parcelas, $this->object->getParcelas());
     }
 
@@ -167,7 +158,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setParcelas($parcelas)
     {
         $result = $this->object->setParcelas($parcelas);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
@@ -181,7 +172,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setParcelas($parcelas);
     }
-    
+
     /**
      * data provider de moedas válidas
      *
@@ -191,12 +182,12 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(986), // R$ real
-            array(998), // Dólar EUA 
-            array(997), // Dólar EUA 
+            array(998), // Dólar EUA
+            array(997), // Dólar EUA
             array(858), // Peso Uruguaio
         );
     }
-    
+
     /**
      * data provider de moedas inválidas
      *
@@ -210,7 +201,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array('ADFSSF'),
         );
     }
-    
+
     /**
      * @test
      * @dataProvider moedasValidas
@@ -220,7 +211,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getMoeda($moeda)
     {
         $result = $this->object->setMoeda($moeda);
-        
+
         $this->assertEquals($moeda, $this->object->getMoeda());
     }
 
@@ -232,10 +223,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setMoeda($moeda)
     {
         $result = $this->object->setMoeda($moeda);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
-    
+
     /**
      * @test
      * @dataProvider moedasInvalidas
@@ -246,7 +237,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setMoeda($moeda);
     }
-    
+
     /**
      * @return mixed
      */
@@ -257,7 +248,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array('false'),
         );
     }
-    
+
     /**
      * @return mixed
      */
@@ -278,7 +269,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getCapturar($capturar)
     {
         $this->object->setCapturar($capturar);
-        
+
         $this->assertEquals($capturar, $this->object->getCapturar());
     }
 
@@ -290,7 +281,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setCapturar($capturar)
     {
         $result = $this->object->setCapturar($capturar);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
@@ -304,10 +295,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setCapturar($capturar);
     }
-    
+
     /**
      * Data provider de autorizações válidas
-     * 
+     *
      * @return mixed
      */
     public function autorizacoesValidas()
@@ -318,11 +309,11 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array(2),
             array(3),
         );
-    } 
-    
+    }
+
     /**
      * Data provider de autorizações inválidas
-     * 
+     *
      * @return mixed
      */
     public function autorizacoesInvalidas()
@@ -344,7 +335,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getAutorizar($autorizar)
     {
         $this->object->setAutorizar($autorizar);
-        
+
         $this->assertEquals($autorizar, $this->object->getAutorizar());
     }
 
@@ -356,7 +347,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setAutorizar($autorizar)
     {
         $result = $this->object->setAutorizar($autorizar);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
@@ -370,7 +361,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setAutorizar($autorizar);
     }
-    
+
     /**
      * Data provider
      *
@@ -385,7 +376,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array('2015-03-06 20:32:00'),
         );
     }
-    
+
     /**
      * Data provider
      *
@@ -410,7 +401,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getDataHora($dataHora)
     {
         $this->object->setDataHora($dataHora);
-        
+
         $this->assertEquals($dataHora, $this->object->getDataHora());
     }
 
@@ -422,7 +413,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setDataHora($dataHora)
     {
         $result = $this->object->setDataHora($dataHora);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
@@ -436,7 +427,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setDataHora($dataHora);
     }
-    
+
     /**
      * Data provider
      *
@@ -451,7 +442,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array(3323),
         );
     }
-    
+
     /**
      * Data provider
      *
@@ -475,7 +466,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function getNumero($numero)
     {
         $this->object->setNumero($numero);
-        
+
         $this->assertEquals($numero, $this->object->getNumero());
     }
 
@@ -487,7 +478,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function setNumero($numero)
     {
         $result = $this->object->setNumero($numero);
-        
+
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
     }
 
@@ -497,29 +488,74 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @dataProvider numerosInvalidos
      * @expectedException InvalidArgumentException
      */
-    public function setNumeroDisparaExcessaiComNumeroInvalido($numero)
+    public function setNumeroDisparaExcessaoComNumeroInvalido($numero)
     {
         $this->object->setNumero($numero);
     }
 
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::getValor
-     * @todo   Implement testGetValor().
+     * Data provider de valores válidos
+     *
+     * @return mixed
      */
-    public function getValor()
+    public function valoresValidos()
     {
-        
+        return array(
+            array(1245),
+            array(1000),
+            array(100),
+            array(20000),
+        );
+    }
+
+    /**
+     * Data provider de valores inválidos
+     *
+     * @return mixed
+     */
+    public function valoresInvalidos()
+    {
+        return array(
+            array('A'),
+            array('XXX'),
+            array(''),
+        );
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setValor
-     * @todo   Implement testSetValor().
+     * @covers MrPrompt\Cielo\Transacao::getValor
+     * @dataProvider valoresValidos
      */
-    public function setValor()
+    public function getValor($valor)
     {
-        
+        $this->object->setValor($valor);
+
+        $this->assertEquals($valor, $this->object->getValor());
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setValor
+     * @dataProvider valoresValidos
+     */
+    public function setValor($valor)
+    {
+        $result = $this->object->setValor($valor);
+
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setValor
+     * @dataProvider valoresInvalidos
+     * @expectedException InvalidArgumentException
+     */
+    public function setValorDisparaExcessaoComValorInvalido($valor)
+    {
+        $this->object->setValor($valor);
     }
 
     /**
@@ -529,7 +565,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      */
     public function setDescricao()
     {
-        
+
     }
 
     /**
@@ -539,6 +575,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      */
     public function getDescricao()
     {
-        
+
     }
 }

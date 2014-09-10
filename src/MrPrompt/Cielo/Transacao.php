@@ -22,7 +22,7 @@ class Transacao
 {
     const PARCELAS_MINIMAS = 1;
     const MOEDA_PADRAO     = 986;
-    
+
     /**
      * TID da transação
      *
@@ -130,7 +130,7 @@ class Transacao
         if (!v::alnum()->notEmpty()->validate($tid)) {
             throw new InvalidArgumentException('Caracteres inválidos no TID.');
         }
-        
+
         $this->tid = $tid;
 
         return $this;
@@ -198,7 +198,7 @@ class Transacao
         if (!v::digit()->notEmpty()->min(self::PARCELAS_MINIMAS, self::PARCELAS_MINIMAS)->validate($parcelas)) {
             throw new InvalidArgumentException('Número de parcelas inválido.');
         }
-        
+
         $this->parcelas = (integer) $parcelas;
 
         return $this;
@@ -254,7 +254,7 @@ class Transacao
     public function setCapturar($capturar)
     {
         $validos = array('true', 'false');
-        
+
         if ($capturar != $validos[0] && $capturar != $validos[1]) {
             throw new InvalidArgumentException(sprintf('Parâmetro capturar \'%s\' inválido.', $capturar));
         }
@@ -295,13 +295,13 @@ class Transacao
     public function setAutorizar($autorizar)
     {
         $validos = array(0, 1, 2, 3);
-        
+
         if (!v::digit()->in($validos)->validate($autorizar)) {
             throw new InvalidArgumentException('Indicador de autorização inválido.');
         }
-        
+
         $this->autorizar = (integer) $autorizar;
-        
+
         return $this;
     }
 
@@ -350,6 +350,7 @@ class Transacao
      *
      * @access public
      * @param  integer $numero
+     * @throws InvalidArgumentException
      * @return Cielo
      */
     public function setNumero($numero)
@@ -386,12 +387,8 @@ class Transacao
      */
     public function setValor($valor)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $valor)) {
-            throw new InvalidArgumentException('Valor inválido. Deve conter apenas números inteiros.');
-        }
-
-        if (!preg_match('/^[[:digit:]]{1,12}$/', $valor)) {
-            throw new InvalidArgumentException('Valor inválido. Deve conter de 1 à 12 digitos.');
+        if (!v::notEmpty()->digit()->validate($valor)) {
+            throw new InvalidArgumentException(sprintf('Valor %s é inválido.', $valor));
         }
 
         $this->valorPedido = $valor;
