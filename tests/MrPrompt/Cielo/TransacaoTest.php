@@ -370,45 +370,136 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setAutorizar($autorizar);
     }
-
+    
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::getDataHora
-     * @todo   Implement testGetDataHora().
+     * Data provider
+     *
+     * @return mixed
      */
-    public function getDataHora()
+    public function dataHoraValidas()
     {
-        
+        return array(
+            array('2014-09-10 00:00:00'),
+            array('2013-01-01 22:22:22'),
+            array('2014-09-12 14:20:00'),
+            array('2015-03-06 20:32:00'),
+        );
+    }
+    
+    /**
+     * Data provider
+     *
+     * @return mixed
+     */
+    public function dataHoraInvalidas()
+    {
+        return array(
+            array('14-09-10 00:00:00'),
+            array('2014-09-10'),
+            array('00:00:00'),
+            array(''),
+        );
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setDataHora
-     * @todo   Implement testSetDataHora().
+     * @covers MrPrompt\Cielo\Transacao::getDataHora
+     * @dataProvider dataHoraValidas
      */
-    public function setDataHora()
+    public function getDataHora($dataHora)
     {
+        $this->object->setDataHora($dataHora);
         
+        $this->assertEquals($dataHora, $this->object->getDataHora());
     }
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::getNumero
-     * @todo   Implement testGetNumero().
+     * @covers MrPrompt\Cielo\Transacao::setDataHora
+     * @dataProvider dataHoraValidas
      */
-    public function getNumero()
+    public function setDataHora($dataHora)
     {
+        $result = $this->object->setDataHora($dataHora);
         
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setDataHora
+     * @dataProvider dataHoraInvalidas
+     * @expectedException InvalidArgumentException
+     */
+    public function setDataHoraDisparaExcessaoComDataOuHoraInvalidos($dataHora)
+    {
+        $this->object->setDataHora($dataHora);
+    }
+    
+    /**
+     * Data provider
+     *
+     * @return mixed
+     */
+    public function numerosValidos()
+    {
+        return array(
+            array(93938382),
+            array(83727829),
+            array(998372),
+            array(3323),
+        );
+    }
+    
+    /**
+     * Data provider
+     *
+     * @return mixed
+     */
+    public function numerosInvalidos()
+    {
+        return array(
+            array('A'),
+            array('XXX'),
+            array(0),
+        );
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setNumero
-     * @todo   Implement testSetNumero().
+     * @covers MrPrompt\Cielo\Transacao::getNumero
+     * @dataProvider numerosValidos
      */
-    public function setNumero()
+    public function getNumero($numero)
     {
+        $this->object->setNumero($numero);
         
+        $this->assertEquals($numero, $this->object->getNumero());
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setNumero
+     * @dataProvider numerosValidos
+     */
+    public function setNumero($numero)
+    {
+        $result = $this->object->setNumero($numero);
+        
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setNumero
+     * @dataProvider numerosInvalidos
+     * @expectedException InvalidArgumentException
+     */
+    public function setNumeroDisparaExcessaiComNumeroInvalido($numero)
+    {
+        $this->object->setNumero($numero);
     }
 
     /**

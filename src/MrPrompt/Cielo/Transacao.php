@@ -326,7 +326,7 @@ class Transacao
     public function setDataHora($dataHora)
     {
         if (strlen($dataHora) !== 19) {
-            throw new InvalidArgumentException('Formato inválido.');
+            throw new InvalidArgumentException('Formato inválido. Formato desejado AAAA-MM-DDTHH:MM:SS');
         }
 
         $this->dataHora = $dataHora;
@@ -354,8 +354,8 @@ class Transacao
      */
     public function setNumero($numero)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $numero)) {
-            throw new InvalidArgumentException('Número do pedido inválido.');
+        if (!v::notEmpty()->digit()->validate($numero)) {
+            throw new InvalidArgumentException(sprintf('Número do pedido %s é inválido.', $numero));
         }
 
         $this->numeroPedido = substr($numero, 0, 50);
