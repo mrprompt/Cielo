@@ -253,11 +253,11 @@ class Transacao
      */
     public function setCapturar($capturar)
     {
-//         $validos = array('true', 'false');
+        $validos = array('true', 'false');
         
-//         if ($capturar != $validos[0] || $capturar != $validos[1]) {
-//             throw new InvalidArgumentException(sprintf('Parâmetro capturar \'%s\' inválido.', $capturar));
-//         }
+        if ($capturar != $validos[0] && $capturar != $validos[1]) {
+            throw new InvalidArgumentException(sprintf('Parâmetro capturar \'%s\' inválido.', $capturar));
+        }
 
         $this->capturar = $capturar;
 
@@ -294,17 +294,15 @@ class Transacao
      */
     public function setAutorizar($autorizar)
     {
-        switch ((integer) $autorizar) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                $this->autorizar = (integer) $autorizar;
-
-                return $this;
-            default:
-                throw new InvalidArgumentException('Indicador de autorização inválido.');
+        $validos = array(0, 1, 2, 3);
+        
+        if (!v::digit()->in($validos)->validate($autorizar)) {
+            throw new InvalidArgumentException('Indicador de autorização inválido.');
         }
+        
+        $this->autorizar = (integer) $autorizar;
+        
+        return $this;
     }
 
     /**

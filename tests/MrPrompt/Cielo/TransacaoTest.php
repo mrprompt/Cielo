@@ -304,25 +304,71 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setCapturar($capturar);
     }
-
+    
     /**
-     * @test
-     * @covers MrPrompt\Cielo\Transacao::getAutorizar
-     * @todo   Implement testGetAutorizar().
+     * Data provider de autorizações válidas
+     * 
+     * @return mixed
      */
-    public function getAutorizar()
+    public function autorizacoesValidas()
     {
-        
+        return array(
+            array(0),
+            array(1),
+            array(2),
+            array(3),
+        );
+    } 
+    
+    /**
+     * Data provider de autorizações inválidas
+     * 
+     * @return mixed
+     */
+    public function autorizacoesInvalidas()
+    {
+        return array(
+            array(4),
+            array('5'),
+            array('A'),
+            array('XXX'),
+        );
     }
 
     /**
      * @test
      * @covers MrPrompt\Cielo\Transacao::setAutorizar
-     * @todo   Implement testSetAutorizar().
+     * @covers MrPrompt\Cielo\Transacao::getAutorizar
+     * @dataProvider autorizacoesValidas
      */
-    public function setAutorizar()
+    public function getAutorizar($autorizar)
     {
+        $this->object->setAutorizar($autorizar);
         
+        $this->assertEquals($autorizar, $this->object->getAutorizar());
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setAutorizar
+     * @dataProvider autorizacoesValidas
+     */
+    public function setAutorizar($autorizar)
+    {
+        $result = $this->object->setAutorizar($autorizar);
+        
+        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @covers MrPrompt\Cielo\Transacao::setAutorizar
+     * @dataProvider autorizacoesInvalidas
+     * @expectedException InvalidArgumentException
+     */
+    public function setAutorizarDisparaExcessaoComAutorizacaoInvalida($autorizar)
+    {
+        $this->object->setAutorizar($autorizar);
     }
 
     /**
