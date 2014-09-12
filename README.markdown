@@ -18,5 +18,5 @@ Instalando via composer.
 Packagist:
 	https://packagist.org/packages/mrprompt/cielo
 
-branch 2.1-dev status
-[![Build Status](https://travis-ci.org/mrprompt/Cielo.png?branch=2.1-dev)](https://travis-ci.org/mrprompt/Cielo)
+branch master status
+[![Build Status](https://travis-ci.org/mrprompt/Cielo.png?branch=master)](https://travis-ci.org/mrprompt/Cielo)
