@@ -41,7 +41,7 @@ class SolicitacaoTransacao extends Requisicao
 
     /**
      * Cartão a ser utilizado
-     * 
+     *
      * Para modalidade Cielo, basta que o atributo Cartao::bandeira seja informado.
      *
      * @var Cartao
@@ -117,7 +117,13 @@ class SolicitacaoTransacao extends Requisicao
         $this->getEnvio()->addChild('capturar', $this->transacao->getCapturar());
         $this->getEnvio()->addChild('campo-livre', '');
 
-        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA === $this->getModalidadeIntegracao()) {
+        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA !== $this->getModalidadeIntegracao())
+            return;
+
+        $numeroCartao = $this->cartao->getCartao();
+
+        if (! empty($numeroCartao)) {
+
             $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
         }
     }
