@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="MrPrompt\Cielo\Cliente" namespace="MrPrompt\Cielo" name="Cliente" abstract="false" final="false" start="42" end="458">
+  <file path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo" file="Cliente.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Cliente.php" size="12964" time="2014-09-04T14:32:03-03:00" unixtime="1409851923" sha1="c788fb17e5d02dbdb11158cdf2cd384ffb14ff68" relative="MrPrompt/Cielo/Cliente.php"/>
+  <docblock>
+    <description compact="Cliente de integração com a Cielo"/>
+    <author value="Thiago Paes &lt;mrprompt@gmail.com&gt;"/>
+    <author value="Luís Otávio Cobucci Oblonczyk &lt;lcobucci@gmail.com&gt;"/>
+  </docblock>
+  <member name="autorizacao" type="{unknown}" visibility="private" line="49">
+    <docblock>
+      <description compact="Dados de autorização na Cielo"/>
+      <var type="object">
+        <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="idioma" type="string" default="'PT'" visibility="private" line="64">
+    <docblock>
+      <description compact="Idioma do pedido">PT (português)
+EN (inglês)
+ES (espanhol).
+
+Com base nessa informação é definida a
+língua a ser utilizada nas telas da Cielo.
+Caso não preenchido, assume-se PT.</description>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="ambiente" type="string" default="'produção'" visibility="private" line="73">
+    <docblock>
+      <description compact="Ambiente (teste ou produção)">Default: produção</description>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="httpClient" type="{unknown}" visibility="private" line="78">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="Guzzle\Http\Client" namespace="Guzzle\Http" name="Client"/>
+      </var>
+    </docblock>
+  </member>
+  <constant name="VERSAO" value="'1.1.0'">
+    <docblock>
+      <description compact="Versão do web service em uso pelo cliente."/>
+      <const value="float"/>
+    </docblock>
+  </constant>
+  <member name="idiomas" type="array" visibility="private" line="92">
+    <docblock>
+      <description compact="Idiomas válidos"/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="ambientes" type="array" visibility="private" line="99">
+    <docblock>
+      <description compact="Ambientes válidos"/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="110" end="116" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Construtor da aplicação">Aqui é configurada o número e a chave de acesso do afiliado a Cielo</description>
+      <access value="public"/>
+      <param type="object" variable="$autorizacao">
+        <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+      </param>
+      <param type="object" variable="$httpClient">
+        <type full="Guzzle\Http\Client" namespace="Guzzle\Http" name="Client"/>
+      </param>
+    </docblock>
+    <parameter name="autorizacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao"/>
+    </parameter>
+    <parameter name="httpClient" byreference="false" type="object" default="null">
+      <type full="Guzzle\Http\Client" namespace="Guzzle\Http" name="Client"/>
+    </parameter>
+  </constructor>
+  <method name="getIdioma" start="124" end="127" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o idioma da venda"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setIdioma" start="143" end="158" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Idioma do pedido">PT (português)
+EN (inglês)
+ES (espanhol).
+
+Com base nessa informação é definida a língua a ser utilizada nas telas
+da Cielo.
+Caso não preenchido, assume-se PT.</description>
+      <param type="string" variable="$idioma"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="idioma" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAmbiente" start="166" end="169" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o ambiente utilizado para as chamadas de transação"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setAmbiente" start="179" end="191" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o ambiente a ser utilizado nas chamadas de transações"/>
+      <access value="public"/>
+      <param description="teste | produção (default)" type="string" variable="$ambiente"/>
+      <throws type="object">
+        <type full="InvalidArgumentException" namespace="" name="InvalidArgumentException"/>
+      </throws>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="ambiente" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setSslCertificate" start="200" end="218" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)"/>
+      <access value="public"/>
+      <param type="string" variable="$sslCertificate"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cielo" namespace="MrPrompt\Cielo" name="Cielo"/>
+      </return>
+    </docblock>
+    <parameter name="sslCertificate" byreference="false" type="string" default="''"/>
+  </method>
+  <method name="iniciaTransacao" start="231" end="242" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Transacao">Inicia uma transação de venda, retornando seu TID e demais valores</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <param type="object" variable="$cartao">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </param>
+      <param type="string" variable="$urlRetorno"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\SolicitacaoTransacao" namespace="MrPrompt\Cielo\Requisicao" name="SolicitacaoTransacao"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+    <parameter name="cartao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+    </parameter>
+    <parameter name="urlRetorno" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="solicitaToken" start="252" end="257" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Solicita Token">Solicita um Token para trasações futuras com um determinado Cartão de Crédito</description>
+      <access value="public"/>
+      <param type="object" variable="$cartao">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </param>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+    <parameter name="cartao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+    </parameter>
+  </method>
+  <method name="autoriza" start="280" end="285" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Autorização">Com base na resposta de autenticação, autenticada ou não-autenticada,
+e nas escolhas efetuadas na criação da transação, a autorização é a
+próxima etapa. Nesse cenário ela é cunhada de autorização automática.
+Embora essa escolha caiba a loja virtual, em conjunto são consideradas
+outras regras:
+- Se o portador não se autenticou com sucesso, ela não é executada
+- Se o portador autenticou-se com sucesso, ela pode ser executada
+- Se o emissor não forneceu mecanismos de autenticação, ela pode ser
+  executada
+- Se a resposta do emissor não pôde ser validada, ela não é executada
+
+Nota: é nessa etapa que o saldo disponível do cartão do comprador é
+sensibilizado caso a transação tenha sido autorizada.</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\AutorizacaoTransacao" namespace="MrPrompt\Cielo\Requisicao" name="AutorizacaoTransacao"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+  </method>
+  <method name="captura" start="306" end="311" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Captura">Uma transação autorizada somente gera crédito para o estabelecimento
+comercial caso ela seja capturada. Por isso, todo pedido de compra que
+o lojista queira efetivar, deve ter a transação capturada.
+
+Para venda na modalidade de Crédito, essa confirmação pode ocorrer
+- Logo após a autorização (valor total)
+- Ou num momento posterior (valor total ou parcial)
+
+Essa definição é feita através do parâmetro capturar. Já na modalidade
+de Débito não existe essa abertura: toda transação de débito autorizada
+é automaticamente capturada.</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\Captura" namespace="MrPrompt\Cielo\Requisicao" name="Captura"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+  </method>
+  <method name="cancela" start="330" end="335" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Cancelamento">É empregado quando o lojista decide não efetivar um pedido de compra,
+seja por insuficiência de estoque, desistência da compra, entre outros
+motivos. Seu uso faz-se necessário principalmente se a transação estiver
+capturada, caso contrário haverá débito na fatura do cliente para um
+pedido de compra não efetivado.
+
+Nota: se a transação estiver apenas autorizada e a loja queira
+cancelá-la, o pedido de cancelamento não é de fato necessário:
+vencido o prazo de captura, ela é cancelada automaticamente.</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\CancelamentoTransacao" namespace="MrPrompt\Cielo\Requisicao" name="CancelamentoTransacao"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+  </method>
+  <method name="consulta" start="348" end="353" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Consulta">Funcionalidade de extrema importância na integração.
+É através dela que a loja virtual obtém uma “foto” da transação.
+É sempre utilizada após a loja ter recebido o retorno do fluxo da Cielo.</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\Consulta" namespace="MrPrompt\Cielo\Requisicao" name="Consulta"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+  </method>
+  <method name="tid" start="365" end="370" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="TID">Requisita um TID (Identificador de transação) ao Web Service</description>
+      <access value="public"/>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <param type="object" variable="$cartao">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </param>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\IdentificacaoTransacao" namespace="MrPrompt\Cielo\Requisicao" name="IdentificacaoTransacao"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+    <parameter name="cartao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+    </parameter>
+  </method>
+  <method name="autorizaPortador" start="394" end="404" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Autorização Direta">É o pedido de autorização sem autenticação.
+É aquela que a loja virtual solicita os dados do cartão em seu
+próprio ambiente e submete um pedido de autorização. Dessa forma o
+lojista deve estar atento as regras de segurança.
+
+Essa funcionalidade é executada em duas etapas: a primeira, para a
+obtenção de um identificador e na outra, o pedido de autorização de
+fato. Mas por que é necessário solicitar um TID? Essa informação é
+uma forma de garantir que o portador não seja debitado mais de uma
+vez. Na ocorrência de erros durante a autorização (um timeout, por
+exemplo), a loja virtual deve consultar àquela transação (via TID)
+antes de tentar submeter uma nova. Pois num caso como esse, há
+possibilidade da transação ter sido autorizada.</description>
+      <param type="object" variable="$transacao">
+        <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+      </param>
+      <param type="object" variable="$cartao">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </param>
+      <access value="public"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Requisicao\AutorizacaoPortador" namespace="MrPrompt\Cielo\Requisicao" name="AutorizacaoPortador"/>
+      </return>
+    </docblock>
+    <parameter name="transacao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Transacao" namespace="MrPrompt\Cielo" name="Transacao"/>
+    </parameter>
+    <parameter name="cartao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+    </parameter>
+  </method>
+  <method name="enviaRequisicao" start="411" end="423" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Realiza o envio da requisição à Cielo"/>
+      <param type="object" variable="$requisicao">
+        <type full="MrPrompt\Cielo\Requisicao\Requisicao" namespace="MrPrompt\Cielo\Requisicao" name="Requisicao"/>
+      </param>
+    </docblock>
+    <parameter name="requisicao" byreference="false" type="object">
+      <type full="MrPrompt\Cielo\Requisicao\Requisicao" namespace="MrPrompt\Cielo\Requisicao" name="Requisicao"/>
+    </parameter>
+  </method>
+  <method name="getEndpoint" start="430" end="437" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Retorna o endereço de destino das requisições"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getIdiomas" start="444" end="447" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Recupera os idiomas válidos"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getAmbientes" start="454" end="457" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Recupera os ambientes válidos"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+</class>

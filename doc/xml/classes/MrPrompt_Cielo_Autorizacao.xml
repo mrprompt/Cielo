@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="MrPrompt\Cielo\Autorizacao" namespace="MrPrompt\Cielo" name="Autorizacao" abstract="false" final="false" start="29" end="161">
+  <file path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo" file="Autorizacao.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Autorizacao.php" size="3698" time="2014-09-10T03:48:57-03:00" unixtime="1410331737" sha1="155a6e3d8567738ee5265419a9ef4bd351d7e8d4" relative="MrPrompt/Cielo/Autorizacao.php"/>
+  <docblock>
+    <description compact="Dados de autorização da requisição"/>
+    <author value="Luís Otávio Cobucci Oblonczyk &lt;lcobucci@gmail.com&gt;"/>
+  </docblock>
+  <constant name="MODALIDADE_BUY_PAGE_CIELO" value="1">
+    <docblock>
+      <description compact="Indica que a digitação dos dados do cartão ocorrerá no ambiente da Cielo."/>
+    </docblock>
+  </constant>
+  <constant name="MODALIDADE_BUY_PAGE_LOJA" value="2">
+    <docblock>
+      <description compact="Indica que a digitação dos dados do cartão ocorrerá no ambiente da loja."/>
+    </docblock>
+  </constant>
+  <member name="numero" type="{unknown}" visibility="private" line="45">
+    <docblock>
+      <description compact="Número de autorização"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="chave" type="{unknown}" visibility="private" line="52">
+    <docblock>
+      <description compact="Chave de autorização"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="modalidade" type="{unknown}" default="self::MODALIDADE_BUY_PAGE_LOJA" visibility="private" line="58">
+    <docblock>
+      <description compact="Modalidade de integração."/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="modalidades" type="array" visibility="private" line="64">
+    <docblock>
+      <description compact="Modalidades válidas."/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="76" end="81" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inicializa o objeto"/>
+      <param type="string" variable="$numero"/>
+      <param type="string" variable="$chave"/>
+      <param type="integer" variable="$modalidade"/>
+    </docblock>
+    <parameter name="numero" byreference="false" type="{unknown}"/>
+    <parameter name="chave" byreference="false" type="{unknown}"/>
+    <parameter name="modalidade" byreference="false" type="{unknown}" default="self::MODALIDADE_BUY_PAGE_LOJA"/>
+  </constructor>
+  <method name="getNumero" start="88" end="91" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o número de autorização"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setNumero" start="99" end="106" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o número de autorização"/>
+      <param type="string" variable="$chave"/>
+      <throws type="object">
+        <type full="InvalidArgumentException" namespace="" name="InvalidArgumentException"/>
+      </throws>
+    </docblock>
+    <parameter name="numero" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getChave" start="113" end="116" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a chave de autorização"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setChave" start="124" end="131" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura a chave de autorização"/>
+      <param type="string" variable="$chave"/>
+      <throws type="object">
+        <type full="InvalidArgumentException" namespace="" name="InvalidArgumentException"/>
+      </throws>
+    </docblock>
+    <parameter name="chave" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getModalidade" start="138" end="141" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Define a modalidade de integração."/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setModalidade" start="149" end="160" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Define a modalidade de integração."/>
+      <param description="the modalidade" type="integer" variable="$modalidade"/>
+      <throws type="object">
+        <type full="InvalidArgumentException" namespace="" name="InvalidArgumentException"/>
+      </throws>
+    </docblock>
+    <parameter name="modalidade" byreference="false" type="{unknown}" default="self::MODALIDADE_BUY_PAGE_LOJA"/>
+  </method>
+</class>

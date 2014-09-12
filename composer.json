@@ -1,6 +1,6 @@
 {
     "name": "mrprompt/cielo",
-    "description": "Description of project Db.",
+    "description": "Integration with Cielo gateway.",
     "type": "library",
     "license": "GPL-3.0+",
     "keywords": ["cielo", "payment", "gateway", "credit", "card"],
@@ -8,6 +8,21 @@
         {
             "name": "Thiago Paes",
             "email": "mrprompt@gmail.com",
+            "role": "developer"
+        },
+        {
+            "name": "Luís Otávio Cobucci Oblonczyk",
+            "email": "lcobucci@gmail.com",
+            "role": "developer"
+        },
+        {
+            "name": "William G. Comnisky",
+            "email": "w.comnisky@gmail.com",
+            "role": "developer"
+        },
+        {
+            "name": "Thiago Rodrigues",
+            "email": "xthiago@gmail.com",
             "role": "developer"
         }
     ],
@@ -23,7 +38,15 @@
         }
     },
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "respect/validation": "0.6.*",
+        "guzzle/guzzle": "<=4.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.1",
+        "squizlabs/php_codesniffer": "*",
+        "pdepend/pdepend": "*",
+        "theseer/phpdox": "0.5.*@dev"
     },
     "minimum-stability": "dev"
 }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - MrPrompt\Cielo\Cliente</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports/index.xhtml">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#MrPrompt_Cielo">MrPrompt\Cielo</a>
+          </li>
+          <li class="separator">Cliente</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/MrPrompt/Cielo/Cliente.php.xhtml#line42">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>MrPrompt\Cielo\</small>Cliente</h1>
+        <h4>Cliente de integração com a Cielo</h4>
+        <p/>
+        <ul>
+          <li>Author: Thiago Paes &lt;mrprompt@gmail.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Cliente
+            {<br/><ul class="none"><li>// constants</li><li>const VERSAO = '1.1.0';</li></ul><ul class="none"><li>// members</li><li>private <span title="MrPrompt\Cielo\Autorizacao">Autorizacao</span> <a href="#members">$autorizacao</a>;
+                    </li><li>private string <a href="#members">$idioma</a>;
+                    </li><li>private string <a href="#members">$ambiente</a>;
+                    </li><li>private <span title="Guzzle\Http\Client">Client</span> <a href="#members">$httpClient</a>;
+                    </li><li>private array <a href="#members">$idiomas</a>;
+                    </li><li>private array <a href="#members">$ambientes</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/__construct.xhtml">__construct</a>()
+                    </li><li>public string <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getIdioma.xhtml">getIdioma</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setIdioma.xhtml">setIdioma</a>()
+                    </li><li>public string <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getAmbiente.xhtml">getAmbiente</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setAmbiente.xhtml">setAmbiente</a>()
+                    </li><li>public Cielo <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setSslCertificate.xhtml">setSslCertificate</a>()
+                    </li><li>public SolicitacaoTransacao <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/iniciaTransacao.xhtml">iniciaTransacao</a>()
+                    </li><li>public void <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/solicitaToken.xhtml">solicitaToken</a>()
+                    </li><li>public AutorizacaoTransacao <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/autoriza.xhtml">autoriza</a>()
+                    </li><li>public Captura <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/captura.xhtml">captura</a>()
+                    </li><li>public CancelamentoTransacao <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/cancela.xhtml">cancela</a>()
+                    </li><li>public Consulta <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/consulta.xhtml">consulta</a>()
+                    </li><li>public IdentificacaoTransacao <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/tid.xhtml">tid</a>()
+                    </li><li>public AutorizacaoPortador <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/autorizaPortador.xhtml">autorizaPortador</a>()
+                    </li><li>protected void <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/enviaRequisicao.xhtml">enviaRequisicao</a>()
+                    </li><li>protected string <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getEndpoint.xhtml">getEndpoint</a>()
+                    </li><li>public array <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getIdiomas.xhtml">getIdiomas</a>()
+                    </li><li>public array <a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getAmbientes.xhtml">getAmbientes</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="VERSAO">VERSAO</td>
+              <td>'1.1.0'</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>private</h4>
+          <ul class="members">
+            <li id="ambiente"><strong>$ambiente</strong>
+                —
+                string<br/><span class="indent">Ambiente (teste ou produção)</span></li>
+            <li id="ambientes"><strong>$ambientes</strong>
+                —
+                array<br/><span class="indent">Ambientes válidos</span></li>
+            <li id="autorizacao"><strong>$autorizacao</strong>
+                —
+                <a href="#">MrPrompt\Cielo\Autorizacao</a><br/><span class="indent">Dados de autorização na Cielo</span></li>
+            <li id="httpClient"><strong>$httpClient</strong>
+                —
+                <a href="#">Guzzle\Http\Client</a></li>
+            <li id="idioma"><strong>$idioma</strong>
+                —
+                string<br/><span class="indent">Idioma do pedido</span></li>
+            <li id="idiomas"><strong>$idiomas</strong>
+                —
+                array<br/><span class="indent">Idiomas válidos</span></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="enviaRequisicao"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/enviaRequisicao.xhtml">enviaRequisicao()</a>
+                — Realiza o envio da requisição à Cielo</li>
+            <li id="getEndpoint"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getEndpoint.xhtml">getEndpoint()</a>
+                — Retorna o endereço de destino das requisições</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="__construct"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/__construct.xhtml">__construct()</a>
+                — Construtor da aplicação</li>
+            <li id="autoriza"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/autoriza.xhtml">autoriza()</a>
+                — Autorização</li>
+            <li id="autorizaPortador"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/autorizaPortador.xhtml">autorizaPortador()</a>
+                — Autorização Direta</li>
+            <li id="cancela"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/cancela.xhtml">cancela()</a>
+                — Cancelamento</li>
+            <li id="captura"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/captura.xhtml">captura()</a>
+                — Captura</li>
+            <li id="consulta"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/consulta.xhtml">consulta()</a>
+                — Consulta</li>
+            <li id="getAmbiente"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getAmbiente.xhtml">getAmbiente()</a>
+                — Retorna o ambiente utilizado para as chamadas de transação</li>
+            <li id="getAmbientes"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getAmbientes.xhtml">getAmbientes()</a>
+                — Recupera os ambientes válidos</li>
+            <li id="getIdioma"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getIdioma.xhtml">getIdioma()</a>
+                — Retorna o idioma da venda</li>
+            <li id="getIdiomas"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/getIdiomas.xhtml">getIdiomas()</a>
+                — Recupera os idiomas válidos</li>
+            <li id="iniciaTransacao"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/iniciaTransacao.xhtml">iniciaTransacao()</a>
+                — Transacao</li>
+            <li id="setAmbiente"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setAmbiente.xhtml">setAmbiente()</a>
+                — Configura o ambiente a ser utilizado nas chamadas de transações</li>
+            <li id="setIdioma"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setIdioma.xhtml">setIdioma()</a>
+                — Idioma do pedido</li>
+            <li id="setSslCertificate"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/setSslCertificate.xhtml">setSslCertificate()</a>
+                — Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)</li>
+            <li id="solicitaToken"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/solicitaToken.xhtml">solicitaToken()</a>
+                — Solicita Token</li>
+            <li id="tid"><a title="MrPrompt\Cielo\Cliente" href="../classes/MrPrompt_Cielo_Cliente/tid.xhtml">tid()</a>
+                — TID</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span/>
+    </footer>
+  </body>
+</html>

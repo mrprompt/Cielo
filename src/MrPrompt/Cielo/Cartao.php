@@ -15,10 +15,8 @@
  */
 namespace MrPrompt\Cielo;
 
-/**
- * @uses MrPrompt\Cielo\Cartao\Exception
- */
-use MrPrompt\Cielo\Cartao\Exception;
+use Respect\Validation\Validator as v;
+use InvalidArgumentException;
 
 class Cartao
 {
@@ -27,17 +25,17 @@ class Cartao
      *
      * @var integer
      */
-    private $_cartao;
-    
+    private $cartao;
+
     /**
      * Bandeira do cartão
      *
-     * vista ou mastercard (sempre minúsculo)
+     * sempre minúsculo
      *
      * @var string
      */
-    private $_bandeira = 'visa';
-    
+    private $bandeira;
+
     /**
      * Indicador do código de segurança:
      *
@@ -48,27 +46,50 @@ class Cartao
      *
      * @var integer
      */
-    private $_indicador = 0;
+    private $indicador = 0;
     /**
      * Código de segurança do cartão, obrigatório se o indicador for 1
      *
      * @var string
      */
-    private $_codigoSeguranca;
+    private $codigoSeguranca;
     /**
      * Nome impresso no cartão.
      *
      * @var string
      */
-    private $_nomePortador;
+    private $nomePortador;
     /**
      * Validade do cartão no formato aaaamm.
      * Exemplos: 201212 (dez 2012).
      *
      * @var integer
      */
-    private $_validade;
-    
+    private $validade;
+
+    /**
+     * Token que liga o cartão ao estabelecimento
+     *
+     * @var string
+     */
+    private $token = null;
+
+    /**
+     * Bandeiras válidas
+     *
+     * @var array
+     */
+    private $bandeiras = array(
+        'visa',
+        'mastercard',
+        'diners',
+        'discover',
+        'elo',
+        'amex',
+        'jcb',
+        'aura',
+    );
+
     /**
      * Retorna o número do cartão
      *
@@ -77,19 +98,23 @@ class Cartao
      */
     public function getCartao()
     {
-        return $this->_cartao;
+        return $this->cartao;
     }
 
     /**
      * Configura o número do cartão
      *
      * @access public
-     * @param  integer $_cartao
-     * @return Cielo
+     * @param  string $cartao
+     * @return Cartao
      */
-    public function setCartao($_cartao)
+    public function setCartao($cartao)
     {
-        $this->_cartao = preg_replace('/[^[:digit:]]/', '', $_cartao);
+        if (!v::notEmpty()->creditCard()->validate($cartao)) {
+            throw new InvalidArgumentException('O número do cartão deve ser válido.');
+        }
+
+        $this->cartao = filter_var($cartao, FILTER_SANITIZE_NUMBER_INT);
 
         return $this;
     }
@@ -102,7 +127,7 @@ class Cartao
      */
     public function getIndicador()
     {
-        return $this->_indicador;
+        return $this->indicador;
     }
 
     /**
@@ -114,21 +139,17 @@ class Cartao
      * 9 (inexistente)
      *
      * @var integer
+     * @return Cartao
      */
-    public function setIndicador($_indicador)
+    public function setIndicador($indicador)
     {
-        switch ((integer) $_indicador) {
-            case 0:
-            case 1:
-            case 2:
-            case 9:
-                $this->_indicador = (integer) substr($_indicador, 0, 1);
-
-                return $this;
-                break;
-            default:
-                throw new Exception('Indicador de segurança inválido.');
+        if (!v::in(array(0, 1, 2, 9), true)->validate($indicador)) {
+            throw new InvalidArgumentException('Indicador de código de segurança inválido.');
         }
+
+        $this->indicador = (int) $indicador;
+
+        return $this;
     }
 
     /**
@@ -139,25 +160,25 @@ class Cartao
      */
     public function getCodigoSeguranca()
     {
-        return $this->_codigoSeguranca;
+        return $this->codigoSeguranca;
     }
 
     /**
      * Seta o código de segurança do cartão
      *
      * @access public
-     * @param  string $_codigo
-     * @return Cielo
+     * @param  string $codigo
+     * @return Cartao
      */
-    public function setCodigoSeguranca($_codigo)
+    public function setCodigoSeguranca($codigo)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_codigo)) {
-            throw new Exception('Código de segurança inválido.');
-        } else {
-            $this->_codigoSeguranca = filter_var($_codigo, FILTER_SANITIZE_STRING);
-
-            return $this;
+        if (!v::digit()->notEmpty()->noWhitespace()->validate($codigo)) {
+            throw new InvalidArgumentException('Código de segurança inválido.');
         }
+
+        $this->codigoSeguranca = filter_var($codigo, FILTER_SANITIZE_STRING);
+
+        return $this;
     }
 
     /**
@@ -168,25 +189,25 @@ class Cartao
      */
     public function getNomePortador()
     {
-        return $this->_nomePortador;
+        return $this->nomePortador;
     }
 
     /**
      * Seta o nome do portador do cartão
      *
      * @access public
-     * @param  string $_nomePortador
-     * @return Cielo
+     * @param  string $nomePortador
+     * @return Cartao
      */
-    public function setNomePortador($_nomePortador)
+    public function setNomePortador($nomePortador)
     {
-        if (preg_match('/[[:alnum:]]/i', $_nomePortador)) {
-            $this->_nomePortador = substr($_nomePortador, 0, 50);
-
-            return $this;
-        } else {
-            throw new Exception('Caracteres inválidos no nome do portador.');
+        if (!v::alnum()->notEmpty()->validate($nomePortador)) {
+            throw new InvalidArgumentException('Caracteres inválidos no nome do portador.');
         }
+
+        $this->nomePortador = substr($nomePortador, 0, 50);
+
+        return $this;
     }
 
     /**
@@ -197,35 +218,34 @@ class Cartao
      */
     public function getValidade()
     {
-        return $this->_validade;
+        return $this->validade;
     }
 
     /**
      * Configura a data de validade do cartão
      *
      * @access public
-     * @param  integer $_validade AAAAMM
-     * @return Cielo
+     * @param  integer $validade   AAAAMM
+     * @param  integer $referencia
+     * @return Cartao
      */
-    public function setValidade($_validade)
+    public function setValidade($validade, $referencia = null)
     {
-        if (preg_match('/([[:alpha:]]|[[:punct:]]|[[:space:]])/', $_validade)) {
-            throw new Exception('Data de validade inválida.');
+        if (!v::digit()->notEmpty()->noWhitespace()->length(6)->validate($validade)) {
+            throw new InvalidArgumentException('Data de validade inválida.');
         }
 
-        if (strlen($_validade) != 6) {
-            throw new Exception('Data de validade inválida.');
+        $referencia = $referencia ?: date('Ym');
+
+        if ($validade < $referencia) {
+            throw new InvalidArgumentException('Cartão com validade ultrapassada.');
         }
 
-        if ($_validade < date('Ym')) {
-            throw new Exception('Cartão com validade ultrapassada.');
-        }
-
-        $this->_validade = substr($_validade, 0, 6);
+        $this->validade = $validade;
 
         return $this;
     }
-    
+
     /**
      * Retorna a bandeira do cartão
      *
@@ -234,24 +254,74 @@ class Cartao
      */
     public function getBandeira()
     {
-        return $this->_bandeira;
+        return $this->bandeira;
     }
 
     /**
      * Configura a bandeira do cartão
+     * 
+     * Obs.: A bandeira do cartão aceita somente caracteres minúsculos.
      *
      * @access public
-     * @param  string $_bandeira
-     * @return Cielo
+     * @param  string $bandeira
+     * @return Cartao
      */
-    public function setBandeira($_bandeira)
+    public function setBandeira($bandeira)
     {
-        if (preg_match('/(visa|mastercard)/i', $_bandeira)) {
-            $this->_bandeira = strtolower($_bandeira);
-
-            return $this;
-        } else {
-            throw new Exception('Bandeira inválida.');
+        $regras = v::string()->notEmpty()
+                             ->in($this->bandeiras)
+                             ->lowercase()
+                             ->alnum();
+        
+        if (!$regras->validate($bandeira)) {
+            throw new InvalidArgumentException('Bandeira inválida.');
         }
+
+        $this->bandeira = $bandeira;
+
+        return $this;
     }
+    
+    /**
+     * Recupera as bandeiras permitidas.
+     * 
+     * @return array
+     */
+    public function getBandeiras()
+    {
+        return $this->bandeiras;
+    }
+
+    /**
+     * Recupera o token.
+     * 
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }    
+
+    /**
+     * Configura o token.
+     * 
+     * @return string
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $token;
+    }
+
+    /**
+     * Verifica se o token está configurado.
+     * 
+     * @return boolean
+     */
+    public function hasToken()
+    {
+        return ! empty($this->token);
+    }
+
 }

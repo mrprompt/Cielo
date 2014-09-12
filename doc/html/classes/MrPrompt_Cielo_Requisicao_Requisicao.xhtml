@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - MrPrompt\Cielo\Requisicao\Requisicao</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports/index.xhtml">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#MrPrompt_Cielo_Requisicao">MrPrompt\Cielo\Requisicao</a>
+          </li>
+          <li class="separator">Requisicao</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/MrPrompt/Cielo/Requisicao/Requisicao.php.xhtml#line31">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>MrPrompt\Cielo\Requisicao\</small>Requisicao</h1>
+        <h4>Cada chamada ao webservice representa uma requisição</h4>
+        <p/>
+        <ul>
+          <li>Author: Luís Otávio Cobucci Oblonczyk &lt;lcobucci@gmail.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Requisicao
+            {<br/><ul class="none"><li>// members</li><li>private <span title="MrPrompt\Cielo\Autorizacao">Autorizacao</span> <a href="#members">$autorizacao</a>;
+                    </li><li>protected <span title="MrPrompt\Cielo\Transacao">Transacao</span> <a href="#members">$transacao</a>;
+                    </li><li>private <span title="SimpleXMLElement">SimpleXMLElement</span> <a href="#members">$envio</a>;
+                    </li><li>private <span title="SimpleXMLElement">SimpleXMLElement</span> <a href="#members">$resposta</a>;
+                    </li><li>private boolean <a href="#members">$adicionarTid</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/__construct.xhtml">__construct</a>()
+                    </li><li>public integer <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getModalidadeIntegracao.xhtml">getModalidadeIntegracao</a>()
+                    </li><li>protected void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraAutenticacao.xhtml">configuraAutenticacao</a>()
+                    </li><li>protected void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraTransacao.xhtml">configuraTransacao</a>()
+                    </li><li>public SimpleXMLElement <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getEnvio.xhtml">getEnvio</a>()
+                    </li><li>public SimpleXMLElement <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getResposta.xhtml">getResposta</a>()
+                    </li><li>public void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/setResposta.xhtml">setResposta</a>()
+                    </li><li>public boolean <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getAdicionarTid.xhtml">getAdicionarTid</a>()
+                    </li><li>public void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/setAdicionarTid.xhtml">setAdicionarTid</a>()
+                    </li><li>protected void <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraEnvio.xhtml">configuraEnvio</a>()
+                    </li><li>protected boolean <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/deveAdicionarTid.xhtml">deveAdicionarTid</a>()
+                    </li><li>protected abstract string <a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getXmlInicial.xhtml">getXmlInicial</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extended by</h4>
+          <ul>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_AutorizacaoPortador.xhtml">MrPrompt\Cielo\Requisicao\AutorizacaoPortador</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_AutorizacaoTransacao.xhtml">MrPrompt\Cielo\Requisicao\AutorizacaoTransacao</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_CancelamentoTransacao.xhtml">MrPrompt\Cielo\Requisicao\CancelamentoTransacao</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_Captura.xhtml">MrPrompt\Cielo\Requisicao\Captura</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_Consulta.xhtml">MrPrompt\Cielo\Requisicao\Consulta</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_IdentificacaoTransacao.xhtml">MrPrompt\Cielo\Requisicao\IdentificacaoTransacao</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_SolicitacaoToken.xhtml">MrPrompt\Cielo\Requisicao\SolicitacaoToken</a>
+            </li>
+            <li>
+              <a href="../classes/MrPrompt_Cielo_Requisicao_SolicitacaoTransacao.xhtml">MrPrompt\Cielo\Requisicao\SolicitacaoTransacao</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>private</h4>
+          <ul class="members">
+            <li id="adicionarTid"><strong>$adicionarTid</strong>
+                —
+                boolean<br/><span class="indent">Deve adicionar o TID?</span></li>
+            <li id="autorizacao"><strong>$autorizacao</strong>
+                —
+                <a href="#">MrPrompt\Cielo\Autorizacao</a><br/><span class="indent">Dados de autorização</span></li>
+            <li id="envio"><strong>$envio</strong>
+                —
+                <a href="#">SimpleXMLElement</a><br/><span class="indent">XML de envio</span></li>
+            <li id="resposta"><strong>$resposta</strong>
+                —
+                <a href="#">SimpleXMLElement</a><br/><span class="indent">XML de resposta</span></li>
+          </ul>
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="transacao"><strong>$transacao</strong>
+                —
+                <a href="#">MrPrompt\Cielo\Transacao</a><br/><span class="indent">Transação a ser enviada</span></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="configuraAutenticacao"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraAutenticacao.xhtml">configuraAutenticacao()</a>
+                — Adiciona os dados de autenticação à requisição</li>
+            <li id="configuraEnvio"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraEnvio.xhtml">configuraEnvio()</a>
+                — Configura o objeto de envio de acordo com as requisições</li>
+            <li id="configuraTransacao"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/configuraTransacao.xhtml">configuraTransacao()</a>
+                — Adiciona os dados da transacao à requisição</li>
+            <li id="deveAdicionarTid"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/deveAdicionarTid.xhtml">deveAdicionarTid()</a>
+                — Verificação se deve ser enviado o TID na requisição</li>
+            <li id="getXmlInicial"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getXmlInicial.xhtml">getXmlInicial()</a>
+                — Retorna o XML inicial da requisição</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="__construct"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/__construct.xhtml">__construct()</a>
+                — Inicializa o objeto</li>
+            <li id="getAdicionarTid"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getAdicionarTid.xhtml">getAdicionarTid()</a>
+                — Retorna adicionarTid</li>
+            <li id="getEnvio"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getEnvio.xhtml">getEnvio()</a>
+                — Retorna o objeto XML de requisição</li>
+            <li id="getModalidadeIntegracao"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getModalidadeIntegracao.xhtml">getModalidadeIntegracao()</a>
+                — Retorna a modalidade de integração definida na autorização.</li>
+            <li id="getResposta"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/getResposta.xhtml">getResposta()</a>
+                — Retorna o objeto XML de resposta</li>
+            <li id="setAdicionarTid"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/setAdicionarTid.xhtml">setAdicionarTid()</a>
+                — Configura adicionarTid</li>
+            <li id="setResposta"><a title="MrPrompt\Cielo\Requisicao\Requisicao" href="../classes/MrPrompt_Cielo_Requisicao_Requisicao/setResposta.xhtml">setResposta()</a>
+                — Configura o objeto de resposta</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span/>
+    </footer>
+  </body>
+</html>

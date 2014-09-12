@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao" abstract="false" final="false" start="21" end="327">
+  <file path="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo" file="Cartao.php" realpath="/Users/mrprompt/Zend/workspaces/DefaultWorkspace10/Cielo/src/MrPrompt/Cielo/Cartao.php" size="6744" time="2014-09-04T14:32:03-03:00" unixtime="1409851923" sha1="9a0459d7a676065efbcff7b48ca3cc494f198070" relative="MrPrompt/Cielo/Cartao.php"/>
+  <member name="cartao" type="{unknown}" visibility="private" line="28">
+    <docblock>
+      <description compact="Número do cartão."/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="bandeira" type="{unknown}" visibility="private" line="37">
+    <docblock>
+      <description compact="Bandeira do cartão">sempre minúsculo</description>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="indicador" type="integer" default="0" visibility="private" line="49">
+    <docblock>
+      <description compact="Indicador do código de segurança:">0 (não informado)
+1 (informado)
+2 (ilegível)
+9 (inexistente)</description>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="codigoSeguranca" type="{unknown}" visibility="private" line="55">
+    <docblock>
+      <description compact="Código de segurança do cartão, obrigatório se o indicador for 1"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="nomePortador" type="{unknown}" visibility="private" line="61">
+    <docblock>
+      <description compact="Nome impresso no cartão."/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="validade" type="{unknown}" visibility="private" line="68">
+    <docblock>
+      <description compact="Validade do cartão no formato aaaamm.">Exemplos: 201212 (dez 2012).</description>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="token" type="{unknown}" default="null" visibility="private" line="75">
+    <docblock>
+      <description compact="Token que liga o cartão ao estabelecimento"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="bandeiras" type="array" visibility="private" line="82">
+    <docblock>
+      <description compact="Bandeiras válidas"/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <method name="getCartao" start="99" end="102" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o número do cartão"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setCartao" start="111" end="120" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o número do cartão"/>
+      <access value="public"/>
+      <param type="string" variable="$cartao"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="cartao" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getIndicador" start="128" end="131" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o indicador do código de segurança setado"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setIndicador" start="144" end="153" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Indicador do código de segurança:">0 (não informado)
+1 (informado)
+2 (ilegível)
+9 (inexistente)</description>
+      <var type="integer"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="indicador" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCodigoSeguranca" start="161" end="164" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o código de segurança configurado para cartão"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setCodigoSeguranca" start="173" end="182" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Seta o código de segurança do cartão"/>
+      <access value="public"/>
+      <param type="string" variable="$codigo"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="codigo" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getNomePortador" start="190" end="193" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o nome do portador do cartão"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setNomePortador" start="202" end="211" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Seta o nome do portador do cartão"/>
+      <access value="public"/>
+      <param type="string" variable="$nomePortador"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="nomePortador" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getValidade" start="219" end="222" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a data de validade setada para o cartão"/>
+      <access value="public"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setValidade" start="232" end="247" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura a data de validade do cartão"/>
+      <access value="public"/>
+      <param description="AAAAMM" type="integer" variable="$validade"/>
+      <param type="integer" variable="$referencia"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="validade" byreference="false" type="{unknown}"/>
+    <parameter name="referencia" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="getBandeira" start="255" end="258" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a bandeira do cartão"/>
+      <access value="public"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setBandeira" start="269" end="283" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura a bandeira do cartão">Obs.: A bandeira do cartão aceita somente caracteres minúsculos.</description>
+      <access value="public"/>
+      <param type="string" variable="$bandeira"/>
+      <return type="object">
+        <type full="MrPrompt\Cielo\Cartao" namespace="MrPrompt\Cielo" name="Cartao"/>
+      </return>
+    </docblock>
+    <parameter name="bandeira" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getBandeiras" start="290" end="293" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Recupera as bandeiras permitidas."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getToken" start="300" end="303" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Recupera o token."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setToken" start="310" end="315" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Configura o token."/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="token" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="hasToken" start="322" end="325" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Verifica se o token está configurado."/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+</class>

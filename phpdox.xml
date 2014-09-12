@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://phpdox.net/config">
+    <project name="Cielo" source="${basedir}/src" workdir="${basedir}/doc/xml">
+        <collector backend="parser" />
+        <generator output="${basedir}/doc">
+            <build engine="html" output="html"/>
+        </generator>
+    </project>
+</phpdox>
