@@ -1,7 +1,7 @@
 Cielo
 =====
 
-Cielo.php é uma classe cliente para o web service da Cielo.
+Cielo é uma classe cliente para o web service da Cielo.
 
 Com esta classe, sua aplicação será capaz de realizar transações
 a Crédito e Débito com cartões VISA e Mastercard.
