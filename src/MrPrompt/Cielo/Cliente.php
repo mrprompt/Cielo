@@ -417,6 +417,8 @@ class Cliente
                                         )
                                     );
 
+        $request->getCurlOptions()->set(CURLOPT_SSLVERSION, 3);
+
         $requisicao->setResposta($request->send()->xml());
 
         return $requisicao;
