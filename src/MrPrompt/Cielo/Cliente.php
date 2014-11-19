@@ -411,11 +411,11 @@ class Cliente
     protected function enviaRequisicao(Requisicao $requisicao)
     {
         $request = $this->httpClient->post($this->getEndpoint())
-                                    ->addPostFields(
-                                        array(
-                                            'mensagem' => $requisicao->getEnvio()->asXML()
-                                        )
-                                    );
+                                    ->addPostFields(array(
+                                        'mensagem' => $requisicao->getEnvio()->asXML()
+                                    ))
+                                    ->getCurlOptions()->set(CURLOPT_SSLVERSION, 3);
+
 
         $requisicao->setResposta($request->send()->xml());
 
