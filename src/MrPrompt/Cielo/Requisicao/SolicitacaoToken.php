@@ -92,7 +92,10 @@ class SolicitacaoToken extends Requisicao
 
         $dadosCartao->addChild('numero', $this->cartao->getCartao());
         $dadosCartao->addChild('validade', $this->cartao->getValidade());
-        $dadosCartao->addChild('nome-portador', $this->cartao->getNomePortador());
+
+        $nomePortador = $this->cartao->getNomePortador();
+        if (!empty($nomePortador))
+            $dadosCartao->addChild('nome-portador', $nomePortador);
     }
 
 }
