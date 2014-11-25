@@ -20,8 +20,7 @@
     
     <filter>
         <blacklist>
-            <directory suffix=".php">vendor</directory>
-            <directory suffix=".php">sample</directory>
+            <directory suffix=".php">../vendor</directory>
         </blacklist>
     </filter>
 </phpunit>
