@@ -151,7 +151,11 @@ class SolicitacaoTransacao extends Requisicao
             $dadosPortador->addChild('numero', $this->cartao->getCartao());
             $dadosPortador->addChild('validade', $this->cartao->getValidade());
             $dadosPortador->addChild('indicador', $this->cartao->getIndicador());
-            $dadosPortador->addChild('nome-portador', $this->cartao->getNomePortador());
+
+            $nomePortador = $this->cartao->getNomePortador();
+            if (!empty($nomePortador))
+                $dadosPortador->addChild('nome-portador', $nomePortador);
+
             $dadosPortador->addChild('codigo-seguranca', $this->cartao->getCodigoSeguranca());
         }
         else
