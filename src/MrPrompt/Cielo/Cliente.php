@@ -413,9 +413,7 @@ class Cliente
         $request = $this->httpClient->post($this->getEndpoint())
                                     ->addPostFields(array(
                                         'mensagem' => $requisicao->getEnvio()->asXML()
-                                    ))
-                                    ->getCurlOptions()->set(CURLOPT_SSLVERSION, 3);
-
+                                    ));
 
         $request->getCurlOptions()->set(CURLOPT_SSLVERSION, 3);
 
