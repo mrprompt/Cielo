@@ -82,7 +82,7 @@ class Cliente
      *
      * @const float
      */
-    const VERSAO = '1.1.0';
+    const VERSAO = '1.2.0';
     
     /**
      * Idiomas válidos
@@ -97,6 +97,13 @@ class Cliente
      * @var array
      */
     private $ambientes = array('teste', 'produção');
+
+    /**
+     * Opções de configuração do cURL.
+     *
+     * @var array
+     */
+    private $curlOpcoes = array(array('nome' => CURLOPT_SSLVERSION, 'valor' => 3));
 
     /**
      * Construtor da aplicação
@@ -417,7 +424,9 @@ class Cliente
                                         )
                                     );
 
-        $request->getCurlOptions()->set(CURLOPT_SSLVERSION, 3);
+        foreach ($this->curlOpcoes as $opcao) {
+            $request->getCurlOptions()->set($opcao['nome'], $opcao['valor']);
+        }
 
         $requisicao->setResposta($request->send()->xml());
 
@@ -456,5 +465,26 @@ class Cliente
     public function getAmbientes()
     {
         return $this->ambientes;
+    }
+
+    /**
+     * Recupera as configurações do cURL.
+     * @return array
+     */
+    public function getCurlOpcoes()
+    {
+        return $this->curlOpcoes;
+    }
+
+    /**
+     * Define as configurações do cURL.
+     *
+     * @param array $curlOpcoes
+     * @return self
+     */
+    public function setCurlOpcoes(array $curlOpcoes = array())
+    {
+        $this->curlOpcoes = $curlOpcoes;
+        return $this;
     }
 }

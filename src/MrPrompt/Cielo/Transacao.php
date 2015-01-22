@@ -108,6 +108,13 @@ class Transacao
     private $descricao;
 
     /**
+     * Gerar token para cartão do portador?
+     *
+     * @var boolean
+     */
+    private $gerarToken = false;
+
+    /**
      * Configura o valor do TID
      *
      * @access public
@@ -423,5 +430,26 @@ class Transacao
     public function getDescricao()
     {
         return $this->descricao;
+    }
+
+    /**
+     * Indica se é para gerar token para o cartão do portador.
+     * @return boolean
+     */
+    public function isGerarToken()
+    {
+        return $this->gerarToken;
+    }
+
+    /**
+     * Define se é para gerar token para o cartão do portador.
+     *
+     * @param boolean $gerarToken
+     * @return self
+     */
+    public function setGerarToken($gerarToken)
+    {
+        $this->gerarToken = $gerarToken;
+        return $this;
     }
 }

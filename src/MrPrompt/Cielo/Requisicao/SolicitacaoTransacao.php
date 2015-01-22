@@ -125,6 +125,9 @@ class SolicitacaoTransacao extends Requisicao
         if (! empty($numeroCartao)) {
 
             $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
+
+            if ($this->transacao->isGerarToken() === true)
+                $this->getEnvio()->addChild('gerar-token', 'true');
         }
     }
 
