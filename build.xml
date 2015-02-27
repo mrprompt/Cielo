@@ -25,15 +25,9 @@
     <target name="code-style">
         <exec executable="${project.bindir}phpcs" passthru="true" checkreturn="true">
             <arg value="--standard=PSR2" />
-            <arg value="--ignore=bin" />
-            <arg value="--ignore=config" />
-            <arg value="--ignore=data" />
-            <arg value="--ignore=public" />
             <arg value="--ignore=vendor" />
-            <arg value="--ignore=view" />
-            <arg value="--ignore=wiki" />
-            <arg value="--ignore=bootstrap.php" />
-            <arg value="--ignore=cli-config.php" />
+            <arg value="--ignore=sample" />
+            <arg value="--ignore=doc" />
             <arg value="${project.basedir}" />
         </exec>
     </target>
