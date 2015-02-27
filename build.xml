@@ -8,9 +8,6 @@
     <target name="update-dependencies">
         <exec executable="composer" passthru="true" checkreturn="true">
             <arg value="install" />
-            <arg value="--prefer-dist" />
-            <arg value="--dev" />
-            <arg value="-o" />
         </exec>
     </target>
 
