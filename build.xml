@@ -7,7 +7,7 @@
 
    <target name="update-code">
         <exec executable="git" passthru="true" checkreturn="true">
-            <arg value="pull" />
+            <arg value="pull origin master" />
         </exec>
     </target>
 
