@@ -10,17 +10,17 @@
          processIsolation="false"
          stopOnFailure="false"
          verbose="true"
-         bootstrap="../vendor/autoload.php">
+         bootstrap="./vendor/autoload.php">
     <testsuites>
         <testsuite name="Cielo Test Suite">
-            <directory>./MrPrompt/</directory>
+            <directory>./tests</directory>
             <exclude>vendor</exclude>
         </testsuite>
     </testsuites>
     
     <filter>
         <blacklist>
-            <directory suffix=".php">../vendor</directory>
+            <directory suffix=".php">./vendor</directory>
         </blacklist>
     </filter>
 </phpunit>

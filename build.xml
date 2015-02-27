@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model xlink:href="vendor/phing/phing/etc/phing-grammar.rng"
+        type="application/xml"
+        schematypens="http://relaxng.org/ns/structure/1.0" ?>
+<project name="Cielo" default="build">
+   <property name="project.bindir" value="${project.basedir}/vendor/bin/" />
+
+   <target name="update-code">
+        <exec executable="git" passthru="true" checkreturn="true">
+            <arg value="pull" />
+        </exec>
+    </target>
+
+    <target name="update-dependencies">
+        <exec executable="composer" passthru="true" checkreturn="true">
+            <arg value="install" />
+            <arg value="--prefer-dist" />
+            <arg value="--no-dev" />
+            <arg value="-o" />
+        </exec>
+    </target>
+
+    <target name="update-dev-dependencies">
+        <exec executable="composer" passthru="true" checkreturn="true">
+            <arg value="install" />
+            <arg value="--prefer-dist" />
+            <arg value="-o" />
+        </exec>
+    </target>
+
+    <target name="build">
+        <phingcall target="update-code" />
+        <phingcall target="update-dev-dependencies" />
+        <phingcall target="test" />
+    </target>
+
+    <target name="test">
+        <exec executable="${project.bindir}phpunit" passthru="true" checkreturn="true">
+            <arg value="--stop-on-failure" />
+        </exec>
+    </target>
+
+    <target name="code-style">
+        <exec executable="${project.bindir}phpcs" passthru="true" checkreturn="true">
+            <arg value="--standard=PSR2" />
+            <arg value="--ignore=bin" />
+            <arg value="--ignore=config" />
+            <arg value="--ignore=data" />
+            <arg value="--ignore=public" />
+            <arg value="--ignore=vendor" />
+            <arg value="--ignore=view" />
+            <arg value="--ignore=wiki" />
+            <arg value="--ignore=bootstrap.php" />
+            <arg value="--ignore=cli-config.php" />
+            <arg value="${project.basedir}" />
+        </exec>
+    </target>
+</project>
