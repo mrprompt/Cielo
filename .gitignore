@@ -1,6 +1,6 @@
-/composer.phar
-/.settings
-/.buildpath
-/.project
-/vendor
+.settings
+.buildpath
+.project
+.idea
+vendor
 composer.lock
