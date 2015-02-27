@@ -5,34 +5,17 @@
 <project name="Cielo" default="build">
    <property name="project.bindir" value="${project.basedir}/vendor/bin/" />
 
-   <target name="update-code">
-        <exec executable="git" passthru="true" checkreturn="true">
-            <arg value="pull" />
-            <arg value="origin" />
-            <arg value="master" />
-        </exec>
-    </target>
-
     <target name="update-dependencies">
         <exec executable="composer" passthru="true" checkreturn="true">
             <arg value="install" />
             <arg value="--prefer-dist" />
-            <arg value="--no-dev" />
-            <arg value="-o" />
-        </exec>
-    </target>
-
-    <target name="update-dev-dependencies">
-        <exec executable="composer" passthru="true" checkreturn="true">
-            <arg value="install" />
-            <arg value="--prefer-dist" />
+            <arg value="--dev" />
             <arg value="-o" />
         </exec>
     </target>
 
     <target name="build">
-        <phingcall target="update-code" />
-        <phingcall target="update-dev-dependencies" />
+        <phingcall target="update-dependencies" />
         <phingcall target="test" />
     </target>
 
