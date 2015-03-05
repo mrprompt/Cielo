@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model xlink:href="vendor/phing/phing/etc/phing-grammar.rng"
+        type="application/xml"
+        schematypens="http://relaxng.org/ns/structure/1.0" ?>
+<project name="Cielo" default="build">
+   <property name="project.bindir" value="${project.basedir}/vendor/bin/" />
+
+    <target name="update-dependencies">
+        <exec executable="composer" passthru="true" checkreturn="true">
+            <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="build">
+        <phingcall target="update-dependencies" />
+        <phingcall target="test" />
+    </target>
+
+    <target name="test">
+        <exec executable="${project.bindir}phpunit" passthru="true" checkreturn="true">
+            <arg value="--stop-on-failure" />
+        </exec>
+    </target>
+
+    <target name="code-style">
+        <exec executable="${project.bindir}phpcs" passthru="true" checkreturn="true">
+            <arg value="--standard=PSR2" />
+            <arg value="--ignore=vendor" />
+            <arg value="--ignore=sample" />
+            <arg value="--ignore=doc" />
+            <arg value="${project.basedir}" />
+        </exec>
+    </target>
+</project>

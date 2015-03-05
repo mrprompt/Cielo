@@ -1,8 +1,6 @@
-/nbproject
-.DS_Store
-/vendor
-/composer.phar
-/.settings
-/.buildpath
-/.project
+.settings
+.buildpath
+.project
+.idea
+vendor
 composer.lock

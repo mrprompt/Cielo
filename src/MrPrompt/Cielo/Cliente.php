@@ -418,11 +418,9 @@ class Cliente
     protected function enviaRequisicao(Requisicao $requisicao)
     {
         $request = $this->httpClient->post($this->getEndpoint())
-                                    ->addPostFields(
-                                        array(
-                                            'mensagem' => $requisicao->getEnvio()->asXML()
-                                        )
-                                    );
+                                    ->addPostFields(array(
+                                        'mensagem' => $requisicao->getEnvio()->asXML()
+                                    ));
 
         foreach ($this->curlOpcoes as $opcao) {
             $request->getCurlOptions()->set($opcao['nome'], $opcao['valor']);

@@ -76,7 +76,7 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('PT', 'PT'),
-            array('pt', 'PT'),
+            array('pT', 'PT'),
             array('Pt', 'PT'),
             array('pt', 'PT'),
             array('EN', 'EN'),
