@@ -20,3 +20,4 @@ Packagist:
 
 branch 2.1-dev status
 [![Build Status](https://travis-ci.org/mrprompt/Cielo.png?branch=2.1-dev)](https://travis-ci.org/mrprompt/Cielo)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828/mini.png)](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828)
