@@ -35,7 +35,7 @@ class ConsultaTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\Consulta::getXmlInicial()
+     * @covers \MrPrompt\Cielo\Requisicao\Consulta::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()

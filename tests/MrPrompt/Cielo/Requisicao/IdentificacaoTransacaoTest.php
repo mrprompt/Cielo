@@ -37,7 +37,7 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::getXmlInicial()
+     * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
@@ -47,7 +47,7 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::configuraEnvio()
+     * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::configuraEnvio()
      * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
@@ -57,7 +57,7 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::deveAdicionarTid()
+     * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::deveAdicionarTid()
      * @todo   Implement deveAdicionarTid().
      */
     public function deveAdicionarTid()
@@ -67,7 +67,7 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::adicionaFormaPagamento()
+     * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::adicionaFormaPagamento()
      * @todo   Implement adicionaFormaPagamento().
      */
     public function adicionaFormaPagamento()

@@ -41,7 +41,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::getXmlInicial()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
@@ -51,7 +51,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
      * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
@@ -61,7 +61,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::deveAdicionarTid()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::deveAdicionarTid()
      * @todo   Implement deveAdicionarTid().
      */
     public function deveAdicionarTid()
@@ -71,7 +71,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaPortador()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaPortador()
      * @todo   Implement adicionaPortador().
      */
     public function adicionaPortador()
@@ -81,7 +81,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaTransacao()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaTransacao()
      * @todo   Implement adicionaTransacao().
      */
     public function adicionaTransacao()
@@ -91,7 +91,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaFormaPagamento()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaFormaPagamento()
      * @todo   Implement adicionaFormaPagamento().
      */
     public function adicionaFormaPagamento()

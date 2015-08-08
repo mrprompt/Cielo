@@ -19,8 +19,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setTid
-     * @covers MrPrompt\Cielo\Transacao::getTid
+     * @covers \MrPrompt\Cielo\Transacao::setTid
+     * @covers \MrPrompt\Cielo\Transacao::getTid
      */
     public function getTid()
     {
@@ -32,7 +32,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setTid
+     * @covers \MrPrompt\Cielo\Transacao::setTid
      * @expectedException InvalidArgumentException
      */
     public function setTidDisparaExcessaoQuandoVazio()
@@ -42,7 +42,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setTid
+     * @covers \MrPrompt\Cielo\Transacao::setTid
      */
     public function setTid()
     {
@@ -85,8 +85,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider produtosValidos
-     * @covers MrPrompt\Cielo\Transacao::setProduto
-     * @covers MrPrompt\Cielo\Transacao::getProduto
+     * @covers \MrPrompt\Cielo\Transacao::setProduto
+     * @covers \MrPrompt\Cielo\Transacao::getProduto
      */
     public function getProduto($produto)
     {
@@ -98,7 +98,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider produtosValidos
-     * @covers MrPrompt\Cielo\Transacao::setProduto
+     * @covers \MrPrompt\Cielo\Transacao::setProduto
      */
     public function setProduto($produto)
     {
@@ -139,8 +139,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setParcelas
-     * @covers MrPrompt\Cielo\Transacao::getParcelas
+     * @covers \MrPrompt\Cielo\Transacao::setParcelas
+     * @covers \MrPrompt\Cielo\Transacao::getParcelas
      * @dataProvider parcelasValidas
      */
     public function getParcelas($parcelas)
@@ -153,7 +153,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider parcelasValidas
-     * @covers MrPrompt\Cielo\Transacao::setParcelas
+     * @covers \MrPrompt\Cielo\Transacao::setParcelas
      */
     public function setParcelas($parcelas)
     {
@@ -165,7 +165,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider parcelasInvalidas
-     * @covers MrPrompt\Cielo\Transacao::setParcelas
+     * @covers \MrPrompt\Cielo\Transacao::setParcelas
      * @expectedException InvalidArgumentException
      */
     public function setParcelasDisparaExcessaoComParcelasInvalidas($parcelas)
@@ -205,8 +205,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider moedasValidas
-     * @covers MrPrompt\Cielo\Transacao::setMoeda
-     * @covers MrPrompt\Cielo\Transacao::getMoeda
+     * @covers \MrPrompt\Cielo\Transacao::setMoeda
+     * @covers \MrPrompt\Cielo\Transacao::getMoeda
      */
     public function getMoeda($moeda)
     {
@@ -218,7 +218,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider moedasValidas
-     * @covers MrPrompt\Cielo\Transacao::setMoeda
+     * @covers \MrPrompt\Cielo\Transacao::setMoeda
      */
     public function setMoeda($moeda)
     {
@@ -230,7 +230,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider moedasInvalidas
-     * @covers MrPrompt\Cielo\Transacao::setMoeda
+     * @covers \MrPrompt\Cielo\Transacao::setMoeda
      * @expectedException InvalidArgumentException
      */
     public function setMoedaDisparaExcessaoComMoedaInvalida($moeda)
@@ -263,8 +263,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider capturasValidas
-     * @covers MrPrompt\Cielo\Transacao::setCapturar
-     * @covers MrPrompt\Cielo\Transacao::getCapturar
+     * @covers \MrPrompt\Cielo\Transacao::setCapturar
+     * @covers \MrPrompt\Cielo\Transacao::getCapturar
      */
     public function getCapturar($capturar)
     {
@@ -276,7 +276,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider capturasValidas
-     * @covers MrPrompt\Cielo\Transacao::setCapturar
+     * @covers \MrPrompt\Cielo\Transacao::setCapturar
      */
     public function setCapturar($capturar)
     {
@@ -288,7 +288,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider capturasInvalidas
-     * @covers MrPrompt\Cielo\Transacao::setCapturar
+     * @covers \MrPrompt\Cielo\Transacao::setCapturar
      * @expectedException InvalidArgumentException
      */
     public function setCapturarDisparaExcessaoComCapturaInvalida($capturar)
@@ -328,8 +328,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setAutorizar
-     * @covers MrPrompt\Cielo\Transacao::getAutorizar
+     * @covers \MrPrompt\Cielo\Transacao::setAutorizar
+     * @covers \MrPrompt\Cielo\Transacao::getAutorizar
      * @dataProvider autorizacoesValidas
      */
     public function getAutorizar($autorizar)
@@ -341,7 +341,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setAutorizar
+     * @covers \MrPrompt\Cielo\Transacao::setAutorizar
      * @dataProvider autorizacoesValidas
      */
     public function setAutorizar($autorizar)
@@ -353,7 +353,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setAutorizar
+     * @covers \MrPrompt\Cielo\Transacao::setAutorizar
      * @dataProvider autorizacoesInvalidas
      * @expectedException InvalidArgumentException
      */
@@ -394,8 +394,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDataHora
-     * @covers MrPrompt\Cielo\Transacao::getDataHora
+     * @covers \MrPrompt\Cielo\Transacao::setDataHora
+     * @covers \MrPrompt\Cielo\Transacao::getDataHora
      * @dataProvider dataHoraValidas
      */
     public function getDataHora($dataHora)
@@ -407,7 +407,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDataHora
+     * @covers \MrPrompt\Cielo\Transacao::setDataHora
      * @dataProvider dataHoraValidas
      */
     public function setDataHora($dataHora)
@@ -419,7 +419,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDataHora
+     * @covers \MrPrompt\Cielo\Transacao::setDataHora
      * @dataProvider dataHoraInvalidas
      * @expectedException InvalidArgumentException
      */
@@ -459,8 +459,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setNumero
-     * @covers MrPrompt\Cielo\Transacao::getNumero
+     * @covers \MrPrompt\Cielo\Transacao::setNumero
+     * @covers \MrPrompt\Cielo\Transacao::getNumero
      * @dataProvider numerosValidos
      */
     public function getNumero($numero)
@@ -472,7 +472,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setNumero
+     * @covers \MrPrompt\Cielo\Transacao::setNumero
      * @dataProvider numerosValidos
      */
     public function setNumero($numero)
@@ -484,7 +484,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setNumero
+     * @covers \MrPrompt\Cielo\Transacao::setNumero
      * @dataProvider numerosInvalidos
      * @expectedException InvalidArgumentException
      */
@@ -524,8 +524,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setValor
-     * @covers MrPrompt\Cielo\Transacao::getValor
+     * @covers \MrPrompt\Cielo\Transacao::setValor
+     * @covers \MrPrompt\Cielo\Transacao::getValor
      * @dataProvider valoresValidos
      */
     public function getValor($valor)
@@ -537,7 +537,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setValor
+     * @covers \MrPrompt\Cielo\Transacao::setValor
      * @dataProvider valoresValidos
      */
     public function setValor($valor)
@@ -549,7 +549,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setValor
+     * @covers \MrPrompt\Cielo\Transacao::setValor
      * @dataProvider valoresInvalidos
      * @expectedException InvalidArgumentException
      */
@@ -587,7 +587,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDescricao
+     * @covers \MrPrompt\Cielo\Transacao::setDescricao
      * @dataProvider descricoesValidas
      */
     public function setDescricao($descricao)
@@ -599,7 +599,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDescricao
+     * @covers \MrPrompt\Cielo\Transacao::setDescricao
      * @dataProvider descricoesInvalidas
      * @expectedException InvalidArgumentException
      */
@@ -610,8 +610,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Transacao::setDescricao
-     * @covers MrPrompt\Cielo\Transacao::getDescricao
+     * @covers \MrPrompt\Cielo\Transacao::setDescricao
+     * @covers \MrPrompt\Cielo\Transacao::getDescricao
      * @dataProvider descricoesValidas
      */
     public function getDescricao($descricao)
