@@ -15,18 +15,17 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+
         $this->object = new Cliente($mockAutorizacao);
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown() { }
-
-    /**
      * @test
+     *
      * @dataProvider ambientesValidos
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::getAmbiente
      */
     public function ambienteDeveSerValido($valor)
     {
@@ -34,6 +33,10 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($valor, $this->object->getAmbiente());
     }
 
+    /**
+     * Data Provider
+     * @return array
+     */
     public function ambientesValidos()
     {
         return array(
@@ -44,7 +47,12 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider ambientesInvalidos
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
+     *
      * @expectedException \InvalidArgumentException
      */
     public function deveLancarErroCasoRecebaAmbienteInvalido($valor)
@@ -52,6 +60,11 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
         $this->object->setAmbiente($valor);
     }
 
+    /**
+     * Data Provider
+     *
+     * @return array
+     */
     public function ambientesInvalidos()
     {
         return array(
@@ -63,7 +76,12 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider idiomasValidos
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::setIdioma
+     * @covers \MrPrompt\Cielo\Cliente::getIdioma
      */
     public function idiomaDeveSerValido($valor, $expected)
     {
@@ -72,6 +90,11 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->object->getIdioma());
     }
 
+    /**
+     * Data Provider
+     *
+     * @return array
+     */
     public function idiomasValidos()
     {
         return array(
@@ -92,14 +115,24 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider idiomasInvalidos
+     *
      * @expectedException \InvalidArgumentException
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
      */
     public function deveLancarErroCasoRecebaIdiomaInvalido($valor)
     {
         $this->object->setAmbiente($valor);
     }
 
+    /**
+     * Data Provider
+     *
+     * @return array
+     */
     public function idiomasInvalidos()
     {
         return array(
@@ -111,6 +144,9 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::getIdiomas
      */
     public function getIdiomasDeveRetornarArray()
     {
@@ -119,6 +155,9 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::getAmbientes
      */
     public function getAmbientesDeveRetornarArray()
     {
