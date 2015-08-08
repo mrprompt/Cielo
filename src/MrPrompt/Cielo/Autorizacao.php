@@ -37,6 +37,7 @@ class Autorizacao
      * Indica que a digitação dos dados do cartão ocorrerá no ambiente da loja.
      */
     const MODALIDADE_BUY_PAGE_LOJA = 2;
+
     /**
      * Número de autorização
      *
@@ -93,7 +94,7 @@ class Autorizacao
     /**
      * Configura o número de autorização
      *
-     * @param  string                   $chave
+     * @param  string                   $numero
      * @throws InvalidArgumentException
      */
     public function setNumero($numero)

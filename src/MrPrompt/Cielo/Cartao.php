@@ -47,18 +47,21 @@ class Cartao
      * @var integer
      */
     private $indicador = 0;
+
     /**
      * Código de segurança do cartão, obrigatório se o indicador for 1
      *
      * @var string
      */
     private $codigoSeguranca;
+
     /**
      * Nome impresso no cartão.
      *
      * @var string
      */
     private $nomePortador;
+
     /**
      * Validade do cartão no formato aaaamm.
      * Exemplos: 201212 (dez 2012).

@@ -8,12 +8,13 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
-     * @covers MrPrompt\Cielo\Autorizacao::getNumero
-     * @covers MrPrompt\Cielo\Autorizacao::getChave
-     * @covers MrPrompt\Cielo\Autorizacao::getModalidade
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
+     * @covers \MrPrompt\Cielo\Autorizacao::getNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::getChave
+     * @covers \MrPrompt\Cielo\Autorizacao::getModalidade
      */
     public function aoConstruirDeveConfigurarDados()
     {
@@ -26,11 +27,12 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
-     * @covers MrPrompt\Cielo\Autorizacao::getNumero
+     *
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
+     * @covers \MrPrompt\Cielo\Autorizacao::getNumero
      */
     public function aoConstruirDeveTruncarNumeroEm20Digitos()
     {
@@ -41,11 +43,12 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
-     * @covers MrPrompt\Cielo\Autorizacao::getChave
+     *
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
+     * @covers \MrPrompt\Cielo\Autorizacao::getChave
      */
     public function aoConstruirDeveTruncarChaveEm100Digitos()
     {
@@ -58,10 +61,11 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @test
      * 
      * @dataProvider valoresInvalidos
-     * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
+     *
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * 
      * @expectedException \InvalidArgumentException
      */
@@ -74,10 +78,11 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @test
      *
      * @dataProvider valoresInvalidos
-     * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
+     *
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * 
      * @expectedException \InvalidArgumentException
      */
@@ -90,10 +95,11 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @test
      * 
      * @dataProvider valoresInvalidos
-     * 
-     * @covers MrPrompt\Cielo\Autorizacao::setNumero
-     * @covers MrPrompt\Cielo\Autorizacao::setChave
-     * @covers MrPrompt\Cielo\Autorizacao::setModalidade
+     *
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * 
      * @expectedException InvalidArgumentException
      */

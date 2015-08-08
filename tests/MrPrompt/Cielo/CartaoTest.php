@@ -1,12 +1,31 @@
 <?php
 namespace MrPrompt\Cielo;
 
+use ReflectionProperty;
+
 class CartaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setCartao
-     * @covers MrPrompt\Cielo\Cartao::getCartao
+     *
+     * @covers \MrPrompt\Cielo\Cartao::getCartao
+     */
+    public function proprieadadeComNumeroDoCartaoNaoPodeSerModificado()
+    {
+        $cartao = new Cartao();
+
+        $reflection = new \ReflectionProperty(Cartao::class, 'cartao');
+        $reflection->setAccessible(true);
+        $reflection->setValue($cartao, 'Elo');
+
+        $this->assertEquals('Elo', $cartao->getCartao());
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::setCartao
+     * @covers \MrPrompt\Cielo\Cartao::getCartao
      */
     public function numeroDoCartaoDeveSerValido()
     {
@@ -18,8 +37,8 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setCartao
-     * @covers MrPrompt\Cielo\Cartao::getCartao
+     * @covers \MrPrompt\Cielo\Cartao::setCartao
+     * @covers \MrPrompt\Cielo\Cartao::getCartao
      */
     public function caracteresNaoNumericosDevemSerRemovidosAoConfigurarOCartao()
     {
@@ -31,7 +50,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setCartao
+     * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
     public function numeroDoCartaoNaoPodeSerVazio()
@@ -42,7 +61,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setCartao
+     * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
     public function numeroDoCartaoSerUmNumeroInvalido()
@@ -53,8 +72,24 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setIndicador
-     * @covers MrPrompt\Cielo\Cartao::getIndicador
+     *
+     * @covers \MrPrompt\Cielo\Cartao::getIndicador
+     */
+    public function indicadorDeCodigoDeSegurancaDeveRetornarValorDaPropriedadeIndicador()
+    {
+        $cartao = new Cartao();
+
+        $reflection = new \ReflectionProperty(Cartao::class, 'indicador');
+        $reflection->setAccessible(true);
+        $reflection->setValue($cartao, 1);
+
+        $this->assertEquals(1, $cartao->getIndicador());
+    }
+
+    /**
+     * @test
+     * @covers       \MrPrompt\Cielo\Cartao::setIndicador
+     * @covers       \MrPrompt\Cielo\Cartao::getIndicador
      * @dataProvider indicadoresValidos
      */
     public function indicadorDeCodigoDeSegurancaDeveSerValido($valor)
@@ -67,7 +102,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * data provider
-     * 
+     *
      * @return array
      */
     public function indicadoresValidos()
@@ -82,7 +117,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers MrPrompt\Cielo\Cartao::setIndicador
+     * @covers       \MrPrompt\Cielo\Cartao::setIndicador
      * @dataProvider indicadoresInvalidos
      * @expectedException \InvalidArgumentException
      */
@@ -100,12 +135,31 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
             array(null),
             array('d'),
             array(array('d')),
-            array((object) array('d' => 'asdad')),
+            array((object)array('d' => 'asdad')),
         );
     }
 
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::getCodigoSeguranca
+     */
+    public function codigoSegurancaDeveRetornarPropriedadeCodigoSeguranca()
+    {
+        $cartao = new Cartao();
+
+        $reflection = new \ReflectionProperty(Cartao::class, 'codigoSeguranca');
+        $reflection->setAccessible(true);
+        $reflection->setValue($cartao, '1');
+
+        $this->assertEquals('1', $cartao->getCodigoSeguranca());
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::setCodigoSeguranca
+     * @covers \MrPrompt\Cielo\Cartao::getCodigoSeguranca
      */
     public function codigoDeSegurancaDeveSerNumerico()
     {
@@ -184,7 +238,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
             array(null),
             array(''),
             array(array('djkhkdh')),
-            array((object) array('aa' => 'dsfsdff'))
+            array((object)array('aa' => 'dsfsdff'))
         );
     }
 
@@ -281,7 +335,65 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
             array(null),
             array('d'),
             array(array('d')),
-            array((object) array('d' => 'ADSFS')),
+            array((object)array('d' => 'ADSFS')),
         );
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::getBandeiras
+     */
+    public function listarBandeirasDeveRetornarUmArray()
+    {
+        $cartao = new Cartao();
+        $bandeiras = $cartao->getBandeiras();
+
+        $this->assertTrue(is_array($bandeiras));
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::getToken
+     */
+    public function getTokenDeveRetornarPropriedadeTokenInalterada()
+    {
+        $cartao = new Cartao();
+
+        $reflection = new \ReflectionProperty(Cartao::class, 'token');
+        $reflection->setAccessible(true);
+        $reflection->setValue($cartao, 'fooo');
+
+        $this->assertEquals('fooo', $cartao->getToken());
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::setToken
+     */
+    public function setTokenDeveRetornarValorDoTokenInalterado()
+    {
+        $cartao = new Cartao();
+        $token  = $cartao->setToken('fooo');
+
+        $this->assertEquals('fooo', $token);
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Cartao::hasToken
+     */
+    public function hasTokenDeveRetornarTrueSeTokenEstiverDefinido()
+    {
+        $cartao = new Cartao();
+
+        $reflection = new \ReflectionProperty(Cartao::class, 'token');
+        $reflection->setAccessible(true);
+        $reflection->setValue($cartao, 'fooo');
+
+        $this->assertTrue($cartao->hasToken());
     }
 }
