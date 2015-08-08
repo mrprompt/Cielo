@@ -1,6 +1,9 @@
 <?php
 namespace MrPrompt\Cielo;
 
+use ReflectionProperty;
+
+
 class ClienteTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -22,14 +25,30 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
+     * @covers \MrPrompt\Cielo\Cliente::getAmbiente
+     */
+    public function ambienteDeveRetornarPropriedadeAmbiente()
+    {
+        $reflection = new ReflectionProperty(Cliente::class, 'ambiente');
+        $reflection->setAccessible(true);
+        $reflection->setValue($this->object, 'teste');
+
+        $this->assertEquals('teste', $this->object->getAmbiente());
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider ambientesValidos
      *
      * @covers \MrPrompt\Cielo\Cliente::__construct
+     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
      * @covers \MrPrompt\Cielo\Cliente::getAmbiente
      */
     public function ambienteDeveSerValido($valor)
     {
         $this->object->setAmbiente($valor);
+
         $this->assertEquals($valor, $this->object->getAmbiente());
     }
 
