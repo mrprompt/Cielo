@@ -1,6 +1,8 @@
 <?php
 namespace MrPrompt\Cielo\Requisicao;
 
+use ReflectionMethod;
+
 class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -29,73 +31,123 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
             $idioma
         );
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
+  
+  	/**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
+     * @expectedException \InvalidArgumentException
      */
-    protected function tearDown()
+  	public function construtorDisparaExcessaoComUrlDeRetornoInvalida()
     {
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $urlRetorno      = 'http:///';
+        $idioma          = 'PT';
 
+        $this->object = new SolicitacaoTransacao(
+            $mockAutorizacao,
+            $mockTransacao,
+            $mockCartao,
+            $urlRetorno,
+            $idioma
+        );
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::getXmlInicial()
-     * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
     {
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNotEmpty($result);
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
-     * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
     {
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::deveAdicionarTid()
-     * @todo   Implement deveAdicionarTid().
      */
     public function deveAdicionarTid()
     {
+        $method = new ReflectionMethod($this->object, 'deveAdicionarTid');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaPortador()
-     * @todo   Implement adicionaPortador().
      */
     public function adicionaPortador()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaPortador');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaTransacao()
-     * @todo   Implement adicionaTransacao().
      */
     public function adicionaTransacao()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaTransacao');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaFormaPagamento()
-     * @todo   Implement adicionaFormaPagamento().
      */
     public function adicionaFormaPagamento()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaFormaPagamento');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertEmpty($result);
     }
 }

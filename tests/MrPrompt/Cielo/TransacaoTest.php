@@ -644,7 +644,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setGerarToken()
      */
-  	public function setGerarToken()
+  	public function setGerarTokenRetornaInstanciaDoProprioObjeto()
     {
       	$this->assertInstanceOf(Transacao::class, $this->object->setGerarToken(true));
     }
