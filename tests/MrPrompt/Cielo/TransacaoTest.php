@@ -239,6 +239,16 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::setMoeda
+     * @expectedException InvalidArgumentException
+     */
+    public function setMoedaDisparaExcessaoComMoedaEmBranco()
+    {
+        $this->object->setMoeda('');
+    }
+
+    /**
      * @return mixed
      */
     public function capturasValidas()
@@ -619,5 +629,23 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
         $this->object->setDescricao($descricao);
 
         $this->assertEquals($descricao, $this->object->getDescricao());
+    }
+  
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::isGerarToken
+     */
+  	public function isGerarTokenDeveRetornarBooleano()
+    {
+      	$this->assertTrue(is_bool($this->object->isGerarToken()));
+    }
+  
+  	/**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::setGerarToken()
+     */
+  	public function setGerarToken()
+    {
+      	$this->assertInstanceOf(Transacao::class, $this->object->setGerarToken(true));
     }
 }
