@@ -20,7 +20,6 @@
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
-
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;

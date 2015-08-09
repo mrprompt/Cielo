@@ -14,13 +14,16 @@
     <testsuites>
         <testsuite name="Cielo Test Suite">
             <directory>./tests</directory>
-            <exclude>vendor</exclude>
         </testsuite>
     </testsuites>
     
     <filter>
         <blacklist>
-            <directory suffix=".php">./vendor</directory>
+            <directory suffix=".php">./sample</directory>
+          	<directory suffix=".php">./vendor</directory>
         </blacklist>
+        <whitelist>
+          	<directory suffix=".php">./src</directory>
+        </whitelist>
     </filter>
 </phpunit>

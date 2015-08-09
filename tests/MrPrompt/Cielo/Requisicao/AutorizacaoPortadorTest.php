@@ -1,6 +1,8 @@
 <?php
 namespace MrPrompt\Cielo\Requisicao;
 
+use ReflectionMethod;
+
 class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -20,70 +22,91 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
         $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
         $idioma          = 'PT';
         
-        $this->object = new AutorizacaoPortador(
+        $this->object 	 = new AutorizacaoPortador(
             $mockAutorizacao,
             $mockTransacao,
             $mockCartao,
             $idioma
         );
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
     
     /**
      * @test
+     * 
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
-     * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
     {
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNotEmpty($result);
     }
     
     /**
      * @test
+     * 
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::configuraEnvio()
-     * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
     {
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNull($result);
     }
     
     /**
      * @test
+     * 
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaCartao()
-     * @todo   Implement adicionaCartao().
      */
     public function adicionaCartao()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaCartao');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNull($result);
     }
     
     /**
      * @test
+     * 
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaTransacao()
-     * @todo   Implement adicionaTransacao().
      */
     public function adicionaTransacao()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaTransacao');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNull($result);
     }
     
     /**
      * @test
+     * 
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaFormaPagamento()
-     * @todo   Implement adicionaFormaPagamento().
      */
     public function adicionaFormaPagamento()
     {
+        $method = new ReflectionMethod($this->object, 'adicionaFormaPagamento');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNull($result);
     }
 }
