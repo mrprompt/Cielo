@@ -1,6 +1,8 @@
 <?php
 namespace MrPrompt\Cielo\Requisicao;
 
+use ReflectionMethod;
+
 class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -23,23 +25,20 @@ class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
             $mockTransacao
         );
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
     
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
-     * @todo   Implement getXmlInicial().
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\CancelamentoTransacao::getXmlInicial()
      */
     public function getXmlInicial()
     {
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNotEmpty($result);
     }
 }
