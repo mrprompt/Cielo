@@ -37,7 +37,7 @@
         }
     },
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.5",
         "respect/validation": "0.6.*",
         "guzzle/guzzle": "<=4.0.0"
     },
