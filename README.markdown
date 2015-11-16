@@ -7,7 +7,7 @@ Com esta classe, sua aplicação será capaz de realizar transações
 a Crédito e Débito com cartões VISA e Mastercard.
 
 Requisitos: 
-* PHP 5.5+
+* PHP 5.6+
 * Extensão cURL
 * Extensão SimpleXML
 
@@ -17,7 +17,7 @@ Instalando via composer.
 Packagist:
 	https://packagist.org/packages/mrprompt/cielo
 	
-## PHP 5.3 ~ 5.4
+#### PHP 5.3 ~ 5.4
 Até a versão 2.1-dev, o PHP 5.3 é suportado. Após, somente 5.5.
 	
 
