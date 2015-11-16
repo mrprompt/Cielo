@@ -1,6 +1,7 @@
 <?php
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Tests;
 
+use MrPrompt\Cielo\Autorizacao;
 use PHPUnit_Framework_TestCase;
 
 class AutorizacaoTest extends PHPUnit_Framework_TestCase

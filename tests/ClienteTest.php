@@ -1,8 +1,9 @@
 <?php
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Tests;
 
 use ReflectionProperty;
 
+use MrPrompt\Cielo\Cliente;
 
 class ClienteTest extends \PHPUnit_Framework_TestCase
 {

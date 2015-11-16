@@ -1,7 +1,10 @@
 <?php
-namespace MrPrompt\Cielo\Requisicao;
+namespace MrPrompt\Cielo\Tests\Requisicao;
 
-class CapturaTest extends \PHPUnit_Framework_TestCase
+use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
+use ReflectionMethod;
+
+class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      *
@@ -18,28 +21,25 @@ class CapturaTest extends \PHPUnit_Framework_TestCase
         $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
         $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
         
-        $this->object = new Captura(
+        $this->object = new CancelamentoTransacao(
             $mockAutorizacao,
             $mockTransacao
         );
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
     
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Requisicao\Captura::getXmlInicial()
-     * @todo   Implement getXmlInicial().
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\CancelamentoTransacao::getXmlInicial()
      */
     public function getXmlInicial()
     {
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNotEmpty($result);
     }
 }

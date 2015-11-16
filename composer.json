@@ -33,7 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MrPrompt\\Cielo\\": "src/MrPrompt/Cielo/"
+            "MrPrompt\\Cielo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MrPrompt\\Cielo\\Tests\\": "tests/"
         }
     },
     "require": {

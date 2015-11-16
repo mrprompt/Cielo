@@ -1,5 +1,7 @@
 <?php
-namespace MrPrompt\Cielo\Requisicao;
+namespace MrPrompt\Cielo\Tests\Requisicao;
+
+use MrPrompt\Cielo\Requisicao\Consulta;
 
 class ConsultaTest extends \PHPUnit_Framework_TestCase
 {

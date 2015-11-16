@@ -1,7 +1,8 @@
 <?php
-namespace MrPrompt\Cielo\Requisicao;
+namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use ReflectionMethod;
+use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 
 class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
 {

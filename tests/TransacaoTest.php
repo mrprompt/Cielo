@@ -1,5 +1,7 @@
 <?php
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Tests;
+
+use MrPrompt\Cielo\Transacao;
 
 class TransacaoTest extends \PHPUnit_Framework_TestCase
 {

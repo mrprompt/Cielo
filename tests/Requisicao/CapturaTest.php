@@ -1,7 +1,9 @@
 <?php
-namespace MrPrompt\Cielo\Requisicao;
+namespace MrPrompt\Cielo\Tests\Requisicao;
 
-class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
+use MrPrompt\Cielo\Requisicao\Captura;
+
+class CapturaTest extends \PHPUnit_Framework_TestCase
 {
     /**
      *
@@ -18,7 +20,7 @@ class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
         $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
         
-        $this->object = new AutorizacaoTransacao(
+        $this->object = new Captura(
             $mockAutorizacao,
             $mockTransacao
         );
@@ -35,7 +37,7 @@ class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
+     * @covers \MrPrompt\Cielo\Requisicao\Captura::getXmlInicial()
      * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()

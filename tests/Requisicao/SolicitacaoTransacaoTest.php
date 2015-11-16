@@ -1,6 +1,7 @@
 <?php
-namespace MrPrompt\Cielo\Requisicao;
+namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use ReflectionMethod;
 
 class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase

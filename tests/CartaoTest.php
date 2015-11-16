@@ -1,6 +1,7 @@
 <?php
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Tests;
 
+use MrPrompt\Cielo\Cartao;
 use ReflectionProperty;
 
 class CartaoTest extends \PHPUnit_Framework_TestCase
