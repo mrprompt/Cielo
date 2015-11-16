@@ -20,7 +20,7 @@
  */
 namespace MrPrompt\Cielo;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use InvalidArgumentException;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
@@ -31,7 +31,7 @@ use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
-use Respect\Validation\Validator as v;
+use Respect\Validation\Validator;
 
 /**
  * Cliente de integração com a Cielo
@@ -114,10 +114,8 @@ class Cliente
      * @param Autorizacao $autorizacao
      * @param Client      $httpClient
      */
-    public function __construct(
-        Autorizacao $autorizacao,
-        Client $httpClient = null
-    ) {
+    public function __construct(Autorizacao $autorizacao, Client $httpClient = null)
+    {
         $this->autorizacao = $autorizacao;
         $this->httpClient = $httpClient ?: new Client();
     }
@@ -145,13 +143,14 @@ class Cliente
      * Caso não preenchido, assume-se PT.
      *
      * @param  string $idioma
-     * @return Cielo
+     * @return \MrPrompt\Cielo\Cliente
      */
     public function setIdioma($idioma)
     {
         $idioma = strtoupper($idioma);
-        $regras = v::string()->notEmpty()
-                             ->in($this->idiomas);
+        $regras = Validator::stringType()
+                            ->notEmpty()
+                            ->in($this->idiomas);
         
         if (!$regras->validate($idioma)) {
             throw new InvalidArgumentException(
@@ -185,9 +184,8 @@ class Cliente
      */
     public function setAmbiente($ambiente)
     {
-        $regras = v::string()->notEmpty()
-                             ->in($this->ambientes);
-        
+        $regras = Validator::stringType()->notEmpty()->in($this->ambientes);
+
         if (!$regras->validate($ambiente)) {
             throw new InvalidArgumentException('Ambiente inválido.');
         }
@@ -254,7 +252,8 @@ class Cliente
      * Solicita um Token para trasações futuras com um determinado Cartão de Crédito
      *
      * @access public
-     * @param  Cartao               $cartao
+     * @param  Cartao $cartao
+     * @return Requisicao
      */
     public function solicitaToken(Transacao $transacao, Cartao $cartao)
     {
@@ -414,6 +413,7 @@ class Cliente
      * Realiza o envio da requisição à Cielo
      *
      * @param Requisicao $requisicao
+     * @return Requisicao
      */
     protected function enviaRequisicao(Requisicao $requisicao)
     {

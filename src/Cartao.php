@@ -271,7 +271,7 @@ class Cartao
      */
     public function setBandeira($bandeira)
     {
-        $regras = v::string()->notEmpty()
+        $regras = v::stringType()->notEmpty()
                              ->in($this->bandeiras)
                              ->lowercase()
                              ->alnum();

@@ -99,7 +99,7 @@ class Autorizacao
      */
     public function setNumero($numero)
     {
-        if (!v::string()->notEmpty()->validate($numero)) {
+        if (!v::stringType()->notEmpty()->validate($numero)) {
             throw new InvalidArgumentException('O número de autenticação deve ser uma string não vazia');
         }
 
@@ -124,7 +124,7 @@ class Autorizacao
      */
     public function setChave($chave)
     {
-        if (!v::string()->notEmpty()->validate($chave)) {
+        if (!v::stringType()->notEmpty()->validate($chave)) {
             throw new InvalidArgumentException('A chave de autenticação deve ser uma string não vazia');
         }
 
@@ -149,7 +149,7 @@ class Autorizacao
      */
     public function setModalidade($modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
     {
-        $regras = v::int()->notEmpty()->in($this->modalidades);
+        $regras = v::intType()->notEmpty()->in($this->modalidades);
         
         if (!$regras->validate($modalidade)) {
             throw new InvalidArgumentException('Modalidade de integração inválida.');
