@@ -117,13 +117,13 @@ class SolicitacaoTransacao extends Requisicao
         $this->getEnvio()->addChild('capturar', $this->transacao->getCapturar());
         $this->getEnvio()->addChild('campo-livre', '');
 
-        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA !== $this->getModalidadeIntegracao())
+        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA !== $this->getModalidadeIntegracao()) {
             return;
+        }
 
         $numeroCartao = $this->cartao->getCartao();
 
         if (! empty($numeroCartao)) {
-
             $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
 
             if ($this->transacao->isGerarToken() === true)
@@ -144,25 +144,25 @@ class SolicitacaoTransacao extends Requisicao
      */
     protected function adicionaPortador()
     {
-        if (Autorizacao::MODALIDADE_BUY_PAGE_CIELO === $this->getModalidadeIntegracao())
+        if (Autorizacao::MODALIDADE_BUY_PAGE_CIELO === $this->getModalidadeIntegracao()) {
             return;
+        }
 
         $dadosPortador = $this->getEnvio()->addChild('dados-portador', '');
 
-        if ( ! $this->cartao->hasToken() )
-        {
+        if ( ! $this->cartao->hasToken() ) {
             $dadosPortador->addChild('numero', $this->cartao->getCartao());
             $dadosPortador->addChild('validade', $this->cartao->getValidade());
             $dadosPortador->addChild('indicador', $this->cartao->getIndicador());
 
             $nomePortador = $this->cartao->getNomePortador();
-            if (!empty($nomePortador))
+
+            if (!empty($nomePortador)) {
                 $dadosPortador->addChild('nome-portador', $nomePortador);
+            }
 
             $dadosPortador->addChild('codigo-seguranca', $this->cartao->getCodigoSeguranca());
-        }
-        else
-        {
+        } else {
             $dadosPortador->addChild('token', $this->cartao->getToken());
         }
     }

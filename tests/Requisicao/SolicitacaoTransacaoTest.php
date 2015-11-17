@@ -18,16 +18,23 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+use MrPrompt\Cielo\Transacao;
 use ReflectionMethod;
 
 class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var SolicitacaoTransacao
      */
     protected $object;
+
+    /**
+     * @var Autorizacao
+     */
+    protected $autorizacao;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -35,9 +42,9 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno      = 'http://localhost/';
         $idioma          = 'PT';
 
@@ -48,6 +55,8 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
             $urlRetorno,
             $idioma
         );
+
+        $this->autorizacao = $mockAutorizacao;
     }
   
   	/**
@@ -58,9 +67,9 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
   	public function construtorDisparaExcessaoComUrlDeRetornoInvalida()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno      = 'http:///';
         $idioma          = 'PT';
 
@@ -73,29 +82,6 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-  	/**
-     * @test
-     *
-     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
-     * @expectedException \InvalidArgumentException
-     */
-  	public function construtorDisparaExcessaoComIdiomaInvalido()
-    {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
-        $urlRetorno      = 'http://localhost/';
-        $idioma          = 'XX';
-
-        $this->object = new SolicitacaoTransacao(
-            $mockAutorizacao,
-            $mockTransacao,
-            $mockCartao,
-            $urlRetorno,
-            $idioma
-        );
-    }
-    
     /**
      * @test
      *
@@ -127,7 +113,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEmpty($result);
     }
-    
+
     /**
      * @test
      *

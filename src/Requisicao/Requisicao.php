@@ -156,7 +156,7 @@ abstract class Requisicao
     /**
      * Configura adicionarTid
      *
-     * @param SimpleXMLElement $resposta
+     * @param bool $deve
      */
     public function setAdicionarTid($deve)
     {
