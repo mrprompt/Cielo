@@ -72,6 +72,29 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
             $idioma
         );
     }
+
+  	/**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
+     * @expectedException \InvalidArgumentException
+     */
+  	public function construtorDisparaExcessaoComIdiomaInvalido()
+    {
+        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $urlRetorno      = 'http://localhost/';
+        $idioma          = 'XX';
+
+        $this->object = new SolicitacaoTransacao(
+            $mockAutorizacao,
+            $mockTransacao,
+            $mockCartao,
+            $urlRetorno,
+            $idioma
+        );
+    }
     
     /**
      * @test
