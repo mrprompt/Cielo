@@ -18,29 +18,28 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
-
-class ExtendRequisicao extends Requisicao
-{
-    protected function getXmlInicial()
-    {
-        return sprintf(
-            '<%s id="%d" versao="%s"></%s>',
-            'requisicao-test',
-            1,
-            1.0,
-            'requisicao-test'
-        );
-    }
-}
+use MrPrompt\Cielo\Transacao;
+use ReflectionMethod;
+use SimpleXMLElement;
 
 class RequisicaoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var Requisicao
      */
     protected $object;
+
+    /**
+     * @var Autorizacao
+     */
+    protected $autorizacao;
+
+    /**
+     * @var Transacao
+     */
+    protected $transacao;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,13 +47,11 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        
-        $this->object = new ExtendRequisicao(
-            $mockAutorizacao,
-            $mockTransacao
-        );
+        parent::setUp();
+
+        $this->autorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $this->object      = $this->getMockForAbstractClass(Requisicao::class, [$this->autorizacao, $this->transacao]);
     }
 
     /**
@@ -63,86 +60,166 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
+        $this->autorizacao  = null;
+        $this->transacao    = null;
+        $this->object       = null;
     }
     
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getModalidadeIntegracao()
+     */
+    public function getModalidadeIntegracao()
+    {
+        $result = $this->object->getModalidadeIntegracao();
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraAutenticacao()
-     * @todo   Implement configuraAutenticacao().
      */
     public function configuraAutenticacao()
     {
-        
+        $method = new ReflectionMethod($this->object, 'configuraAutenticacao');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraTransacao()
-     * @todo   Implement configuraTransacao().
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
      */
     public function configuraTransacao()
     {
-        
+        $method = new ReflectionMethod($this->object, 'configuraTransacao');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraTransacao()
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
+     */
+    public function configuraTransacaoSemAdicionarTidDeveRetornarVazio()
+    {
+        $method = new ReflectionMethod($this->object, 'configuraTransacao');
+        $method->setAccessible(true);
+
+        $this->object->setAdicionarTid(false);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getEnvio()
-     * @todo   Implement getEnvio().
      */
     public function getEnvio()
     {
-        
+        $result = $this->object->getEnvio();
+
+        $this->assertInstanceOf(SimpleXMLElement::class, $result);
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getResposta()
-     * @todo   Implement getResposta().
      */
     public function getResposta()
     {
-        
+        $result = $this->object->getResposta();
+
+        $this->assertInstanceOf(SimpleXMLElement::class, $result);
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::setResposta()
-     * @todo   Implement setResposta().
      */
     public function setResposta()
     {
-        
+        $dom = new \DOMDocument('1.0', 'utf-8');
+        $dom->appendChild($dom->createElement('resposta'));
+
+        $xml    = new SimpleXMLElement($dom->saveXML());
+        $result = $this->object->setResposta($xml);
+
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraEnvio()
-     * @todo   Implement configuraEnvio().
      */
     public function configuraEnvio()
     {
-        
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
     }
     
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getAdicionarTid()
+     */
+    public function getAdicionarTid()
+    {
+        $result = $this->object->getAdicionarTid();
+
+        $this->assertTrue(is_bool($result));
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::setAdicionarTid()
+     */
+    public function setAdicionarTid()
+    {
+        $result = $this->object->setAdicionarTid(true);
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
-     * @todo   Implement deveAdicionarTid().
      */
     public function deveAdicionarTid()
     {
-        
+        $method = new ReflectionMethod($this->object, 'deveAdicionarTid');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertTrue(is_bool($result));
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getXmlInicial()
-     * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
     {
-        
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertNotEmpty($result);
     }
 }

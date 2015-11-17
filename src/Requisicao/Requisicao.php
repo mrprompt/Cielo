@@ -72,10 +72,11 @@ abstract class Requisicao
      */
     public function __construct(Autorizacao $autorizacao, Transacao $transacao)
     {
-        $this->autorizacao = $autorizacao;
-        $this->transacao = $transacao;
+        $this->autorizacao  = $autorizacao;
+        $this->transacao    = $transacao;
+        $this->envio        = new SimpleXMLElement($this->getXmlInicial());
+        $this->resposta     = new SimpleXMLElement($this->getXmlInicial());
 
-        $this->envio = new SimpleXMLElement($this->getXmlInicial());
         $this->configuraTransacao();
         $this->configuraAutenticacao();
         $this->configuraEnvio();
@@ -186,5 +187,12 @@ abstract class Requisicao
      *
      * @return string
      */
-    abstract protected function getXmlInicial();
+    protected function getXmlInicial()
+    {
+        // sempre é sobrescrito...
+        $dom = new \DOMDocument('1.0', 'utf-8');
+        $dom->appendChild($dom->createElement('requisicao'));
+
+        return $dom->saveXML();
+    }
 }
