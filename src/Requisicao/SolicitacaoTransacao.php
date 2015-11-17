@@ -71,13 +71,8 @@ class SolicitacaoTransacao extends Requisicao
      * @param string      $urlRetorno
      * @param string      $idioma
      */
-    public function __construct(
-        Autorizacao $autorizacao,
-        Transacao $transacao,
-        Cartao $cartao,
-        $urlRetorno,
-        $idioma
-    ) {
+    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao, $urlRetorno, $idioma)
+    {
         if (filter_var($urlRetorno, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) == false) {
             throw new InvalidArgumentException('URL de retorno inválida.');
         }
@@ -117,7 +112,7 @@ class SolicitacaoTransacao extends Requisicao
         $this->getEnvio()->addChild('capturar', $this->transacao->getCapturar());
         $this->getEnvio()->addChild('campo-livre', '');
 
-        if (Autorizacao::MODALIDADE_BUY_PAGE_LOJA !== $this->getModalidadeIntegracao()) {
+        if ($this->getModalidadeIntegracao() !== Autorizacao::MODALIDADE_BUY_PAGE_LOJA) {
             return;
         }
 
@@ -126,8 +121,9 @@ class SolicitacaoTransacao extends Requisicao
         if (! empty($numeroCartao)) {
             $this->getEnvio()->addChild('bin', substr($this->cartao->getCartao(), 0, 6));
 
-            if ($this->transacao->isGerarToken() === true)
+            if ($this->transacao->isGerarToken() === true) {
                 $this->getEnvio()->addChild('gerar-token', 'true');
+            }
         }
     }
 

@@ -35,6 +35,16 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      * @var Autorizacao
      */
     protected $autorizacao;
+
+    /**
+     * @var Cartao
+     */
+    protected $cartao;
+
+    /**
+     * @var Transacao
+     */
+    protected $transacao;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -42,23 +52,21 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
-        $urlRetorno      = 'http://localhost/';
-        $idioma          = 'PT';
+        $this->autorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $this->cartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $urlRetorno        = 'http://localhost/';
+        $idioma            = 'PT';
 
         $this->object = new SolicitacaoTransacao(
-            $mockAutorizacao,
-            $mockTransacao,
-            $mockCartao,
+            $this->autorizacao,
+            $this->transacao,
+            $this->cartao,
             $urlRetorno,
             $idioma
         );
-
-        $this->autorizacao = $mockAutorizacao;
     }
-  
+
   	/**
      * @test
      *
@@ -94,10 +102,10 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $result = $method->invoke($this->object);
-        
+
         $this->assertNotEmpty($result);
     }
-    
+
     /**
      * @test
      *
@@ -110,7 +118,75 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $result = $method->invoke($this->object);
-        
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
+     */
+    public function configuraEnvioComCartao()
+    {
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockCartao->setCartao('4012001037141112');
+
+        $urlRetorno      = 'http://localhost/';
+        $idioma          = 'PT';
+
+        $this->object = new SolicitacaoTransacao(
+            $mockAutorizacao,
+            $mockTransacao,
+            $mockCartao,
+            $urlRetorno,
+            $idioma
+        );
+
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
+     *
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
+     */
+    public function configuraEnvioComCartaoSetandoToken()
+    {
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockAutorizacao->setModalidade(Autorizacao::MODALIDADE_BUY_PAGE_CIELO);
+
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockTransacao->setGerarToken(true);
+
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockCartao->setCartao('4012001037141112');
+
+        $urlRetorno      = 'http://localhost/';
+        $idioma          = 'PT';
+
+        $this->object = new SolicitacaoTransacao(
+            $mockAutorizacao,
+            $mockTransacao,
+            $mockCartao,
+            $urlRetorno,
+            $idioma
+        );
+
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
         $this->assertEmpty($result);
     }
 
