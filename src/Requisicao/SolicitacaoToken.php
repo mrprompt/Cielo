@@ -16,7 +16,6 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
-
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
@@ -53,7 +52,8 @@ class SolicitacaoToken extends Requisicao
      * @param Cartao      $cartao
      * @param string      $idioma
      */
-    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao) {
+    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao)
+    {
         $this->cartao = $cartao;
 
         $this->setAdicionarTid(false);
