@@ -18,6 +18,7 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use ReflectionMethod;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
 
 class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
@@ -34,6 +35,8 @@ class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        parent::setUp();
+
         $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
         $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
         
@@ -49,16 +52,22 @@ class AutorizacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->object = null;
 
+        parent::tearDown();
     }
     
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
-     * @todo   Implement getXmlInicial().
+     * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoTransacao::getXmlInicial()
      */
     public function getXmlInicial()
     {
-        
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertNotEmpty($result);
     }
 }
