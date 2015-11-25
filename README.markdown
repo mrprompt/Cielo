@@ -26,3 +26,4 @@ Até a versão 2.1, o PHP 5.3 é suportado.
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Percentage of issues still open")
 [![Dependency Status](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/70cb14d6f3ef41babd86477122ac6e57)](https://www.codacy.com/app/mrprompt/Cielo)
