@@ -97,8 +97,8 @@ class IdentificacaoTransacao extends Requisicao
     {
         $formaPgto  = $this->getEnvio()->addChild('forma-pagamento', '');
 
-        $formaPgto->addChild('bandeira', $this->cartao->getBandeira());
-        $formaPgto->addChild('produto', $this->transacao->getProduto());
-        $formaPgto->addChild('parcelas', $this->transacao->getParcelas());
+        $formaPgto->addChild('bandeira', (string) $this->cartao->getBandeira());
+        $formaPgto->addChild('produto', (string) $this->transacao->getProduto());
+        $formaPgto->addChild('parcelas', (string) $this->transacao->getParcelas());
     }
 }

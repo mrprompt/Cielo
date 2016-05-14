@@ -2,16 +2,16 @@
 require_once __DIR__ . '/resources/config.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use MrPrompt\Cielo\Ambiente\Teste;
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Cliente;
 
 $transacao = require_once __DIR__ . '/resources/transacao.php';
 $cartao    = require_once __DIR__ . '/resources/cartao.php';
 
-$cielo     = new Cliente(new Autorizacao(NUMERO_CIELO, CHAVE_CIELO));
-$cielo->setAmbiente('teste');
+$cielo     = new Cliente(new Autorizacao(NUMERO_CIELO, CHAVE_CIELO), null, null, new Teste());
 
 $requisicao = $cielo->tid($transacao, $cartao);
 
 echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;

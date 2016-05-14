@@ -9,6 +9,6 @@ $cartao->setCartao('4012001037141112');
 $cartao->setCodigoSeguranca('123');
 $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
-$cartao->setValidade('201512');
+$cartao->setValidade('202012');
 
 return $cartao;

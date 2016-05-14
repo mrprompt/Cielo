@@ -16,7 +16,7 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
-namespace MrPrompt\Cielo\Tests;
+namespace MrPrompt\Cielo\Tests\Ambiente;
 
 use MrPrompt\Cielo\Ambiente\Producao;
 
