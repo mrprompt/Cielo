@@ -122,7 +122,7 @@ class AutorizacaoPortador extends Requisicao
         $dadosTransacao->addChild('numero', (string) $this->transacao->getNumero());
         $dadosTransacao->addChild('valor', (string) $this->transacao->getValor());
         $dadosTransacao->addChild('moeda', (string) $this->transacao->getMoeda());
-        $dadosTransacao->addChild('data-hora', (string) $this->transacao->getDataHora());
+        $dadosTransacao->addChild('data-hora', (string) $this->transacao->getDataHora()->format(\DateTime::ATOM));
         $dadosTransacao->addChild('descricao', (string) $this->transacao->getDescricao());
         $dadosTransacao->addChild('idioma', (string) $this->idioma->getIdioma());
     }
