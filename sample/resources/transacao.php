@@ -5,7 +5,7 @@ use MrPrompt\Cielo\Transacao;
 
 $transacao = new Transacao();
 $transacao->setTid('10069930691FB8C01001');
-$transacao->setAutorizar(0);
+$transacao->setAutorizar(2);
 $transacao->setCapturar(false);
 $transacao->setDataHora(new DateTimeImmutable());
 $transacao->setDescricao('teste');
