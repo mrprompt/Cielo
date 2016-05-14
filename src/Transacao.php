@@ -121,6 +121,16 @@ class Transacao
     private $gerarToken = false;
 
     /**
+     * Construtor
+     *
+     * @param DateTimeImmutable $dataHora
+     */
+    public function __construct(DateTimeImmutable $dataHora = null)
+    {
+        $this->dataHora = $dataHora ?: new DateTimeImmutable();
+    }
+
+    /**
      * Configura o valor do TID
      *
      * @access public

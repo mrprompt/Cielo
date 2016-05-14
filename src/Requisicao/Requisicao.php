@@ -100,8 +100,8 @@ abstract class Requisicao
     {
         $auth = $this->getEnvio()->addChild('dados-ec', '');
 
-        $auth->addChild('numero', $this->autorizacao->getNumero());
-        $auth->addChild('chave', $this->autorizacao->getChave());
+        $auth->addChild('numero', (string) $this->autorizacao->getNumero());
+        $auth->addChild('chave', (string) $this->autorizacao->getChave());
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class Requisicao
             return ;
         }
 
-        $this->getEnvio()->addChild('tid', $this->transacao->getTid());
+        $this->getEnvio()->addChild('tid', (string) $this->transacao->getTid());
     }
 
     /**

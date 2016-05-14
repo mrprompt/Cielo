@@ -273,8 +273,8 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function capturasValidas()
     {
         return array(
-            array('true'),
-            array('false'),
+            array(true),
+            array(false),
         );
     }
 
@@ -311,14 +311,13 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->object->setCapturar($capturar);
 
-        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+        $this->assertInstanceOf(Transacao::class, $result);
     }
 
     /**
      * @test
      * @dataProvider capturasInvalidas
      * @covers \MrPrompt\Cielo\Transacao::setCapturar
-     * @expectedException InvalidArgumentException
      */
     public function setCapturarDisparaExcessaoComCapturaInvalida($capturar)
     {
@@ -348,8 +347,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function autorizacoesInvalidas()
     {
         return array(
-            array(4),
-            array('5'),
             array('A'),
             array('XXX'),
         );
@@ -377,14 +374,14 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->object->setAutorizar($autorizar);
 
-        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+        $this->assertInstanceOf(Transacao::class, $result);
     }
 
     /**
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setAutorizar
      * @dataProvider autorizacoesInvalidas
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setAutorizarDisparaExcessaoComAutorizacaoInvalida($autorizar)
     {
@@ -399,10 +396,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function dataHoraValidas()
     {
         return array(
-            array('2014-09-10 00:00:00'),
-            array('2013-01-01 22:22:22'),
-            array('2014-09-12 14:20:00'),
-            array('2015-03-06 20:32:00'),
+            array(new \DateTimeImmutable('2014-09-10 00:00:00')),
+            array(new \DateTimeImmutable('2013-01-01 22:22:22')),
+            array(new \DateTimeImmutable('2014-09-12 14:20:00')),
+            array(new \DateTimeImmutable('2015-03-06 20:32:00')),
         );
     }
 
@@ -443,14 +440,14 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->object->setDataHora($dataHora);
 
-        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+        $this->assertInstanceOf(Transacao::class, $result);
     }
 
     /**
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setDataHora
      * @dataProvider dataHoraInvalidas
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setDataHoraDisparaExcessaoComDataOuHoraInvalidos($dataHora)
     {
@@ -482,7 +479,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
         return array(
             array('A'),
             array('XXX'),
-            array(0),
         );
     }
 
@@ -515,7 +511,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setNumero
      * @dataProvider numerosInvalidos
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setNumeroDisparaExcessaoComNumeroInvalido($numero)
     {
@@ -547,7 +543,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
         return array(
             array('A'),
             array('XXX'),
-            array(''),
         );
     }
 
@@ -580,7 +575,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setValor
      * @dataProvider valoresInvalidos
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setValorDisparaExcessaoComValorInvalido($valor)
     {
@@ -598,19 +593,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
             array('Teste'),
             array('Teste com Espaço'),
             array('xxxxx'),
-        );
-    }
-
-    /**
-     * Data provider de descrições inválidas
-     *
-     * @return mixed
-     */
-    public function descricoesInvalidas()
-    {
-        return array(
-            array(null),
-            array(''),
+            array('')
         );
     }
 
@@ -623,18 +606,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->object->setDescricao($descricao);
 
-        $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
-    }
-
-    /**
-     * @test
-     * @covers \MrPrompt\Cielo\Transacao::setDescricao
-     * @dataProvider descricoesInvalidas
-     * @expectedException InvalidArgumentException
-     */
-    public function setDescricaoDisparaExcessaoComDescricaoInvalida($descricao)
-    {
-        $this->object->setDescricao($descricao);
+        $this->assertInstanceOf(Transacao::class, $result);
     }
 
     /**

@@ -94,7 +94,7 @@ class AutorizacaoPortador extends Requisicao
         $this->adicionaTransacao();
         $this->adicionaFormaPagamento();
 
-        $this->getEnvio()->addChild('capturar-automaticamente', $this->transacao->getCapturar());
+        $this->getEnvio()->addChild('capturar-automaticamente', (string) $this->transacao->getCapturar());
         $this->getEnvio()->addChild('campo-livre', '');
     }
 
@@ -105,11 +105,11 @@ class AutorizacaoPortador extends Requisicao
     {
         $dadosCartao = $this->getEnvio()->addChild('dados-cartao', '');
 
-        $dadosCartao->addChild('numero', $this->cartao->getCartao());
-        $dadosCartao->addChild('validade', $this->cartao->getValidade());
-        $dadosCartao->addChild('indicador', $this->cartao->getIndicador());
-        $dadosCartao->addChild('codigo-seguranca', $this->cartao->getCodigoSeguranca());
-        $dadosCartao->addChild('nome-portador', $this->cartao->getNomePortador());
+        $dadosCartao->addChild('numero', (string) $this->cartao->getCartao());
+        $dadosCartao->addChild('validade', (string) $this->cartao->getValidade());
+        $dadosCartao->addChild('indicador', (string) $this->cartao->getIndicador());
+        $dadosCartao->addChild('codigo-seguranca', (string) $this->cartao->getCodigoSeguranca());
+        $dadosCartao->addChild('nome-portador', (string) $this->cartao->getNomePortador());
     }
 
     /**
@@ -119,12 +119,12 @@ class AutorizacaoPortador extends Requisicao
     {
         $dadosTransacao = $this->getEnvio()->addChild('dados-pedido', '');
 
-        $dadosTransacao->addChild('numero', $this->transacao->getNumero());
-        $dadosTransacao->addChild('valor', $this->transacao->getValor());
-        $dadosTransacao->addChild('moeda', $this->transacao->getMoeda());
-        $dadosTransacao->addChild('data-hora', $this->transacao->getDataHora());
-        $dadosTransacao->addChild('descricao', $this->transacao->getDescricao());
-        $dadosTransacao->addChild('idioma', $this->idioma->getIdioma());
+        $dadosTransacao->addChild('numero', (string) $this->transacao->getNumero());
+        $dadosTransacao->addChild('valor', (string) $this->transacao->getValor());
+        $dadosTransacao->addChild('moeda', (string) $this->transacao->getMoeda());
+        $dadosTransacao->addChild('data-hora', (string) $this->transacao->getDataHora());
+        $dadosTransacao->addChild('descricao', (string) $this->transacao->getDescricao());
+        $dadosTransacao->addChild('idioma', (string) $this->idioma->getIdioma());
     }
 
     /**
@@ -134,8 +134,8 @@ class AutorizacaoPortador extends Requisicao
     {
         $formaPgto  = $this->getEnvio()->addChild('forma-pagamento', '');
 
-        $formaPgto->addChild('bandeira', $this->cartao->getBandeira());
-        $formaPgto->addChild('produto', $this->transacao->getProduto());
-        $formaPgto->addChild('parcelas', $this->transacao->getParcelas());
+        $formaPgto->addChild('bandeira', (string) $this->cartao->getBandeira());
+        $formaPgto->addChild('produto', (string) $this->transacao->getProduto());
+        $formaPgto->addChild('parcelas', (string) $this->transacao->getParcelas());
     }
 }

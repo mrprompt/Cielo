@@ -48,7 +48,10 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
      */
     public function iniciaTransacaoDeveRetornarUmObjectSolicitacaoTransacao()
     {
-        $transacao  = $this->getMock(Transacao::class, [], [], '', false);
+        $transacao  = $this->getMock(
+            Transacao::class, [
+                'getDataHora' =>  'ooo'
+            ], [], '', true);
         $cartao     = $this->getMock(Cartao::class, [], [], '', false);
         $url        = 'http://localhost';
 
