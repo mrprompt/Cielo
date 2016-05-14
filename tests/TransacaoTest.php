@@ -150,7 +150,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function parcelasInvalidas()
     {
         return array(
-            array(0),
             array('A'),
             array('ADFSSF'),
         );
@@ -185,11 +184,21 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider parcelasInvalidas
      * @covers \MrPrompt\Cielo\Transacao::setParcelas
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setParcelasDisparaExcessaoComParcelasInvalidas($parcelas)
     {
         $this->object->setParcelas($parcelas);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::setParcelas
+     * @expectedException \InvalidArgumentException
+     */
+    public function setParcelasDisparaExcessaoComParcelaZerada()
+    {
+        $this->object->setParcelas(0);
     }
 
     /**
@@ -215,7 +224,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function moedasInvalidas()
     {
         return array(
-            array(0),
             array('A'),
             array('ADFSSF'),
         );
@@ -250,7 +258,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider moedasInvalidas
      * @covers \MrPrompt\Cielo\Transacao::setMoeda
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setMoedaDisparaExcessaoComMoedaInvalida($moeda)
     {
@@ -260,7 +268,7 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Transacao::setMoeda
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function setMoedaDisparaExcessaoComMoedaEmBranco()
     {
@@ -396,10 +404,10 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function dataHoraValidas()
     {
         return array(
-            array(new \DateTimeImmutable('2014-09-10 00:00:00')),
-            array(new \DateTimeImmutable('2013-01-01 22:22:22')),
-            array(new \DateTimeImmutable('2014-09-12 14:20:00')),
-            array(new \DateTimeImmutable('2015-03-06 20:32:00')),
+            array(new \DateTime('2014-09-10 00:00:00')),
+            array(new \DateTime('2013-01-01 22:22:22')),
+            array(new \DateTime('2014-09-12 14:20:00')),
+            array(new \DateTime('2015-03-06 20:32:00')),
         );
     }
 

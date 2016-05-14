@@ -43,7 +43,7 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
         $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $idioma          = $this->getMock(Idioma::class, [], [], '', false);
         $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockTransacao->method('getDataHora')->willReturn(new \DateTimeImmutable());
+        $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
 
         $this->object 	 = new AutorizacaoPortador($mockAutorizacao, $mockTransacao, $mockCartao, $idioma);
     }

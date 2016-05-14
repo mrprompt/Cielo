@@ -55,7 +55,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $this->autorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
         $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $this->transacao->method('getDataHora')->willReturn(new \DateTimeImmutable());
+        $this->transacao->method('getDataHora')->willReturn(new \DateTime());
 
         $this->cartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno        = 'http://localhost/';
@@ -135,7 +135,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
     {
         $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
         $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockTransacao->method('getDataHora')->willReturn(new \DateTimeImmutable());
+        $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
 
         $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $mockCartao->setCartao('4012001037141112');
@@ -172,7 +172,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
 
         $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
         $mockTransacao->method('isGerarToken')->willReturn(true);
-        $mockTransacao->method('getDataHora')->willReturn(new \DateTimeImmutable());
+        $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
 
         $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $mockCartao->method('getCartao')->willReturn('4012001037141112');

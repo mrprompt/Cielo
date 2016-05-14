@@ -17,7 +17,7 @@ declare(strict_types = 1);
 
 namespace MrPrompt\Cielo;
 
-use DateTimeImmutable;
+use DateTime;
 use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
@@ -123,11 +123,11 @@ class Transacao
     /**
      * Construtor
      *
-     * @param DateTimeImmutable $dataHora
+     * @param DateTime $dataHora
      */
-    public function __construct(DateTimeImmutable $dataHora = null)
+    public function __construct(DateTime $dataHora = null)
     {
-        $this->dataHora = $dataHora ?: new DateTimeImmutable();
+        $this->dataHora = $dataHora ?: new DateTime();
     }
 
     /**
@@ -136,9 +136,9 @@ class Transacao
      * @access public
      * @return string
      */
-    public function getTid()
+    public function getTid(): string
     {
-        return $this->tid;
+        return (string) $this->tid;
     }
 
     /**
@@ -146,9 +146,9 @@ class Transacao
      *
      * @access public
      * @param  string $tid
-     * @return Cielo
+     * @return Transacao
      */
-    public function setTid($tid)
+    public function setTid(string $tid): Transacao
     {
         if (!v::alnum()->notEmpty()->validate($tid)) {
             throw new InvalidArgumentException('Caracteres inválidos no TID.');
@@ -163,11 +163,11 @@ class Transacao
      * Retorna o tipo de compra/produto
      *
      * @access public
-     * @return integer
+     * @return string
      */
-    public function getProduto()
+    public function getProduto(): string
     {
-        return $this->produto;
+        return (string) $this->produto;
     }
 
     /**
@@ -181,9 +181,9 @@ class Transacao
      *
      * @access public
      * @param  mixed $produto
-     * @return Cielo
+     * @return Transacao
      */
-    public function setProduto($produto)
+    public function setProduto($produto): Transacao
     {
         switch ($produto) {
             case '1':
@@ -204,9 +204,9 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getParcelas()
+    public function getParcelas(): int
     {
-        return $this->parcelas;
+        return (int) $this->parcelas;
     }
 
     /**
@@ -214,9 +214,9 @@ class Transacao
      *
      * @access public
      * @param  integer $parcelas
-     * @return Cielo
+     * @return Transacao
      */
-    public function setParcelas($parcelas = self::PARCELAS_MINIMAS)
+    public function setParcelas(int $parcelas = self::PARCELAS_MINIMAS): Transacao
     {
         if (!v::digit()->notEmpty()->min(self::PARCELAS_MINIMAS, self::PARCELAS_MINIMAS)->validate($parcelas)) {
             throw new InvalidArgumentException('Número de parcelas inválido.');
@@ -233,9 +233,9 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getMoeda()
+    public function getMoeda(): int
     {
-        return $this->moeda;
+        return (int) $this->moeda;
     }
 
     /**
@@ -243,9 +243,9 @@ class Transacao
      *
      * @access public
      * @param  integer $moeda
-     * @return Cielo
+     * @return Transacao
      */
-    public function setMoeda($moeda = self::MOEDA_PADRAO)
+    public function setMoeda(int $moeda = self::MOEDA_PADRAO): Transacao
     {
         if (!v::digit()->notEmpty()->validate($moeda)) {
             throw new InvalidArgumentException('Moeda inválida');
@@ -320,7 +320,7 @@ class Transacao
      * Retorna a data e hora configurada para a transação
      *
      * @access public
-     * @return \DateTimeImmutable
+     * @return \DateTime
      */
     public function getDataHora()
     {
@@ -331,10 +331,10 @@ class Transacao
      * Seta a data e hora da venda
      *
      * @access public
-     * @param  DateTimeImmutable $dataHora
-     * @return Cielo
+     * @param  DateTime $dataHora
+     * @return Transacao
      */
-    public function setDataHora(DateTimeImmutable $dataHora): Transacao
+    public function setDataHora(DateTime $dataHora): Transacao
     {
         $this->dataHora = $dataHora;
 
@@ -432,7 +432,7 @@ class Transacao
      * Define se é para gerar token para o cartão do portador.
      *
      * @param boolean $gerarToken
-     * @return self
+     * @return Transacao
      */
     public function setGerarToken(bool $gerarToken = true): Transacao
     {
