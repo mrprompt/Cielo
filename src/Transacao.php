@@ -17,6 +17,7 @@ declare(strict_types = 1);
 
 namespace MrPrompt\Cielo;
 
+use DateTimeImmutable;
 use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
@@ -249,28 +250,22 @@ class Transacao
      * Retorna se é ou não para capturar automaticamente a venda
      *
      * @access public
-     * @return string
+     * @return bool
      */
     public function getCapturar()
     {
-        return $this->capturar;
+        return (bool) $this->capturar;
     }
 
     /**
      * Informa se é para capturar automaticamente a venda
      *
      * @access public
-     * @param  string $capturar (true|false)
-     * @return Cielo
+     * @param  bool $capturar
+     * @return Transacao
      */
-    public function setCapturar($capturar)
+    public function setCapturar(bool $capturar = false): Transacao
     {
-        $validos = array('true', 'false');
-
-        if ($capturar != $validos[0] && $capturar != $validos[1]) {
-            throw new InvalidArgumentException(sprintf('Parâmetro capturar \'%s\' inválido.', $capturar));
-        }
-
         $this->capturar = $capturar;
 
         return $this;
@@ -287,9 +282,9 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getAutorizar()
+    public function getAutorizar(): int
     {
-        return $this->autorizar;
+        return (int) $this->autorizar;
     }
 
     /**
@@ -302,17 +297,11 @@ class Transacao
      *
      * @access public
      * @param  integer $autorizar
-     * @return integer
+     * @return Transacao
      */
-    public function setAutorizar($autorizar)
+    public function setAutorizar(int $autorizar = 0): Transacao
     {
-        $validos = array(0, 1, 2, 3);
-
-        if (!v::digit()->in($validos)->validate($autorizar)) {
-            throw new InvalidArgumentException('Indicador de autorização inválido.');
-        }
-
-        $this->autorizar = (integer) $autorizar;
+        $this->autorizar = $autorizar;
 
         return $this;
     }
@@ -321,7 +310,7 @@ class Transacao
      * Retorna a data e hora configurada para a transação
      *
      * @access public
-     * @return datetime
+     * @return \DateTimeImmutable
      */
     public function getDataHora()
     {
@@ -332,15 +321,11 @@ class Transacao
      * Seta a data e hora da venda
      *
      * @access public
-     * @param  datetime $dataHora AAAA-MM-DDTHH:MM:SS
+     * @param  DateTimeImmutable $dataHora
      * @return Cielo
      */
-    public function setDataHora($dataHora)
+    public function setDataHora(DateTimeImmutable $dataHora): Transacao
     {
-        if (strlen($dataHora) !== 19) {
-            throw new InvalidArgumentException('Formato inválido. Formato desejado AAAA-MM-DDTHH:MM:SS');
-        }
-
         $this->dataHora = $dataHora;
 
         return $this;
@@ -352,9 +337,9 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getNumero()
+    public function getNumero(): int
     {
-        return $this->numeroPedido;
+        return (int) $this->numeroPedido;
     }
 
     /**
@@ -362,16 +347,11 @@ class Transacao
      *
      * @access public
      * @param  integer $numero
-     * @throws InvalidArgumentException
-     * @return Cielo
+     * @return Transacao
      */
-    public function setNumero($numero)
+    public function setNumero(int $numero): Transacao
     {
-        if (!v::notEmpty()->digit()->validate($numero)) {
-            throw new InvalidArgumentException(sprintf('Número do pedido %s é inválido.', $numero));
-        }
-
-        $this->numeroPedido = substr((string) $numero, 0, 50);
+        $this->numeroPedido = (int) substr((string) $numero, 0, 50);
 
         return $this;
     }
@@ -382,9 +362,9 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getValor()
+    public function getValor(): int
     {
-        return $this->valorPedido;
+        return (int) $this->valorPedido;
     }
 
     /**
@@ -394,15 +374,11 @@ class Transacao
      * digitos referem-se aos centavos. Ex.: 1237 = R$ 12,37
      *
      * @access public
-     * @param  integer $valor
-     * @return Cielo
+     * @param  int $valor
+     * @return Transacao
      */
-    public function setValor($valor)
+    public function setValor(int $valor): Transacao
     {
-        if (!v::notEmpty()->digit()->validate($valor)) {
-            throw new InvalidArgumentException(sprintf('Valor %s é inválido.', $valor));
-        }
-
         $this->valorPedido = $valor;
 
         return $this;
@@ -413,14 +389,10 @@ class Transacao
      *
      * @access public
      * @param  string $descricao
-     * @return Cielo
+     * @return Transacao
      */
-    public function setDescricao($descricao)
+    public function setDescricao(string $descricao): Transacao
     {
-        if (!v::notEmpty()->validate($descricao)) {
-            throw new InvalidArgumentException(sprintf('Descrição %s é inválido.', $descricao));
-        }
-
         $this->descricao = $descricao;
 
         return $this;
@@ -432,18 +404,18 @@ class Transacao
      * @access public
      * @return string
      */
-    public function getDescricao()
+    public function getDescricao(): string
     {
-        return $this->descricao;
+        return (string) $this->descricao;
     }
 
     /**
      * Indica se é para gerar token para o cartão do portador.
      * @return boolean
      */
-    public function isGerarToken()
+    public function isGerarToken(): bool
     {
-        return $this->gerarToken;
+        return (bool) $this->gerarToken;
     }
 
     /**
@@ -452,9 +424,10 @@ class Transacao
      * @param boolean $gerarToken
      * @return self
      */
-    public function setGerarToken($gerarToken)
+    public function setGerarToken(bool $gerarToken = true): Transacao
     {
         $this->gerarToken = $gerarToken;
+
         return $this;
     }
 }

@@ -296,7 +296,15 @@ class Cliente
     {
         $response = $this
             ->httpClient
-            ->post($this->ambiente->getUrl(), ['mensagem' => $requisicao->getEnvio()->asXML()]);
+            ->request(
+                'POST',
+                $this->ambiente->getUrl(),
+                [
+                    'form_params' => [
+                        'mensagem' => $requisicao->getEnvio()->asXML()
+                    ]
+                ]
+            );
 
         $requisicao->setResposta($response->getBody()->getContents());
 

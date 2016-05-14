@@ -1,15 +1,9 @@
 <?php
-require_once __DIR__ . '/resources/config.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-
+$cielo     = require_once __DIR__ . '/resources/cliente.php';
 $transacao = require_once __DIR__ . '/resources/transacao.php';
 $cartao    = require_once __DIR__ . '/resources/cartao.php';
-
-$cielo     = new Cliente(new Autorizacao(NUMERO_CIELO, CHAVE_CIELO), null, null, new Teste());
 
 $requisicao = $cielo->tid($transacao, $cartao);
 
