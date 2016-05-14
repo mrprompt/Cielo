@@ -150,7 +150,7 @@ class Transacao
      */
     public function setTid(string $tid): Transacao
     {
-        if (!v::alnum()->notEmpty()->validate($tid)) {
+        if (!v::notEmpty()->validate($tid)) {
             throw new InvalidArgumentException('Caracteres inválidos no TID.');
         }
 
@@ -183,19 +183,15 @@ class Transacao
      * @param  mixed $produto
      * @return Transacao
      */
-    public function setProduto($produto): Transacao
+    public function setProduto(string $produto): Transacao
     {
-        switch ($produto) {
-            case '1':
-            case '2':
-            case '3':
-            case 'A':
-                $this->produto = $produto;
-
-                return $this;
-            default:
-                throw new InvalidArgumentException('Tipo de produto inválido.');
+        if (!v::in(['1', '2', '3', 'A'])->validate($produto)) {
+            throw new InvalidArgumentException('Tipo de produto inválido.');
         }
+
+        $this->produto = $produto;
+
+        return $this;
     }
 
     /**
@@ -247,10 +243,6 @@ class Transacao
      */
     public function setMoeda(int $moeda = self::MOEDA_PADRAO): Transacao
     {
-        if (!v::digit()->notEmpty()->validate($moeda)) {
-            throw new InvalidArgumentException('Moeda inválida');
-        }
-
         $this->moeda = $moeda;
 
         return $this;

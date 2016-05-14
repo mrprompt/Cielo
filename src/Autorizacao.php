@@ -153,7 +153,7 @@ class Autorizacao
      */
     public function setModalidade(int $modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
     {
-        $regras = v::intType()->notEmpty()->in($this->modalidades);
+        $regras = v::notEmpty()->in($this->modalidades);
         
         if (!$regras->validate($modalidade)) {
             throw new InvalidArgumentException('Modalidade de integração inválida.');

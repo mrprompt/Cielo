@@ -125,6 +125,24 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
     {
         $autorizacao = new Autorizacao('teste', 'teste', $valor);
     }
+
+    /**
+     * @test
+     *
+     * @dataProvider modalidadesInvalidas
+     * 
+     * @covers \MrPrompt\Cielo\Autorizacao::__construct
+     * @covers \MrPrompt\Cielo\Autorizacao::setNumero
+     * @covers \MrPrompt\Cielo\Autorizacao::setChave
+     * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function setModalidadeDisparaExcessaoSeAModalidadeNaoForPermitida($modalidade)
+    {
+        $autorizacao = new Autorizacao('teste', 'teste');
+        $autorizacao->setModalidade($modalidade);
+    }
     
     /**
      * Data Provider
@@ -140,5 +158,25 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
             array(array('dfgdfg')),
             array((object) array('dfgdfg' => 'sdfsdf'))
         );
+    }
+
+    /**
+     * Data Provider
+     *
+     * @return array
+     */
+    public function modalidadesInvalidas()
+    {
+        return [
+            [
+                0
+            ],
+            [
+                3
+            ],
+            [
+                4
+            ],
+        ];
     }
 }

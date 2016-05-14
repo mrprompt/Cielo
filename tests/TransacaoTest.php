@@ -94,7 +94,6 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
     public function produtosInvalidos()
     {
         return array(
-            array(0),
             array(5),
             array(99),
             array('AAAA')
@@ -124,6 +123,17 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
         $result = $this->object->setProduto($produto);
 
         $this->assertInstanceOf('MrPrompt\Cielo\Transacao', $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider produtosInvalidos
+     * @covers \MrPrompt\Cielo\Transacao::setProduto
+     * @expectedException \InvalidArgumentException
+     */
+    public function setProdutoDisparaExcessaoComProdutoInvalido($produto)
+    {
+        $result = $this->object->setProduto($produto);
     }
 
     /**
@@ -646,5 +656,47 @@ class TransacaoTest extends \PHPUnit_Framework_TestCase
   	public function setGerarTokenRetornaInstanciaDoProprioObjeto()
     {
       	$this->assertInstanceOf(Transacao::class, $this->object->setGerarToken(true));
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::__construct()
+     * @covers \MrPrompt\Cielo\Transacao::getDataHora()
+     */
+    public function ConstrutorSemParametrosDeveIniciarDataHoraComValorAtual()
+    {
+        $object = new Transacao();
+
+        $this->assertInstanceOf(Transacao::class, $object);
+        $this->assertInstanceOf(\DateTime::class, $object->getDataHora());
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::__construct()
+     * @covers \MrPrompt\Cielo\Transacao::getDataHora()
+     */
+    public function ConstrutorComObjetoDateTimeDeveIniciarSemErros()
+    {
+        $hoje = new \DateTime();
+
+        $object = new Transacao($hoje);
+
+        $this->assertInstanceOf(Transacao::class, $object);
+        $this->assertEquals($hoje, $object->getDataHora());
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Transacao::__construct()
+     * @expectedException \TypeError
+     */
+    public function ConstrutorComObjectErradoDeveDispararExcessao()
+    {
+        $hoje = date('y-m-d');
+
+        $object = new Transacao($hoje);
+
+        $this->assertInstanceOf(Transacao::class, $object);
     }
 }
