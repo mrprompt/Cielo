@@ -21,7 +21,8 @@
 namespace MrPrompt\Cielo;
 
 use GuzzleHttp\Client;
-use InvalidArgumentException;
+use MrPrompt\Cielo\Ambiente\Producao;
+use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
@@ -31,7 +32,6 @@ use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
-use Respect\Validation\Validator;
 
 /**
  * Cliente de integração com a Cielo
@@ -51,28 +51,22 @@ class Cliente
     /**
      * Idioma do pedido
      *
-     * PT (português)
-     * EN (inglês)
-     * ES (espanhol).
+     * Com base nessa informação é definida a língua a ser utilizada nas telas da Cielo.
      *
-     * Com base nessa informação é definida a
-     * língua a ser utilizada nas telas da Cielo.
-     * Caso não preenchido, assume-se PT.
-     *
-     * @var string
+     * @var Idioma
      */
-    private $idioma = 'PT';
+    private $idioma;
 
     /**
      * Ambiente (teste ou produção)
      *
-     * Default: produção
-     *
-     * @var string
+     * @var Ambiente
      */
-    private $ambiente = 'produção';
+    private $ambiente;
 
     /**
+     * Cliente Http a ser utilizado
+     *
      * @var Client
      */
     private $httpClient;
@@ -83,143 +77,26 @@ class Cliente
      * @const float
      */
     const VERSAO = '1.2.0';
-    
-    /**
-     * Idiomas válidos
-     *
-     * @var array 
-     */
-    private $idiomas = array('PT', 'EN', 'ES');
-    
-    /**
-     * Ambientes válidos
-     * 
-     * @var array
-     */
-    private $ambientes = array('teste', 'produção');
-
-    /**
-     * Opções de configuração do cURL.
-     *
-     * @var array
-     */
-    private $curlOpcoes = array(array('nome' => CURLOPT_SSLVERSION, 'valor' => 3));
 
     /**
      * Construtor da aplicação
      *
-     * Aqui é configurada o número e a chave de acesso do afiliado a Cielo
-     *
      * @access public
      * @param Autorizacao $autorizacao
      * @param Client      $httpClient
+     * @param Idioma      $idioma
+     * @param Ambiente    $ambiente
      */
-    public function __construct(Autorizacao $autorizacao, Client $httpClient = null)
-    {
-        $this->autorizacao = $autorizacao;
-        $this->httpClient = $httpClient ?: new Client();
-    }
-
-    /**
-     * Retorna o idioma da venda
-     *
-     * @access public
-     * @return string
-     */
-    public function getIdioma()
-    {
-        return $this->idioma;
-    }
-
-    /**
-     * Idioma do pedido
-     *
-     * PT (português)
-     * EN (inglês)
-     * ES (espanhol).
-     *
-     * Com base nessa informação é definida a língua a ser utilizada nas telas 
-     * da Cielo.
-     * Caso não preenchido, assume-se PT.
-     *
-     * @param  string $idioma
-     * @return \MrPrompt\Cielo\Cliente
-     */
-    public function setIdioma($idioma)
-    {
-        $idioma = strtoupper($idioma);
-        $regras = Validator::stringType()
-                            ->notEmpty()
-                            ->in($this->idiomas);
-        
-        if (!$regras->validate($idioma)) {
-            throw new InvalidArgumentException(
-                sprintf('Idioma inválido: %s.', $idioma)
-            );
-        }
-        
-        $this->idioma = $idioma;
-
-        return $this;
-    }
-
-    /**
-     * Retorna o ambiente utilizado para as chamadas de transação
-     *
-     * @access public
-     * @return string
-     */
-    public function getAmbiente()
-    {
-        return $this->ambiente;
-    }
-
-    /**
-     * Configura o ambiente a ser utilizado nas chamadas de transações
-     *
-     * @access public
-     * @param  string                   $ambiente teste | produção (default)
-     * @throws InvalidArgumentException
-     * @return Cielo
-     */
-    public function setAmbiente($ambiente)
-    {
-        $regras = Validator::stringType()->notEmpty()->in($this->ambientes);
-
-        if (!$regras->validate($ambiente)) {
-            throw new InvalidArgumentException('Ambiente inválido.');
-        }
-        
-        $this->ambiente = $ambiente;
-
-        return $this;
-    }
-
-    /**
-     * Seta o caminho para o arquivo certificado SSL (ex.: certificado.crt)
-     *
-     * @access public
-     * @param  string $sslCertificate
-     * @return Cielo
-     */
-    public function setSslCertificate($sslCertificate = '')
-    {
-        if (!is_string($sslCertificate)
-            || (trim($sslCertificate) != '' && !is_readable($sslCertificate))) {
-            throw new InvalidArgumentException('Parâmetro inválido.');
-        }
-
-        if ($sslCertificate != '') {
-            $this->httpClient->setSslVerification(
-                $sslCertificate,
-                true,
-                2
-            );
-        } else {
-            $this->httpClient->setSslVerification(false);
-        }
-
-        return $this;
+    public function __construct(
+        Autorizacao $autorizacao,
+        Client $httpClient = null,
+        Idioma $idioma = null,
+        Ambiente $ambiente = null
+    ) {
+        $this->autorizacao  = $autorizacao;
+        $this->httpClient   = $httpClient ?: new Client();
+        $this->idioma       = $idioma ?: new Portugues();
+        $this->ambiente     = $ambiente ?: new Producao();
     }
 
     /**
@@ -417,72 +294,12 @@ class Cliente
      */
     protected function enviaRequisicao(Requisicao $requisicao)
     {
-        $request = $this->httpClient->post($this->getEndpoint())
-                                    ->addPostFields(array(
-                                        'mensagem' => $requisicao->getEnvio()->asXML()
-                                    ));
+        $response = $this
+            ->httpClient
+            ->post($this->ambiente->getUrl(), ['mensagem' => $requisicao->getEnvio()->asXML()]);
 
-        foreach ($this->curlOpcoes as $opcao) {
-            $request->getCurlOptions()->set($opcao['nome'], $opcao['valor']);
-        }
-
-        $requisicao->setResposta($request->send()->xml());
+        $requisicao->setResposta($response->getBody()->getContents());
 
         return $requisicao;
-    }
-
-    /**
-     * Retorna o endereço de destino das requisições
-     *
-     * @return string
-     */
-    protected function getEndpoint()
-    {
-        if ($this->ambiente === 'teste') {
-            return 'https://qasecommerce.cielo.com.br/servicos/ecommwsec.do';
-        }
-
-        return 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';
-    }
-    
-    /**
-     * Recupera os idiomas válidos
-     * 
-     * @return array
-     */
-    public function getIdiomas()
-    {
-        return $this->idiomas;
-    }
-    
-    /**
-     * Recupera os ambientes válidos
-     * 
-     * @return array
-     */
-    public function getAmbientes()
-    {
-        return $this->ambientes;
-    }
-
-    /**
-     * Recupera as configurações do cURL.
-     * @return array
-     */
-    public function getCurlOpcoes()
-    {
-        return $this->curlOpcoes;
-    }
-
-    /**
-     * Define as configurações do cURL.
-     *
-     * @param array $curlOpcoes
-     * @return self
-     */
-    public function setCurlOpcoes(array $curlOpcoes = array())
-    {
-        $this->curlOpcoes = $curlOpcoes;
-        return $this;
     }
 }

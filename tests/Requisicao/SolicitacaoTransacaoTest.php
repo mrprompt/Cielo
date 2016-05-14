@@ -20,6 +20,7 @@ namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Cartao;
+use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Transacao;
 use ReflectionMethod;
@@ -56,7 +57,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
         $this->cartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno        = 'http://localhost/';
-        $idioma            = 'PT';
+        $idioma            = $this->getMock(Idioma::class, [], [], '', false);
 
         $this->object = new SolicitacaoTransacao(
             $this->autorizacao,
@@ -79,7 +80,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
         $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno      = 'http:///';
-        $idioma          = 'PT';
+        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,
@@ -136,7 +137,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $mockCartao->setCartao('4012001037141112');
 
         $urlRetorno      = 'http://localhost/';
-        $idioma          = 'PT';
+        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,
@@ -172,7 +173,7 @@ class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
         $mockCartao->setCartao('4012001037141112');
 
         $urlRetorno      = 'http://localhost/';
-        $idioma          = 'PT';
+        $idioma            = $this->getMock(Idioma::class, [], [], '', false);
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,

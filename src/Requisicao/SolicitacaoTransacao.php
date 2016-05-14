@@ -16,11 +16,13 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
 use InvalidArgumentException;
@@ -28,6 +30,7 @@ use InvalidArgumentException;
 /**
  * Requisição de autorizacao de portador
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  */
 class SolicitacaoTransacao extends Requisicao
@@ -58,7 +61,7 @@ class SolicitacaoTransacao extends Requisicao
     /**
      * Idioma a ser utilizado
      *
-     * @var string
+     * @var Idioma
      */
     private $idioma;
 
@@ -69,17 +72,22 @@ class SolicitacaoTransacao extends Requisicao
      * @param Transacao   $transacao
      * @param Cartao      $cartao
      * @param string      $urlRetorno
-     * @param string      $idioma
+     * @param Idioma      $idioma
      */
-    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao, $urlRetorno, $idioma)
-    {
+    public function __construct(
+        Autorizacao $autorizacao,
+        Transacao $transacao,
+        Cartao $cartao,
+        string $urlRetorno,
+        Idioma $idioma = null
+    ) {
         if (filter_var($urlRetorno, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) == false) {
             throw new InvalidArgumentException('URL de retorno inválida.');
         }
 
         $this->cartao = $cartao;
         $this->urlRetorno = substr($urlRetorno, 0, 1024);
-        $this->idioma = $idioma;
+        $this->idioma = $idioma ?: new Idioma\Portugues();
 
         parent::__construct($autorizacao, $transacao);
     }
@@ -87,7 +95,7 @@ class SolicitacaoTransacao extends Requisicao
     /**
      * {@inheritdoc}
      */
-    protected function getXmlInicial()
+    protected function getXmlInicial(): string
     {
         return sprintf(
             '<%s id="%d" versao="%s"></%s>',
@@ -130,7 +138,7 @@ class SolicitacaoTransacao extends Requisicao
     /**
      * {@inheritdoc}
      */
-    protected function deveAdicionarTid()
+    protected function deveAdicionarTid(): bool
     {
         return false;
     }
@@ -175,7 +183,7 @@ class SolicitacaoTransacao extends Requisicao
         $dadosTransacao->addChild('moeda', $this->transacao->getMoeda());
         $dadosTransacao->addChild('data-hora', $this->transacao->getDataHora());
         $dadosTransacao->addChild('descricao', $this->transacao->getDescricao());
-        $dadosTransacao->addChild('idioma', $this->idioma);
+        $dadosTransacao->addChild('idioma', $this->idioma->getIdioma());
     }
 
     /**

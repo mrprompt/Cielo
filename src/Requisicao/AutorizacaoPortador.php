@@ -16,16 +16,20 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
 
 /**
  * Requisição de autorizacao de portador
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  */
 class AutorizacaoPortador extends Requisicao
@@ -57,16 +61,12 @@ class AutorizacaoPortador extends Requisicao
      * @param Autorizacao $autorizacao
      * @param Transacao   $transacao
      * @param Cartao      $cartao
-     * @param string      $idioma
+     * @param Idioma      $idioma
      */
-    public function __construct(
-        Autorizacao $autorizacao,
-        Transacao $transacao,
-        Cartao $cartao,
-        $idioma = 'PT'
-    ) {
+    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao, Idioma $idioma = null)
+    {
         $this->cartao = $cartao;
-        $this->idioma = $idioma;
+        $this->idioma = $idioma ?: new Idioma\Portugues();
 
         parent::__construct($autorizacao, $transacao);
     }
@@ -74,7 +74,7 @@ class AutorizacaoPortador extends Requisicao
     /**
      * {@inheritdoc}
      */
-    protected function getXmlInicial()
+    protected function getXmlInicial(): string
     {
         return sprintf(
             '<%s id="%d" versao="%s"></%s>',
@@ -124,7 +124,7 @@ class AutorizacaoPortador extends Requisicao
         $dadosTransacao->addChild('moeda', $this->transacao->getMoeda());
         $dadosTransacao->addChild('data-hora', $this->transacao->getDataHora());
         $dadosTransacao->addChild('descricao', $this->transacao->getDescricao());
-        $dadosTransacao->addChild('idioma', $this->idioma);
+        $dadosTransacao->addChild('idioma', $this->idioma->getIdioma());
     }
 
     /**

@@ -18,6 +18,10 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Cartao;
 use ReflectionMethod;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 
@@ -35,17 +39,12 @@ class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
-        $idioma          = 'PT';
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
         
-        $this->object 	 = new AutorizacaoPortador(
-            $mockAutorizacao,
-            $mockTransacao,
-            $mockCartao,
-            $idioma
-        );
+        $this->object 	 = new AutorizacaoPortador($mockAutorizacao, $mockTransacao, $mockCartao, $idioma);
     }
     
     /**

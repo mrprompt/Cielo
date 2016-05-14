@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
@@ -25,6 +27,7 @@ use SimpleXMLElement;
 /**
  * Cada chamada ao webservice representa uma requisição
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  */
 abstract class Requisicao
@@ -75,7 +78,6 @@ abstract class Requisicao
         $this->autorizacao  = $autorizacao;
         $this->transacao    = $transacao;
         $this->envio        = new SimpleXMLElement($this->getXmlInicial());
-        $this->resposta     = new SimpleXMLElement($this->getXmlInicial());
 
         $this->configuraTransacao();
         $this->configuraAutenticacao();
@@ -86,9 +88,9 @@ abstract class Requisicao
      * Retorna a modalidade de integração definida na autorização.
      * @return integer
      */
-    public function getModalidadeIntegracao()
+    public function getModalidadeIntegracao(): int
     {
-        return $this->autorizacao->getModalidade();
+        return (int) $this->autorizacao->getModalidade();
     }
 
     /**
@@ -115,31 +117,31 @@ abstract class Requisicao
     }
 
     /**
-     * Retorna o objeto XML de requisição
+     * Retorna o XML de requisição
      *
      * @return \SimpleXMLElement
      */
-    public function getEnvio()
+    public function getEnvio(): \SimpleXMLElement
     {
         return $this->envio;
     }
 
     /**
-     * Retorna o objeto XML de resposta
+     * Retorna o XML de resposta
      *
-     * @return \SimpleXMLElement
+     * @return string
      */
-    public function getResposta()
+    public function getResposta(): string
     {
-        return $this->resposta;
+        return (string) $this->resposta;
     }
 
     /**
      * Configura o objeto de resposta
      *
-     * @param SimpleXMLElement $resposta
+     * @param string $resposta
      */
-    public function setResposta(SimpleXMLElement $resposta)
+    public function setResposta(string $resposta)
     {
         $this->resposta = $resposta;
     }
@@ -149,7 +151,7 @@ abstract class Requisicao
      *
      * @return boolean
      */
-    public function getAdicionarTid()
+    public function getAdicionarTid(): bool
     {
         return $this->adicionarTid;
     }
@@ -159,7 +161,7 @@ abstract class Requisicao
      *
      * @param bool $deve
      */
-    public function setAdicionarTid($deve)
+    public function setAdicionarTid(bool $deve)
     {
         $this->adicionarTid = $deve;
     }
@@ -177,7 +179,7 @@ abstract class Requisicao
      *
      * @return boolean
      */
-    protected function deveAdicionarTid()
+    protected function deveAdicionarTid(): bool
     {
         return $this->getAdicionarTid();
     }
@@ -187,7 +189,7 @@ abstract class Requisicao
      *
      * @return string
      */
-    protected function getXmlInicial()
+    protected function getXmlInicial(): string
     {
         // sempre é sobrescrito...
         $dom = new \DOMDocument('1.0', 'utf-8');

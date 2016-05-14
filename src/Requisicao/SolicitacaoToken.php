@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
@@ -26,6 +28,7 @@ use MrPrompt\Cielo\Autorizacao;
 /**
  * Requisição do token para um determinado cartão de crédito
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Antonio Carlos Ribeiro <acr@antoniocarlosribeiro.com>
  */
 class SolicitacaoToken extends Requisicao
@@ -50,7 +53,6 @@ class SolicitacaoToken extends Requisicao
      * @param Autorizacao $autorizacao
      * @param Transacao   $transacao
      * @param Cartao      $cartao
-     * @param string      $idioma
      */
     public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao)
     {
@@ -64,7 +66,7 @@ class SolicitacaoToken extends Requisicao
     /**
      * {@inheritdoc}
      */
-    protected function getXmlInicial()
+    protected function getXmlInicial(): string
     {
         return sprintf(
             '<%s id="%d" versao="%s"></%s>',
@@ -97,5 +99,4 @@ class SolicitacaoToken extends Requisicao
         if (!empty($nomePortador))
             $dadosCartao->addChild('nome-portador', $nomePortador);
     }
-
 }

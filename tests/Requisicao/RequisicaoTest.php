@@ -141,7 +141,7 @@ class RequisicaoTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->object->getResposta();
 
-        $this->assertInstanceOf(SimpleXMLElement::class, $result);
+        $this->assertEmpty($result);
     }
     
     /**

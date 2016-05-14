@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo;
 
 use Respect\Validation\Validator as v;
@@ -24,6 +26,7 @@ use InvalidArgumentException;
 /**
  * Dados de autorização da requisição
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  */
 class Autorizacao
@@ -86,9 +89,9 @@ class Autorizacao
      *
      * @return string
      */
-    public function getNumero()
+    public function getNumero(): string
     {
-        return $this->numero;
+        return (string) $this->numero;
     }
 
     /**
@@ -111,9 +114,9 @@ class Autorizacao
      *
      * @return string
      */
-    public function getChave()
+    public function getChave(): string
     {
-        return $this->chave;
+        return (string) $this->chave;
     }
 
     /**
@@ -136,9 +139,9 @@ class Autorizacao
      *
      * @return integer
      */
-    public function getModalidade()
+    public function getModalidade(): int
     {
-        return $this->modalidade;
+        return (int) $this->modalidade;
     }
     
     /**
@@ -146,8 +149,9 @@ class Autorizacao
      *
      * @param integer $modalidade the modalidade
      * @throws InvalidArgumentException
+     * @return self
      */
-    public function setModalidade($modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
+    public function setModalidade(int $modalidade = self::MODALIDADE_BUY_PAGE_LOJA)
     {
         $regras = v::intType()->notEmpty()->in($this->modalidades);
         

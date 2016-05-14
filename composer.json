@@ -26,11 +26,6 @@
             "role": "developer"
         }
     ],
-    "support": {
-        "issues": "https://github.com/mrprompt/Cielo/issues",
-        "source": "https://github.com/mrprompt/Cielo",
-        "wiki": "https://github.com/mrprompt/Cielo/wiki"
-    },
     "autoload": {
         "psr-4": {
             "MrPrompt\\Cielo\\": "src/"
@@ -42,16 +37,13 @@
         }
     },
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "respect/validation": "1.0.2",
         "guzzlehttp/guzzle": "6.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "5.0.9",
-        "pdepend/pdepend": "2.2.2",
-        "theseer/phpdox": "0.8.1",
-        "phing/phing": "2.12.0",
-        "squizlabs/php_codesniffer": "2.3.4"
+        "theseer/phpdox": "0.8.1"
     },
     "minimum-stability": "dev"
 }

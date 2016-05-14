@@ -18,9 +18,11 @@
  */
 namespace MrPrompt\Cielo\Tests;
 
-use ReflectionProperty;
-
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+use MrPrompt\Cielo\Transacao;
 
 class ClienteTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,169 +37,23 @@ class ClienteTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
 
         $this->object = new Cliente($mockAutorizacao);
     }
 
     /**
      * @test
-     *
-     * @covers \MrPrompt\Cielo\Cliente::getAmbiente
+     * @covers \MrPrompt\Cielo\Cliente::iniciaTransacao()
      */
-    public function ambienteDeveRetornarPropriedadeAmbiente()
+    public function iniciaTransacaoDeveRetornarUmObjectSolicitacaoTransacao()
     {
-        $reflection = new ReflectionProperty(Cliente::class, 'ambiente');
-        $reflection->setAccessible(true);
-        $reflection->setValue($this->object, 'teste');
+        $transacao  = $this->getMock(Transacao::class, [], [], '', false);
+        $cartao     = $this->getMock(Cartao::class, [], [], '', false);
+        $url        = 'http://localhost';
 
-        $this->assertEquals('teste', $this->object->getAmbiente());
-    }
+        $result = $this->object->iniciaTransacao($transacao, $cartao, $url);
 
-    /**
-     * @test
-     *
-     * @dataProvider ambientesValidos
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
-     * @covers \MrPrompt\Cielo\Cliente::getAmbiente
-     */
-    public function ambienteDeveSerValido($valor)
-    {
-        $this->object->setAmbiente($valor);
-
-        $this->assertEquals($valor, $this->object->getAmbiente());
-    }
-
-    /**
-     * Data Provider
-     * @return array
-     */
-    public function ambientesValidos()
-    {
-        return array(
-            array('teste', 'teste'),
-            array('produção', 'produção'),
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider ambientesInvalidos
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
-     *
-     * @expectedException \InvalidArgumentException
-     */
-    public function deveLancarErroCasoRecebaAmbienteInvalido($valor)
-    {
-        $this->object->setAmbiente($valor);
-    }
-
-    /**
-     * Data Provider
-     *
-     * @return array
-     */
-    public function ambientesInvalidos()
-    {
-        return array(
-            array(''),
-            array(null),
-            array('test')
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider idiomasValidos
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::setIdioma
-     * @covers \MrPrompt\Cielo\Cliente::getIdioma
-     */
-    public function idiomaDeveSerValido($valor, $expected)
-    {
-        $this->object->setIdioma($valor);
-        
-        $this->assertEquals($expected, $this->object->getIdioma());
-    }
-
-    /**
-     * Data Provider
-     *
-     * @return array
-     */
-    public function idiomasValidos()
-    {
-        return array(
-            array('PT', 'PT'),
-            array('pT', 'PT'),
-            array('Pt', 'PT'),
-            array('pt', 'PT'),
-            array('EN', 'EN'),
-            array('En', 'EN'),
-            array('eN', 'EN'),
-            array('en', 'EN'),
-            array('ES', 'ES'),
-            array('Es', 'ES'),
-            array('eS', 'ES'),
-            array('es', 'ES'),
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider idiomasInvalidos
-     *
-     * @expectedException \InvalidArgumentException
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::setAmbiente
-     */
-    public function deveLancarErroCasoRecebaIdiomaInvalido($valor)
-    {
-        $this->object->setAmbiente($valor);
-    }
-
-    /**
-     * Data Provider
-     *
-     * @return array
-     */
-    public function idiomasInvalidos()
-    {
-        return array(
-            array(''),
-            array(null),
-            array('pt-br')
-        );
-    }
-    
-    /**
-     * @test
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::getIdiomas
-     */
-    public function getIdiomasDeveRetornarArray()
-    {
-        $this->assertTrue(is_array($this->object->getIdiomas()));
-    }
-    
-    /**
-     * @test
-     *
-     * @covers \MrPrompt\Cielo\Cliente::__construct
-     * @covers \MrPrompt\Cielo\Cliente::getAmbientes
-     */
-    public function getAmbientesDeveRetornarArray()
-    {
-        $this->assertTrue(is_array($this->object->getAmbientes()));
+        $this->assertInstanceOf(SolicitacaoTransacao::class, $result);
     }
 }

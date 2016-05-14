@@ -119,7 +119,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Autorizacao::setChave
      * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * 
-     * @expectedException InvalidArgumentException
+     * @expectedException \TypeError
      */
     public function aoConstruirModalideNaoPodeValorInvalido($valor)
     {

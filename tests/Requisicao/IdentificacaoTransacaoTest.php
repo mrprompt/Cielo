@@ -18,7 +18,10 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Cartao;
 use ReflectionMethod;
 
 class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
@@ -35,15 +38,11 @@ class IdentificacaoTransacaoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         
-        $this->object = new IdentificacaoTransacao(
-            $mockAutorizacao,
-            $mockTransacao,
-            $mockCartao
-        );
+        $this->object = new IdentificacaoTransacao($mockAutorizacao, $mockTransacao, $mockCartao);
     }
     
     /**

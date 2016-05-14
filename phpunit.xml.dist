@@ -13,7 +13,7 @@
          bootstrap="./vendor/autoload.php">
     <testsuites>
         <testsuite name="Cielo Test Suite">
-            <directory>./tests</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
     

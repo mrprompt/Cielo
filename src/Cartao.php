@@ -13,11 +13,16 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2010
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo;
 
 use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
+/**
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class Cartao
 {
     /**
@@ -126,11 +131,11 @@ class Cartao
      * Retorna o indicador do código de segurança setado
      *
      * @access public
-     * @return integer
+     * @return string
      */
-    public function getIndicador()
+    public function getIndicador(): string
     {
-        return $this->indicador;
+        return (string) $this->indicador;
     }
 
     /**
@@ -161,9 +166,9 @@ class Cartao
      * @access public
      * @return string
      */
-    public function getCodigoSeguranca()
+    public function getCodigoSeguranca(): string
     {
-        return $this->codigoSeguranca;
+        return (string) $this->codigoSeguranca;
     }
 
     /**
@@ -190,9 +195,9 @@ class Cartao
      * @access public
      * @return string
      */
-    public function getNomePortador()
+    public function getNomePortador(): string
     {
-        return $this->nomePortador;
+        return (string) $this->nomePortador;
     }
 
     /**
@@ -300,9 +305,9 @@ class Cartao
      * 
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->token;
+        return (string) $this->token;
     }    
 
     /**
@@ -322,7 +327,7 @@ class Cartao
      * 
      * @return boolean
      */
-    public function hasToken()
+    public function hasToken(): bool
     {
         return ! empty($this->token);
     }

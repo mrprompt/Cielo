@@ -16,6 +16,7 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Requisicao;
 
@@ -24,6 +25,7 @@ use MrPrompt\Cielo\Cliente;
 /**
  * Requisição de autorizacao de transação
  *
+ * @author Thiago Paes <mrprompt@gmail.com>
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  */
 class AutorizacaoTransacao extends Requisicao
@@ -38,7 +40,7 @@ class AutorizacaoTransacao extends Requisicao
     /**
      * {@inheritdoc}
      */
-    protected function getXmlInicial()
+    protected function getXmlInicial(): string
     {
         return sprintf(
             '<%s id="%d" versao="%s"></%s>',

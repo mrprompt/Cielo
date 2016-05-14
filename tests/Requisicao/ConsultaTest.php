@@ -18,7 +18,9 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\Consulta;
+use MrPrompt\Cielo\Transacao;
 
 class ConsultaTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,13 +36,10 @@ class ConsultaTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
         
-        $this->object = new Consulta(
-            $mockAutorizacao,
-            $mockTransacao
-        );
+        $this->object = new Consulta($mockAutorizacao, $mockTransacao);
     }
 
     /**

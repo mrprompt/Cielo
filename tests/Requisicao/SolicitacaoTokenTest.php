@@ -18,7 +18,11 @@
  */
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Cartao;
 use ReflectionMethod;
 
 class SolicitacaoTokenTest extends \PHPUnit_Framework_TestCase
@@ -35,19 +39,13 @@ class SolicitacaoTokenTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $mockAutorizacao = $this->getMock('MrPrompt\Cielo\Autorizacao', array(), array(), '', false);
-        $mockTransacao   = $this->getMock('MrPrompt\Cielo\Transacao', array(), array(), '', false);
-        $mockCartao      = $this->getMock('MrPrompt\Cielo\Cartao', array(), array(), '', false);
+        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
         $urlRetorno      = 'http://localhost/';
-        $idioma          = 'PT';
+        $idioma            = $this->getMock(Idioma::class, [], [], '', false);
 
-        $this->object = new SolicitacaoToken(
-            $mockAutorizacao,
-            $mockTransacao,
-            $mockCartao,
-            $urlRetorno,
-            $idioma
-        );
+        $this->object = new SolicitacaoToken($mockAutorizacao, $mockTransacao, $mockCartao, $urlRetorno, $idioma);
     }
 
     /**

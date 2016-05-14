@@ -13,11 +13,16 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2010
  * @license    GPL-3.0+
  */
+declare(strict_types = 1);
+
 namespace MrPrompt\Cielo;
 
 use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
+/**
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
 class Transacao
 {
     const PARCELAS_MINIMAS = 1;
@@ -366,7 +371,7 @@ class Transacao
             throw new InvalidArgumentException(sprintf('Número do pedido %s é inválido.', $numero));
         }
 
-        $this->numeroPedido = substr($numero, 0, 50);
+        $this->numeroPedido = substr((string) $numero, 0, 50);
 
         return $this;
     }

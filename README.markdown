@@ -3,12 +3,11 @@ Cielo
 
 Cielo é uma classe cliente para o web service da Cielo.
 
-Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito com cartões VISA e Mastercard.
+Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
 
 Requisitos: 
 
-* PHP 5.6+
-* Extensão cURL
+* PHP 7.0
 * Extensão SimpleXML
 
 Instalando via composer.
@@ -17,11 +16,13 @@ Instalando via composer.
 composer require "mrprompt/cielo"  
 ```
 
+#### PHP 5.5 ~ 5.6
+Somente a versão 2.2 é compatível com PHP 5.5 e 5.6
+
 #### PHP 5.3 ~ 5.4
 Até a versão 2.1, o PHP 5.3 é suportado.
 
 [![Build Status](https://travis-ci.org/mrprompt/Cielo.png)](https://travis-ci.org/mrprompt/Cielo)
-[![Build Status](http://ci.mrprompt.com.br/build-status/image/72)](http://ci.mrprompt.com.br/project/view/72)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828/mini.png)](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Percentage of issues still open")
