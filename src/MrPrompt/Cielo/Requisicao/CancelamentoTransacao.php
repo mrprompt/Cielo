@@ -54,8 +54,9 @@ class CancelamentoTransacao extends Requisicao
      */
     protected function configuraEnvio()
     {
-        if (!empty($this->transacao->getValor())) {
-            $this->getEnvio()->addChild('valor', $this->transacao->getValor());
+        $valor = $this->transacao->getValor();
+        if (!empty($valor)) {
+            $this->getEnvio()->addChild('valor', $valor);
         }
     }
 }
