@@ -25,6 +25,5 @@ script:
 after_script: 
   - mv tests/_output/coverage.xml clover.xml 
   - ./cc-test-reporter after-build --coverage-input-type clover --id 12345 --exit-code $TRAVIS_TEST_RESULT
-
   # - php vendor/bin/codacycoverage clover build/coverage/xml
   # - php vendor/bin/codecept clover
