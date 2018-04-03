@@ -16,16 +16,19 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests;
 
 use MrPrompt\Cielo\Idioma;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class IdiomaTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class IdiomaTest extends \PHPUnit_Framework_TestCase
+class IdiomaTest extends TestCase
 {
     /**
      * @var Idioma
@@ -36,7 +39,7 @@ class IdiomaTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new class extends Idioma {
             /**
@@ -54,7 +57,7 @@ class IdiomaTest extends \PHPUnit_Framework_TestCase
      * Data Provider
      * @return array
      */
-    public function idiomasValidas()
+    public function idiomasValidas(): array
     {
         return [
             [
@@ -73,7 +76,7 @@ class IdiomaTest extends \PHPUnit_Framework_TestCase
      * Data Provider
      * @return array
      */
-    public function idiomasInvalidas()
+    public function idiomasInvalidas(): array
     {
         return [
             [
@@ -90,7 +93,7 @@ class IdiomaTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Idioma::valida()
      * @dataProvider idiomasValidas
      */
-    public function validaDeveRetornarVerdadeiroParaUmaIdiomaValidaDoEndPoint($idioma)
+    public function validaDeveRetornarVerdadeiroParaUmaIdiomaValidaDoEndPoint($idioma): void
     {
         $result = $this->object->valida($idioma);
 
@@ -102,7 +105,7 @@ class IdiomaTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Idioma::valida()
      * @dataProvider idiomasInvalidas
      */
-    public function validaDeveRetornarFalsoParaUmaIdiomaInvalidaDoEndPoint($idioma)
+    public function validaDeveRetornarFalsoParaUmaIdiomaInvalidaDoEndPoint($idioma): void
     {
         $result = $this->object->valida($idioma);
 

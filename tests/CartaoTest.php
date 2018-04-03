@@ -16,19 +16,26 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests;
 
 use MrPrompt\Cielo\Cartao;
 use ReflectionProperty;
+use PHPUnit\Framework\TestCase;
 
-class CartaoTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class CartaoTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class CartaoTest extends TestCase
 {
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::getCartao
      */
-    public function proprieadadeComNumeroDoCartaoNaoPodeSerModificado()
+    public function proprieadadeComNumeroDoCartaoNaoPodeSerModificado(): void
     {
         $cartao = new Cartao();
 
@@ -41,11 +48,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @covers \MrPrompt\Cielo\Cartao::getCartao
      */
-    public function numeroDoCartaoDeveSerValido()
+    public function numeroDoCartaoDeveSerValido(): void
     {
         $cartao = new Cartao();
         $cartao->setCartao('4923993827951627');
@@ -58,7 +64,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @covers \MrPrompt\Cielo\Cartao::getCartao
      */
-    public function caracteresNaoNumericosDevemSerRemovidosAoConfigurarOCartao()
+    public function caracteresNaoNumericosDevemSerRemovidosAoConfigurarOCartao(): void
     {
         $cartao = new Cartao();
         $cartao->setCartao('4a9a2a3a9a9a3a8aa2a7a9a5a1a6a2a7a');
@@ -71,7 +77,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
-    public function numeroDoCartaoNaoPodeSerVazio()
+    public function numeroDoCartaoNaoPodeSerVazio(): void
     {
         $cartao = new Cartao();
         $cartao->setCartao('');
@@ -82,7 +88,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Cartao::setCartao
      * @expectedException InvalidArgumentException
      */
-    public function numeroDoCartaoSerUmNumeroInvalido()
+    public function numeroDoCartaoSerUmNumeroInvalido(): void
     {
         $cartao = new Cartao();
         $cartao->setCartao('49239938');
@@ -90,10 +96,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::getIndicador
      */
-    public function indicadorDeCodigoDeSegurancaDeveRetornarValorDaPropriedadeIndicador()
+    public function indicadorDeCodigoDeSegurancaDeveRetornarValorDaPropriedadeIndicador(): void
     {
         $cartao = new Cartao();
 
@@ -110,7 +115,7 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
      * @covers       \MrPrompt\Cielo\Cartao::getIndicador
      * @dataProvider indicadoresValidos
      */
-    public function indicadorDeCodigoDeSegurancaDeveSerValido($valor)
+    public function indicadorDeCodigoDeSegurancaDeveSerValido($valor): void
     {
         $cartao = new Cartao();
         $cartao->setIndicador($valor);
@@ -120,10 +125,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * data provider
-     *
      * @return array
      */
-    public function indicadoresValidos()
+    public function indicadoresValidos(): array
     {
         return array(
             array(0),
@@ -139,13 +143,17 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
      * @dataProvider indicadoresInvalidos
      * @expectedException \InvalidArgumentException
      */
-    public function deveLancarErroCasoRecebaIndicadorInvalido($valor)
+    public function deveLancarErroCasoRecebaIndicadorInvalido($valor): void
     {
         $cartao = new Cartao();
         $cartao->setIndicador($valor);
     }
 
-    public function indicadoresInvalidos()
+    /**
+     * Data provider
+     * @return array
+     */
+    public function indicadoresInvalidos(): array
     {
         return array(
             array(3),
@@ -159,10 +167,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::getCodigoSeguranca
      */
-    public function codigoSegurancaDeveRetornarPropriedadeCodigoSeguranca()
+    public function codigoSegurancaDeveRetornarPropriedadeCodigoSeguranca(): void
     {
         $cartao = new Cartao();
 
@@ -175,11 +182,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::setCodigoSeguranca
      * @covers \MrPrompt\Cielo\Cartao::getCodigoSeguranca
      */
-    public function codigoDeSegurancaDeveSerNumerico()
+    public function codigoDeSegurancaDeveSerNumerico(): void
     {
         $cartao = new Cartao();
         $cartao->setCodigoSeguranca(123);
@@ -189,9 +195,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setCodigoSeguranca
      * @expectedException \InvalidArgumentException
      */
-    public function codigoDeSegurancaNaoPodeConterCaracteresAlfabeticos()
+    public function codigoDeSegurancaNaoPodeConterCaracteresAlfabeticos(): void
     {
         $cartao = new Cartao();
         $cartao->setCodigoSeguranca('aaa');
@@ -199,9 +206,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setCodigoSeguranca
      * @expectedException \InvalidArgumentException
      */
-    public function codigoDeSegurancaNaoPodeConterPontuacao()
+    public function codigoDeSegurancaNaoPodeConterPontuacao(): void
     {
         $cartao = new Cartao();
         $cartao->setCodigoSeguranca('22.');
@@ -209,9 +217,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setCodigoSeguranca
      * @expectedException \InvalidArgumentException
      */
-    public function codigoDeSegurancaNaoPodeConterEspacos()
+    public function codigoDeSegurancaNaoPodeConterEspacos(): void
     {
         $cartao = new Cartao();
         $cartao->setCodigoSeguranca('22 2');
@@ -219,8 +228,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setNomePortador
      */
-    public function nomePortadorDeveSerAlfanumerico()
+    public function nomePortadorDeveSerAlfanumerico(): void
     {
         $cartao = new Cartao();
         $cartao->setNomePortador('Thiago Paes 1000');
@@ -230,8 +240,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setNomePortador
      */
-    public function nomePortadorDeveSerTruncadoEm50Caracteres()
+    public function nomePortadorDeveSerTruncadoEm50Caracteres(): void
     {
         $cartao = new Cartao();
         $cartao->setNomePortador(str_repeat('a', 60));
@@ -242,15 +253,20 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider nomesInvalidos
+     * @covers \MrPrompt\Cielo\Cartao::setNomePortador
      * @expectedException \InvalidArgumentException
      */
-    public function nomePortadorNaoPodeSerInvalido($valor)
+    public function nomePortadorNaoPodeSerInvalido($valor): void
     {
         $cartao = new Cartao();
         $cartao->setNomePortador($valor);
     }
 
-    public function nomesInvalidos()
+    /**
+     * Data provider
+     * @return array
+     */
+    public function nomesInvalidos(): array
     {
         return array(
             array(null),
@@ -262,8 +278,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setValidade
      */
-    public function validadeDeveSerInformadaNoFormatoCorreto()
+    public function validadeDeveSerInformadaNoFormatoCorreto(): void
     {
         $cartao = new Cartao();
         $cartao->setValidade('201606', '201302');
@@ -273,9 +290,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setValidade
      * @expectedException \InvalidArgumentException
      */
-    public function validadeNaoPodeConterCaracteresAlfabeticos()
+    public function validadeNaoPodeConterCaracteresAlfabeticos(): void
     {
         $cartao = new Cartao();
         $cartao->setValidade('aaa');
@@ -283,9 +301,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setValidade
      * @expectedException \InvalidArgumentException
      */
-    public function validadeNaoPodeConterPontuacao()
+    public function validadeNaoPodeConterPontuacao(): void
     {
         $cartao = new Cartao();
         $cartao->setValidade('22.');
@@ -293,9 +312,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setValidade
      * @expectedException \InvalidArgumentException
      */
-    public function validadeNaoPodeConterEspacos()
+    public function validadeNaoPodeConterEspacos(): void
     {
         $cartao = new Cartao();
         $cartao->setValidade('22 2');
@@ -303,9 +323,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setValidade
      * @expectedException \InvalidArgumentException
      */
-    public function naoPodeSerUtilizadaValidadeNoPassado()
+    public function naoPodeSerUtilizadaValidadeNoPassado(): void
     {
         $cartao = new Cartao();
         $cartao->setValidade('201210', '201305');
@@ -313,8 +334,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setBandeira
      */
-    public function bandeiraDeveSerValido()
+    public function bandeiraDeveSerValido(): void
     {
         $cartao = new Cartao();
         $cartao->setBandeira('visa');
@@ -324,9 +346,10 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setBandeira
      * @expectedException \InvalidArgumentException
      */
-    public function bandeiraDeveReceberApenasMinusculos()
+    public function bandeiraDeveReceberApenasMinusculos(): void
     {
         $cartao = new Cartao();
         $cartao->setBandeira('MASTERCARD');
@@ -336,16 +359,21 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cartao::setBandeira
      * @dataProvider bandeirasInvalidas
      * @expectedException \InvalidArgumentException
      */
-    public function deveLancarErroCasoRecebaBandeiraInvalido($valor)
+    public function deveLancarErroCasoRecebaBandeiraInvalido($valor): void
     {
         $cartao = new Cartao();
         $cartao->setBandeira($valor);
     }
 
-    public function bandeirasInvalidas()
+    /**
+     * Data provider
+     * @return array
+     */
+    public function bandeirasInvalidas(): array
     {
         return array(
             array(3),
@@ -359,10 +387,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::getBandeiras
      */
-    public function listarBandeirasDeveRetornarUmArray()
+    public function listarBandeirasDeveRetornarUmArray(): void
     {
         $cartao = new Cartao();
         $bandeiras = $cartao->getBandeiras();
@@ -372,10 +399,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::getToken
      */
-    public function getTokenDeveRetornarPropriedadeTokenInalterada()
+    public function getTokenDeveRetornarPropriedadeTokenInalterada(): void
     {
         $cartao = new Cartao();
 
@@ -388,10 +414,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::setToken
      */
-    public function setTokenDeveRetornarValorDoTokenInalterado()
+    public function setTokenDeveRetornarValorDoTokenInalterado(): void
     {
         $cartao = new Cartao();
         $token  = $cartao->setToken('fooo');
@@ -401,10 +426,9 @@ class CartaoTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Cartao::hasToken
      */
-    public function hasTokenDeveRetornarTrueSeTokenEstiverDefinido()
+    public function hasTokenDeveRetornarTrueSeTokenEstiverDefinido(): void
     {
         $cartao = new Cartao();
 

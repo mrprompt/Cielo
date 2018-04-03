@@ -16,12 +16,19 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests;
 
 use MrPrompt\Cielo\Autorizacao;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AutorizacaoTest extends PHPUnit_Framework_TestCase
+/**
+ * Class AutorizacaoTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class AutorizacaoTest extends TestCase
 {
     /**
      * @test
@@ -34,7 +41,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Autorizacao::getChave
      * @covers \MrPrompt\Cielo\Autorizacao::getModalidade
      */
-    public function aoConstruirDeveConfigurarDados()
+    public function aoConstruirDeveConfigurarDados(): void
     {
         $autorizacao = new Autorizacao('teste', 'teste', Autorizacao::MODALIDADE_BUY_PAGE_LOJA);
 
@@ -52,7 +59,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * @covers \MrPrompt\Cielo\Autorizacao::getNumero
      */
-    public function aoConstruirDeveTruncarNumeroEm20Digitos()
+    public function aoConstruirDeveTruncarNumeroEm20Digitos(): void
     {
         $autorizacao = new Autorizacao(str_repeat('a', 30), 'teste');
 
@@ -68,7 +75,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Autorizacao::setModalidade
      * @covers \MrPrompt\Cielo\Autorizacao::getChave
      */
-    public function aoConstruirDeveTruncarChaveEm100Digitos()
+    public function aoConstruirDeveTruncarChaveEm100Digitos(): void
     {
         $autorizacao = new Autorizacao('teste', str_repeat('a', 130));
 
@@ -87,7 +94,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException \InvalidArgumentException
      */
-    public function aoConstruirNumeroNaoPodeTerValorInvalido($valor)
+    public function aoConstruirNumeroNaoPodeTerValorInvalido($valor): void
     {
         $autorizacao = new Autorizacao($valor, 'teste');
     }
@@ -104,7 +111,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException \InvalidArgumentException
      */
-    public function aoConstruirChaveNaoPodeTerValorInvalido($valor)
+    public function aoConstruirChaveNaoPodeTerValorInvalido($valor): void
     {
         $autorizacao = new Autorizacao('teste', $valor);
     }
@@ -121,7 +128,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException \TypeError
      */
-    public function aoConstruirModalideNaoPodeValorInvalido($valor)
+    public function aoConstruirModalideNaoPodeValorInvalido($valor): void
     {
         $autorizacao = new Autorizacao('teste', 'teste', $valor);
     }
@@ -138,7 +145,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function setModalidadeDisparaExcessaoSeAModalidadeNaoForPermitida($modalidade)
+    public function setModalidadeDisparaExcessaoSeAModalidadeNaoForPermitida($modalidade): void
     {
         $autorizacao = new Autorizacao('teste', 'teste');
         $autorizacao->setModalidade($modalidade);
@@ -149,15 +156,15 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      * 
      * @return mixed
      */
-    public function valoresInvalidos()
+    public function valoresInvalidos(): array
     {
-        return array(
-            array(null),
-            array(15.5),
-            array(''),
-            array(array('dfgdfg')),
-            array((object) array('dfgdfg' => 'sdfsdf'))
-        );
+        return [
+            [ null ],
+            [ 15.5 ],
+            [ '' ],
+            [ ['dfgdfg'] ],
+            [ (object) ['dfgdfg' => 'sdfsdf'] ]
+        ];
     }
 
     /**
@@ -165,7 +172,7 @@ class AutorizacaoTest extends PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    public function modalidadesInvalidas()
+    public function modalidadesInvalidas(): array
     {
         return [
             [

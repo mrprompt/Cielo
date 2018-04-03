@@ -16,16 +16,19 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests;
 
 use MrPrompt\Cielo\Ambiente;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AmbienteTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class AmbienteTest extends \PHPUnit_Framework_TestCase
+class AmbienteTest extends TestCase
 {
     /**
      * @var Ambiente
@@ -36,7 +39,7 @@ class AmbienteTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new class extends Ambiente {
             /**
@@ -54,7 +57,7 @@ class AmbienteTest extends \PHPUnit_Framework_TestCase
      * Data Provider
      * @return array
      */
-    public function urlsValidas()
+    public function urlsValidas(): array
     {
         return [
             [
@@ -70,7 +73,7 @@ class AmbienteTest extends \PHPUnit_Framework_TestCase
      * Data Provider
      * @return array
      */
-    public function urlsInvalidas()
+    public function urlsInvalidas(): array
     {
         return [
             [
@@ -87,7 +90,7 @@ class AmbienteTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Ambiente::validaUrl()
      * @dataProvider urlsValidas
      */
-    public function validaUrlDeveRetornarVerdadeiroParaUmaUrlValidaDoEndPoint($url)
+    public function validaUrlDeveRetornarVerdadeiroParaUmaUrlValidaDoEndPoint(string $url): void
     {
         $result = $this->object->validaUrl($url);
 
@@ -99,7 +102,7 @@ class AmbienteTest extends \PHPUnit_Framework_TestCase
      * @covers \MrPrompt\Cielo\Ambiente::validaUrl()
      * @dataProvider urlsInvalidas
      */
-    public function validaUrlDeveRetornarFalsoParaUmaUrlInvalidaDoEndPoint($url)
+    public function validaUrlDeveRetornarFalsoParaUmaUrlInvalidaDoEndPoint(string $url): void
     {
         $result = $this->object->validaUrl($url);
 
