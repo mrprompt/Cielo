@@ -23,16 +23,16 @@ namespace MrPrompt\Cielo\Tests\Requisicao;
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Transacao;
+use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use SimpleXMLElement;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class RequisicaoTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class RequisicaoTest extends TestCase
+final class RequisicaoTest extends TestCase
 {
     /**
      * @var Requisicao

@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class ClienteTest extends TestCase
+final class ClienteTest extends TestCase
 {
     /**
      * @var Cliente

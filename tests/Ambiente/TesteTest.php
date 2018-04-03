@@ -28,7 +28,7 @@ use PHPUnit\Framework\TestCase;
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class TesteTest extends TestCase
+final class TesteTest extends TestCase
 {
     /**
      * @var Teste

@@ -25,15 +25,15 @@ use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
-use ReflectionMethod;
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 
 /**
  * Class SolicitacaoTokenTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class SolicitacaoTokenTest extends TestCase
+final class SolicitacaoTokenTest extends TestCase
 {
     /**
      *

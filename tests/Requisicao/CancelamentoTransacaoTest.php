@@ -23,15 +23,15 @@ namespace MrPrompt\Cielo\Tests\Requisicao;
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
 use MrPrompt\Cielo\Transacao;
-use ReflectionMethod;
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 
 /**
  * Class CancelamentoTransacaoTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class CancelamentoTransacaoTest extends TestCase
+final class CancelamentoTransacaoTest extends TestCase
 {
     /**
      *

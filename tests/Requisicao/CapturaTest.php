@@ -31,7 +31,7 @@ use ReflectionMethod;
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class CapturaTest extends TestCase
+final class CapturaTest extends TestCase
 {
     /**
      *

@@ -33,7 +33,7 @@ use ReflectionMethod;
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class AutorizacaoPortadorTest extends TestCase
+final class AutorizacaoPortadorTest extends TestCase
 {
     /**
      *

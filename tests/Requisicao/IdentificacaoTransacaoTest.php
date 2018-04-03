@@ -24,15 +24,15 @@ use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
-use ReflectionMethod;
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 
 /**
  * Class IdentificacaoTransacaoTest
  * @package MrPrompt\Cielo\Tests
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class IdentificacaoTransacaoTest extends TestCase
+final class IdentificacaoTransacaoTest extends TestCase
 {
     /**
      *
