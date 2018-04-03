@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
@@ -24,8 +26,14 @@ use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Transacao;
 use ReflectionMethod;
+use PHPUnit\Framework\TestCase;
 
-class SolicitacaoTransacaoTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class SolicitacaoTransacaoTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class SolicitacaoTransacaoTest extends TestCase
 {
     /**
      * @var SolicitacaoTransacao

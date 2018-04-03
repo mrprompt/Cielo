@@ -16,13 +16,21 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\Consulta;
 use MrPrompt\Cielo\Transacao;
+use PHPUnit\Framework\TestCase;
 
-class ConsultaTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class ConsultaTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class ConsultaTest extends TestCase
 {
     /**
      *

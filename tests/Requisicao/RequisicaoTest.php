@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
@@ -23,8 +25,14 @@ use MrPrompt\Cielo\Requisicao\Requisicao;
 use MrPrompt\Cielo\Transacao;
 use ReflectionMethod;
 use SimpleXMLElement;
+use PHPUnit\Framework\TestCase;
 
-class RequisicaoTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class RequisicaoTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class RequisicaoTest extends TestCase
 {
     /**
      * @var Requisicao

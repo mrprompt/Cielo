@@ -16,6 +16,8 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
@@ -24,8 +26,14 @@ use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
 use ReflectionMethod;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
+use PHPUnit\Framework\TestCase;
 
-class AutorizacaoPortadorTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class AutorizacaoPortadorTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class AutorizacaoPortadorTest extends TestCase
 {
     /**
      *

@@ -16,14 +16,22 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
 use MrPrompt\Cielo\Transacao;
 use ReflectionMethod;
+use PHPUnit\Framework\TestCase;
 
-class CancelamentoTransacaoTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class CancelamentoTransacaoTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class CancelamentoTransacaoTest extends TestCase
 {
     /**
      *
