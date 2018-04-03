@@ -25,6 +25,7 @@ namespace MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Idioma;
 
 /**
+ * Class Ingles
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 class Ingles extends Idioma

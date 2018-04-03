@@ -25,6 +25,7 @@ use MrPrompt\Cielo\Idioma\Ingles;
 use MrPrompt\Cielo\Idioma\Portugues;
 
 /**
+ * Class Idioma
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 abstract class Idioma

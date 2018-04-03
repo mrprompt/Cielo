@@ -25,6 +25,7 @@ namespace MrPrompt\Cielo\Ambiente;
 use MrPrompt\Cielo\Ambiente;
 
 /**
+ * Class Teste
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 final class Teste extends Ambiente

@@ -21,6 +21,7 @@ use Respect\Validation\Validator as v;
 use InvalidArgumentException;
 
 /**
+ * Class Cartao
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 class Cartao

@@ -26,6 +26,7 @@ use MrPrompt\Cielo\Ambiente\Producao;
 use MrPrompt\Cielo\Ambiente\Teste;
 
 /**
+ * Class Ambiente
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 abstract class Ambiente
