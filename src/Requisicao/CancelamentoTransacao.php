@@ -50,4 +50,15 @@ class CancelamentoTransacao extends Requisicao
             'requisicao-cancelamento'
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configuraEnvio()
+    {
+        $valor = $this->transacao->getValor();
+        if (!empty($valor)) {
+            $this->getEnvio()->addChild('valor', $valor);
+        }
+    }
 }
