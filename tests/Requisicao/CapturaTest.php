@@ -24,6 +24,7 @@ use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Requisicao\Captura;
 use MrPrompt\Cielo\Transacao;
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 
 /**
  * Class CapturaTest
@@ -42,10 +43,10 @@ class CapturaTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         
         $this->object = new Captura($mockAutorizacao, $mockTransacao);
     }
@@ -54,18 +55,24 @@ class CapturaTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
+        $this->object = null;
 
+        parent::tearDown();
     }
     
     /**
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Captura::getXmlInicial()
-     * @todo   Implement getXmlInicial().
      */
     public function getXmlInicial()
     {
+        $method = new ReflectionMethod($this->object, 'getXmlInicial');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
         
+        $this->assertNotEmpty($result);
     }
 }

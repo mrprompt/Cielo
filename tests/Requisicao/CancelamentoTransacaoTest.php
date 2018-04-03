@@ -43,12 +43,23 @@ class CancelamentoTransacaoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         
         $this->object = new CancelamentoTransacao($mockAutorizacao, $mockTransacao);
+    }
+
+    /**
+     * Tears down the fixture, for example, closes a network connection.
+     * This method is called after a test is executed.
+     */
+    protected function tearDown(): void
+    {
+        $this->object = null;
+
+        parent::tearDown();
     }
     
     /**
@@ -57,7 +68,7 @@ class CancelamentoTransacaoTest extends TestCase
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\CancelamentoTransacao::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);

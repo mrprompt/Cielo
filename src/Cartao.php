@@ -331,5 +331,4 @@ class Cartao
     {
         return ! empty($this->token);
     }
-
 }

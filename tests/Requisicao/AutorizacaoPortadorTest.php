@@ -24,9 +24,9 @@ use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Idioma;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
-use ReflectionMethod;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 
 /**
  * Class AutorizacaoPortadorTest
@@ -45,24 +45,24 @@ class AutorizacaoPortadorTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
-        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
+        $autorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $cartao = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
+        $idioma = $this->getMockBuilder(Idioma::class)->disableOriginalConstructor()->getMock();
+        
+        $transacao = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
 
-        $this->object 	 = new AutorizacaoPortador($mockAutorizacao, $mockTransacao, $mockCartao, $idioma);
+        $this->object = new AutorizacaoPortador($autorizacao, $transacao, $cartao, $idioma);
     }
     
     /**
      * @test
-     * 
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);
@@ -74,11 +74,10 @@ class AutorizacaoPortadorTest extends TestCase
     
     /**
      * @test
-     * 
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::configuraEnvio()
      */
-    public function configuraEnvio()
+    public function configuraEnvio(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraEnvio');
         $method->setAccessible(true);
@@ -90,11 +89,10 @@ class AutorizacaoPortadorTest extends TestCase
     
     /**
      * @test
-     * 
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaCartao()
      */
-    public function adicionaCartao()
+    public function adicionaCartao(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaCartao');
         $method->setAccessible(true);
@@ -106,11 +104,10 @@ class AutorizacaoPortadorTest extends TestCase
     
     /**
      * @test
-     * 
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaTransacao()
      */
-    public function adicionaTransacao()
+    public function adicionaTransacao(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaTransacao');
         $method->setAccessible(true);
@@ -122,11 +119,10 @@ class AutorizacaoPortadorTest extends TestCase
     
     /**
      * @test
-     * 
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoPortador::adicionaFormaPagamento()
      */
-    public function adicionaFormaPagamento()
+    public function adicionaFormaPagamento(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaFormaPagamento');
         $method->setAccessible(true);

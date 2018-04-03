@@ -43,12 +43,12 @@ class AutorizacaoTransacaoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         
         $this->object = new AutorizacaoTransacao($mockAutorizacao, $mockTransacao);
     }
@@ -57,7 +57,7 @@ class AutorizacaoTransacaoTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
 
@@ -68,7 +68,7 @@ class AutorizacaoTransacaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\AutorizacaoTransacao::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);

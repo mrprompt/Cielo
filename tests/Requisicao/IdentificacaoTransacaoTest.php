@@ -44,22 +44,21 @@ class IdentificacaoTransacaoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
+        $mockCartao      = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
         
         $this->object = new IdentificacaoTransacao($mockAutorizacao, $mockTransacao, $mockCartao);
     }
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);
@@ -71,11 +70,10 @@ class IdentificacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::configuraEnvio()
      */
-    public function configuraEnvio()
+    public function configuraEnvio(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraEnvio');
         $method->setAccessible(true);
@@ -87,11 +85,10 @@ class IdentificacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::deveAdicionarTid()
      */
-    public function deveAdicionarTid()
+    public function deveAdicionarTid(): void
     {
         $method = new ReflectionMethod($this->object, 'deveAdicionarTid');
         $method->setAccessible(true);
@@ -103,11 +100,10 @@ class IdentificacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\IdentificacaoTransacao::adicionaFormaPagamento()
      */
-    public function adicionaFormaPagamento()
+    public function adicionaFormaPagamento(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaFormaPagamento');
         $method->setAccessible(true);

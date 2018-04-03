@@ -59,13 +59,11 @@ class ClienteTest extends TestCase
      */
     public function iniciaTransacaoDeveRetornarUmObjectSolicitacaoTransacao()
     {
-        // @todo Tests broken with getDataHora, fix it.
-        $this->markTestIncomplete();
-        
         $transacao = $this->getMockBuilder(Transacao::class)
-                        ->setMethods(['getDataHora' => new DateTime])
                         ->disableOriginalConstructor()
                         ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
 
         $cartao = $this->getMockBuilder(Cartao::class)
                         ->disableOriginalConstructor()

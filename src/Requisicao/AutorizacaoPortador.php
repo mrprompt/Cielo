@@ -63,8 +63,12 @@ class AutorizacaoPortador extends Requisicao
      * @param Cartao      $cartao
      * @param Idioma      $idioma
      */
-    public function __construct(Autorizacao $autorizacao, Transacao $transacao, Cartao $cartao, Idioma $idioma = null)
-    {
+    public function __construct(
+        Autorizacao $autorizacao, 
+        Transacao $transacao, 
+        Cartao $cartao, 
+        Idioma $idioma = null
+    ) {
         $this->cartao = $cartao;
         $this->idioma = $idioma ?: new Idioma\Portugues();
 
