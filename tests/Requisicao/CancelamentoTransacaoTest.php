@@ -77,4 +77,40 @@ final class CancelamentoTransacaoTest extends TestCase
         
         $this->assertNotEmpty($result);
     }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\CancelamentoTransacao::configuraEnvio()
+     */
+    public function configuraEnvio(): void
+    {
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Requisicao\Requisicao::__construct()
+     * @covers \MrPrompt\Cielo\Requisicao\CancelamentoTransacao::configuraEnvio()
+     */
+    public function configuraEnvioComValor(): void
+    {
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao->method('getValor')->willReturn(100);
+        
+        $this->object = new CancelamentoTransacao($mockAutorizacao, $mockTransacao);
+
+        $method = new ReflectionMethod($this->object, 'configuraEnvio');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->object);
+
+        $this->assertEmpty($result);
+    }
 }
