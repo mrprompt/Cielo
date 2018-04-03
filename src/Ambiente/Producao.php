@@ -22,7 +22,7 @@ declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Ambiente;
 
-use MrPrompt\Cielo\Ambiente;
+use MrPrompt\Cielo\Ambiente\Ambiente;
 
 /**
  * Class Producao

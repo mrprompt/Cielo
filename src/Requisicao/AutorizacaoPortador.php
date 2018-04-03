@@ -22,7 +22,7 @@ namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Idioma\Idioma;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cliente;
 

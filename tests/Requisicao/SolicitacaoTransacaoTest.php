@@ -22,7 +22,7 @@ namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Cartao;
-use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Idioma\Idioma;
 use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Transacao;
 use PHPUnit\Framework\TestCase;

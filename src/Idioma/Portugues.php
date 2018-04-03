@@ -22,7 +22,7 @@ declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Idioma;
 
-use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Idioma\Idioma;
 
 /**
  * Class Portugues

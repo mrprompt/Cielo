@@ -20,7 +20,7 @@
  */
 declare(strict_types = 1);
 
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Ambiente;
 
 use MrPrompt\Cielo\Ambiente\Producao;
 use MrPrompt\Cielo\Ambiente\Teste;

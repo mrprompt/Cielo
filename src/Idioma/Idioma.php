@@ -18,7 +18,7 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
-namespace MrPrompt\Cielo;
+namespace MrPrompt\Cielo\Idioma;
 
 use MrPrompt\Cielo\Idioma\Espanhol;
 use MrPrompt\Cielo\Idioma\Ingles;

@@ -18,14 +18,17 @@
  */
 declare(strict_types=1);
 
-namespace MrPrompt\Cielo\Tests;
+namespace MrPrompt\Cielo\Tests\Idioma;
 
-use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Idioma\Idioma;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Idioma\Espanhol;
+use MrPrompt\Cielo\Idioma\Ingles;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class IdiomaTest
- * @package MrPrompt\Cielo\Tests
+ * @package MrPrompt\Cielo\Tests\Idioma
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 final class IdiomaTest extends TestCase
@@ -61,13 +64,13 @@ final class IdiomaTest extends TestCase
     {
         return [
             [
-                Idioma\Portugues::IDIOMA
+                Portugues::IDIOMA
             ],
             [
-                Idioma\Espanhol::IDIOMA
+                Espanhol::IDIOMA
             ],
             [
-                Idioma\Ingles::IDIOMA
+                Ingles::IDIOMA
             ],
         ];
     }
@@ -90,7 +93,7 @@ final class IdiomaTest extends TestCase
 
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Idioma::valida()
+     * @covers \MrPrompt\Cielo\Idioma\Idioma::valida()
      * @dataProvider idiomasValidas
      */
     public function validaDeveRetornarVerdadeiroParaUmaIdiomaValidaDoEndPoint($idioma): void
@@ -102,7 +105,7 @@ final class IdiomaTest extends TestCase
 
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Idioma::valida()
+     * @covers \MrPrompt\Cielo\Idioma\Idioma::valida()
      * @dataProvider idiomasInvalidas
      */
     public function validaDeveRetornarFalsoParaUmaIdiomaInvalidaDoEndPoint($idioma): void

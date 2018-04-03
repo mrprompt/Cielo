@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class TesteTest
- * @package MrPrompt\Cielo\Tests
+ * @package MrPrompt\Cielo\Tests\Ambiente
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 final class TesteTest extends TestCase

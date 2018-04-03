@@ -18,14 +18,16 @@
  */
 declare(strict_types=1);
 
-namespace MrPrompt\Cielo\Tests;
+namespace MrPrompt\Cielo\Tests\Ambiente;
 
-use MrPrompt\Cielo\Ambiente;
+use MrPrompt\Cielo\Ambiente\Ambiente;
+use MrPrompt\Cielo\Ambiente\Producao;
+use MrPrompt\Cielo\Ambiente\Teste;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class AmbienteTest
- * @package MrPrompt\Cielo\Tests
+ * @package MrPrompt\Cielo\Tests\Ambiente
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 final class AmbienteTest extends TestCase
@@ -61,10 +63,10 @@ final class AmbienteTest extends TestCase
     {
         return [
             [
-                Ambiente\Producao::URL
+                Producao::URL
             ],
             [
-                Ambiente\Teste::URL
+                Teste::URL
             ]
         ];
     }
@@ -87,7 +89,7 @@ final class AmbienteTest extends TestCase
 
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Ambiente::validaUrl()
+     * @covers \MrPrompt\Cielo\Ambiente\Ambiente::validaUrl()
      * @dataProvider urlsValidas
      */
     public function validaUrlDeveRetornarVerdadeiroParaUmaUrlValidaDoEndPoint(string $url): void
@@ -99,7 +101,7 @@ final class AmbienteTest extends TestCase
 
     /**
      * @test
-     * @covers \MrPrompt\Cielo\Ambiente::validaUrl()
+     * @covers \MrPrompt\Cielo\Ambiente\Ambiente::validaUrl()
      * @dataProvider urlsInvalidas
      */
     public function validaUrlDeveRetornarFalsoParaUmaUrlInvalidaDoEndPoint(string $url): void

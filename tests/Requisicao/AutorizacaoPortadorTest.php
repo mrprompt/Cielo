@@ -21,7 +21,7 @@ declare(strict_types=1);
 namespace MrPrompt\Cielo\Tests\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Idioma;
+use MrPrompt\Cielo\Idioma\Idioma;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
