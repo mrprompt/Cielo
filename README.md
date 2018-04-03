@@ -7,9 +7,19 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/70cb14d6f3ef41babd86477122ac6e57)](https://www.codacy.com/app/mrprompt/Cielo)
 
-Cielo é uma classe cliente para o web service da Cielo.
+Cielo é uma biblioteca cliente para o web service da Cielo.
 
 Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
+
+## ATENÇÃO
+
+Esta biblioteca é baseada na versão 1.5.x da API da Cielo, porém a mesma foi descontinuada.
+Alterações neste projeto são apenas para bug fixes e melhorias para a versão mencionada. 
+Caso você esteja implementando em um novo projeto, recomendo utilizar a versão 3.x da API.
+
+* https://developercielo.github.io/
+* https://developercielo.github.io/manual/webservice-1-5
+* https://developercielo.github.io/tutorial/guia-de-migracao
 
 ## Requisitos
 
@@ -62,10 +72,13 @@ $cielo = new Cliente(
     new Teste()
 );
 
-$requisicao = $cielo->autoriza($transacao);
+try {
+    $requisicao = $cielo->autoriza($transacao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### Autorização Portador
@@ -108,10 +121,13 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201612');
 
-$requisicao = $cielo->autorizaPortador($transacao, $cartao);
+try {
+    $requisicao = $cielo->autorizaPortador($transacao, $cartao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### Cancelamento
@@ -136,10 +152,13 @@ $cielo     = new Cliente(
     new Teste()
 );
 
-$requisicao = $cielo->cancela($transacao);
+try {
+    $requisicao = $cielo->cancela($transacao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### Captura
@@ -164,10 +183,13 @@ $cielo     = new Cliente(
     new Teste()
 );
 
-$requisicao = $cielo->captura($transacao);
+try {
+    $requisicao = $cielo->captura($transacao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### Consulta
@@ -192,10 +214,13 @@ $cielo     = new Cliente(
     new Teste()
 );
 
-$requisicao = $cielo->consulta($transacao);
+try {
+    $requisicao = $cielo->consulta($transacao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### TID
@@ -237,10 +262,13 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201612');
 
-$requisicao = $cielo->tid($transacao, $cartao);
+try {
+    $requisicao = $cielo->tid($transacao, $cartao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ### Transação
@@ -283,10 +311,13 @@ $cielo     = new Cliente(
     new Teste()
 );
 
-$requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
+try {
+    $requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}
 ```
 
 ## Versões anteriores
