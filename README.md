@@ -25,13 +25,13 @@ composer.phar require "mrprompt/cielo"
 
 ## Exemplos
 
-* [Autorizacao](#Autorizacao)
-* [Autorização Portador](#Autorização Portador)
-* [Cancelamento](#Cancelamento)
-* [Captura](#Captura)
-* [Consulta](#Consulta)
-* [TID](#TID)
-* [Transação](#Transação)
+* [Autorização](#autorização)
+* [Autorização Portador](#autorização-portador)
+* [Cancelamento](#cancelamento)
+* [Captura](#captura)
+* [Consulta](#consulta)
+* [TID](#tid)
+* [Transação](#transação)
 
 ### Autorização
 
