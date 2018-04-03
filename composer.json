@@ -39,7 +39,8 @@
     "require": {
         "php": ">=7.1",
         "respect/validation": "~1.1.15",
-        "guzzlehttp/guzzle": "~6.3.2"
+        "guzzlehttp/guzzle": "~6.3.2",
+        "jms/serializer": "^1.11@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0.3"
