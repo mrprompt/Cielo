@@ -23,8 +23,274 @@ Com esta classe, sua aplicação será capaz de realizar transações a Crédito
 composer.phar require "mrprompt/cielo"
 ```
 
-#### PHP 5.5 ~ 5.6
-Somente a versão 2.2 é compatível com PHP 5.5 e 5.6
+## Exemplos
 
-#### PHP 5.3 ~ 5.4
-Até a versão 2.1, o PHP 5.3 é suportado.
+* [Autorizacao](#Autorizacao)
+* [Autorização Portador](#Autorização Portador)
+* [Cancelamento](#Cancelamento)
+* [Captura](#Captura)
+* [Consulta]](#Consulta)
+* [TID](#TID)
+* [Transação](#Transação)
+
+### Autorização
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+$transacao->setAutorizar(2);
+$transacao->setCapturar(false);
+$transacao->setDataHora(new DateTimeImmutable());
+$transacao->setDescricao('teste');
+$transacao->setMoeda(986);
+$transacao->setNumero(001);
+$transacao->setParcelas(1);
+$transacao->setValor(1.00);
+
+/* @var $cielo \MrPrompt\Cielo\Cliente */
+$cielo = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+$requisicao = $cielo->autoriza($transacao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### Autorização Portador
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Cartao;
+use MrPrompt\Cielo\Transacao;
+
+/* @var $cielo \MrPrompt\Cielo\Cliente */
+$cielo = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+$transacao->setAutorizar(2);
+$transacao->setCapturar(false);
+$transacao->setDataHora(new DateTimeImmutable());
+$transacao->setDescricao('teste');
+$transacao->setMoeda(986);
+$transacao->setNumero(001);
+$transacao->setParcelas(1);
+$transacao->setValor(1.00);
+
+/* @var $transacao \MrPrompt\Cielo\Cartao */
+$cartao = new Cartao();
+$cartao->setBandeira('visa');
+$cartao->setCartao('4012001037141112');
+$cartao->setCodigoSeguranca('123');
+$cartao->setIndicador(0);
+$cartao->setNomePortador('Teste');
+$cartao->setValidade('201612');
+
+$requisicao = $cielo->autorizaPortador($transacao, $cartao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### Cancelamento
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Transacao;
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+
+/* @var $transacao \MrPrompt\Cielo\Cliente */
+$cielo     = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+$requisicao = $cielo->cancela($transacao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### Captura
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Transacao;
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+
+/* @var $transacao \MrPrompt\Cielo\Cliente */
+$cielo     = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+$requisicao = $cielo->captura($transacao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### Consulta
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Transacao;
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+
+/* @var $transacao \MrPrompt\Cielo\Cliente */
+$cielo     = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+$requisicao = $cielo->consulta($transacao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### TID
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Cartao;
+
+/* @var $transacao \MrPrompt\Cielo\Cliente */
+$cielo     = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setAutorizar(2);
+$transacao->setCapturar(false);
+$transacao->setDataHora(new DateTimeImmutable());
+$transacao->setDescricao('teste');
+$transacao->setMoeda(986);
+$transacao->setNumero(001);
+$transacao->setParcelas(1);
+$transacao->setValor(1.00);
+
+/* @var $transacao \MrPrompt\Cielo\Cartao */
+$cartao = new Cartao();
+$cartao->setBandeira('visa');
+$cartao->setCartao('4012001037141112');
+$cartao->setCodigoSeguranca('123');
+$cartao->setIndicador(0);
+$cartao->setNomePortador('Teste');
+$cartao->setValidade('201612');
+
+$requisicao = $cielo->tid($transacao, $cartao);
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+### Transação
+
+```php
+use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Cartao;
+
+/* @var $transacao \MrPrompt\Cielo\Transacao */
+$transacao = new Transacao();
+$transacao->setTid('10069930691FB8C01001');
+$transacao->setAutorizar(2);
+$transacao->setCapturar(false);
+$transacao->setDataHora(new DateTimeImmutable());
+$transacao->setDescricao('teste');
+$transacao->setMoeda(986);
+$transacao->setNumero(001);
+$transacao->setParcelas(1);
+$transacao->setValor(1.00);
+
+/* @var $transacao \MrPrompt\Cielo\Cartao */
+$cartao = new Cartao();
+$cartao->setBandeira('visa');
+$cartao->setCartao('4012001037141112');
+$cartao->setCodigoSeguranca('123');
+$cartao->setIndicador(0);
+$cartao->setNomePortador('Teste');
+$cartao->setValidade('201612');
+
+/* @var $transacao \MrPrompt\Cielo\Cliente */
+$cielo     = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new Client(),
+    new Portugues(),
+    new Teste()
+);
+
+$requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
+
+echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
+echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+```
+
+## Versões anteriores
+
+* PHP 5.5 ~ 5.6: Somente a versão 2.2 é compatível com PHP 5.5 e 5.6
+* PHP 5.3 ~ 5.4: Até a versão 2.1, o PHP 5.3 é suportado.
