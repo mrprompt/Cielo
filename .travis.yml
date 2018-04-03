@@ -13,17 +13,9 @@ matrix:
 
 before_script:
   - composer install --dev --prefer-dist -o
-  # - composer require codacy/coverage --dev
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
-  - chmod +x ./cc-test-reporter 
-  - ./cc-test-reporter before-build
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover build/coverage/xml
-  - ./vendor/bin/codecept run unit --coverage --coverage-xml
+  - ./vendor/bin/phpunit --coverage-clover tmp/clover.xml
 
-after_script: 
-  - mv tests/_output/coverage.xml clover.xml 
-  - ./cc-test-reporter after-build --coverage-input-type clover --id 12345 --exit-code $TRAVIS_TEST_RESULT
-  # - php vendor/bin/codacycoverage clover build/coverage/xml
-  # - php vendor/bin/codecept clover
+after_success:
+  - ./vendor/bin/test-reporter --coverage-report tmp/clover.xml
