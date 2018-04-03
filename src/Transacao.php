@@ -293,6 +293,7 @@ class Transacao
      * 1 (autorizar somente se autenticada)
      * 2 (autorizar autenticada e não-autenticada)
      * 3 (autorizar sem passar por autenticação – válido somente para crédito)
+     * 4 (autorização recorrente - válido somente para crédito)
      *
      * @access public
      * @return integer
@@ -309,6 +310,7 @@ class Transacao
      * 1 (autorizar somente se autenticada)
      * 2 (autorizar autenticada e não-autenticada)
      * 3 (autorizar sem passar por autenticação – válido somente para crédito)
+     * 4 (autorização recorrente - válido somente para crédito)
      *
      * @access public
      * @param  integer $autorizar
