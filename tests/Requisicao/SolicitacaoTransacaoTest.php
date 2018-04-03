@@ -57,9 +57,9 @@ class SolicitacaoTransacaoTest extends TestCase
         $urlRetorno = 'http://localhost/';
 
         $this->object = new SolicitacaoTransacao(
-            $this->autorizacao,
-            $this->transacao,
-            $this->cartao,
+            $autorizacao,
+            $transacao,
+            $cartao,
             $urlRetorno,
             $idioma
         );
