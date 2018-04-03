@@ -7,9 +7,19 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/70cb14d6f3ef41babd86477122ac6e57)](https://www.codacy.com/app/mrprompt/Cielo)
 
-Cielo é uma classe cliente para o web service da Cielo.
+Cielo é uma biblioteca cliente para o web service da Cielo.
 
 Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
+
+## ATENÇÃO
+
+Esta biblioteca é baseada na versão 1.5.x da API da Cielo, porém a mesma foi descontinuada.
+Alterações neste projeto são apenas para bug fixes e melhorias para a versão mencionada. 
+Caso você esteja implementando em um novo projeto, recomendo utilizar a versão 3.x da API.
+
+* https://developercielo.github.io/
+* https://developercielo.github.io/manual/webservice-1-5
+* https://developercielo.github.io/tutorial/guia-de-migracao
 
 ## Requisitos
 
