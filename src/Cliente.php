@@ -290,9 +290,9 @@ class Cliente
      * Realiza o envio da requisição à Cielo
      *
      * @param Requisicao $requisicao
-     * @return Requisicao
+     * @return object
      */
-    protected function enviaRequisicao(Requisicao $requisicao)
+    protected function enviaRequisicao(Requisicao $requisicao): object
     {
         $response = $this
             ->httpClient
@@ -308,6 +308,6 @@ class Cliente
 
         $requisicao->setResposta($response->getBody()->getContents());
 
-        return $requisicao;
+        return $requisicao->getResposta();
     }
 }

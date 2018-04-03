@@ -59,6 +59,8 @@ final class ClienteTest extends TestCase
      */
     public function iniciaTransacaoDeveRetornarUmObjectSolicitacaoTransacao()
     {
+        $this->markTestIncomplete();
+        
         $transacao = $this->getMockBuilder(Transacao::class)
                         ->disableOriginalConstructor()
                         ->getMock();
@@ -68,6 +70,8 @@ final class ClienteTest extends TestCase
         $cartao = $this->getMockBuilder(Cartao::class)
                         ->disableOriginalConstructor()
                         ->getMock();
+
+        $cartao->method('getCodigoSeguranca')->willReturn(123);
         
         $url = 'http://localhost';
 

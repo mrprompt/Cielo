@@ -7,7 +7,10 @@ $transacao = require_once __DIR__ . '/resources/transacao.php';
 /* @var $transacao \MrPrompt\Cielo\Cliente */
 $cielo     = require_once __DIR__ . '/resources/cliente.php';
 
-$requisicao = $cielo->captura($transacao);
+try {
+    $requisicao = $cielo->captura($transacao);
 
-echo 'XML GERADO: ', $requisicao->getEnvio()->asXML(), PHP_EOL;
-echo 'RETORNO: ', $requisicao->getResposta(), PHP_EOL;
+    print_r($requisicao);
+} catch (\InvalidArgumentException $ex) {
+    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
+}

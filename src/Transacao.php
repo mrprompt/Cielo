@@ -19,6 +19,7 @@ namespace MrPrompt\Cielo;
 
 use DateTime;
 use Respect\Validation\Validator as v;
+use JMS\Serializer\Annotation\Type;
 use InvalidArgumentException;
 
 /**
@@ -33,6 +34,7 @@ class Transacao
     /**
      * TID da transação
      *
+     * @Type("integer")
      * @var integer
      */
     private $tid;
@@ -46,6 +48,7 @@ class Transacao
      * 3 (Parcelado administradora)
      * A (Débito)
      *
+     * @Type("string")
      * @var string
      */
     private $produto = 1;
@@ -53,6 +56,7 @@ class Transacao
     /**
      * Número de parcelas da venda
      *
+     * @Type("integer")
      * @var integer
      */
     private $parcelas = self::PARCELAS_MINIMAS;
@@ -60,6 +64,7 @@ class Transacao
     /**
      * Código numérico da moeda na ISO 4217 (R$ é 986 - default)
      *
+     * @Type("integer")
      * @var integer
      */
     private $moeda = self::MOEDA_PADRAO;
@@ -68,6 +73,7 @@ class Transacao
      * Define se a transação será automaticamente capturada caso
      * seja autorizada.
      *
+     * @Type("string")
      * @var string
      */
     private $capturar = 'false';
@@ -80,6 +86,7 @@ class Transacao
      * 2 (autorizar autenticada e não-autenticada)
      * 3 (autorizar sem passar por autenticação – válido somente para crédito)
      *
+     * @Type("integer")
      * @var integer
      */
     private $autorizar = 0;
@@ -89,6 +96,7 @@ class Transacao
      *
      * Formato: AAAA-MM-DDTHH:MM:SS
      *
+     * @Type("DateTime")
      * @var datetime
      */
     private $dataHora;
@@ -96,6 +104,7 @@ class Transacao
     /**
      * Número do pedido da loja.
      *
+     * @Type("integer")
      * @var integer
      */
     private $numeroPedido;
@@ -103,6 +112,7 @@ class Transacao
     /**
      * Valor do pedido
      *
+     * @Type("integer")
      * @var integer
      */
     private $valorPedido;
@@ -110,6 +120,7 @@ class Transacao
     /**
      * Descricao da transação
      *
+     * @Type("string")
      * @var string
      */
     private $descricao;
@@ -117,6 +128,7 @@ class Transacao
     /**
      * Gerar token para cartão do portador?
      *
+     * @Type("boolean")
      * @var boolean
      */
     private $gerarToken = false;

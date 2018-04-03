@@ -149,7 +149,7 @@ final class RequisicaoTest extends TestCase
     {
         $result = $this->object->getResposta();
 
-        $this->assertEmpty($result);
+        $this->assertInstanceOf(Transacao::class, $result);
     }
     
     /**
