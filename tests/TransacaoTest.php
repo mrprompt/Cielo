@@ -87,9 +87,9 @@ class TransacaoTest extends TestCase
     public function produtosValidos(): array
     {
         return array(
-            array(1),
-            array(2),
-            array(3),
+            array('1'),
+            array('2'),
+            array('3'),
             array('A')
         );
     }
@@ -102,8 +102,8 @@ class TransacaoTest extends TestCase
     public function produtosInvalidos(): array
     {
         return array(
-            array(5),
-            array(99),
+            array('5'),
+            array('99'),
             array('AAAA')
         );
     }
@@ -346,6 +346,7 @@ class TransacaoTest extends TestCase
      * @test
      * @dataProvider capturasInvalidas
      * @covers \MrPrompt\Cielo\Transacao::setCapturar
+     * @expectedException \TypeError
      */
     public function setCapturarDisparaExcessaoComCapturaInvalida($capturar): void
     {
