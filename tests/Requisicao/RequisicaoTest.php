@@ -53,12 +53,12 @@ class RequisicaoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->autorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $this->autorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $this->transacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         $this->object      = $this->getMockForAbstractClass(Requisicao::class, [$this->autorizacao, $this->transacao]);
     }
 
@@ -66,7 +66,7 @@ class RequisicaoTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->autorizacao  = null;
         $this->transacao    = null;
@@ -77,7 +77,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getModalidadeIntegracao()
      */
-    public function getModalidadeIntegracao()
+    public function getModalidadeIntegracao(): void
     {
         $result = $this->object->getModalidadeIntegracao();
 
@@ -88,7 +88,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraAutenticacao()
      */
-    public function configuraAutenticacao()
+    public function configuraAutenticacao(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraAutenticacao');
         $method->setAccessible(true);
@@ -103,7 +103,7 @@ class RequisicaoTest extends TestCase
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraTransacao()
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
      */
-    public function configuraTransacao()
+    public function configuraTransacao(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraTransacao');
         $method->setAccessible(true);
@@ -118,7 +118,7 @@ class RequisicaoTest extends TestCase
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraTransacao()
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
      */
-    public function configuraTransacaoSemAdicionarTidDeveRetornarVazio()
+    public function configuraTransacaoSemAdicionarTidDeveRetornarVazio(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraTransacao');
         $method->setAccessible(true);
@@ -134,7 +134,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getEnvio()
      */
-    public function getEnvio()
+    public function getEnvio(): void
     {
         $result = $this->object->getEnvio();
 
@@ -145,7 +145,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getResposta()
      */
-    public function getResposta()
+    public function getResposta(): void
     {
         $result = $this->object->getResposta();
 
@@ -156,13 +156,13 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::setResposta()
      */
-    public function setResposta()
+    public function setResposta(): void
     {
         $dom = new \DOMDocument('1.0', 'utf-8');
         $dom->appendChild($dom->createElement('resposta'));
 
         $xml    = new SimpleXMLElement($dom->saveXML());
-        $result = $this->object->setResposta($xml);
+        $result = $this->object->setResposta($xml->__toString());
 
         $this->assertEmpty($result);
     }
@@ -171,7 +171,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::configuraEnvio()
      */
-    public function configuraEnvio()
+    public function configuraEnvio(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraEnvio');
         $method->setAccessible(true);
@@ -185,7 +185,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getAdicionarTid()
      */
-    public function getAdicionarTid()
+    public function getAdicionarTid(): void
     {
         $result = $this->object->getAdicionarTid();
 
@@ -196,7 +196,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::setAdicionarTid()
      */
-    public function setAdicionarTid()
+    public function setAdicionarTid(): void
     {
         $result = $this->object->setAdicionarTid(true);
 
@@ -207,7 +207,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::deveAdicionarTid()
      */
-    public function deveAdicionarTid()
+    public function deveAdicionarTid(): void
     {
         $method = new ReflectionMethod($this->object, 'deveAdicionarTid');
         $method->setAccessible(true);
@@ -221,7 +221,7 @@ class RequisicaoTest extends TestCase
      * @test
      * @covers \MrPrompt\Cielo\Requisicao\Requisicao::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);

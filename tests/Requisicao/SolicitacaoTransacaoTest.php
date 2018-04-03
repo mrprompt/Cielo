@@ -39,35 +39,22 @@ class SolicitacaoTransacaoTest extends TestCase
      * @var SolicitacaoTransacao
      */
     protected $object;
-
-    /**
-     * @var Autorizacao
-     */
-    protected $autorizacao;
-
-    /**
-     * @var Cartao
-     */
-    protected $cartao;
-
-    /**
-     * @var Transacao
-     */
-    protected $transacao;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->autorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $this->transacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $this->transacao->method('getDataHora')->willReturn(new \DateTime());
+        $autorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        
+        $transacao = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
+        $transacao->method('getDataHora')->willReturn(new \DateTime());
 
-        $this->cartao      = $this->getMock(Cartao::class, [], [], '', false);
-        $urlRetorno        = 'http://localhost/';
-        $idioma            = $this->getMock(Idioma::class, [], [], '', false);
+        $cartao = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
+        $idioma = $this->getMockBuilder(Idioma::class)->disableOriginalConstructor()->getMock();
+
+        $urlRetorno = 'http://localhost/';
 
         $this->object = new SolicitacaoTransacao(
             $this->autorizacao,
@@ -78,19 +65,29 @@ class SolicitacaoTransacaoTest extends TestCase
         );
     }
 
+    /**
+     * Tears down the fixture, for example, closes a network connection.
+     * This method is called after a test is executed.
+     */
+    protected function tearDown(): void
+    {
+        $this->object = null;
+
+        parent::tearDown();
+    }
+
   	/**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @expectedException \InvalidArgumentException
      */
-  	public function construtorDisparaExcessaoComUrlDeRetornoInvalida()
+  	public function construtorDisparaExcessaoComUrlDeRetornoInvalida(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
+        $mockCartao      = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
+        $idioma          = $this->getMockBuilder(Idioma::class)->disableOriginalConstructor()->getMock();
         $urlRetorno      = 'http:///';
-        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,
@@ -103,11 +100,10 @@ class SolicitacaoTransacaoTest extends TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::getXmlInicial()
      */
-    public function getXmlInicial()
+    public function getXmlInicial(): void
     {
         $method = new ReflectionMethod($this->object, 'getXmlInicial');
         $method->setAccessible(true);
@@ -119,11 +115,10 @@ class SolicitacaoTransacaoTest extends TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
      */
-    public function configuraEnvio()
+    public function configuraEnvio(): void
     {
         $method = new ReflectionMethod($this->object, 'configuraEnvio');
         $method->setAccessible(true);
@@ -135,21 +130,21 @@ class SolicitacaoTransacaoTest extends TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
      */
-    public function configuraEnvioComCartao()
+    public function configuraEnvioComCartao(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
 
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockCartao = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
         $mockCartao->setCartao('4012001037141112');
 
-        $urlRetorno      = 'http://localhost/';
-        $idioma          = $this->getMock(Idioma::class, [], [], '', false);
+        $urlRetorno = 'http://localhost/';
+        
+        $idioma  = $this->getMockBuilder(Idioma::class)->disableOriginalConstructor()->getMock();
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,
@@ -169,24 +164,23 @@ class SolicitacaoTransacaoTest extends TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::configuraEnvio()
      */
-    public function configuraEnvioComCartaoSetandoToken()
+    public function configuraEnvioComCartaoSetandoToken(): void
     {
-        $mockAutorizacao = $this->getMock(Autorizacao::class, [], [], '', false);
+        $mockAutorizacao = $this->getMockBuilder(Autorizacao::class)->disableOriginalConstructor()->getMock();
         $mockAutorizacao->setModalidade(Autorizacao::MODALIDADE_BUY_PAGE_CIELO);
 
-        $mockTransacao   = $this->getMock(Transacao::class, [], [], '', false);
+        $mockTransacao   = $this->getMockBuilder(Transacao::class)->disableOriginalConstructor()->getMock();
         $mockTransacao->method('isGerarToken')->willReturn(true);
         $mockTransacao->method('getDataHora')->willReturn(new \DateTime());
 
-        $mockCartao      = $this->getMock(Cartao::class, [], [], '', false);
+        $mockCartao      = $this->getMockBuilder(Cartao::class)->disableOriginalConstructor()->getMock();
         $mockCartao->method('getCartao')->willReturn('4012001037141112');
 
         $urlRetorno      = 'http://localhost/';
-        $idioma            = $this->getMock(Idioma::class, [], [], '', false);
+        $idioma            = $this->getMockBuilder(Idioma::class)->disableOriginalConstructor()->getMock();
 
         $this->object = new SolicitacaoTransacao(
             $mockAutorizacao,
@@ -206,11 +200,10 @@ class SolicitacaoTransacaoTest extends TestCase
 
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::deveAdicionarTid()
      */
-    public function deveAdicionarTid()
+    public function deveAdicionarTid(): void
     {
         $method = new ReflectionMethod($this->object, 'deveAdicionarTid');
         $method->setAccessible(true);
@@ -222,11 +215,10 @@ class SolicitacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaPortador()
      */
-    public function adicionaPortador()
+    public function adicionaPortador(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaPortador');
         $method->setAccessible(true);
@@ -238,11 +230,10 @@ class SolicitacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaTransacao()
      */
-    public function adicionaTransacao()
+    public function adicionaTransacao(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaTransacao');
         $method->setAccessible(true);
@@ -254,11 +245,10 @@ class SolicitacaoTransacaoTest extends TestCase
     
     /**
      * @test
-     *
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::__construct()
      * @covers \MrPrompt\Cielo\Requisicao\SolicitacaoTransacao::adicionaFormaPagamento()
      */
-    public function adicionaFormaPagamento()
+    public function adicionaFormaPagamento(): void
     {
         $method = new ReflectionMethod($this->object, 'adicionaFormaPagamento');
         $method->setAccessible(true);
