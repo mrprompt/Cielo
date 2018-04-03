@@ -1,11 +1,13 @@
 # Cielo
 
 [![Build Status](https://travis-ci.org/mrprompt/Cielo.png)](https://travis-ci.org/mrprompt/Cielo)
+[![Maintainability](https://api.codeclimate.com/v1/badges/52ff4029d94a20f9759a/maintainability)](https://codeclimate.com/github/mrprompt/Cielo/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/52ff4029d94a20f9759a/test_coverage)](https://codeclimate.com/github/mrprompt/Cielo/test_coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/70cb14d6f3ef41babd86477122ac6e57)](https://www.codacy.com/app/mrprompt/Cielo)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828/mini.png)](https://insight.sensiolabs.com/projects/78105a12-81f1-4421-bee8-0f0d73a6b828)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mrprompt/cielo.svg)](http://isitmaintained.com/project/mrprompt/cielo "Percentage of issues still open")
 [![Dependency Status](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/551a384e3661f134fe00002d)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/70cb14d6f3ef41babd86477122ac6e57)](https://www.codacy.com/app/mrprompt/Cielo)
 
 Cielo é uma biblioteca cliente para o web service da Cielo.
 
