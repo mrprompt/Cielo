@@ -16,11 +16,19 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Idioma;
 
 use MrPrompt\Cielo\Idioma\Portugues;
+use PHPUnit\Framework\TestCase;
 
-class PortuguesTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class PortuguesTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class PortuguesTest extends TestCase
 {
     /**
      * @var Portugues
@@ -31,7 +39,7 @@ class PortuguesTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new Portugues();
     }
@@ -40,7 +48,7 @@ class PortuguesTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \MrPrompt\Cielo\Idioma\Portugues::getIdioma()
      */
-    public function getIdiomaDeveRetornarValorDaConstante()
+    public function getIdiomaDeveRetornarValorDaConstante(): void
     {
         $result = $this->object->getIdioma();
 

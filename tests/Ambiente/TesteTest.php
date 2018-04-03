@@ -16,11 +16,19 @@
  * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2013
  * @license    GPL-3.0+
  */
+declare(strict_types=1);
+
 namespace MrPrompt\Cielo\Tests\Ambiente;
 
 use MrPrompt\Cielo\Ambiente\Teste;
+use PHPUnit\Framework\TestCase;
 
-class TesteTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class TesteTest
+ * @package MrPrompt\Cielo\Tests
+ * @author Thiago Paes <mrprompt@gmail.com>
+ */
+class TesteTest extends TestCase
 {
     /**
      * @var Teste
@@ -31,7 +39,7 @@ class TesteTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new Teste();
     }
@@ -40,7 +48,7 @@ class TesteTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \MrPrompt\Cielo\Ambiente\Teste::getUrl()
      */
-    public function getUrlDeveRetornarValorDaConstante()
+    public function getUrlDeveRetornarValorDaConstante(): void
     {
         $result = $this->object->getUrl();
 
