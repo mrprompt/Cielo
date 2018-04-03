@@ -229,6 +229,7 @@ final class CartaoTest extends TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Cartao::setNomePortador
+     * @covers \MrPrompt\Cielo\Cartao::getNomePortador
      */
     public function nomePortadorDeveSerAlfanumerico(): void
     {
@@ -241,6 +242,7 @@ final class CartaoTest extends TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Cartao::setNomePortador
+     * @covers \MrPrompt\Cielo\Cartao::getNomePortador
      */
     public function nomePortadorDeveSerTruncadoEm50Caracteres(): void
     {
@@ -279,6 +281,7 @@ final class CartaoTest extends TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Cartao::setValidade
+     * @covers \MrPrompt\Cielo\Cartao::getValidade
      */
     public function validadeDeveSerInformadaNoFormatoCorreto(): void
     {
@@ -335,6 +338,7 @@ final class CartaoTest extends TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Cartao::setBandeira
+     * @covers \MrPrompt\Cielo\Cartao::getBandeira
      */
     public function bandeiraDeveSerValido(): void
     {
@@ -347,6 +351,7 @@ final class CartaoTest extends TestCase
     /**
      * @test
      * @covers \MrPrompt\Cielo\Cartao::setBandeira
+     * @covers \MrPrompt\Cielo\Cartao::getBandeira
      * @expectedException \InvalidArgumentException
      */
     public function bandeiraDeveReceberApenasMinusculos(): void
