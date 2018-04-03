@@ -29,7 +29,7 @@ composer.phar require "mrprompt/cielo"
 * [Autorização Portador](#Autorização Portador)
 * [Cancelamento](#Cancelamento)
 * [Captura](#Captura)
-* [Consulta]](#Consulta)
+* [Consulta](#Consulta)
 * [TID](#TID)
 * [Transação](#Transação)
 
