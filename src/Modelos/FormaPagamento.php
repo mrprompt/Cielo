@@ -1,7 +1,5 @@
 <?php
 /**
- * Dados do FormaPagamento.
- *
  * Licença
  * Este código fonte está sob a licença GPL-3.0+
  *

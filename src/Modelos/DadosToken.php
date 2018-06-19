@@ -1,7 +1,5 @@
 <?php
 /**
- * Dados do Token.
- *
  * Licença
  * Este código fonte está sob a licença GPL-3.0+
  *
