@@ -140,13 +140,13 @@ class Transacao
      */
     private $token;
 
-    /** @var Autorizacao */
+    /** @var \MrPrompt\Cielo\Modelos\Autorizacao */
     private $autorizacao;
 
-    /** @var Autenticacao */
+    /** @var \MrPrompt\Cielo\Modelos\Autenticacao */
     private $autenticacao;
 
-    /** @var Captura */
+    /** @var \MrPrompt\Cielo\Modelos\Captura */
     private $captura;
 
     /**
@@ -481,17 +481,17 @@ class Transacao
     }
 
     /**
-     * @return Autorizacao
+     * @return Modelos\Autorizacao
      */
-    public function getAutorizacao(): Autorizacao
+    public function getAutorizacao(): Modelos\Autorizacao
     {
         return $this->autorizacao;
     }
 
     /**
-     * @param Autorizacao $autorizacao
+     * @param Modelos\Autorizacao $autorizacao
      */
-    public function setAutorizacao(Autorizacao $autorizacao): void
+    public function setAutorizacao(Modelos\Autorizacao $autorizacao): void
     {
         $this->autorizacao = $autorizacao;
     }

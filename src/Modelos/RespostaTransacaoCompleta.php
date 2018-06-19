@@ -174,25 +174,24 @@ class RespostaTransacaoCompleta
         $this->formaPagamento = $formaPagamento;
     }
 
-
     /**
-     * @return \Autenticacao
+     * @return Autenticacao
      */
-    public function getAutenticacao()
+    public function getAutenticacao(): Autenticacao
     {
         return $this->autenticacao;
     }
 
     /**
-     * @param \Autenticacao $autenticacao
+     * @param Autenticacao $autenticacao
      */
-    public function setAutenticacao($autenticacao)
+    public function setAutenticacao(Autenticacao $autenticacao): void
     {
         $this->autenticacao = $autenticacao;
     }
 
     /**
-     * @return \Autorizacao
+     * @return \MrPrompt\Cielo\Modelos\Autorizacao
      */
     public function getAutorizacao()
     {
@@ -200,7 +199,7 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @param \Autorizacao $autorizacao
+     * @param \MrPrompt\Cielo\Modelos\Autorizacao $autorizacao
      */
     public function setAutorizacao($autorizacao)
     {
@@ -208,7 +207,7 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @return \Captura
+     * @return \MrPrompt\Cielo\Modelos\Captura
      */
     public function getCaptura()
     {
@@ -216,7 +215,7 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @param \Captura $captura
+     * @param \MrPrompt\Cielo\Modelos\Captura $captura
      */
     public function setCaptura($captura)
     {
@@ -224,7 +223,7 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @return Token
+     * @return \MrPrompt\Cielo\Modelos\Token
      */
     public function getToken()
     {
@@ -232,7 +231,7 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @param Token $token
+     * @param \MrPrompt\Cielo\Modelos\Token $token
      */
     public function setToken($token)
     {
@@ -249,91 +248,35 @@ class RespostaTransacaoCompleta
         $transacao = new Transacao();
 
         $transacao->setTid( $this->getTid() );
-        $transacao->setProduto( $this->getProduto() );
-        $transacao->setParcelas( $this->getParcelas() );
-        $transacao->setMoeda( $this->getMoeda());
-        $transacao->setDataHora( $this->getDataHora() );
-        $transacao->setNumero( $this->getNumero() );
-        $transacao->setValor( $this->getValor() );
-        $transacao->setDescricao( $this->getDescricao() );
-        $transacao->setToken( $this->getCodigoToken() );
+
+        $transacao->setProduto( $this->getFormaPagamento()->getProduto() );
+        $transacao->setParcelas( $this->getFormaPagamento() ->getParcelas() );
+
+        $this->setPedidoTransacao( $transacao, $this->getDadosPedido() );
+
+        $transacao->setToken( $this->getToken()->getDadosToken()->getCodigoToken() );
         $transacao->setAutenticacao( $this->getAutenticacao() );
-        $transacao->setAutorizacao( $this->getAutorizacao() );
+        $transacao->setAutorizacao( $this->getAutorizacao());
         $transacao->setCaptura( $this->getCaptura() );
 
         return $transacao;
     }
 
     /**
-     * @return string
+     * Seta informações do pedido em Transacao.
+     *
+     * @param Transacao $transacao
+     * @param DadosPedido $dadosPedido
+     * @return Transacao
      */
-    private function getDescricao(){
+    private function setPedidoTransacao( Transacao $transacao, DadosPedido $dadosPedido ){
 
-        return $this->getDadosPedido()
-            ->getDescricao();
-    }
+        $transacao->setDescricao( $dadosPedido->getDescricao() );
+        $transacao->setValor( $dadosPedido->getValor() );
+        $transacao->setNumero( $dadosPedido->getNumero() );
+        $transacao->setDataHora( $dadosPedido->getDataHora() );
+        $transacao->setMoeda( $dadosPedido->getMoeda() );
 
-    /**
-     * @return int
-     */
-    private function getValor(){
-
-        return $this->getDadosPedido()
-            ->getValor();
-    }
-
-    /**
-     * @return int
-     */
-    private function getNumero(){
-
-        return $this->getDadosPedido()
-            ->getNumero();
-    }
-
-    /**
-     * @return DateTime
-     */
-    private function getDataHora(){
-
-        return $this->getDadosPedido()
-            ->getDataHora();
-    }
-
-    /**
-     * @return int
-     */
-    private function getMoeda(){
-
-        return $this->getDadosPedido()
-            ->getMoeda();
-    }
-
-    /**
-     * @return string
-     */
-    private function getCodigoToken(){
-
-        return $this->getToken()
-            ->getDadosToken()
-            ->getCodigoToken();
-    }
-
-    /**
-     * @return string
-     */
-    private function getProduto(){
-
-        return $this->getFormaPagamento()
-            ->getProduto();
-    }
-
-    /**
-     * @return int
-     */
-    private function getParcelas(){
-
-        return $this->getFormaPagamento()
-            ->getParcelas();
+        return $transacao;
     }
 }
