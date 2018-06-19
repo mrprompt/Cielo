@@ -111,14 +111,6 @@ class RespostaTransacaoCompleta
     }
 
     /**
-     * @return string
-     */
-    public function getPan()
-    {
-        return $this->pan;
-    }
-
-    /**
      * @param string $pan
      */
     public function setPan($pan)
