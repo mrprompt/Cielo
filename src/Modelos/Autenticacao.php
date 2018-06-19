@@ -30,14 +30,12 @@ use InvalidArgumentException;
 class Autenticacao
 {
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $codigo;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
@@ -56,14 +54,12 @@ class Autenticacao
 
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $valor;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
@@ -71,7 +67,6 @@ class Autenticacao
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

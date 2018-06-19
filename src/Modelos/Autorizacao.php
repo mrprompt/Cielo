@@ -30,14 +30,12 @@ use InvalidArgumentException;
 class Autorizacao
 {
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $codigo;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
@@ -55,28 +53,24 @@ class Autorizacao
     private $dataHora;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $valor;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $lr;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $arp;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
@@ -84,7 +78,6 @@ class Autorizacao
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

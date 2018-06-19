@@ -1,7 +1,5 @@
 <?php
 /**
- * FormaPagamento
- *
  * Dados do FormaPagamento.
  *
  * Licença
@@ -38,14 +36,12 @@ class FormaPagamento
     private $bandeira;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
     private $produto;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
@@ -53,7 +49,6 @@ class FormaPagamento
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

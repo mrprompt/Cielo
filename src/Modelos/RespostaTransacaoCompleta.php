@@ -82,7 +82,6 @@ class RespostaTransacaoCompleta
     private $captura;
 
     /**
-     *
      * @Type("MrPrompt\Cielo\Modelos\Token")
      * @var \MrPrompt\Cielo\Modelos\Token
      */
@@ -90,7 +89,6 @@ class RespostaTransacaoCompleta
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

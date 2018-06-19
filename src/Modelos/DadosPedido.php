@@ -31,21 +31,18 @@ use InvalidArgumentException;
 class DadosPedido
 {
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $numero;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $valor;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
@@ -63,14 +60,12 @@ class DadosPedido
     private $dataHora;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
     private $descricao;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
@@ -78,7 +73,6 @@ class DadosPedido
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

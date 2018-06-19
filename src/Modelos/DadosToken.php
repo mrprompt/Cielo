@@ -1,7 +1,5 @@
 <?php
 /**
- * DadosToken
- *
  * Dados do Token.
  *
  * Licença
@@ -58,7 +56,6 @@ class DadosToken
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

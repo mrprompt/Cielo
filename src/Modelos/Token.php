@@ -42,7 +42,6 @@ class Token
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {

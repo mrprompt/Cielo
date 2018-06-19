@@ -32,14 +32,12 @@ class Captura
 {
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
     private $codigo;
 
     /**
-     *
      * @Type("string")
      * @var string
      */
@@ -57,7 +55,6 @@ class Captura
     private $dataHora;
 
     /**
-     *
      * @Type("integer")
      * @var integer
      */
@@ -65,7 +62,6 @@ class Captura
 
     /**
      * Construtor
-     *
      */
     public function __construct()
     {
