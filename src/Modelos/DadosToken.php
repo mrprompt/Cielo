@@ -1,18 +1,5 @@
 <?php
-/**
- * DadosToken
- *
- * Seta informações token
- *
- * Licença
- * Este código fonte está sob a licença GPL-3.0+
- *
- * @category   Library
- * @package    MrPrompt\Cielo
- * @subpackage DadosToken
- * @copyright  Thiago Paes <mrprompt@gmail.com> (c) 2010
- * @license    GPL-3.0+
- */
+
 declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Modelos;
