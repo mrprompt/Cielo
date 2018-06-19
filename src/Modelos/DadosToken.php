@@ -2,7 +2,7 @@
 /**
  * DadosToken
  *
- * Seta informações do token
+ * Seta informações token
  *
  * Licença
  * Este código fonte está sob a licença GPL-3.0+
