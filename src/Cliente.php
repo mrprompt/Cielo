@@ -22,7 +22,9 @@ namespace MrPrompt\Cielo;
 
 use GuzzleHttp\Client;
 use MrPrompt\Cielo\Ambiente\Producao;
+use MrPrompt\Cielo\Ambiente\Teste;
 use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Ambiente\Ambiente;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
@@ -290,9 +292,9 @@ class Cliente
      * Realiza o envio da requisição à Cielo
      *
      * @param Requisicao $requisicao
-     * @return object
+     * @return Transacao
      */
-    protected function enviaRequisicao(Requisicao $requisicao): object
+    protected function enviaRequisicao(Requisicao $requisicao): Transacao
     {
         $response = $this
             ->httpClient

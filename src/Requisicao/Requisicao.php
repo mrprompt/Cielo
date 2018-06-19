@@ -21,6 +21,7 @@ declare(strict_types = 1);
 namespace MrPrompt\Cielo\Requisicao;
 
 use MrPrompt\Cielo\Autorizacao;
+use MrPrompt\Cielo\Modelos\RespostaTransacaoCompleta;
 use MrPrompt\Cielo\Transacao;
 use JMS\Serializer\SerializerBuilder;
 use DOMDocument;
@@ -152,7 +153,11 @@ abstract class Requisicao
             return new Transacao;
         }
 
-        $serializer = SerializerBuilder::create()->build();
+        $serializer = SerializerBuilder::create()->setPropertyNamingStrategy(
+            new \JMS\Serializer\Naming\SerializedNameAnnotationStrategy(
+                new \JMS\Serializer\Naming\IdenticalPropertyNamingStrategy()
+            )
+        )->build();
 
         $xml = simplexml_load_string($this->resposta);
 
@@ -160,8 +165,11 @@ abstract class Requisicao
             throw new InvalidArgumentException((string) $xml->mensagem, (int) $xml->codigo);
         }
 
-        $object = $serializer->deserialize($this->resposta, Transacao::class, 'xml');
-        
+        /** @var RespostaTransacaoCompleta $respostaTransacao */
+        $respostaTransacao = $serializer->deserialize($this->resposta, RespostaTransacaoCompleta::class, 'xml');
+
+        $object = $respostaTransacao->asTransacao();
+
         return $object;
     }
 

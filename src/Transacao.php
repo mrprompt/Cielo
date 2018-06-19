@@ -18,6 +18,8 @@ declare(strict_types = 1);
 namespace MrPrompt\Cielo;
 
 use DateTime;
+use MrPrompt\Cielo\Modelos\Autenticacao;
+use MrPrompt\Cielo\Modelos\Captura;
 use Respect\Validation\Validator as v;
 use JMS\Serializer\Annotation\Type;
 use InvalidArgumentException;
@@ -132,6 +134,20 @@ class Transacao
      * @var boolean
      */
     private $gerarToken = false;
+
+    /**
+     * @var string
+     */
+    private $token;
+
+    /** @var Autorizacao */
+    private $autorizacao;
+
+    /** @var Autenticacao */
+    private $autenticacao;
+
+    /** @var Captura */
+    private $captura;
 
     /**
      * Construtor
@@ -446,5 +462,69 @@ class Transacao
         $this->gerarToken = $gerarToken;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return Autorizacao
+     */
+    public function getAutorizacao(): Autorizacao
+    {
+        return $this->autorizacao;
+    }
+
+    /**
+     * @param Autorizacao $autorizacao
+     */
+    public function setAutorizacao(Autorizacao $autorizacao): void
+    {
+        $this->autorizacao = $autorizacao;
+    }
+
+    /**
+     * @return Autenticacao
+     */
+    public function getAutenticacao(): Autenticacao
+    {
+        return $this->autenticacao;
+    }
+
+    /**
+     * @param Autenticacao $autenticacao
+     */
+    public function setAutenticacao(Autenticacao $autenticacao): void
+    {
+        $this->autenticacao = $autenticacao;
+    }
+
+    /**
+     * @return Captura
+     */
+    public function getCaptura(): Captura
+    {
+        return $this->captura;
+    }
+
+    /**
+     * @param Captura $captura
+     */
+    public function setCaptura(Captura $captura): void
+    {
+        $this->captura = $captura;
     }
 }
