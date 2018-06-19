@@ -1,5 +1,9 @@
 <?php
 /**
+ * FormaPagamento
+ *
+ * Informações da forma de pagamento
+ *
  * Licença
  * Este código fonte está sob a licença GPL-3.0+
  *
