@@ -59,10 +59,11 @@ class Autorizacao
     private $valor;
 
     /**
+     * @SerializedName("lr")
      * @Type("integer")
      * @var integer
      */
-    private $lr;
+    private $lrCod;
 
     /**
      * @Type("integer")
@@ -150,17 +151,17 @@ class Autorizacao
     /**
      * @return int
      */
-    public function getLr()
+    public function getLrCod(): int
     {
-        return $this->lr;
+        return $this->lrCod;
     }
 
     /**
-     * @param int $lr
+     * @param int $lrCod
      */
-    public function setLr($lr)
+    public function setLrCod(int $lrCod): void
     {
-        $this->lr = $lr;
+        $this->lrCod = $lrCod;
     }
 
     /**
