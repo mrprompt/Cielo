@@ -263,12 +263,10 @@ class RespostaTransacaoCompleta
      */
     private function setPedidoTransacao( Transacao $transacao, DadosPedido $dadosPedido ){
 
-        $dateCreated = DateTime::createFromFormat( 'Y-m-d', $dadosPedido->getDataHora() );
-
         $transacao->setDescricao( $dadosPedido->getDescricao() );
         $transacao->setValor( $dadosPedido->getValor() );
         $transacao->setNumero( $dadosPedido->getNumero() );
-        $transacao->setDataHora( $dateCreated );
+        $transacao->setDataHora( new \DateTime('now') );
         $transacao->setMoeda( $dadosPedido->getMoeda() );
 
         return $transacao;
