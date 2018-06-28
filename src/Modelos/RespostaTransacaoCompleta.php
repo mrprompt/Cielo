@@ -249,7 +249,9 @@ class RespostaTransacaoCompleta
         $transacao->setToken( $this->getToken()->getDadosToken()->getCodigoToken() );
         $transacao->setAutenticacao( $this->getAutenticacao() );
         $transacao->setAutorizacao( $this->getAutorizacao());
-        $transacao->setCaptura( $this->getCaptura() );
+
+        if ( $this->getCaptura() != null )
+            $transacao->setCaptura( $this->getCaptura() );
 
         return $transacao;
     }
