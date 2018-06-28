@@ -47,7 +47,7 @@ class Autenticacao
      * Formato: AAAA-MM-DDTHH:MM:SS
      *
      * @SerializedName("data-hora")
-     * @Type("DateTime<'Y-m-d\TH:i:s.uP'>")
+     * @Type("DateTime<'Y-m-d\TH:i:sP'>")
      * @var datetime
      */
     private $dataHora;
