@@ -125,14 +125,12 @@ class Autorizacao
     }
 
     /**
-     * @param DateTime $dataHoraString
+     * @param DateTime $dateTime
      */
-    public function setDataHora( $dataHoraString )
+    public function setDataHora( $dateTime )
     {
 
-        $dateFormated = DateTime::createFromFormat( 'Y-m-d\TH:i:s', $dataHoraString );
-
-        $this->dataHora = $dateFormated;
+        $this->dataHora = $dateTime;
     }
 
     /**
