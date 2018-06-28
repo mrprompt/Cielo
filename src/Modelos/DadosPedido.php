@@ -55,7 +55,7 @@ class DadosPedido
      *
      * @SerializedName("data-hora")
      * @Type("string")
-     * @var datetime
+     * @var string
      */
     private $dataHora;
 
@@ -127,19 +127,19 @@ class DadosPedido
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDataHora()
+    public function getDataHora(): string
     {
         return $this->dataHora;
     }
 
     /**
-     * @param DateTime $dateTime
+     * @param string $dataHora
      */
-    public function setDataHora( $dateTime )
+    public function setDataHora(string $dataHora): void
     {
-        $this->dataHora = $dateTime;
+        $this->dataHora = $dataHora;
     }
 
     /**

@@ -44,11 +44,9 @@ class Autenticacao
     /**
      * Data Autenticacao
      *
-     * Formato: AAAA-MM-DDTHH:MM:SS
-     *
      * @SerializedName("data-hora")
      * @Type("string")
-     * @var datetime
+     * @var string
      */
     private $dataHora;
 
@@ -105,20 +103,19 @@ class Autenticacao
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDataHora()
+    public function getDataHora(): string
     {
         return $this->dataHora;
     }
 
     /**
-     * @param DateTime $dataHoraString
+     * @param string $dataHora
      */
-    public function setDataHora( $dateTime )
+    public function setDataHora(string $dataHora): void
     {
-
-        $this->dataHora = $dateTime;
+        $this->dataHora = $dataHora;
     }
 
     /**
