@@ -47,7 +47,7 @@ class Autorizacao
      * Formato: AAAA-MM-DDTHH:MM:SS
      *
      * @SerializedName("data-hora")
-     * @Type("DateTime<'Y-m-d\TH:i:s.vP'>")
+     * @Type("string")
      * @var datetime
      */
     private $dataHora;
@@ -125,11 +125,14 @@ class Autorizacao
     }
 
     /**
-     * @param DateTime $dataHora
+     * @param DateTime $dataHoraString
      */
-    public function setDataHora($dataHora)
+    public function setDataHora( $dataHoraString )
     {
-        $this->dataHora = $dataHora;
+
+        $dateFormated = DateTime::createFromFormat( $dataHoraString, 'Y-m-d\TH:i:s' );
+
+        $this->dataHora = $dateFormated;
     }
 
     /**
