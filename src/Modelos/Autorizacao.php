@@ -130,7 +130,7 @@ class Autorizacao
     public function setDataHora( $dataHoraString )
     {
 
-        $dateFormated = DateTime::createFromFormat( $dataHoraString, 'Y-m-d\TH:i:s' );
+        $dateFormated = DateTime::createFromFormat( 'Y-m-d\TH:i:s', $dataHoraString );
 
         $this->dataHora = $dateFormated;
     }
