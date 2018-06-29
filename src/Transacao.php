@@ -165,7 +165,7 @@ class Transacao
      * @access public
      * @return string
      */
-    public function getTid(): string
+    public function getTid()
     {
         return (string) $this->tid;
     }
@@ -194,7 +194,7 @@ class Transacao
      * @access public
      * @return string
      */
-    public function getProduto(): string
+    public function getProduto()
     {
         return (string) $this->produto;
     }
@@ -229,7 +229,7 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getParcelas(): int
+    public function getParcelas()
     {
         return (int) $this->parcelas;
     }
@@ -258,7 +258,7 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getMoeda(): int
+    public function getMoeda()
     {
         return (int) $this->moeda;
     }
@@ -314,7 +314,7 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getAutorizar(): int
+    public function getAutorizar()
     {
         return (int) $this->autorizar;
     }
@@ -370,7 +370,7 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getNumero(): int
+    public function getNumero()
     {
         return (int) $this->numeroPedido;
     }
@@ -395,7 +395,7 @@ class Transacao
      * @access public
      * @return integer
      */
-    public function getValor(): int
+    public function getValor()
     {
         return (int) $this->valorPedido;
     }
@@ -437,7 +437,7 @@ class Transacao
      * @access public
      * @return string
      */
-    public function getDescricao(): string
+    public function getDescricao()
     {
         return (string) $this->descricao;
     }
@@ -446,7 +446,7 @@ class Transacao
      * Indica se é para gerar token para o cartão do portador.
      * @return boolean
      */
-    public function isGerarToken(): bool
+    public function isGerarToken()
     {
         return (bool) $this->gerarToken;
     }
@@ -467,7 +467,7 @@ class Transacao
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getToken()
     {
         return $this->token;
     }
@@ -483,7 +483,7 @@ class Transacao
     /**
      * @return Modelos\Autorizacao
      */
-    public function getAutorizacao(): Modelos\Autorizacao
+    public function getAutorizacao()
     {
         return $this->autorizacao;
     }
@@ -499,7 +499,7 @@ class Transacao
     /**
      * @return Autenticacao
      */
-    public function getAutenticacao(): Autenticacao
+    public function getAutenticacao()
     {
         return $this->autenticacao;
     }
@@ -515,7 +515,7 @@ class Transacao
     /**
      * @return Captura
      */
-    public function getCaptura(): Captura
+    public function getCaptura()
     {
         return $this->captura;
     }
