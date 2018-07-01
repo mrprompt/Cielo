@@ -290,9 +290,10 @@ class Cliente
      * Realiza o envio da requisição à Cielo
      *
      * @param Requisicao $requisicao
-     * @return object
+     * @return Transacao
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function enviaRequisicao(Requisicao $requisicao): object
+    protected function enviaRequisicao(Requisicao $requisicao): Transacao
     {
         $response = $this
             ->httpClient
