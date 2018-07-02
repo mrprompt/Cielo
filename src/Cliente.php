@@ -293,6 +293,7 @@ class Cliente
      *
      * @param Requisicao $requisicao
      * @return Transacao
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function enviaRequisicao(Requisicao $requisicao): Transacao
     {
