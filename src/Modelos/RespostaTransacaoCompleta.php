@@ -246,7 +246,9 @@ class RespostaTransacaoCompleta
 
         $this->setPedidoTransacao( $transacao, $this->getDadosPedido() );
 
-        $transacao->setToken( $this->getToken()->getDadosToken()->getCodigoToken() );
+        if ( $this->getToken() != null )
+            $transacao->setToken( $this->getToken()->getDadosToken()->getCodigoToken() );
+
         $transacao->setAutenticacao( $this->getAutenticacao() );
         $transacao->setAutorizacao( $this->getAutorizacao());
 
