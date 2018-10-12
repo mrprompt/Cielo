@@ -21,7 +21,9 @@
 namespace MrPrompt\Cielo;
 
 use GuzzleHttp\Client;
+use MrPrompt\Cielo\Ambiente\Ambiente;
 use MrPrompt\Cielo\Ambiente\Producao;
+use MrPrompt\Cielo\Idioma\Idioma;
 use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
 use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
