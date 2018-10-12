@@ -160,6 +160,7 @@ abstract class Requisicao
             throw new InvalidArgumentException((string) $xml->mensagem, (int) $xml->codigo);
         }
 
+        // @todo serializar resposta para o objeto correto
         $object = $serializer->deserialize($this->resposta, Transacao::class, 'xml');
         
         return $object;
