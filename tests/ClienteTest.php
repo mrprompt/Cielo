@@ -21,12 +21,13 @@ declare(strict_types=1);
 namespace MrPrompt\Cielo\Tests;
 
 use DateTime;
-use MrPrompt\Cielo\Autorizacao;
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Autorizacao;
 use PHPUnit\Framework\TestCase;
+use MrPrompt\Cielo\Requisicao\Requisicao;
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 
 /**
  * Class ClienteTest
@@ -55,12 +56,11 @@ final class ClienteTest extends TestCase
 
     /**
      * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
      * @covers \MrPrompt\Cielo\Cliente::iniciaTransacao()
      */
-    public function iniciaTransacaoDeveRetornarUmObjectSolicitacaoTransacao()
+    public function iniciaTransacaoDeveRetornarUmXmlValido()
     {
-        $this->markTestIncomplete();
-        
         $transacao = $this->getMockBuilder(Transacao::class)
                         ->disableOriginalConstructor()
                         ->getMock();
@@ -76,7 +76,203 @@ final class ClienteTest extends TestCase
         $url = 'http://localhost';
 
         $result = $this->object->iniciaTransacao($transacao, $cartao, $url);
+        $xml = simplexml_load_string($result);
 
-        $this->assertInstanceOf(SolicitacaoTransacao::class, $result);
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::solicitaToken()
+     */
+    public function solicitaTokenDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $cartao = $this->getMockBuilder(Cartao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $cartao->method('getCodigoSeguranca')->willReturn(123);
+        
+        $result = $this->object->solicitaToken($transacao, $cartao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::autoriza()
+     */
+    public function autorizaDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $result = $this->object->autoriza($transacao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::captura()
+     */
+    public function capturaDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $result = $this->object->captura($transacao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::cancela()
+     */
+    public function cancelaDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $result = $this->object->cancela($transacao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::consulta()
+     */
+    public function consultaDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $result = $this->object->consulta($transacao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::tid()
+     */
+    public function tidDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $cartao = $this->getMockBuilder(Cartao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $cartao->method('getCodigoSeguranca')->willReturn(123);
+
+        $result = $this->object->tid($transacao, $cartao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::autorizaPortador()
+     */
+    public function autorizaPortadorDeveRetornarUmXmlValido()
+    {
+        $transacao = $this->getMockBuilder(Transacao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $transacao->method('getDataHora')->willReturn(new \DateTime);
+
+        $cartao = $this->getMockBuilder(Cartao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $cartao->method('getCodigoSeguranca')->willReturn(123);
+
+        $result = $this->object->autorizaPortador($transacao, $cartao);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    }
+
+    /**
+     * @test
+     * @covers \MrPrompt\Cielo\Cliente::__construct()
+     * @covers \MrPrompt\Cielo\Cliente::enviaRequisicao()
+     */
+    public function enviaRequisicaoDeveRetornarUmXmlValido()
+    {
+        $xml = simplexml_load_string('<foo></foo>');
+        $requisicao = $this->getMockBuilder(Requisicao::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        
+        $requisicao->method('getEnvio')->willReturn($xml);
+        $requisicao->method('setResposta')->willReturn(null);
+        $requisicao->method('getResposta')->willReturn($xml->asXML());
+
+        $class = new \ReflectionClass($this->object);
+        $method = $class->getMethod('enviaRequisicao');
+        $method->setAccessible(true);
+        
+        $result = $method->invokeArgs($this->object, [$requisicao]);
+        $xml = simplexml_load_string($result);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($xml);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     }
 }

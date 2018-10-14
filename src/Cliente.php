@@ -295,7 +295,7 @@ class Cliente
      * @return Transacao
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function enviaRequisicao(Requisicao $requisicao): Transacao
+    protected function enviaRequisicao(Requisicao $requisicao): String
     {
         $response = $this
             ->httpClient

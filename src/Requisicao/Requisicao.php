@@ -20,12 +20,14 @@ declare(strict_types = 1);
 
 namespace MrPrompt\Cielo\Requisicao;
 
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Transacao;
-use JMS\Serializer\SerializerBuilder;
 use DOMDocument;
 use SimpleXMLElement;
 use InvalidArgumentException;
+use MrPrompt\Cielo\Transacao;
+use MrPrompt\Cielo\Autorizacao;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 
@@ -146,24 +148,9 @@ abstract class Requisicao
      *
      * @return Transacao
      */
-    public function getResposta(): Transacao
+    public function getResposta(): string
     {
-        if (!$this->resposta) {
-            return new Transacao;
-        }
-
-        $serializer = SerializerBuilder::create()->build();
-
-        $xml = simplexml_load_string($this->resposta);
-
-        if ($xml->codigo && in_array((int) $xml->codigo, $this->codErros, true)) {
-            throw new InvalidArgumentException((string) $xml->mensagem, (int) $xml->codigo);
-        }
-
-        // @todo serializar resposta para o objeto correto
-        $object = $serializer->deserialize($this->resposta, Transacao::class, 'xml');
-        
-        return $object;
+        return $this->resposta;
     }
 
     /**
