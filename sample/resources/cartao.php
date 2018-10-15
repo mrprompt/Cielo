@@ -7,9 +7,8 @@ $cartao = new Cartao();
 $cartao->setBandeira('visa');
 $cartao->setCartao('4012001037141112');
 $cartao->setCodigoSeguranca('123');
-$cartao->setIndicador(0);
+$cartao->setIndicador(1);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('202012');
-$cartao->setToken('123123123');
 
 return $cartao;

@@ -20,7 +20,7 @@ Caso você esteja implementando em um novo projeto, recomendo utilizar a versão
 
 ## Requisitos
 
-* PHP 7.1+
+* PHP 7.2+
 * SimpleXML
 
 ## Instalação

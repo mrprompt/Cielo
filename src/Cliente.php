@@ -86,7 +86,7 @@ class Cliente
      *
      * @const float
      */
-    const VERSAO = '1.2.0';
+    const VERSAO = '1.5.0';
 
     /**
      * Construtor da aplicação
