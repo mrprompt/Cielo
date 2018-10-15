@@ -21,19 +21,25 @@
 namespace MrPrompt\Cielo;
 
 use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Ambiente;
-use MrPrompt\Cielo\Ambiente\Producao;
 use MrPrompt\Cielo\Idioma\Idioma;
 use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
-use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
-use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
+use MrPrompt\Cielo\Ambiente\Ambiente;
+use MrPrompt\Cielo\Ambiente\Producao;
 use MrPrompt\Cielo\Requisicao\Captura;
 use MrPrompt\Cielo\Requisicao\Consulta;
-use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 use MrPrompt\Cielo\Requisicao\Requisicao;
-use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
+use MrPrompt\Cielo\Requisicao\AutorizacaoPortador;
+use MrPrompt\Cielo\Requisicao\AutorizacaoTransacao;
+use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
+use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
+use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
+
+use MrPrompt\Cielo\Retorno\Traits\Serializer;
+use MrPrompt\Cielo\Retorno\Transacao as RetornoTransacao;
+use MrPrompt\Cielo\Retorno\Tid as RetornoTid;
+use MrPrompt\Cielo\Retorno\Autorizacao as RetornoAutorizacao;
+use MrPrompt\Cielo\Retorno\Token as RetornoToken;
 
 /**
  * Cliente de integração com a Cielo
@@ -43,6 +49,8 @@ use MrPrompt\Cielo\Requisicao\SolicitacaoToken;
  */
 class Cliente
 {
+    use Serializer;
+
     /**
      * Dados de autorização na Cielo
      *
@@ -110,19 +118,21 @@ class Cliente
      * @param  Transacao            $transacao
      * @param  Cartao               $cartao
      * @param  string               $urlRetorno
-     * @return SolicitacaoTransacao
+     * @return RetornoTransacao
      */
-    public function iniciaTransacao(Transacao $transacao, Cartao $cartao, $urlRetorno)
+    public function iniciaTransacao(Transacao $transacao, Cartao $cartao, $urlRetorno): object
     {
-        return $this->enviaRequisicao(
-            new SolicitacaoTransacao(
-                $this->autorizacao,
-                $transacao,
-                $cartao,
-                $urlRetorno,
-                $this->idioma
-            )
+        $solicitacao = new SolicitacaoTransacao(
+            $this->autorizacao,
+            $transacao,
+            $cartao,
+            $urlRetorno,
+            $this->idioma
         );
+
+        $resposta = $this->enviaRequisicao($solicitacao);
+
+        return $this->deserialize($resposta, RetornoTransacao::class);
     }
 
     /**
@@ -132,13 +142,14 @@ class Cliente
      *
      * @access public
      * @param  Cartao $cartao
-     * @return Requisicao
+     * @return RetornoToken
      */
-    public function solicitaToken(Transacao $transacao, Cartao $cartao)
+    public function solicitaToken(Transacao $transacao, Cartao $cartao): object
     {
-        return $this->enviaRequisicao(
-            new SolicitacaoToken($this->autorizacao, $transacao, $cartao)
-        );
+        $solicitacao = new SolicitacaoToken($this->autorizacao, $transacao, $cartao);
+        $resposta = $this->enviaRequisicao($solicitacao);
+
+        return $this->deserialize($resposta, RetornoToken::class);
     }
 
     /**
@@ -160,13 +171,14 @@ class Cliente
      *
      * @access public
      * @param  Transacao            $transacao
-     * @return AutorizacaoTransacao
+     * @return RetornoAutorizacao
      */
-    public function autoriza(Transacao $transacao)
+    public function autoriza(Transacao $transacao): object
     {
-        return $this->enviaRequisicao(
-            new AutorizacaoTransacao($this->autorizacao, $transacao)
-        );
+        $autorizacao = new AutorizacaoTransacao($this->autorizacao, $transacao);
+        $resposta = $this->enviaRequisicao($autorizacao);
+
+        return $this->deserialize($resposta, RetornoAutorizacao::class);
     }
 
     /**
@@ -186,13 +198,14 @@ class Cliente
      *
      * @access public
      * @param  Transacao $transacao
-     * @return Captura
+     * @return RetornoCaptura
      */
-    public function captura(Transacao $transacao)
+    public function captura(Transacao $transacao): object
     {
-        return $this->enviaRequisicao(
-            new Captura($this->autorizacao, $transacao)
-        );
+        $captura = new Captura($this->autorizacao, $transacao);
+        $resposta = $this->enviaRequisicao($captura);
+
+        return $this->deserialize($resposta, RetornoCaptura::class);
     }
 
     /**
@@ -210,13 +223,14 @@ class Cliente
      *
      * @access public
      * @param  Transacao             $transacao
-     * @return CancelamentoTransacao
+     * @return RetornoAutorizacao
      */
-    public function cancela(Transacao $transacao)
+    public function cancela(Transacao $transacao): object
     {
-        return $this->enviaRequisicao(
-            new CancelamentoTransacao($this->autorizacao, $transacao)
-        );
+        $cancelamento = new CancelamentoTransacao($this->autorizacao, $transacao);
+        $resposta = $this->enviaRequisicao($cancelamento);
+
+        return $this->deserialize($resposta, RetornoAutorizacao::class);
     }
 
     /**
@@ -228,13 +242,14 @@ class Cliente
      *
      * @access public
      * @param  Transacao $transacao
-     * @return Consulta
+     * @return RetornoTransacao
      */
-    public function consulta(Transacao $transacao)
+    public function consulta(Transacao $transacao): object
     {
-        return $this->enviaRequisicao(
-            new Consulta($this->autorizacao, $transacao)
-        );
+        $consulta = new Consulta($this->autorizacao, $transacao);
+        $resposta = $this->enviaRequisicao($consulta);
+
+        return $this->deserialize($resposta, RetornoTransacao::class);
     }
 
     /**
@@ -245,13 +260,14 @@ class Cliente
      * @access public
      * @param  Transacao              $transacao
      * @param  Cartao                 $cartao
-     * @return IdentificacaoTransacao
+     * @return RetornoTid
      */
-    public function tid(Transacao $transacao, Cartao $cartao)
+    public function tid(Transacao $transacao, Cartao $cartao): object
     {
-        return $this->enviaRequisicao(
-            new IdentificacaoTransacao($this->autorizacao, $transacao, $cartao)
-        );
+        $requisicao = new IdentificacaoTransacao($this->autorizacao, $transacao, $cartao);
+        $resposta = $this->enviaRequisicao($requisicao);
+        
+        return $this->deserialize($resposta, RetornoTid::class);
     }
 
     /**
@@ -274,18 +290,20 @@ class Cliente
      * @param Transacao $transacao
      * @param Cartao    $cartao
      * @access public
-     * @return AutorizacaoPortador
+     * @return RetornoAutorizacao
      */
-    public function autorizaPortador(Transacao $transacao, Cartao $cartao)
+    public function autorizaPortador(Transacao $transacao, Cartao $cartao): object
     {
-        return $this->enviaRequisicao(
-            new AutorizacaoPortador(
-                $this->autorizacao,
-                $transacao,
-                $cartao,
-                $this->idioma
-            )
+        $autorizacao = new AutorizacaoPortador(
+            $this->autorizacao,
+            $transacao,
+            $cartao,
+            $this->idioma
         );
+
+        $resposta = $this->enviaRequisicao($autorizacao);
+
+        return $this->deserialize($resposta, RetornoAutorizacao::class);
     }
 
     /**

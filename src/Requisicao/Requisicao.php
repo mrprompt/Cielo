@@ -25,11 +25,6 @@ use SimpleXMLElement;
 use InvalidArgumentException;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Autorizacao;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
-use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
-
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 
 /**
  * Cada chamada ao webservice representa uma requisição
