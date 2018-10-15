@@ -76,11 +76,9 @@ final class ClienteTest extends TestCase
         $url = 'http://localhost';
 
         $result = $this->object->iniciaTransacao($transacao, $cartao, $url);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -103,11 +101,9 @@ final class ClienteTest extends TestCase
         $cartao->method('getCodigoSeguranca')->willReturn(123);
         
         $result = $this->object->solicitaToken($transacao, $cartao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -124,11 +120,9 @@ final class ClienteTest extends TestCase
         $transacao->method('getDataHora')->willReturn(new \DateTime);
 
         $result = $this->object->autoriza($transacao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -145,11 +139,9 @@ final class ClienteTest extends TestCase
         $transacao->method('getDataHora')->willReturn(new \DateTime);
 
         $result = $this->object->captura($transacao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -166,11 +158,9 @@ final class ClienteTest extends TestCase
         $transacao->method('getDataHora')->willReturn(new \DateTime);
 
         $result = $this->object->cancela($transacao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -187,11 +177,9 @@ final class ClienteTest extends TestCase
         $transacao->method('getDataHora')->willReturn(new \DateTime);
 
         $result = $this->object->consulta($transacao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -214,11 +202,9 @@ final class ClienteTest extends TestCase
         $cartao->method('getCodigoSeguranca')->willReturn(123);
 
         $result = $this->object->tid($transacao, $cartao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -241,11 +227,9 @@ final class ClienteTest extends TestCase
         $cartao->method('getCodigoSeguranca')->willReturn(123);
 
         $result = $this->object->autorizaPortador($transacao, $cartao);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+        $this->assertTrue(is_object($result));
     }
 
     /**
@@ -269,10 +253,7 @@ final class ClienteTest extends TestCase
         $method->setAccessible(true);
         
         $result = $method->invokeArgs($this->object, [$requisicao]);
-        $xml = simplexml_load_string($result);
 
         $this->assertNotEmpty($result);
-        $this->assertNotFalse($xml);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     }
 }

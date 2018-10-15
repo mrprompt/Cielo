@@ -143,7 +143,7 @@ abstract class Requisicao
      *
      * @return Transacao
      */
-    public function getResposta(): string
+    public function getResposta(): ?string
     {
         return $this->resposta;
     }
