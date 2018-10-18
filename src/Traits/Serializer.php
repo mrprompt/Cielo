@@ -18,7 +18,7 @@
  */
 declare(strict_types = 1);
 
-namespace MrPrompt\Cielo\Retorno\Traits;
+namespace MrPrompt\Cielo\Traits;
 
 use MrPrompt\Cielo\Retorno\Erro;
 use JMS\Serializer\SerializerBuilder;

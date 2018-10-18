@@ -21,18 +21,15 @@ declare(strict_types = 1);
 namespace MrPrompt\Cielo\Retorno;
 
 use JMS\Serializer\Annotation\Type;
-use MrPrompt\Cielo\Retorno\Traits\GetterSetter;
 
 /**
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 class Tid
 {
-    use GetterSetter;
-    
     /**
      * @Type("string")
      * @var string
      */
-    private $tid;
+    public $tid;
 }

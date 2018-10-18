@@ -35,7 +35,7 @@ use MrPrompt\Cielo\Requisicao\SolicitacaoTransacao;
 use MrPrompt\Cielo\Requisicao\CancelamentoTransacao;
 use MrPrompt\Cielo\Requisicao\IdentificacaoTransacao;
 
-use MrPrompt\Cielo\Retorno\Traits\Serializer;
+use MrPrompt\Cielo\Traits\Serializer;
 use MrPrompt\Cielo\Retorno\Transacao as RetornoTransacao;
 use MrPrompt\Cielo\Retorno\Tid as RetornoTid;
 use MrPrompt\Cielo\Retorno\Autorizacao as RetornoAutorizacao;

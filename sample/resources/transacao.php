@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use MrPrompt\Cielo\Transacao;
 
 $transacao = new Transacao();
-$transacao->setTid('1006993069000D55E47A');
+$transacao->setTid('1006993069000D58CF6A');
 $transacao->setAutorizar(2);
 $transacao->setCapturar(false);
 $transacao->setDataHora(new \DateTime());

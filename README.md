@@ -18,6 +18,12 @@ Caso você esteja implementando em um novo projeto, recomendo utilizar a versão
 * https://developercielo.github.io/manual/webservice-1-5
 * https://developercielo.github.io/tutorial/guia-de-migracao
 
+## ATENÇÃO 2
+
+Não use a branch de desenvolvimento em ambientes de produção. Nela estão correções de bugs 
+mas também experimentos de refatoração para melhorar a qualidade do código, por isso, a mesma
+é extremamente passível de erros e bugs.
+
 ## Requisitos
 
 * PHP 7.2+
@@ -31,6 +37,7 @@ composer.phar require "mrprompt/cielo"
 
 ## Exemplos
 
+* [Ambiente](#ambiente)
 * [Autorização](#autorização)
 * [Autorização Portador](#autorização-portador)
 * [Cancelamento](#cancelamento)
@@ -39,15 +46,28 @@ composer.phar require "mrprompt/cielo"
 * [TID](#tid)
 * [Transação](#transação)
 
+### Ambiente
+
+```php
+use GuzzleHttp\Client as ClienteHttp;
+use MrPrompt\Cielo\Ambiente\Teste;
+use MrPrompt\Cielo\Idioma\Portugues;
+use MrPrompt\Cielo\Cliente;
+use MrPrompt\Cielo\Autorizacao;
+
+/* @var $cielo \MrPrompt\Cielo\Cliente */
+$cielo = new Cliente(
+    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
+    new ClienteHttp(),
+    new Portugues(),
+    new Teste()
+);
+```
+
 ### Autorização
 
 ```php
-use GuzzleHttp\Client;
 use MrPrompt\Cielo\Transacao;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
@@ -61,41 +81,16 @@ $transacao->setNumero(001);
 $transacao->setParcelas(1);
 $transacao->setValor(1.00);
 
-/* @var $cielo \MrPrompt\Cielo\Cliente */
-$cielo = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+$requisicao = $cielo->autoriza($transacao);
 
-try {
-    $requisicao = $cielo->autoriza($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### Autorização Portador
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Cartao;
 use MrPrompt\Cielo\Transacao;
-
-/* @var $cielo \MrPrompt\Cielo\Cliente */
-$cielo = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
@@ -118,126 +113,58 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201612');
 
-try {
-    $requisicao = $cielo->autorizaPortador($transacao, $cartao);
+$requisicao = $cielo->autorizaPortador($transacao, $cartao);
 
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### Cancelamento
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Transacao;
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
 $transacao->setTid('10069930691FB8C01001');
 
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+$requisicao = $cielo->cancela($transacao);
 
-try {
-    $requisicao = $cielo->cancela($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### Captura
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Transacao;
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
 $transacao->setTid('10069930691FB8C01001');
 
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+$requisicao = $cielo->captura($transacao);
 
-try {
-    $requisicao = $cielo->captura($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### Consulta
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Transacao;
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
 $transacao->setTid('10069930691FB8C01001');
 
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+$requisicao = $cielo->consulta($transacao);
 
-try {
-    $requisicao = $cielo->consulta($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### TID
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
 
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = new Transacao();
@@ -259,23 +186,14 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201612');
 
-try {
-    $requisicao = $cielo->tid($transacao, $cartao);
+$requisicao = $cielo->tid($transacao, $cartao);
 
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ### Transação
 
 ```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
 use MrPrompt\Cielo\Transacao;
 use MrPrompt\Cielo\Cartao;
 
@@ -300,21 +218,9 @@ $cartao->setIndicador(0);
 $cartao->setNomePortador('Teste');
 $cartao->setValidade('201612');
 
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+$requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
 
-try {
-    $requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
+print_r($requisicao);
 ```
 
 ## Versões anteriores

@@ -4,11 +4,16 @@ require_once __DIR__ . '/../vendor/autoload.php';
 /* @var $transacao \MrPrompt\Cielo\Transacao */
 $transacao = require_once __DIR__ . '/resources/transacao.php';
 
+/* @var $transacao \MrPrompt\Cielo\Cartao */
+$cartao    = require_once __DIR__ . '/resources/cartao.php';
+
 /* @var $cielo \MrPrompt\Cielo\Cliente */
 $cielo     = require_once __DIR__ . '/resources/cliente.php';
 
 try {
-    $requisicao = $cielo->autoriza($transacao);
+    $requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
+
+    //$requisicao = $cielo->autoriza($transacao);
 
     print_r($requisicao);
 } catch (\InvalidArgumentException $ex) {

@@ -21,24 +21,21 @@ declare(strict_types = 1);
 namespace MrPrompt\Cielo\Retorno;
 
 use JMS\Serializer\Annotation\Type;
-use MrPrompt\Cielo\Retorno\Traits\GetterSetter;
 
 /**
  * @author Thiago Paes <mrprompt@gmail.com>
  */
 class Erro
 {
-    use GetterSetter;
-    
     /**
      * @Type("string")
      * @var string
      */
-    private $codigo;
+    public $codigo;
 
     /**
      * @Type("string")
      * @var string
      */
-    private $mensagem;
+    public $mensagem;
 }

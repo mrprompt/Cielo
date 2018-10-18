@@ -88,7 +88,7 @@ class Cartao
      *
      * @var array
      */
-    private $bandeiras = array(
+    private $bandeiras = [
         'visa',
         'mastercard',
         'diners',
@@ -97,7 +97,7 @@ class Cartao
         'amex',
         'jcb',
         'aura',
-    );
+    ];
 
     /**
      * Retorna o número do cartão
