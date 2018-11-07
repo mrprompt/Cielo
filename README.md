@@ -8,10 +8,15 @@ Cielo é uma biblioteca cliente para o web service da Cielo.
 
 Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
 
+## ARQUIVADA 
+
+A biblioteca foi arquiva, pois agora como a Cielo possui uma biblioteca oficial, esta cumpriu 
+seu papel.
+
 ## ATENÇÃO
 
 Esta biblioteca é baseada na versão 1.5.x da API da Cielo, porém a mesma foi descontinuada.
-Alterações neste projeto são apenas para bug fixes e melhorias para a versão mencionada. 
+~Alterações neste projeto são apenas para bug fixes e melhorias para a versão mencionada.~
 Caso você esteja implementando em um novo projeto, recomendo utilizar a versão 3.x da API.
 
 * https://developercielo.github.io/
