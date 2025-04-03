@@ -1,0 +1,51 @@
+{
+    "name": "mrprompt/cielo",
+    "description": "Integration with Cielo gateway.",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "cielo", 
+        "payment", 
+        "gateway", 
+        "credit", 
+        "card", 
+        "debit",
+        "token",
+        "payment",
+        "pix",
+        "boleto",
+        "pagamento",
+        "cartão",
+        "crédito",
+        "débito"
+    ],
+    "authors": [
+        {
+            "name": "Thiago Paes",
+            "email": "mrprompt@gmail.com",
+            "role": "developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MrPrompt\\Cielo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MrPrompt\\Cielo\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.0",
+        "respect/validation": "^2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~11.0",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox"
+    }
+}

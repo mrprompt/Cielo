@@ -1,0 +1,10 @@
+.settings
+.buildpath
+.project
+.idea
+phpunit.xml
+vendor
+build
+tmp
+.phpunit.cache
+
