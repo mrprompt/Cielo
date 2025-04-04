@@ -8,7 +8,6 @@ use MrPrompt\Cielo\Enum\Pagamento\Moeda;
 use MrPrompt\Cielo\Enum\Pagamento\Parcelamento;
 use MrPrompt\Cielo\Enum\Pagamento\Provedor;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
-use MrPrompt\Cielo\Enum\Pagamento\Status;
 use MrPrompt\Cielo\Enum\Localizacao\Pais;
 
 class Pagamento implements Dto
@@ -91,7 +90,7 @@ class Pagamento implements Dto
             autenticacao: $data['autenticacao'] ?? null,
             recorrente: $data['recorrente'] ?? null,
             criptomoeda: $data['criptomoeda'] ?? null,
-            cartao: Cartao::fromArray($data['cartao'] ?? []),
+            cartao: array_key_exists('cartao', $data) ? Cartao::fromArray($data['cartao']) : null,
             identificador: $data['identificador'] ?? null,
             qrcode: $data['qrcode'] ?? null,
             recebimento: array_key_exists('recebimento', $data) ? new DateTime($data['recebimento']) : null,
@@ -114,9 +113,9 @@ class Pagamento implements Dto
             'SoftDescriptor' => $this->descricao,
             'Installments' => $this->parcelas,
             'Interest' => !is_null($this->parcelas_tipo) ? $this->parcelas_tipo->value : null,
-            'Capture' => (bool) $this->captura,
-            'Authenticate' => (bool) $this->autenticacao,
-            'Recurrent' => (bool) $this->recorrente,
+            'Capture' => $this->captura ?? null,
+            'Authenticate' => $this->autenticacao ?? null,
+            'Recurrent' => $this->recorrente ?? null,
         ];
 
         if (!is_null($this->cartao)) {
