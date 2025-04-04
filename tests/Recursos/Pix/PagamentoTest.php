@@ -31,7 +31,7 @@ class PagamentoTest extends TestCase
         $httpDriverMock->expects($this->once())
             ->method('post')
             ->with(
-                '1/sales',
+                '1/sales/',
                 $this->callback(function ($dadosPagamento) use ($ordemMock, $clienteMock, $pagamentoMock) {
                     return $dadosPagamento['MerchantOrderId'] === $ordemMock->identificador &&
                         $dadosPagamento['Customer']['Name'] === $clienteMock->nome &&

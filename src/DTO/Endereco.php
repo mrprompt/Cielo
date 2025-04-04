@@ -11,14 +11,14 @@ class Endereco implements Dto
 {
     public function __construct(
         public TipoEndereco $tipo,
-        public string $endereco,
-        public ?string $numero,
-        public ?string $complemento,
-        public string $bairro,
-        public string $cep,
-        public string $cidade,
-        public Estado $estado,
-        public Pais $pais
+        public ?string $endereco = null,
+        public ?string $numero = null,
+        public ?string $complemento = null,
+        public ?string $bairro = null,
+        public ?string $cep = null,
+        public ?string $cidade = null,
+        public ?Estado $estado = null,
+        public ?Pais $pais = null, 
     ) {}
 
     public static function fromRequest(object $request, TipoEndereco $tipo = TipoEndereco::RESIDENCIAL): self

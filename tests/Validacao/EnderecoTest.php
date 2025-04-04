@@ -20,6 +20,7 @@ class EnderecoTest extends TestCase
         $cliente = EnderecoDto::fromArray([
             'endereco' => 'Elm St',
             'numero' => '456',
+            'bairro' => 'Centro',
             'cidade' => 'Othertown',
             'estado' => 'SC',
             'cep' => '67890',
@@ -40,6 +41,7 @@ class EnderecoTest extends TestCase
         $cliente = EnderecoDto::fromArray([
             'endereco' => '',
             'numero' => '',
+            'bairro' => '',
             'cidade' => '',
             'estado' => '',
             'cep' => '',

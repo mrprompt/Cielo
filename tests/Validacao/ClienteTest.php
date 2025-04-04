@@ -29,6 +29,7 @@ class ClienteTest extends TestCase
             'endereco' => [
                 'numero' => '123',
                 'endereco' => 'Main St',
+                'bairro' => 'Centro',
                 'cidade' => 'Anytown',
                 'estado' => 'SC',
                 'cep' => '12345',
@@ -37,6 +38,7 @@ class ClienteTest extends TestCase
             'entrega' => [
                 'numero' => '456',
                 'endereco' => 'Elm St',
+                'bairro' => 'Centro',
                 'cidade' => 'Othertown',
                 'estado' => 'SC',
                 'cep' => '67890',
@@ -44,7 +46,8 @@ class ClienteTest extends TestCase
             ],
             'cobranca' => [
                 'numero' => '789',
-                'endereco' => 1111,
+                'endereco' => 'Oak St',
+                'bairro' => 'Centro',
                 'cidade' => 'Sometown',
                 'estado' => 'SC',
                 'cep' => '11223',
@@ -76,6 +79,7 @@ class ClienteTest extends TestCase
             'endereco' => [
                 'numero' => '123',
                 'endereco' => 'Main St',
+                'bairro' => 'Centro',
                 'cidade' => 'Anytown',
                 'estado' => 'SC',
                 'cep' => '12345',
@@ -84,6 +88,7 @@ class ClienteTest extends TestCase
             'entrega' => [
                 'numero' => '456',
                 'endereco' => 'Elm St',
+                'bairro' => 'Centro',
                 'cidade' => 'Othertown',
                 'estado' => 'SC',
                 'cep' => '67890',
@@ -92,6 +97,7 @@ class ClienteTest extends TestCase
             'cobranca' => [
                 'numero' => '789',
                 'endereco' => 'Oak St',
+                'bairro' => 'Centro',
                 'cidade' => 'Sometown',
                 'estado' => 'SC',
                 'cep' => '11223',

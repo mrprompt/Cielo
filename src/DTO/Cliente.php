@@ -12,8 +12,8 @@ class Cliente implements Dto
 {
     public function __construct(
         public string $nome,
-        public ?Status $status = null,
         public Documento $documento,
+        public ?Status $status = null,
         public ?string $email = null,
         public ?DateTime $nascimento = null,
         public ?Endereco $endereco = null,

@@ -70,6 +70,7 @@ final class Cliente extends Base
          v::key('Street', v::stringType()->notEmpty()),
          v::key('Number', v::stringType()->notEmpty(), false),
          v::key('Complement', v::stringType(), false),
+         v::key('District', v::stringType()->notEmpty(), false),
          v::key('ZipCode', v::intVal()),
          v::key('City', v::stringType()->notEmpty()),
          v::key('State', v::stringType()->notEmpty()),
@@ -90,6 +91,7 @@ final class Cliente extends Base
       $requiredAddressesFields = [
          v::key('Street', v::stringType()->notEmpty()),
          v::key('Number', v::stringType()->notEmpty(), false),
+         v::key('District', v::stringType()->notEmpty(), false),
          v::key('Complement', v::stringType(), false),
          v::key('ZipCode', v::intVal()),
          v::key('City', v::stringType()->notEmpty()),
@@ -112,6 +114,7 @@ final class Cliente extends Base
          v::key('Street', v::stringType()->notEmpty()),
          v::key('Number', v::stringType()->notEmpty(), false),
          v::key('Complement', v::stringType(), false),
+         v::key('District', v::stringType()->notEmpty(), false),
          v::key('ZipCode', v::intVal()),
          v::key('City', v::stringType()->notEmpty()),
          v::key('State', v::stringType()->notEmpty()),

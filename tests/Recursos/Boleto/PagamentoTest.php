@@ -36,7 +36,7 @@ class PagamentoTest extends TestCase
         $httpDriverMock->expects($this->once())
             ->method('post')
             ->with(
-                '1/sales',
+                '1/sales/',
                 $this->callback(function ($dadosPagamento) use ($ordemMock, $clienteMock, $pagamentoMock) {
                     return $dadosPagamento['MerchantOrderId'] === $ordemMock->identificador &&
                         $dadosPagamento['Customer']['Name'] === $clienteMock->nome &&
@@ -64,16 +64,20 @@ class PagamentoTest extends TestCase
             ],
             'endereco' => [
                 'tipo' => EnderecoTipo::RESIDENCIAL->value,
-                'endereco' => '123 Main St',
+                'numero' => '123',
+                'endereco' => 'Main St',
+                'bairro' => 'Centro',
                 'cidade' => 'Anytown',
                 'estado' => Estado::SC->value,
                 'cep' => '12345',
-                'pais' => Pais::BRASIL->value
+                'pais' => Pais::BRASIL->value,
             ],
             'cobranca' => [
                 'tipo' => EnderecoTipo::COBRANCA->value,
-                'endereco' => '789 Oak St',
+                'numero' => '456',
+                'endereco' => 'Oak St',
                 'cidade' => 'Sometown',
+                'bairro' => 'Centro',
                 'estado' => Estado::SC->value,
                 'cep' => '11223',
                 'pais' => Pais::BRASIL->value

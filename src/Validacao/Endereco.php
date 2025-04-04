@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Validacao;
 
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use Respect\Validation\Validator as v;
 
 final class Endereco extends Base
@@ -49,7 +51,7 @@ final class Endereco extends Base
 
    public static function StateValidate($input)
    {
-      if (!v::notEmpty()->validate($input)) {
+      if (!v::notEmpty()->in(Estado::estados())->validate($input)) {
          static::$erros[] = 'Estado inválido';
       }
 
@@ -58,8 +60,17 @@ final class Endereco extends Base
 
    public static function CountryValidate($input)
    {
-      if (!v::notEmpty()->validate($input)) {
+      if (!v::notEmpty()->in(Pais::paises())->validate($input)) {
          static::$erros[] = 'País inválido';
+      }
+
+      return (bool) sizeof(static::$erros) === 0;
+   }
+
+   public static function DistrictValidate($input)
+   {
+      if (!v::notEmpty()->validate($input)) {
+         static::$erros[] = 'Bairro inválido';
       }
 
       return (bool) sizeof(static::$erros) === 0;
