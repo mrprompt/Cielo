@@ -26,7 +26,7 @@ final class Cliente extends Base
       return (bool) sizeof(static::$erros) === 0;
    }
 
-   public static function IdentityValidate($identity) 
+   public static function IdentityValidate($identity)
    {
       if (!v::notEmpty()->validate($identity)) {
          static::$erros[] = 'Número de documento inválido';
@@ -44,13 +44,13 @@ final class Cliente extends Base
       return (bool) sizeof(static::$erros) === 0;
    }
 
-   public static function EmailValidate($email) 
+   public static function EmailValidate($email)
    {
       if (!v::notEmpty()->email()->validate($email)) {
          static::$erros[] = 'Email inválido';
-     }
+      }
 
-     return (bool) sizeof(static::$erros) === 0;
+      return (bool) sizeof(static::$erros) === 0;
    }
 
    public static function BirthdateValidate($birthdate)
@@ -64,9 +64,66 @@ final class Cliente extends Base
       return (bool) sizeof(static::$erros) === 0;
    }
 
-   public static function AddressValidate($address) {}
+   public static function AddressValidate($address)
+   {
+      $requiredAddressesFields = [
+         v::key('Street', v::stringType()->notEmpty()),
+         v::key('Number', v::stringType()->notEmpty(), false),
+         v::key('Complement', v::stringType(), false),
+         v::key('ZipCode', v::intVal()),
+         v::key('City', v::stringType()->notEmpty()),
+         v::key('State', v::stringType()->notEmpty()),
+         v::key('Country', v::stringType()->notEmpty()),
+      ];
 
-   public static function DeliveryAddressValidate($delivery) {}
+      if (!v::keySet(
+         ...$requiredAddressesFields,
+      )->isValid($address)) {
+         static::$erros[] = "Endereço inválido";
+      }
 
-   public static function BillingValidate($billing) {}
+      return (bool) sizeof(static::$erros) === 0;
+   }
+
+   public static function DeliveryAddressValidate($address)
+   {
+      $requiredAddressesFields = [
+         v::key('Street', v::stringType()->notEmpty()),
+         v::key('Number', v::stringType()->notEmpty(), false),
+         v::key('Complement', v::stringType(), false),
+         v::key('ZipCode', v::intVal()),
+         v::key('City', v::stringType()->notEmpty()),
+         v::key('State', v::stringType()->notEmpty()),
+         v::key('Country', v::stringType()->notEmpty()),
+      ];
+
+      if (!v::keySet(
+         ...$requiredAddressesFields,
+      )->isValid($address)) {
+         static::$erros[] = "Endereço de entrega inválido";
+      }
+
+      return (bool) sizeof(static::$erros) === 0;
+   }
+
+   public static function BillingValidate($address)
+   {
+      $requiredAddressesFields = [
+         v::key('Street', v::stringType()->notEmpty()),
+         v::key('Number', v::stringType()->notEmpty(), false),
+         v::key('Complement', v::stringType(), false),
+         v::key('ZipCode', v::intVal()),
+         v::key('City', v::stringType()->notEmpty()),
+         v::key('State', v::stringType()->notEmpty()),
+         v::key('Country', v::stringType()->notEmpty()),
+      ];
+
+      if (!v::keySet(
+         ...$requiredAddressesFields,
+      )->isValid($address)) {
+         static::$erros[] = "Endereço de cobrança inválido";
+      }
+
+      return (bool) sizeof(static::$erros) === 0;
+   }
 }

@@ -63,12 +63,24 @@ final class Cartao extends Base
 
     public static function SecurityCodeValidate($codigo)
     {
-        return true;
+        if (!v::notEmpty()
+            ->noWhitespace()
+            ->validate($codigo)) {
+            static::$erros[] = 'Código de segurança inválido';
+        }
+        
+        return (bool) sizeof(static::$erros) === 0;
     }
 
     public static function CardTokenValidate($token)
     {
-        return true;
+        if (!v::notEmpty()
+            ->noWhitespace()
+            ->validate($token)) {
+            static::$erros[] = 'Token inválido';
+        }
+        
+        return (bool) sizeof(static::$erros) === 0;
     }
 
     public static function IssuerValidate($nome)
