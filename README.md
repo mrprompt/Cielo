@@ -47,6 +47,8 @@ Para executar os exemplos, copie o arquivo .env.example do diretório exemplos p
 * **PIX**
   * [Criar pagamento com QRCode Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/qrcode-pix)
   * [Solicitar uma devolução Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/devolu%C3%A7ao-pix-api)
+* **Boleto**
+  * [Criar pagamento com boleto](https://docs.cielo.com.br/ecommerce-cielo/reference/boleto-api)
 * **Tokenização**
   * [Criar cartão tokenizado antes da autorização](https://docs.cielo.com.br/ecommerce-cielo/reference/criar-cardtoken)
 

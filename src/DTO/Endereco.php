@@ -12,8 +12,9 @@ class Endereco implements Dto
     public function __construct(
         public TipoEndereco $tipo,
         public string $endereco,
-        public string $numero,
-        public string $complemento,
+        public ?string $numero,
+        public ?string $complemento,
+        public string $bairro,
         public string $cep,
         public string $cidade,
         public Estado $estado,
@@ -24,13 +25,14 @@ class Endereco implements Dto
     {
         return new self(
             tipo: $tipo,
-            endereco: $request->Street,
-            numero: $request->Number ?? '',
-            complemento: $request->Complement ?? '',
-            cep: $request->ZipCode,
-            cidade: $request->City,
-            estado: Estado::match($request->State),
-            pais: Pais::match($request->Country)
+            endereco: $request->Street ?? null,
+            numero: $request->Number ?? null,
+            complemento: $request->Complement ?? null,
+            bairro: $request->District ?? null,
+            cep: $request->ZipCode ?? null,
+            cidade: $request->City ?? null,
+            estado: property_exists($request, 'State') ? Estado::match($request->State) : null,
+            pais: property_exists($request, 'Country') ? Pais::match($request->Country) : null
         );
     }
 
@@ -39,12 +41,13 @@ class Endereco implements Dto
         return new self(
             tipo: $tipo,
             endereco: $data['endereco'],
-            numero: $data['numero'] ?? '',
-            complemento: $data['complemento'] ?? '',
-            cep: $data['cep'],
-            cidade: $data['cidade'],
-            estado: Estado::match($data['estado']),
-            pais: Pais::match($data['pais'])
+            numero: $data['numero'] ?? null,
+            complemento: $data['complemento'] ?? null,
+            bairro: $data['bairro'] ?? null,
+            cep: $data['cep'] ?? null,
+            cidade: $data['cidade'] ?? null,
+            estado: array_key_exists('estado', $data) ? Estado::match($data['estado']) : null,
+            pais: array_key_exists('pais', $data) ? Pais::match($data['pais']) : null
         );
     }
 
@@ -54,6 +57,7 @@ class Endereco implements Dto
             'Street' => $this->endereco,
             'Number' => $this->numero,
             'Complement' => $this->complemento,
+            'District'=> $this->bairro,
             'ZipCode' => $this->cep,
             'City' => $this->cidade,
             'State' => $this->estado->value,
