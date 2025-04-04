@@ -8,9 +8,9 @@ class Devolucao implements Dto
 {
     public function __construct(
         public readonly int $status,
-        public readonly int $motivoCodigo,
+        public readonly string $motivoCodigo,
         public readonly string $motivoMensagem,
-        public readonly int $retornoCodigo,
+        public readonly string $retornoCodigo,
         public readonly string $retornoMensagem,
     ) {}
 

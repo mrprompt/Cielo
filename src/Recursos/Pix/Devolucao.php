@@ -1,6 +1,6 @@
 <?php
 
-namespace MrPrompt\Cielo\Recursos\Cartao;
+namespace MrPrompt\Cielo\Recursos\Pix;
 
 use MrPrompt\Cielo\Infra\HttpDriver;
 use MrPrompt\Cielo\DTO\Pagamento as PagamentoDto;
