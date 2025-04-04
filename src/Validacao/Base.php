@@ -14,8 +14,6 @@ abstract class Base
         static::$erros = [];
         
         $campos = $dto->toRequest();
-        // print_r($campos); 
-        // exit;
 
         array_walk(
             $campos,
@@ -36,7 +34,6 @@ abstract class Base
         
         $exception = new ValidacaoErrors("Erros encontrados.");
         $exception->setDetails(static::$erros);
-        // print_r(static::$erros);
 
         throw $exception;
     }
