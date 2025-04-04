@@ -85,7 +85,6 @@ class CartaoTest extends TestCase
     public function testValidateThrowsExceptionForInvalidCard($card): void
     {
         $this->expectException(ValidacaoErrors::class);
-        // $this->expectExceptionMessage('Erros encontrados.');
 
         $cartao = CartaoDto::fromArray($card);
 
