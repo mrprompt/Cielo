@@ -2,6 +2,7 @@
 
 namespace MrPrompt\Cielo\Validacao;
 
+use DateTime;
 use Respect\Validation\Validator as v;
 use MrPrompt\Cielo\Enum\Cartao\Bandeira;
 
@@ -27,14 +28,19 @@ final class Cartao extends Base
 
     public static function ExpirationDateValidate($validade)
     {
-        $referencia = new \DateTime;
+        $referencia = new DateTime;
+        $validadeObj = DateTime::createFromFormat('m/Y', $validade);
 
-        if ($validade < $referencia) {
-            static::$erros[] = 'Cartão com validade ultrapassada.';
+        if (!v::date('m/Y')->validate($validade) || $validadeObj === false) {
+            static::$erros[] = 'Data de validade inválida.';
+
+            return false;
         }
 
-        if (!v::digit()->notEmpty()->noWhitespace()->length(8)->validate($validade)) {
-            static::$erros[] = 'Validade inválida';
+        if ($validadeObj->diff($referencia)->days <= 0) {
+            static::$erros[] = 'Cartão com validade ultrapassada.';
+
+            return false;
         }
 
         return (bool) sizeof(static::$erros) === 0;
@@ -42,7 +48,7 @@ final class Cartao extends Base
 
     public static function CustomerNameValidate($nome)
     {
-        if (!v::alnum()->notEmpty()->validate($nome)) {
+        if (!v::stringType()->notEmpty()->validate($nome)) {
             static::$erros[] = 'Nome inválido';
         }
 
@@ -51,7 +57,7 @@ final class Cartao extends Base
 
     public static function CardNumberValidate($numero)
     {
-        if (!v::notEmpty()
+        if (!v::digit()
             ->noWhitespace()
             ->creditCard()
             ->validate($numero)) {
@@ -63,7 +69,8 @@ final class Cartao extends Base
 
     public static function SecurityCodeValidate($codigo)
     {
-        if (!v::notEmpty()
+        if (!v::digit()
+            ->notEmpty()
             ->noWhitespace()
             ->validate($codigo)) {
             static::$erros[] = 'Código de segurança inválido';
@@ -96,5 +103,14 @@ final class Cartao extends Base
     public static function PrepaidValidate($prepago)
     {
         return true;
+    }
+
+    public static function HolderValidate($nome)
+    {
+        if (!v::stringType()->notEmpty()->validate($nome)) {
+            static::$erros[] = 'Nome inválido';
+        }
+
+        return (bool) sizeof(static::$erros) === 0;
     }
 }

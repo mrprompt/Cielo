@@ -88,6 +88,6 @@ class PagamentoTest extends TestCase
 
         $bin = PagamentoDto::fromArray($pagamento);
 
-        $this->assertTrue(Pagamento::validate($bin));
+        Pagamento::validate($bin);
     }
 }

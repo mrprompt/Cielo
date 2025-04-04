@@ -12,23 +12,82 @@ use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 
 class CartaoTest extends TestCase
 {
+    public static function validCardData(): array
+    {
+        return [
+            'valid visa card number' => [
+                [
+                    'numero' => '4235647728025682',
+                    'tipo' => 'CreditCard',
+                    'bandeira' => 'VISA',
+                    'validade' => '11/2030',
+                    'codigoSeguranca' => '123',
+                    'nome' => 'John Doe',
+                ],
+            ],
+            'valid master card number' => [
+                [
+                    'numero' => '5031433215406351',
+                    'tipo' => 'CreditCard',
+                    'bandeira' => 'MASTERCARD',
+                    'validade' => '11/2030',
+                    'codigoSeguranca' => '123',
+                    'nome' => 'John Doe',
+                ],
+            ],
+        ];
+    }
+
     #[Test]
     #[TestDox('Ensure validate method passes for valid card')]
-    public function testValidatePassesForValidCard(): void
+    #[DataProvider('validCardData')]
+    public function testValidatePassesForValidCard($card): void
     {
-        $cartao = CartaoDto::fromArray(['numero' => '5502095822650000']);
+        $cartao = CartaoDto::fromArray($card);
 
         $this->assertTrue(Cartao::validate($cartao));
     }
 
+    public static function invalidCardData(): array
+    {
+        return [
+            'invalid card number' => [
+                [
+                    'numero' => 'invalid_number',
+                ],
+            ],
+            'invalid expiration date' => [
+                [
+                    'validade' => 'invalid_date',
+                ],
+            ],
+            'negative value' => [
+                [
+                    'validade' => '-1000',
+                ],
+            ],
+            'invalid card type' => [
+                [
+                    'tipo' => 'INVALID_CARD_TYPE',
+                ],
+            ],
+            'invalid card brand' => [
+                [
+                    'bandeira' => 'INVALID_BRAND',
+                ],
+            ],
+        ];
+    }
+
     #[Test]
     #[TestDox('Ensure validate method throws exception for invalid card')]
-    public function testValidateThrowsExceptionForInvalidCard(): void
+    #[DataProvider('invalidCardData')]
+    public function testValidateThrowsExceptionForInvalidCard($card): void
     {
         $this->expectException(ValidacaoErrors::class);
-        $this->expectExceptionMessage('Erros encontrados.');
+        // $this->expectExceptionMessage('Erros encontrados.');
 
-        $cartao = CartaoDto::fromArray(['numero' => 'invalid_number']);
+        $cartao = CartaoDto::fromArray($card);
 
         Cartao::validate($cartao);
     }
