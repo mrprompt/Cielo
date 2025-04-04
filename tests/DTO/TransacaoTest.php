@@ -13,9 +13,9 @@ use MrPrompt\Cielo\Enum\Pagamento\Provedor;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
 use MrPrompt\Cielo\Enum\Cartao\Bandeira;
 use MrPrompt\Cielo\Enum\Cartao\Tipo as TipoCartao;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as TipoEndereco;
-use MrPrompt\Cielo\Enum\Cliente\Estado;
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as TipoEndereco;
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use MrPrompt\Cielo\Enum\Cliente\Status as ClienteStatus;
 use MrPrompt\Cielo\Tests\TestCase;
 

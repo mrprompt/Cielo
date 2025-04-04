@@ -10,9 +10,9 @@ use MrPrompt\Cielo\DTO\Cliente;
 use MrPrompt\Cielo\DTO\Documento;
 use MrPrompt\Cielo\Enum\Cliente\Status;
 use MrPrompt\Cielo\DTO\Endereco;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as TipoEndereco;
-use MrPrompt\Cielo\Enum\Cliente\Estado;
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as TipoEndereco;
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use MrPrompt\Cielo\Tests\TestCase;
 
 class ClienteTest extends TestCase

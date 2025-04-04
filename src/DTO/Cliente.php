@@ -6,7 +6,7 @@ use DateTime;
 use MrPrompt\Cielo\Contratos\Dto;
 use MrPrompt\Cielo\DTO\Documento;
 use MrPrompt\Cielo\Enum\Cliente\Status;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as TipoEndereco;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as TipoEndereco;
 
 class Cliente implements Dto
 {

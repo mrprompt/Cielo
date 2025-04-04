@@ -7,15 +7,15 @@ use MrPrompt\Cielo\DTO\Cliente as ClienteDto;
 use MrPrompt\Cielo\DTO\Pagamento as PagamentoDto;
 use MrPrompt\Cielo\DTO\Transacao as TransacaoDto;
 use MrPrompt\Cielo\Enum\Cliente\Status;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as EnderecoTipo;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as EnderecoTipo;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo as PagamentoTipo;
 use MrPrompt\Cielo\Enum\Pagamento\Moeda as MoedaTipo;
 use MrPrompt\Cielo\Enum\Pagamento\Provedor as ProvedorTipo;
 use MrPrompt\Cielo\Enum\Pagamento\Parcelamento as ParcelamentoTipo;
 use MrPrompt\Cielo\Enum\Cartao\Tipo as CartaoTipo;
 use MrPrompt\Cielo\Enum\Cartao\Bandeira as CartaoBandeira;
-use MrPrompt\Cielo\Enum\Cliente\Estado;
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use MrPrompt\Cielo\Recursos\Cartao\Pagamento;
 use MrPrompt\Cielo\Exceptions\CieloApiErrors;
 

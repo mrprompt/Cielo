@@ -2,7 +2,7 @@
 
 namespace MrPrompt\Cielo\Tests\Enum\Cliente;
 
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use MrPrompt\Cielo\Tests\TestCase;
 use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use PHPUnit\Framework\Attributes\Test;

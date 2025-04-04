@@ -1,6 +1,6 @@
 <?php
 
-namespace MrPrompt\Cielo\Enum\Cliente;
+namespace MrPrompt\Cielo\Enum\Localizacao;
 
 use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 

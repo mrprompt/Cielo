@@ -3,9 +3,9 @@
 namespace MrPrompt\Cielo\DTO;
 
 use MrPrompt\Cielo\Contratos\Dto;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as TipoEndereco;
-use MrPrompt\Cielo\Enum\Cliente\Estado;
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as TipoEndereco;
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 
 class Endereco implements Dto
 {

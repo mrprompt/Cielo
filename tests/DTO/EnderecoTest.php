@@ -7,9 +7,9 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\Test;
 use MrPrompt\Cielo\DTO\Endereco;
 use MrPrompt\Cielo\Tests\TestCase;
-use MrPrompt\Cielo\Enum\Cliente\Endereco as TipoEndereco;
-use MrPrompt\Cielo\Enum\Cliente\Estado;
-use MrPrompt\Cielo\Enum\Cliente\Pais;
+use MrPrompt\Cielo\Enum\Localizacao\Endereco as TipoEndereco;
+use MrPrompt\Cielo\Enum\Localizacao\Estado;
+use MrPrompt\Cielo\Enum\Localizacao\Pais;
 
 class EnderecoTest extends TestCase
 {
