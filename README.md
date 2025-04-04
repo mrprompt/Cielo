@@ -44,6 +44,9 @@ Para executar os exemplos, copie o arquivo .env.example do diretório exemplos p
   * [Criar pagamento com cartão de débito](https://docs.cielo.com.br/ecommerce-cielo/reference/debito)
   * [Cancelar transação de débito via PaymentId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-d%C3%A9bito-paymentid)
   * [Cancelar transação de débito via MerchantOrderId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-debito-merchantorderid)
+* **PIX**
+  * [Criar pagamento com QRCode Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/qrcode-pix)
+  * [Solicitar uma devolução Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/devolu%C3%A7ao-pix-api)
 * **Tokenização**
   * [Criar cartão tokenizado antes da autorização](https://docs.cielo.com.br/ecommerce-cielo/reference/criar-cardtoken)
 
