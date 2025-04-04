@@ -2,18 +2,17 @@
 
 namespace MrPrompt\Cielo\Infra;
 
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use MrPrompt\Cielo\Exceptions\CieloApiErrors;
-use MrPrompt\Cielo\Infra\Ambiente;
+use MrPrompt\Cielo\Contratos\Ambiente as AmbienteInterface;
 
 class HttpDriver
 {
     private $defaultHeaders = [];
 
     public function __construct(
-        private readonly Ambiente $ambiente,
+        private readonly AmbienteInterface $ambiente,
         private readonly Client $client,
         private readonly Autenticacao $autenticacao,
     ) {

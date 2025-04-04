@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use MrPrompt\Cielo\Infra\Ambiente;
+use MrPrompt\Cielo\Enum\Ambiente\Ambiente;
 use MrPrompt\Cielo\Infra\Autenticacao;
 use MrPrompt\Cielo\Infra\HttpDriver;
 
@@ -15,6 +15,5 @@ define('MERCHANT_ID', $_ENV['CIELO_MERCHANT_ID']);
 define('MERCHANT_KEY', $_ENV['CIELO_MERCHANT_KEY']);
 
 $client = new Client;
-$ambiente = new Ambiente(Ambiente::SANDBOX);
 $autenticacao = new Autenticacao(MERCHANT_ID, MERCHANT_KEY);
-$driver = new HttpDriver($ambiente, $client, $autenticacao);
+$driver = new HttpDriver(Ambiente::match('sandbox'), $client, $autenticacao);

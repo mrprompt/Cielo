@@ -10,9 +10,9 @@ use GuzzleHttp\Psr7\Response;
 use MrPrompt\Cielo\Tests\TestCase;
 use MrPrompt\Cielo\Recursos\Bin\Consulta;
 use MrPrompt\Cielo\DTO\Bin as BinDto;
-use MrPrompt\Cielo\Infra\Ambiente;
 use MrPrompt\Cielo\Infra\Autenticacao;
 use MrPrompt\Cielo\Infra\HttpDriver;
+use MrPrompt\Cielo\Contratos\Ambiente;
 
 class ConsultaTest extends TestCase
 {
