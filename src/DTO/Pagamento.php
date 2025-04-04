@@ -114,9 +114,9 @@ class Pagamento implements Dto
             'SoftDescriptor' => $this->descricao,
             'Installments' => $this->parcelas,
             'Interest' => !is_null($this->parcelas_tipo) ? $this->parcelas_tipo->value : null,
-            'Capture' => $this->captura,
-            'Authenticate' => $this->autenticacao,
-            'Recurrent' => $this->recorrente,
+            'Capture' => (bool) $this->captura,
+            'Authenticate' => (bool) $this->autenticacao,
+            'Recurrent' => (bool) $this->recorrente,
         ];
 
         if (!is_null($this->cartao)) {

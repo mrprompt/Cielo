@@ -2,7 +2,6 @@
 
 namespace MrPrompt\Cielo\Validacao;
 
-use MrPrompt\Cielo\Enum\Cliente\Endereco as EnderecoEnum;
 use Respect\Validation\Validator as v;
 
 final class Endereco extends Base

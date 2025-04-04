@@ -35,8 +35,7 @@ class EnderecoTest extends TestCase
     #[TestDox('Ensure validate method throws exception for invalid client')]
     public function testValidateThrowsExceptionForInvalidCliente(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        // $this->expectExceptionMessage('Tipo de carteira inválida: invalid_type');
+        $this->expectException(ValidacaoErrors::class);
 
         $cliente = EnderecoDto::fromArray([
             'endereco' => '',

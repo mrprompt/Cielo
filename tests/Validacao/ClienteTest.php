@@ -61,7 +61,7 @@ class ClienteTest extends TestCase
     #[TestDox('Ensure validate method throws exception for invalid client')]
     public function testValidateThrowsExceptionForInvalidCliente(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         // $this->expectExceptionMessage('Tipo de carteira inválida: invalid_type');
 
         $cliente = ClienteDto::fromArray([

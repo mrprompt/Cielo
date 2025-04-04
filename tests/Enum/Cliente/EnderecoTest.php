@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Cliente;
 
 use MrPrompt\Cielo\Enum\Cliente\Endereco;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -20,7 +21,7 @@ class EnderecoTest extends TestCase
     #[TestDox('Verifica se match lança exceção para um valor inválido')]
     public function testMatchThrowsExceptionForInvalidValue()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de endereço inválido: Invalido');
         Endereco::match('Invalido');
     }

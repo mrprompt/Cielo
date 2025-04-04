@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Pagamento;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Moeda: string 
 {
     case REAL = 'BRL';
@@ -32,7 +34,7 @@ enum Moeda: string
             'JPY' => self::IENE,
             'CNY' => self::YUAN,
             'SEK' => self::COROA_SUECA,
-            default => throw new \InvalidArgumentException("Moeda inválida: {$moeda}")
+            default => throw new ValidacaoErrors("Moeda inválida: {$moeda}")
         };
     }
 

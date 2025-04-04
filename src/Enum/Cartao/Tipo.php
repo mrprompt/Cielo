@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cartao;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Tipo: string
 {
     case CREDITO = 'CreditCard';
@@ -16,7 +18,7 @@ enum Tipo: string
             'DebitCard' => self::DEBITO,
             'Débito' => self::DEBITO,
             'Múltiplo' => self::BOTH,
-            default => throw new \InvalidArgumentException("Tipo de cartão inválido: {$value}")
+            default => throw new ValidacaoErrors("Tipo de cartão inválido: {$value}")
         };
     }
 

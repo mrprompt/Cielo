@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Cartao;
 
 use MrPrompt\Cielo\Enum\Cartao\Tipo;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -29,7 +30,7 @@ class TipoTest extends TestCase
     #[TestDox('Verifica se match lança exceção para um valor inválido')]
     public function testMatchThrowsExceptionForInvalidValue(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de cartão inválido: InvalidCard');
         Tipo::match('InvalidCard');
     }

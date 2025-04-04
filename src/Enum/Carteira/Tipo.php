@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Carteira;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Tipo: string 
 {
     case APPLE_PAY = 'ApplePay';
@@ -14,7 +16,7 @@ enum Tipo: string
             'ApplePay' => self::APPLE_PAY,
             'GooglePay' => self::GOOGLE_PAY,
             'SamsungPay' => self::SAMSUNG_PAY,
-            default => throw new \InvalidArgumentException("Tipo de carteira inválida: {$value}")
+            default => throw new ValidacaoErrors("Tipo de carteira inválida: {$value}")
         };
     }
 

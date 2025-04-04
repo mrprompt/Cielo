@@ -6,7 +6,7 @@ use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use MrPrompt\Cielo\Enum\Cartao\Bandeira;
-
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 
 class BandeiraTest extends TestCase
 {
@@ -28,7 +28,7 @@ class BandeiraTest extends TestCase
     #[TestDox('Verifica se o método match lança uma exceção para valores inválidos')]
     public function testMatchThrowsExceptionForInvalidValue()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Bandeira inválida: InvalidValue');
 
         Bandeira::match('InvalidValue');

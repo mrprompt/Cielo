@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cliente;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Status: string
 {
     case NOVO = 'NEW';
@@ -14,7 +16,7 @@ enum Status: string
             'NOVO' => self::NOVO,
             'EXISTING' => self::EXISTENTE,
             'EXISTENTE' => self::EXISTENTE,
-            default => throw new \InvalidArgumentException("Status de usuário inválido: {$status}")
+            default => throw new ValidacaoErrors("Status de usuário inválido: {$status}")
         };
     }
 

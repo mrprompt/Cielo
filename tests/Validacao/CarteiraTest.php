@@ -31,7 +31,7 @@ class CarteiraTest extends TestCase
     #[TestDox('Ensure validate method throws exception for invalid wallet')]
     public function testValidateThrowsExceptionForInvalidWallet(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de carteira inválida: invalid_type');
 
         $carteira = CarteiraDto::fromArray(['tipo' => 'invalid_type', 'cavv' => '123', 'eci' => '123']);

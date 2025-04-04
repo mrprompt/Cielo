@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Cliente;
 
 use MrPrompt\Cielo\Enum\Cliente\Documento;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -29,7 +30,7 @@ class DocumentoTest extends TestCase
     #[TestDox('Lança exceção para um tipo de documento inválido')]
     public function testMatchThrowsExceptionForInvalidType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de documento inválido: INVALID');
 
         Documento::match('INVALID');

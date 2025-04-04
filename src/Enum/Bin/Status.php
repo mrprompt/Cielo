@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Bin;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Status: string
 {
     case ANALISE_AUTORIZADA = '00';
@@ -16,7 +18,7 @@ enum Status: string
             self::BANDEIRA_NAO_SUPORTADA => 'Bandeira não suportada ',
             self::CARTAO_NAO_SUPORTADO => 'Cartão não suportado na consulta de bin ',
             self::AFILIACAO_BLOQUEADA => 'Afiliação bloqueada',
-            default => throw new \InvalidArgumentException("Label não encontrado"),
+            default => throw new ValidacaoErrors("Label não encontrado"),
         };
     }
 
@@ -27,7 +29,7 @@ enum Status: string
             self::BANDEIRA_NAO_SUPORTADA => 'Bandeira não suportada ',
             self::CARTAO_NAO_SUPORTADO => 'Cartão não suportado na consulta de bin ',
             self::AFILIACAO_BLOQUEADA => 'Afiliação bloqueada',
-            default => throw new \InvalidArgumentException("Descrição não encontrada"),
+            default => throw new ValidacaoErrors("Descrição não encontrada"),
         };
     }
 

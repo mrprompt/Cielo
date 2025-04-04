@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cliente;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Documento: string
 {
     case CPF = 'CPF';
@@ -12,7 +14,7 @@ enum Documento: string
         return match ($tipo) {
             'CPF' => self::CPF,
             'CNPJ' => self::CNPJ,
-            default => throw new \InvalidArgumentException("Tipo de documento inválido: {$tipo}")
+            default => throw new ValidacaoErrors("Tipo de documento inválido: {$tipo}")
         };
     }
 

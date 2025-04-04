@@ -4,7 +4,7 @@ namespace MrPrompt\Cielo\Tests\Enum\Cliente;
 
 use MrPrompt\Cielo\Enum\Cliente\Estado;
 use MrPrompt\Cielo\Tests\TestCase;
-use InvalidArgumentException;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -26,7 +26,7 @@ class EstadoTest extends TestCase
     #[DataProvider('invalidEstadosProvider')]
     public function testInvalidEstadoThrowsException(string $invalidEstado)
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage("Estado inválido: $invalidEstado");
         Estado::match($invalidEstado);
     }

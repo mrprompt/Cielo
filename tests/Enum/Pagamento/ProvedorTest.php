@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Pagamento;
 
 use MrPrompt\Cielo\Enum\Pagamento\Provedor;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -31,7 +32,7 @@ class ProvedorTest extends TestCase
     #[TestDox('Deve lançar uma exceção para um provedor inválido')]
     public function testMatchThrowsExceptionForInvalidProvedor(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Provedor inválido: InvalidProvedor');
 
         Provedor::match('InvalidProvedor');

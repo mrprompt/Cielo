@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cliente;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Endereco: string
 {
     case RESIDENCIAL = 'Address';
@@ -14,7 +16,7 @@ enum Endereco: string
             'Address' => self::RESIDENCIAL,
             'DeliveryAddress' => self::ENTREGA,
             'Billing' => self::COBRANCA,
-            default => throw new \InvalidArgumentException("Tipo de endereço inválido: {$tipo}")
+            default => throw new ValidacaoErrors("Tipo de endereço inválido: {$tipo}")
         };
     }
 

@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Pagamento;
 
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -28,7 +29,7 @@ class TipoTest extends TestCase
 
     public function testMatchThrowsExceptionForInvalidType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de pagamento inválido: InvalidType');
 
         Tipo::match('InvalidType');

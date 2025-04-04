@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Pagamento;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Status: string
 {
     /**
@@ -72,7 +74,7 @@ enum Status: string
             self::REFUNDED->value => self::REFUNDED,
             self::PENDING->value => self::PENDING,
             self::SCHEDULED->value => self::SCHEDULED,
-            default => throw new \InvalidArgumentException("Status inválido: {$status}")
+            default => throw new ValidacaoErrors("Status inválido: {$status}")
         };
     }
 

@@ -2,7 +2,6 @@
 
 namespace MrPrompt\Cielo\Tests\Validacao;
 
-use InvalidArgumentException;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -46,7 +45,7 @@ class DocumentoTest extends TestCase
     #[TestDox('Ensure validate method throws exception for invalid document')]
     public function testValidateThrowsExceptionForInvalidType(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
 
         $documento = DocumentoDto::fromArray([
             'numero' => '12345678900',

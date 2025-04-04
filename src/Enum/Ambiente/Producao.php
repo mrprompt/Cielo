@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Enum\Ambiente;
 
 use MrPrompt\Cielo\Contratos\Ambiente as AmbienteInterface;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 
 enum Producao: string implements AmbienteInterface
 {
@@ -13,7 +14,7 @@ enum Producao: string implements AmbienteInterface
     {
         return match ($this) {
             self::TRANSACIONAL => self::TRANSACIONAL->value,
-            default => throw new \Exception('Ambiente inválido'),
+            default => throw new ValidacaoErrors('Ambiente inválido'),
         };
     }
 
@@ -21,7 +22,7 @@ enum Producao: string implements AmbienteInterface
     {
         return match ($this) {
             self::CONSULTAS => self::CONSULTAS->value,
-            default => throw new \Exception('Ambiente inválido'),
+            default => throw new ValidacaoErrors('Ambiente inválido'),
         };
     }
 }

@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Pagamento;
 
 use MrPrompt\Cielo\Enum\Pagamento\Parcelamento;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -30,7 +31,7 @@ class ParcelamentoTest extends TestCase
     #[TestDox('Deve lançar uma exceção para um valor inválido')]
     public function testMatchThrowsExceptionForInvalidValue(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Tipo de parcelamento inválido: InvalidValue');
         Parcelamento::match('InvalidValue');
     }

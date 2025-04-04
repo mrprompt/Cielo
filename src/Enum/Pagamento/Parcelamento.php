@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Pagamento;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Parcelamento: string 
 {
     case LOJA = 'ByMerchant';
@@ -16,7 +18,7 @@ enum Parcelamento: string
             self::CARTAO->value => self::CARTAO,
             self::A_VISTA->value => self::A_VISTA,
             self::PARCELADO->value => self::PARCELADO,
-            default => throw new \InvalidArgumentException("Tipo de parcelamento inválido: {$parcelamento}")
+            default => throw new ValidacaoErrors("Tipo de parcelamento inválido: {$parcelamento}")
         };
     }
 

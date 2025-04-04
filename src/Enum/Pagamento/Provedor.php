@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Pagamento;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Provedor: string 
 {
     case CIELO = 'Cielo';
@@ -12,7 +14,7 @@ enum Provedor: string
         return match ($provedor) {
             self::CIELO->value => self::CIELO,
             self::SIMULADO->value => self::SIMULADO,
-            default => throw new \InvalidArgumentException("Provedor inválido: {$provedor}")
+            default => throw new ValidacaoErrors("Provedor inválido: {$provedor}")
         };
     }
 

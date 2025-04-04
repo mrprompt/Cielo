@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cartao;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Bandeira: string 
 {
     case VISA = 'Visa';
@@ -32,7 +34,7 @@ enum Bandeira: string
             'JCB' => self::JCB,
             'Aura' => self::AURA,
             'AURA' => self::AURA,
-            default => throw new \InvalidArgumentException("Bandeira inválida: {$value}")
+            default => throw new ValidacaoErrors("Bandeira inválida: {$value}")
         };
     }
 

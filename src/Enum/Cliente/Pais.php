@@ -2,6 +2,8 @@
 
 namespace MrPrompt\Cielo\Enum\Cliente;
 
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
+
 enum Pais: string
 {
     case AFEGANISTAO = 'AFG';
@@ -398,7 +400,7 @@ enum Pais: string
             'YEM' => self::IEMEN,
             'ZMB' => self::ZAMBIA,
             'ZWE' => self::ZIMBABUE,
-            default => throw new \InvalidArgumentException("País inválido: {$code}")
+            default => throw new ValidacaoErrors("País inválido: {$code}")
         };
     }
 

@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Pagamento;
 
 use MrPrompt\Cielo\Enum\Pagamento\Moeda;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -29,7 +30,7 @@ class MoedaTest extends TestCase
     #[TestDox('Lança exceção para moeda inválida no método match')]
     public function testMatchMethodThrowsExceptionForInvalidCurrency()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Moeda inválida: INVALID');
         Moeda::match('INVALID');
     }
@@ -47,7 +48,6 @@ class MoedaTest extends TestCase
     {
         return [
             ['UYU', Moeda::PESO_URUGUAIO],
-            // Adicione outras moedas aqui, se necessário
         ];
     }
 

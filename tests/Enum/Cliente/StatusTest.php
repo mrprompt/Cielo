@@ -3,6 +3,7 @@
 namespace MrPrompt\Cielo\Tests\Enum\Cliente;
 
 use MrPrompt\Cielo\Enum\Cliente\Status;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -30,7 +31,7 @@ class StatusTest extends TestCase
     #[TestDox('Deve lançar uma exceção para um status inválido')]
     public function testMatchThrowsExceptionForInvalidStatus(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ValidacaoErrors::class);
         $this->expectExceptionMessage('Status de usuário inválido: INVALID');
         Status::match('INVALID');
     }

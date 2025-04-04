@@ -2,7 +2,7 @@
 
 namespace MrPrompt\Cielo\Enum\Cliente;
 
-use InvalidArgumentException;
+use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 
 enum Estado: string
 {
@@ -64,7 +64,7 @@ enum Estado: string
             'SP' => self::SP,
             'SE' => self::SE,
             'TO' => self::TO,
-            default => throw new InvalidArgumentException("Estado inválido: {$estado}"),
+            default => throw new ValidacaoErrors("Estado inválido: {$estado}"),
         };
     }
 
