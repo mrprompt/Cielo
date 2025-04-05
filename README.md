@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml/badge.svg)](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml)
 
-Cielo é uma biblioteca cliente para o web service da Cielo.
+Esta é uma biblioteca cliente para a API da [Cielo](https://www.cielo.com.br/).
 
 ## AVISO
 
@@ -20,10 +20,13 @@ composer require mrprompt/cielo "^4.0"
 
 ## Exemplos
 
-Para executar os exemplos, copie o arquivo .env.example do diretório exemplos para .env e edite os campos:
+Para todos os recursos suportados pela biblioteca, existe um exemplo de código no diretório de [exemplos](./exemplos/).
+Para executa-los, copie o arquivo .env.example do diretório .env e edite os campos:
 
 * CIELO_MERCHANT_ID
 * CIELO_MERCHANT_KEY
+
+Você pode obter as credencias diretamente na [documentação](https://docs.cielo.com.br/) da [Cielo](https://www.cielo.com.br/).
 
 ## Recursos disponíveis
 
