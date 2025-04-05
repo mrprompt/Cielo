@@ -4,11 +4,9 @@
 
 Cielo é uma biblioteca cliente para o web service da Cielo.
 
-Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
-
 ## AVISO
 
-**Esta versão é totalmente incompatível com as versões anteriores da biblioteca.**
+**Esta versão foi inteiramente reescrita e é totalmente incompatível com as versões anteriores da biblioteca.**
 
 ## Requisitos
 
@@ -52,8 +50,12 @@ Para executar os exemplos, copie o arquivo .env.example do diretório exemplos p
 * **Tokenização**
   * [Criar cartão tokenizado antes da autorização](https://docs.cielo.com.br/ecommerce-cielo/reference/criar-cardtoken)
 
-## Versões anteriores
+## Adicionais
 
-* PHP 8.2 ~ 8.4: Somente versão 4 em diante
-* PHP 5.5 ~ 5.6: Somente a versão 2.2 é compatível com PHP 5.5 e 5.6
-* PHP 5.3 ~ 5.4: Até a versão 2.1, o PHP 5.3 é suportado.
+Para [Laravel](https://laravel.com/)/[Lumen](https://lumen.laravel.com) foi desenvolvido um _Service Provider_ para facilitar o uso da biblioteca.
+Você pode obter mais detalhes sobre uso ou instalação diretamente no [repositório](https://github.com/mrprompt/cielo-service-provider).
+
+## Debug
+
+Para todas as requisições/recursos, você pode obter no retorno as propriedades `jsonEnvio` e `jsonRecebimento`, com o corpo da requisição
+e da resposta da API.
