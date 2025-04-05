@@ -1,6 +1,6 @@
 <?php
 
-namespace MrPrompt\Cielo\Tests\Enum\Cliente;
+namespace MrPrompt\Cielo\Tests\Enum\Localizacao;
 
 use MrPrompt\Cielo\Enum\Localizacao\Endereco;
 use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
@@ -14,7 +14,7 @@ class EnderecoTest extends TestCase
     #[TestDox('Verifica se match retorna o caso correto do enum')]
     public function testMatchReturnsCorrectEnumCase()
     {
-        $this->assertSame(Endereco::RESIDENCIAL, Endereco::match('Address'));
+        $this->assertSame(Endereco::PRINCIPAL, Endereco::match('Address'));
     }
 
     #[Test]

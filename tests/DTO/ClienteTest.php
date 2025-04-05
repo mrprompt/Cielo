@@ -2,6 +2,7 @@
 
 namespace MrPrompt\Cielo\Tests\DTO;
 
+use ArrayObject;
 use DateTime;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -26,14 +27,12 @@ class ClienteTest extends TestCase
         $cliente = Cliente::fromRequest($request);
 
         $this->assertInstanceOf(Cliente::class, $cliente);
+        $this->assertInstanceOf(ArrayObject::class, $cliente->enderecos);
         $this->assertEquals($expectedData['nome'], $cliente->nome);
         $this->assertEquals($expectedData['status'], $cliente->status);
         $this->assertEquals($expectedData['documento'], $cliente->documento);
         $this->assertEquals($expectedData['email'], $cliente->email);
         $this->assertEquals($expectedData['nascimento'], $cliente->nascimento);
-        $this->assertEquals($expectedData['endereco'], $cliente->endereco);
-        $this->assertEquals($expectedData['entrega'], $cliente->entrega);
-        $this->assertEquals($expectedData['cobranca'], $cliente->cobranca);
     }
 
     #[Test]
@@ -46,9 +45,7 @@ class ClienteTest extends TestCase
         $this->assertInstanceOf(Cliente::class, $cliente);
         $this->assertInstanceOf(Status::class, $cliente->status);
         $this->assertInstanceOf(Documento::class, $cliente->documento);
-        $this->assertInstanceOf(Endereco::class, $cliente->endereco);
-        $this->assertInstanceOf(Endereco::class, $cliente->entrega);
-        $this->assertInstanceOf(Endereco::class, $cliente->cobranca);
+        $this->assertInstanceOf(ArrayObject::class, $cliente->enderecos);
     }
 
     public static function clienteRequestProvider(): array
@@ -93,27 +90,29 @@ class ClienteTest extends TestCase
                     ]),
                     'email' => 'john.doe@example.com',
                     'nascimento' => new DateTime('1980-01-01'),
-                    'endereco' => Endereco::fromArray([
-                        'endereco' => '123 Main St',
-                        'cidade' => 'Anytown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '12345',
-                        'pais' => Pais::BRASIL->value,
-                    ], TipoEndereco::RESIDENCIAL),
-                    'entrega' => Endereco::fromArray([
-                        'endereco' => '456 Elm St',
-                        'cidade' => 'Othertown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '67890',
-                        'pais' => Pais::BRASIL->value,
-                    ], TipoEndereco::ENTREGA),
-                    'cobranca' => Endereco::fromArray([
-                        'endereco' => '789 Oak St',
-                        'cidade' => 'Sometown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '11223',
-                        'pais' => Pais::BRASIL->value,
-                    ], TipoEndereco::COBRANCA)
+                    'enderecos' => new ArrayObject([
+                        Endereco::fromArray([
+                            'endereco' => '123 Main St',
+                            'cidade' => 'Anytown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '12345',
+                            'pais' => Pais::BRASIL->value,
+                        ], TipoEndereco::PRINCIPAL),
+                        Endereco::fromArray([
+                            'endereco' => '456 Elm St',
+                            'cidade' => 'Othertown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '67890',
+                            'pais' => Pais::BRASIL->value,
+                        ], TipoEndereco::ENTREGA),
+                        Endereco::fromArray([
+                            'endereco' => '789 Oak St',
+                            'cidade' => 'Sometown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '11223',
+                            'pais' => Pais::BRASIL->value,
+                        ], TipoEndereco::COBRANCA)
+                    ]),
                 ]
             ],
             [
@@ -155,27 +154,29 @@ class ClienteTest extends TestCase
                     ]),
                     'email' =>  'john.doe@example.com',
                     'nascimento' =>  new DateTime('1980-01-01'),
-                    'endereco' => Endereco::fromArray([
-                        'endereco' =>  '123 Main St',
-                        'cidade' =>  'Anytown',
-                        'estado' =>  Estado::SC->value,
-                        'cep' =>  '12345',
-                        'pais' =>  Pais::BRASIL->value,
-                    ], TipoEndereco::RESIDENCIAL),
-                    'entrega' => Endereco::fromArray([
-                        'endereco' => '456 Elm St',
-                        'cidade' => 'Othertown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '67890',
-                        'pais' => Pais::BRASIL->value,
-                    ], TipoEndereco::ENTREGA),
-                    'cobranca' => Endereco::fromArray([
-                        'endereco' => '789 Oak St',
-                        'cidade' => 'Sometown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '11223',
-                        'pais' => Pais::BRASIL->value,
-                    ], TipoEndereco::COBRANCA)
+                    'enderecos' => new ArrayObject([
+                        'principal' => Endereco::fromArray([
+                            'endereco' =>  '123 Main St',
+                            'cidade' =>  'Anytown',
+                            'estado' =>  Estado::SC->value,
+                            'cep' =>  '12345',
+                            'pais' =>  Pais::BRASIL->value,
+                        ], TipoEndereco::PRINCIPAL),
+                        'entrega' => Endereco::fromArray([
+                            'endereco' => '456 Elm St',
+                            'cidade' => 'Othertown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '67890',
+                            'pais' => Pais::BRASIL->value,
+                        ], TipoEndereco::ENTREGA),
+                        'cobranca' => Endereco::fromArray([
+                            'endereco' => '789 Oak St',
+                            'cidade' => 'Sometown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '11223',
+                            'pais' => Pais::BRASIL->value,
+                        ], TipoEndereco::COBRANCA)
+                    ]),
                 ]
             ],
         ];
@@ -194,26 +195,28 @@ class ClienteTest extends TestCase
                     ],
                     'email' => 'john.doe.new@example.com',
                     'nascimento' => '1980-01-01',
-                    'endereco' => [
-                        'endereco' => '123 Main St',
-                        'cidade' => 'Anytown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '12345',
-                        'pais' => Pais::BRASIL->value,
-                    ],
-                    'entrega' => [
-                        'endereco' => '456 Elm St',
-                        'cidade' => 'Othertown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '67890',
-                        'pais' => Pais::BRASIL->value,
-                    ],
-                    'cobranca' => [
-                        'endereco' => '789 Oak St',
-                        'cidade' => 'Sometown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '11223',
-                        'pais' => Pais::BRASIL->value,
+                    'enderecos' => [
+                        'principal' => [
+                            'endereco' => '123 Main St',
+                            'cidade' => 'Anytown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '12345',
+                            'pais' => Pais::BRASIL->value,
+                        ],
+                        'entrega' => [
+                            'endereco' => '456 Elm St',
+                            'cidade' => 'Othertown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '67890',
+                            'pais' => Pais::BRASIL->value,
+                        ],
+                        'cobranca' => [
+                            'endereco' => '789 Oak St',
+                            'cidade' => 'Sometown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '11223',
+                            'pais' => Pais::BRASIL->value,
+                        ],
                     ],
                 ]
             ],
@@ -227,26 +230,28 @@ class ClienteTest extends TestCase
                     ],
                     'email' =>  'john.doe.existing@example.com',
                     'nascimento' =>  '1980-01-01',
-                    'endereco' => [
-                        'endereco' =>  '123 Main St',
-                        'cidade' =>  'Anytown',
-                        'estado' =>  Estado::SC->value,
-                        'cep' =>  '12345',
-                        'pais' =>  Pais::BRASIL->value,
-                    ],
-                    'entrega' => [
-                        'endereco' => '456 Elm St',
-                        'cidade' => 'Othertown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '67890',
-                        'pais' => Pais::BRASIL->value,
-                    ],
-                    'cobranca' => [
-                        'endereco' => '789 Oak St',
-                        'cidade' => 'Sometown',
-                        'estado' => Estado::SC->value,
-                        'cep' => '11223',
-                        'pais' => Pais::BRASIL->value,
+                    'enderecos' => [
+                        'principal' => [
+                            'endereco' =>  '123 Main St',
+                            'cidade' =>  'Anytown',
+                            'estado' =>  Estado::SC->value,
+                            'cep' =>  '12345',
+                            'pais' =>  Pais::BRASIL->value,
+                        ],
+                        'entrega' => [
+                            'endereco' => '456 Elm St',
+                            'cidade' => 'Othertown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '67890',
+                            'pais' => Pais::BRASIL->value,
+                        ],
+                        'cobranca' => [
+                            'endereco' => '789 Oak St',
+                            'cidade' => 'Sometown',
+                            'estado' => Estado::SC->value,
+                            'cep' => '11223',
+                            'pais' => Pais::BRASIL->value,
+                        ],
                     ],
                 ]
             ],

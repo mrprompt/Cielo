@@ -27,7 +27,7 @@ try {
     echo "Efetuando cancelamento por: Ordem\n";
 
     $ordemDto = new OrdemDto(uniqid());
-    
+
     $clienteDto = ClienteDto::fromArray([
         'nome' => 'John Doe',
         'status' => Status::NOVO->value,
@@ -37,29 +37,28 @@ try {
         ],
         'email' => 'john.doe@example.com',
         'nascimento' => '1980-01-01',
-        'endereco' => [
-            'tipo' => EnderecoTipo::RESIDENCIAL->value,
-            'endereco' => '123 Main St',
-            'cidade' => 'Anytown',
-            'estado' => Estado::SC->value,
-            'cep' => '12345',
-            'pais' => Pais::BRASIL->value,
-        ],
-        'entrega' => [
-            'tipo' => EnderecoTipo::ENTREGA->value,
-            'endereco' => '456 Elm St',
-            'cidade' => 'Othertown',
-            'estado' => Estado::SC->value,
-            'cep' => '67890',
-            'pais' => Pais::BRASIL->value,
-        ],
-        'cobranca' => [
-            'tipo' => EnderecoTipo::COBRANCA->value,
-            'endereco' => '789 Oak St',
-            'cidade' => 'Sometown',
-            'estado' => Estado::SC->value,
-            'cep' => '11223',
-            'pais' => Pais::BRASIL->value,
+        'enderecos' => [
+            'principal' => [
+                'endereco' => '123 Main St',
+                'cidade' => 'Anytown',
+                'estado' => Estado::SC->value,
+                'cep' => '12345',
+                'pais' => Pais::BRASIL->value,
+            ],
+            'entrega' => [
+                'endereco' => '456 Elm St',
+                'cidade' => 'Othertown',
+                'estado' => Estado::SC->value,
+                'cep' => '67890',
+                'pais' => Pais::BRASIL->value,
+            ],
+            'cobranca' => [
+                'endereco' => '789 Oak St',
+                'cidade' => 'Sometown',
+                'estado' => Estado::SC->value,
+                'cep' => '11223',
+                'pais' => Pais::BRASIL->value,
+            ],
         ],
     ]);
 
@@ -91,9 +90,9 @@ try {
      * @var TransacaoDto $resultPagamentoComCaptura
      */
     $resultPagamentoComCaptura = $pagamento($ordemDto, $clienteDto, $pagamentoDto);
-    
+
     $cancelamento = new CancelamentoMerchantOrderId($driver);
-    
+
     /**
      * @result CancelamentoDto $result
      */
@@ -121,9 +120,9 @@ try {
      * @var TransacaoDto $resultPagamentoComCaptura
      */
     $resultPagamentoComCaptura = $pagamento($ordemDto, $clienteDto, $pagamentoDto);
-    
+
     $cancelamento = new CancelamentoPaymentId($driver);
-    
+
     /**
      * @result CancelamentoDto $result
      */

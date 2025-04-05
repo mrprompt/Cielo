@@ -21,7 +21,7 @@ class Endereco implements Dto
         public ?Pais $pais = null, 
     ) {}
 
-    public static function fromRequest(object $request, TipoEndereco $tipo = TipoEndereco::RESIDENCIAL): self
+    public static function fromRequest(object $request, TipoEndereco $tipo = TipoEndereco::PRINCIPAL): self
     {
         return new self(
             tipo: $tipo,
@@ -36,7 +36,7 @@ class Endereco implements Dto
         );
     }
 
-    public static function fromArray(array $data, TipoEndereco $tipo = TipoEndereco::RESIDENCIAL): self
+    public static function fromArray(array $data, TipoEndereco $tipo = TipoEndereco::PRINCIPAL): self
     {
         return new self(
             tipo: $tipo,

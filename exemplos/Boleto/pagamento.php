@@ -22,25 +22,25 @@ $clienteDto = ClienteDto::fromArray([
         'numero' => '12345678900',
         'tipo' => 'CPF'
     ],
-    'endereco' => [
-        'tipo' => EnderecoTipo::RESIDENCIAL->value,
-        'numero' => '123',
-        'endereco' => 'Main St',
-        'cidade' => 'Anytown',
-        'estado' => Estado::SC->value,
-        'cep' => '12345',
-        'pais' => Pais::BRASIL->value,
-        'bairro' => 'Centro',
-    ],
-    'cobranca' => [
-        'tipo' => EnderecoTipo::COBRANCA->value,
-        'endereco' => 'Oak St',
-        'numero' => '789',
-        'cidade' => 'Sometown',
-        'estado' => Estado::SC->value,
-        'cep' => '11223',
-        'pais' => Pais::BRASIL->value,
-        'bairro' => 'Centro',
+    'enderecos' => [
+        'principal' => [
+            'numero' => '123',
+            'endereco' => 'Main St',
+            'cidade' => 'Anytown',
+            'estado' => Estado::SC->value,
+            'cep' => '12345',
+            'pais' => Pais::BRASIL->value,
+            'bairro' => 'Centro',
+        ],
+        'cobranca' => [
+            'endereco' => 'Oak St',
+            'numero' => '789',
+            'cidade' => 'Sometown',
+            'estado' => Estado::SC->value,
+            'cep' => '11223',
+            'pais' => Pais::BRASIL->value,
+            'bairro' => 'Centro',
+        ],
     ],
 ]);
 

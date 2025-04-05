@@ -33,29 +33,31 @@ try {
         ],
         'email' => 'john.doe@example.com',
         'nascimento' => '1980-01-01',
-        'endereco' => [
-            'tipo' => EnderecoTipo::RESIDENCIAL->value,
-            'endereco' => '123 Main St',
-            'cidade' => 'Anytown',
-            'estado' => Estado::SC->value,
-            'cep' => '12345',
-            'pais' => Pais::BRASIL->value,
-        ],
-        'entrega' => [
-            'tipo' => EnderecoTipo::ENTREGA->value,
-            'endereco' => '456 Elm St',
-            'cidade' => 'Othertown',
-            'estado' => Estado::SC->value,
-            'cep' => '67890',
-            'pais' => Pais::BRASIL->value,
-        ],
-        'cobranca' => [
-            'tipo' => EnderecoTipo::COBRANCA->value,
-            'endereco' => '789 Oak St',
-            'cidade' => 'Sometown',
-            'estado' => Estado::SC->value,
-            'cep' => '11223',
-            'pais' => Pais::BRASIL->value,
+        'enderecos' => [
+            'principal' => [
+                'tipo' => EnderecoTipo::PRINCIPAL->value,
+                'endereco' => '123 Main St',
+                'cidade' => 'Anytown',
+                'estado' => Estado::SC->value,
+                'cep' => '12345',
+                'pais' => Pais::BRASIL->value,
+            ],
+            'entrega' => [
+                'tipo' => EnderecoTipo::ENTREGA->value,
+                'endereco' => '456 Elm St',
+                'cidade' => 'Othertown',
+                'estado' => Estado::SC->value,
+                'cep' => '67890',
+                'pais' => Pais::BRASIL->value,
+            ],
+            'cobranca' => [
+                'tipo' => EnderecoTipo::COBRANCA->value,
+                'endereco' => '789 Oak St',
+                'cidade' => 'Sometown',
+                'estado' => Estado::SC->value,
+                'cep' => '11223',
+                'pais' => Pais::BRASIL->value,
+            ],
         ],
     ]);
 
@@ -94,7 +96,7 @@ try {
         'valor' => $resultPagamentoSemCaptura->pagamento->valor,
         'taxas' => $resultPagamentoSemCaptura->pagamento->taxas,
     ]);
-    
+
     // validação
     PagamentoValidate::validate($capturaDto);
 

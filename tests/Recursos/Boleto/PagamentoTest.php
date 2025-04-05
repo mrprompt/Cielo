@@ -30,7 +30,7 @@ class PagamentoTest extends TestCase
     {
         $jsonObject = '{"MerchantOrderId":"67ef7f65805e6","Customer":{"Name":"John Doe","Identity":"12345678900","IdentityType":"CPF","Address":{"Street":"Main St","Number":"123","ZipCode":"12345","City":"Anytown","State":"SC","Country":"BRA","District":"Centro","AddressType":0},"Status":"NEW"},"Payment":{"ExpirationDate":"2025-04-07","Url":"https://transactionsandbox.pagador.com.br/post/pagador/reenvia.asp/8d60a4ad-2dfe-4264-8143-238d22e0d45b","BoletoNumber":"2-3","BarCodeNumber":"00091104400000010009999250000000000299999990","DigitableLine":"00099.99921 50000.000005 02999.999903 1 10440000001000","Address":"N/A, 1","Bank":0,"Amount":1000,"ReceivedDate":"2025-04-04 03:42:45","Provider":"Simulado","Status":1,"IsSplitted":false,"PaymentId":"8d60a4ad-2dfe-4264-8143-238d22e0d45b","Type":"Boleto","Currency":"BRL","Country":"BRA","Links":[{"Method":"GET","Rel":"self","Href":"https://apiquerysandbox.cieloecommerce.cielo.com.br/1/sales/8d60a4ad-2dfe-4264-8143-238d22e0d45b"}]}}';
         $mockResponse = $this->getMockBuilder(Response::class)->getMock();
-        $mockResponse->method('getBody')->willReturn(new Stream(fopen('data://application/json,' . $jsonObject,'r')));
+        $mockResponse->method('getBody')->willReturn(new Stream(fopen('data://application/json,' . $jsonObject, 'r')));
 
         $httpDriverMock = $this->createMock(HttpDriver::class);
         $httpDriverMock->expects($this->once())
@@ -44,17 +44,17 @@ class PagamentoTest extends TestCase
                 })
             )
             ->willReturn($mockResponse);
-    
+
         $pagamento = new Pagamento($httpDriverMock);
         $response = $pagamento($ordemMock, $clienteMock, $pagamentoMock);
-    
+
         $this->assertInstanceOf(TransacaoDto::class, $response);
     }
-    
+
     public static function invokeProvider(): array
     {
         $ordemMock1 = new OrdemDto('12345');
-    
+
         $clienteMock1 = ClienteDto::fromArray([
             'nome' => 'John Doe',
             'status' => ClienteStatus::NOVO->value,
@@ -62,37 +62,38 @@ class PagamentoTest extends TestCase
                 'numero' => '12345678900',
                 'tipo' => 'CPF'
             ],
-            'endereco' => [
-                'tipo' => EnderecoTipo::RESIDENCIAL->value,
-                'numero' => '123',
-                'endereco' => 'Main St',
-                'bairro' => 'Centro',
-                'cidade' => 'Anytown',
-                'estado' => Estado::SC->value,
-                'cep' => '12345',
-                'pais' => Pais::BRASIL->value,
-            ],
-            'cobranca' => [
-                'tipo' => EnderecoTipo::COBRANCA->value,
-                'numero' => '456',
-                'endereco' => 'Oak St',
-                'cidade' => 'Sometown',
-                'bairro' => 'Centro',
-                'estado' => Estado::SC->value,
-                'cep' => '11223',
-                'pais' => Pais::BRASIL->value
+            'enderecos' => [
+                'principal' => [
+                    'tipo' => EnderecoTipo::PRINCIPAL->value,
+                    'numero' => '123',
+                    'endereco' => 'Main St',
+                    'bairro' => 'Centro',
+                    'cidade' => 'Anytown',
+                    'estado' => Estado::SC->value,
+                    'cep' => '12345',
+                    'pais' => Pais::BRASIL->value,
+                ],
+                'cobranca' => [
+                    'tipo' => EnderecoTipo::COBRANCA->value,
+                    'numero' => '456',
+                    'endereco' => 'Oak St',
+                    'cidade' => 'Sometown',
+                    'bairro' => 'Centro',
+                    'estado' => Estado::SC->value,
+                    'cep' => '11223',
+                    'pais' => Pais::BRASIL->value
+                ],
             ],
         ]);
-    
+
         $pagamentoMock1 = PagamentoDto::fromArray([
             'tipo' => PagamentoTipo::BOLETO->value,
             'valor' => 1000,
             'provedor' => ProvedorTipo::BANCO_DO_BRASIL->value,
         ]);
-    
+
         return [
             [$ordemMock1, $clienteMock1, $pagamentoMock1, 'success'],
         ];
     }
-    
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace MrPrompt\Cielo\Tests\Enum\Cliente;
+namespace MrPrompt\Cielo\Tests\Enum\Localizacao;
 
 use MrPrompt\Cielo\Enum\Localizacao\Pais;
 use MrPrompt\Cielo\Tests\TestCase;

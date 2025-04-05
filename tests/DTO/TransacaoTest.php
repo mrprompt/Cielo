@@ -134,7 +134,7 @@ class TransacaoTest extends TestCase
                         'email' => 'john.doe@example.com',
                         'nascimento' => new \DateTime('1980-01-01'),
                         'endereco' => [
-                            'tipo' => TipoEndereco::RESIDENCIAL,
+                            'tipo' => TipoEndereco::PRINCIPAL,
                             'endereco' => '123 Main St',
                             'numero' => '100',
                             'complemento' => 'Apt 1',

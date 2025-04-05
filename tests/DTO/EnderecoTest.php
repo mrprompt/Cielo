@@ -57,7 +57,7 @@ class EnderecoTest extends TestCase
         return [
             [
                 'requestData' => [
-                    'Type' => TipoEndereco::RESIDENCIAL->value,
+                    'Type' => TipoEndereco::PRINCIPAL->value,
                     'Street' => '123 Main St',
                     'Number' => '100',
                     'Complement' => 'Apt 1',
@@ -67,7 +67,7 @@ class EnderecoTest extends TestCase
                     'Country' => Pais::BRASIL->value,
                 ],
                 'expectedData' => [
-                    'tipo' => TipoEndereco::RESIDENCIAL,
+                    'tipo' => TipoEndereco::PRINCIPAL,
                     'endereco' => '123 Main St',
                     'numero' => '100',
                     'complemento' => 'Apt 1',
