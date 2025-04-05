@@ -78,7 +78,7 @@ class ClienteTest extends TestCase
             'email' => 'john.doe@example.com',
             'nascimento' => '1980-01-01',
             'enderecos' => [
-                'endereco' => [
+                'principal' => [
                     'numero' => '123',
                     'endereco' => 'Main St',
                     'bairro' => 'Centro',
