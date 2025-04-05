@@ -175,6 +175,8 @@ foreach ($pagamentos as $tipo => $dados) {
             "\tPagamento: {$result->pagamento->id}",
             "\tOrdem: {$result->ordem->identificador}",
             "\tCliente: {$result->cliente->nome}",
+            "\tStatus Id: {$result->pagamento->status->value}",
+            "\tStatus Descrição: {$result->pagamento->status->descricao()}",
             "\tJSON enviado: {$pagamento->jsonEnvio}",
             "\tJSON recebido: {$pagamento->jsonRecebimento}",
         ];

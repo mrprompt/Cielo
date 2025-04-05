@@ -9,6 +9,7 @@ use MrPrompt\Cielo\Enum\Pagamento\Parcelamento;
 use MrPrompt\Cielo\Enum\Pagamento\Provedor;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
 use MrPrompt\Cielo\Enum\Localizacao\Pais;
+use MrPrompt\Cielo\Enum\Pagamento\Status;
 
 class Pagamento implements Dto
 {
@@ -30,7 +31,7 @@ class Pagamento implements Dto
         public ?string $identificador = null,
         public ?bool $qrcode = null,
         public ?DateTime $recebimento = null,
-        public ?int $status = null,
+        public ?Status $status = null,
         public ?bool $dividida = null,
         public ?Pais $pais = null,
         public ?int $codigoRetorno = null,
@@ -56,7 +57,7 @@ class Pagamento implements Dto
             identificador: $request->Tid ?? null,
             qrcode: $request->IsQrCode ?? null,
             recebimento: property_exists($request, 'ReceivedDate') ? new DateTime($request->ReceivedDate) : null,
-            status: $request->Status ?? null,
+            status: property_exists($request, 'Status') ? Status::from($request->Status) : null,
             dividida: $request->IsSplitted ?? null,
             pais: property_exists($request, 'Country') ? Pais::match($request->Country) : null,
             codigoRetorno: $request->ReturnCode ?? null,
@@ -94,7 +95,7 @@ class Pagamento implements Dto
             identificador: $data['identificador'] ?? null,
             qrcode: $data['qrcode'] ?? null,
             recebimento: array_key_exists('recebimento', $data) ? new DateTime($data['recebimento']) : null,
-            status: $data['status'] ?? null,
+            status: array_key_exists('status', $data) ? Status::from($data['status']) : null,
             dividida: $data['dividida'] ?? null,
             pais: array_key_exists('pais', $data) ? Pais::match($data['pais']) : null,
             codigoRetorno: array_key_exists('codigoRetorno', $data) ? $data['codigoRetorno'] : null,
