@@ -2,7 +2,6 @@
 
 namespace MrPrompt\Cielo\Tests\Validacao;
 
-use InvalidArgumentException;
 use MrPrompt\Cielo\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
