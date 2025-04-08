@@ -9,7 +9,7 @@ use MrPrompt\Cielo\Enum\Pagamento\Parcelamento;
 use MrPrompt\Cielo\Enum\Pagamento\Provedor;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
 use MrPrompt\Cielo\Enum\Localizacao\Pais;
-use MrPrompt\Cielo\Enum\Pagamento\Status;
+use MrPrompt\Cielo\Enum\Status\Transacao as Status;
 
 class Pagamento implements Dto
 {
