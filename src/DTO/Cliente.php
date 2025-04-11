@@ -13,7 +13,7 @@ class Cliente implements Dto
 {
     public function __construct(
         public string $nome,
-        public Documento $documento,
+        public ?Documento $documento = null,
         public ?Status $status = null,
         public ?string $email = null,
         public ?DateTime $nascimento = null,
@@ -30,7 +30,7 @@ class Cliente implements Dto
         $cliente = new self(
             nome: $request->Name ?? null,
             status: property_exists($request, 'Status') ? Status::match($request->Status) : null,
-            documento: Documento::fromRequest($request),
+            documento: property_exists($request, 'IdentityType') ? Documento::fromRequest($request): null,
             email: $request->Email ?? null,
             nascimento: property_exists($request, 'Birthdate') ? new DateTime($request->Birthdate) : null,
             enderecos: $enderecos,
@@ -55,7 +55,7 @@ class Cliente implements Dto
         $cliente = new self(
             nome: $data['nome'],
             status: array_key_exists('status', $data) ? Status::match($data['status']) : null,
-            documento: Documento::fromArray($data['documento']),
+            documento: array_key_exists('documento', $data) ? Documento::fromArray($data['documento']) : null,
             email: $data['email'] ?? null,
             nascimento: array_key_exists('nascimento', $data) ? new DateTime($data['nascimento']) : null,
             enderecos: $enderecos,
@@ -69,8 +69,8 @@ class Cliente implements Dto
         $cliente = [
             'Name' => $this->nome,
             'Status' => !is_null($this->status) ? $this->status->value : null,
-            'Identity' => $this->documento->numero,
-            'IdentityType' => $this->documento->tipo->value,
+            'Identity' => !is_null($this->documento) ? $this->documento->numero : null,
+            'IdentityType' => !is_null($this->documento) ? $this->documento->tipo->value : null,
             'Email' => $this->email,
             'Birthdate' => !is_null($this->nascimento) ? $this->nascimento->format('Y-m-d') : null,
         ];

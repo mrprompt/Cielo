@@ -12,7 +12,7 @@ class Documento implements Dto
     public static function fromRequest($request): self
     {
         return new self(
-            tipo: DocumentoTipo::match($request->IdentityType),
+            tipo: $request->IdentityType ? DocumentoTipo::match($request->IdentityType) : null,
             numero: $request->Identity
         );
     }
