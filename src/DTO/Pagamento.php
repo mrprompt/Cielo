@@ -9,6 +9,7 @@ use MrPrompt\Cielo\Enum\Pagamento\Parcelamento;
 use MrPrompt\Cielo\Enum\Pagamento\Provedor;
 use MrPrompt\Cielo\Enum\Pagamento\Tipo;
 use MrPrompt\Cielo\Enum\Localizacao\Pais;
+use MrPrompt\Cielo\Enum\Status\Retorno;
 use MrPrompt\Cielo\Enum\Status\Transacao as Status;
 
 class Pagamento implements Dto
@@ -34,8 +35,7 @@ class Pagamento implements Dto
         public ?Status $status = null,
         public ?bool $dividida = null,
         public ?Pais $pais = null,
-        public ?int $codigoRetorno = null,
-        public ?string $mensagemRetorno = null,
+        public ?Retorno $retorno = null
     ) {}
 
     public static function fromRequest(object $request): self
@@ -60,8 +60,7 @@ class Pagamento implements Dto
             status: property_exists($request, 'Status') ? Status::from($request->Status) : null,
             dividida: $request->IsSplitted ?? null,
             pais: property_exists($request, 'Country') ? Pais::match($request->Country) : null,
-            codigoRetorno: $request->ReturnCode ?? null,
-            mensagemRetorno: $request->ReturnMessage ?? null,
+            retorno: property_exists($request, 'ReturnCode') ? Retorno::from($request->ReturnCode) : null,
         );
 
         if (property_exists($request, 'CreditCard')) {
@@ -98,8 +97,7 @@ class Pagamento implements Dto
             status: array_key_exists('status', $data) ? Status::from($data['status']) : null,
             dividida: $data['dividida'] ?? null,
             pais: array_key_exists('pais', $data) ? Pais::match($data['pais']) : null,
-            codigoRetorno: array_key_exists('codigoRetorno', $data) ? $data['codigoRetorno'] : null,
-            mensagemRetorno: array_key_exists('mensagemRetorno', $data) ? $data['mensagemRetorno'] : null,
+            retorno: array_key_exists('retorno', $data) ? Retorno::from($data['retorno']) : null,
         );
     }
 

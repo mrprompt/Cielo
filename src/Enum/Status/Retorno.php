@@ -5,6 +5,7 @@ namespace MrPrompt\Cielo\Enum\Status;
 use MrPrompt\Cielo\Exceptions\ValidacaoErrors;
 
 enum Retorno: string {
+    case UNKNOWN_STATUS = '99';
     case INTERNAL_ERROR = '0';
     case MERCHANT_ID_IS_REQUIRED = '101';
     case PAYMENT_TYPE_IS_REQUIRED = '102';
@@ -152,7 +153,7 @@ enum Retorno: string {
             }
         }
 
-        throw new ValidacaoErrors("Status inválido: {$status}");
+        return self::match(self::UNKNOWN_STATUS->value);
     }
 
     public static function retornos(): array
@@ -163,6 +164,7 @@ enum Retorno: string {
     public function descricao(): string
     {
         return match ($this) {
+            self::UNKNOWN_STATUS => 'Status desconhecido',
             self::INTERNAL_ERROR => 'Dado enviado excede o tamanho do campo',
             self::MERCHANT_ID_IS_REQUIRED => 'Campo enviado está vazio ou inválido',
             self::PAYMENT_TYPE_IS_REQUIRED => 'Campo enviado está vazio ou inválido',

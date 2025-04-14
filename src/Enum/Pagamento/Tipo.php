@@ -14,10 +14,10 @@ enum Tipo: string
     public static function match(string $tipo): self
     {
         return match ($tipo) {
-            'CreditCard' => self::CARTAO_DE_CREDITO,
-            'DebitCard' => self::CARTAO_DE_DEBITO,
-            'Boleto' => self::BOLETO,
-            'Pix' => self::PIX,
+            self::CARTAO_DE_CREDITO->value => self::CARTAO_DE_CREDITO,
+            self::CARTAO_DE_DEBITO->value => self::CARTAO_DE_DEBITO,
+            self::BOLETO->value => self::BOLETO,
+            self::PIX->value => self::PIX,
             default => throw new ValidacaoErrors("Tipo de pagamento inválido: {$tipo}")
         };
     }

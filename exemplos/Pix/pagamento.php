@@ -13,7 +13,7 @@ use MrPrompt\Cielo\Exceptions\CieloApiErrors;
 $clienteDto = ClienteDto::fromArray([
     'nome' => 'John Doe',
     'documento' => [
-        'numero' => '12345678900',
+        'numero' => '79477018490',
         'tipo' => 'CPF'
     ],
 ]);

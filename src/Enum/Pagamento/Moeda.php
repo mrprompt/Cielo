@@ -21,21 +21,13 @@ enum Moeda: string
 
     public static function match(string $moeda): self
     {
-        return match ($moeda) {
-            'BRL' => self::REAL,
-            'USD' => self::DOLAR,
-            'EUR' => self::EURO,
-            'GBP' => self::LIBRA,
-            'ARS' => self::PESO_ARGENTINO,
-            'CLP' => self::PESO_CHILENO,
-            'UYU' => self::PESO_URUGUAIO,
-            'MXN' => self::PESO_MEXICANO,
-            'CHF' => self::FRANCO_SUICO,
-            'JPY' => self::IENE,
-            'CNY' => self::YUAN,
-            'SEK' => self::COROA_SUECA,
-            default => throw new ValidacaoErrors("Moeda inválida: {$moeda}")
-        };
+        foreach (self::cases() as $case) {
+            if ($case->value === (string) $moeda) {
+                return $case;
+            }
+        }
+
+        throw new ValidacaoErrors("Moeda inválida: {$moeda}");
     }
 
     public static function moedas(): array

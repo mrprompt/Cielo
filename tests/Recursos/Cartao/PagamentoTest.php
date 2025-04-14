@@ -33,7 +33,74 @@ class PagamentoTest extends TestCase
     #[TestDox('Testing Pagamento __invoke method with ordem $ordemMock->identificador and cliente $clienteMock->nome')]
     public function testInvoke($ordemMock, $clienteMock, $pagamentoMock, $expectedStatus)
     {
-        $jsonObject = '{"MerchantOrderId":"12345","Customer":{"Name":"John Doe","Identity":"12345678900","IdentityType":"CPF","Email":"john.doe@example.com","Birthdate":"1980-01-01","Address":{"Street":"123 Main St","Number":"","Complement":"","ZipCode":"12345","City":"Anytown","State":"SC","Country":"BRA","AddressType":0},"DeliveryAddress":{"Street":"456 Elm St","Number":"","Complement":"","ZipCode":"67890","City":"Othertown","State":"SC","Country":"BRA","AddressType":0},"Status":"NEW"},"Payment":{"ServiceTaxAmount":0,"Installments":1,"Interest":0,"Capture":true,"Authenticate":false,"Recurrent":false,"CreditCard":{"CardNumber":"123456******3456","Holder":"John Doe","ExpirationDate":"12/2025","SaveCard":false,"CardToken":"token123","CardType":"CreditCard","Brand":"Visa"},"Tid":"0327011932082","SoftDescriptor":"no nonono nonono","Provider":"Simulado","IsQrCode":false,"Amount":1000,"ReceivedDate":"2025-03-27 13:19:32","Status":0,"IsSplitted":false,"ReturnMessage":"Timeout","ReturnCode":"99","PaymentId":"8c90d52d-2eae-426e-9a98-03ff9e59274e","Type":"CreditCard","Currency":"BRL","Country":"BRA","Links":[{"Method":"GET","Rel":"self","Href":"https://apiquerysandbox.cieloecommerce.cielo.com.br/1/sales/8c90d52d-2eae-426e-9a98-03ff9e59274e"}]}}';
+        $jsonObject = <<<EOF
+{
+    "MerchantOrderId": "67fd978c501c8",
+    "Customer": {
+        "Name": "John Doe",
+        "Identity": "12345678900",
+        "IdentityType": "CPF",
+        "Email": "john.doe@example.com",
+        "Birthdate": "1980-01-01",
+        "Address": {
+        "Street": "123 Main St",
+        "ZipCode": "12345",
+        "City": "Anytown",
+        "State": "SC",
+        "Country": "BRA",
+        "AddressType": 0
+        },
+        "DeliveryAddress": {
+        "Street": "456 Elm St",
+        "ZipCode": "67890",
+        "City": "Othertown",
+        "State": "SC",
+        "Country": "BRA",
+        "AddressType": 0
+        },
+        "Status": "NEW"
+    },
+    "Payment": {
+        "ServiceTaxAmount": 0,
+        "Installments": 1,
+        "Interest": 0,
+        "Capture": true,
+        "Authenticate": false,
+        "Recurrent": false,
+        "CreditCard": {
+        "CardNumber": "123456******3456",
+        "Holder": "John Doe",
+        "ExpirationDate": "12/2025",
+        "SaveCard": false,
+        "CardToken": "token123",
+        "CardType": "CreditCard",
+        "Brand": "Visa"
+        },
+        "Tid": "0414081732692",
+        "SoftDescriptor": "no nonono nonono",
+        "Provider": "Simulado",
+        "IsQrCode": false,
+        "Amount": 1000,
+        "ReceivedDate": "2025-04-14 20:17:32",
+        "Status": 0,
+        "IsSplitted": false,
+        "ReturnMessage": "Timeout",
+        "ReturnCode": "99",
+        "PaymentId": "422b1acb-2457-4ade-9c49-a7608c6110f1",
+        "Type": "CreditCard",
+        "Currency": "BRL",
+        "Country": "BRA",
+        "Links": [
+        {
+            "Method": "GET",
+            "Rel": "self",
+            "Href": "https://apiquerysandbox.cieloecommerce.cielo.com.br/1/sales/422b1acb-2457-4ade-9c49-a7608c6110f1"
+        }
+        ]
+    }
+}
+EOF;
+
         $mockResponse = $this->getMockBuilder(Response::class)->getMock();
         $mockResponse->method('getBody')->willReturn(new Stream(fopen('data://application/json,' . $jsonObject,'r')));
 

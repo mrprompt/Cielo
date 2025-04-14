@@ -28,7 +28,53 @@ class PagamentoTest extends TestCase
     #[TestDox('Testing Boleto payment method')]
     public function testInvoke($ordemMock, $clienteMock, $pagamentoMock, $expectedStatus)
     {
-        $jsonObject = '{"MerchantOrderId":"67ef7f65805e6","Customer":{"Name":"John Doe","Identity":"12345678900","IdentityType":"CPF","Address":{"Street":"Main St","Number":"123","ZipCode":"12345","City":"Anytown","State":"SC","Country":"BRA","District":"Centro","AddressType":0},"Status":"NEW"},"Payment":{"ExpirationDate":"2025-04-07","Url":"https://transactionsandbox.pagador.com.br/post/pagador/reenvia.asp/8d60a4ad-2dfe-4264-8143-238d22e0d45b","BoletoNumber":"2-3","BarCodeNumber":"00091104400000010009999250000000000299999990","DigitableLine":"00099.99921 50000.000005 02999.999903 1 10440000001000","Address":"N/A, 1","Bank":0,"Amount":1000,"ReceivedDate":"2025-04-04 03:42:45","Provider":"Simulado","Status":1,"IsSplitted":false,"PaymentId":"8d60a4ad-2dfe-4264-8143-238d22e0d45b","Type":"Boleto","Currency":"BRL","Country":"BRA","Links":[{"Method":"GET","Rel":"self","Href":"https://apiquerysandbox.cieloecommerce.cielo.com.br/1/sales/8d60a4ad-2dfe-4264-8143-238d22e0d45b"}]}}';
+        $jsonObject = <<<EOF
+{
+    "MerchantOrderId": "67fd95fb29f6b",
+    "Customer": {
+        "Name": "John Doe",
+        "Identity": "12345678900",
+        "IdentityType": "CPF",
+        "Address": {
+        "Street": "Main St",
+        "Number": "123",
+        "ZipCode": "12345",
+        "City": "Anytown",
+        "State": "SC",
+        "Country": "BRA",
+        "District": "Centro",
+        "AddressType": 0
+        },
+        "Status": "NEW"
+    },
+    "Payment": {
+        "ExpirationDate": "2025-04-17",
+        "Url": "https://transactionsandbox.pagador.com.br/post/pagador/reenvia.asp/02dcf3b5-ed0e-4a09-849b-1dee90885afb",
+        "BoletoNumber": "131-3",
+        "BarCodeNumber": "00095105400000010009999250000000013199999990",
+        "DigitableLine": "00099.99921 50000.000013 31999.999902 5 10540000001000",
+        "Address": "N/A, 1",
+        "Bank": 0,
+        "Amount": 1000,
+        "ReceivedDate": "2025-04-14 20:10:51",
+        "Provider": "Simulado",
+        "Status": 1,
+        "IsSplitted": false,
+        "PaymentId": "02dcf3b5-ed0e-4a09-849b-1dee90885afb",
+        "Type": "Boleto",
+        "Currency": "BRL",
+        "Country": "BRA",
+        "Links": [
+        {
+            "Method": "GET",
+            "Rel": "self",
+            "Href": "https://apiquerysandbox.cieloecommerce.cielo.com.br/1/sales/02dcf3b5-ed0e-4a09-849b-1dee90885afb"
+        }
+        ]
+    }
+}
+EOF;
+
         $mockResponse = $this->getMockBuilder(Response::class)->getMock();
         $mockResponse->method('getBody')->willReturn(new Stream(fopen('data://application/json,' . $jsonObject, 'r')));
 
