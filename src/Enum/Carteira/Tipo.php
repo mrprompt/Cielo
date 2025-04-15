@@ -9,6 +9,7 @@ enum Tipo: string
     case APPLE_PAY = 'ApplePay';
     case GOOGLE_PAY = 'GooglePay';
     case SAMSUNG_PAY = 'SamsungPay';
+    case CLICK2PAY = 'Click2Pay';
 
     public static function match(string $value): self
     {
@@ -16,6 +17,7 @@ enum Tipo: string
             'ApplePay' => self::APPLE_PAY,
             'GooglePay' => self::GOOGLE_PAY,
             'SamsungPay' => self::SAMSUNG_PAY,
+            'Click2Pay' => self::CLICK2PAY,
             default => throw new ValidacaoErrors("Tipo de carteira inválida: {$value}")
         };
     }

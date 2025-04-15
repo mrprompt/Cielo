@@ -60,7 +60,7 @@ class Pagamento implements Dto
             status: property_exists($request, 'Status') ? Status::from($request->Status) : null,
             dividida: $request->IsSplitted ?? null,
             pais: property_exists($request, 'Country') ? Pais::match($request->Country) : null,
-            retorno: property_exists($request, 'ReturnCode') ? Retorno::from($request->ReturnCode) : null,
+            retorno: property_exists($request, 'ReturnCode') ? Retorno::match($request->ReturnCode) : null,
         );
 
         if (property_exists($request, 'CreditCard')) {
