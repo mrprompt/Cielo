@@ -60,7 +60,7 @@ class Pagamento implements Dto
             status: property_exists($request, 'Status') ? Status::from($request->Status) : null,
             dividida: $request->IsSplitted ?? null,
             pais: property_exists($request, 'Country') ? Pais::match($request->Country) : null,
-            retorno: property_exists($request, 'ReturnCode') ? Retorno::match($request->ReturnCode) : null,
+            retorno: property_exists($request, 'ReturnCode') ? Retorno::tryFrom($request->ReturnCode) : null,
         );
 
         if (property_exists($request, 'CreditCard')) {
@@ -97,7 +97,7 @@ class Pagamento implements Dto
             status: array_key_exists('status', $data) ? Status::from($data['status']) : null,
             dividida: $data['dividida'] ?? null,
             pais: array_key_exists('pais', $data) ? Pais::match($data['pais']) : null,
-            retorno: array_key_exists('retorno', $data) ? Retorno::from($data['retorno']) : null,
+            retorno: array_key_exists('retorno', $data) ? Retorno::tryFrom($data['retorno']) : null,
         );
     }
 
