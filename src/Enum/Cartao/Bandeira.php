@@ -17,25 +17,13 @@ enum Bandeira: string
 
     public static function match(string $value): self
     {
-        return match ($value) {
-            'Visa' => self::VISA,
-            'VISA' => self::VISA,
-            'Master' => self::MASTERCARD,
-            'MASTER' => self::MASTERCARD,
-            'MASTERCARD' => self::MASTERCARD,
-            'Elo' => self::ELO,
-            'ELO' => self::ELO,
-            'Amex' => self::AMEX,
-            'AMEX' => self::AMEX,
-            'Diners' => self::DINERS,
-            'DINERS' => self::DINERS,
-            'Discover' => self::DISCOVER,
-            'DISCOVER' => self::DISCOVER,
-            'JCB' => self::JCB,
-            'Aura' => self::AURA,
-            'AURA' => self::AURA,
-            default => throw new ValidacaoErrors("Bandeira inválida: {$value}")
-        };
+        foreach (self::cases() as $case) {
+            if (strtolower($case->value) === (string) strtolower($value)) {
+                return $case;
+            }
+        }
+
+        throw new ValidacaoErrors("Bandeira inválida: {$value}");
     }
 
     public static function bandeiras(): array

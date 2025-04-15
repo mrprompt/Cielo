@@ -29,7 +29,7 @@ class CartaoTest extends TestCase
                 [
                     'numero' => '5031433215406351',
                     'tipo' => 'CreditCard',
-                    'bandeira' => 'MASTERCARD',
+                    'bandeira' => 'MASTER',
                     'validade' => '11/2030',
                     'codigoSeguranca' => '123',
                     'nome' => 'John Doe',
