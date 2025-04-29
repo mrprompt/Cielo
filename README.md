@@ -1,328 +1,64 @@
 # Cielo
 
-[![Build Status](https://travis-ci.org/mrprompt/Cielo.png)](https://travis-ci.org/mrprompt/Cielo)
-[![Maintainability](https://api.codeclimate.com/v1/badges/52ff4029d94a20f9759a/maintainability)](https://codeclimate.com/github/mrprompt/Cielo/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/52ff4029d94a20f9759a/test_coverage)](https://codeclimate.com/github/mrprompt/Cielo/test_coverage)
+[![Tests](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml/badge.svg)](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml)
 
-Cielo é uma biblioteca cliente para o web service da Cielo.
+Esta é uma biblioteca cliente para a API da [Cielo](https://www.cielo.com.br/).
 
-Com esta classe, sua aplicação será capaz de realizar transações a Crédito e Débito.
+## AVISO
 
-## ARQUIVADA 
-
-A biblioteca foi arquiva, pois agora como a Cielo possui uma biblioteca oficial, esta cumpriu 
-seu papel.
-
-## ATENÇÃO
-
-Esta biblioteca é baseada na versão 1.5.x da API da Cielo, porém a mesma foi descontinuada.
-~Alterações neste projeto são apenas para bug fixes e melhorias para a versão mencionada.~
-Caso você esteja implementando em um novo projeto, recomendo utilizar a versão 3.x da API.
-
-* https://developercielo.github.io/
-* https://developercielo.github.io/manual/webservice-1-5
-* https://developercielo.github.io/tutorial/guia-de-migracao
+**Esta versão foi inteiramente reescrita e é totalmente incompatível com as versões anteriores da biblioteca.**
 
 ## Requisitos
 
-* PHP 7.1+
-* SimpleXML
+* PHP 8.2+
 
 ## Instalação
 
 ```console
-composer.phar require "mrprompt/cielo"
+composer require mrprompt/cielo "^4.0"
 ```
 
 ## Exemplos
 
-* [Autorização](#autorização)
-* [Autorização Portador](#autorização-portador)
-* [Cancelamento](#cancelamento)
-* [Captura](#captura)
-* [Consulta](#consulta)
-* [TID](#tid)
-* [Transação](#transação)
+Para todos os recursos suportados pela biblioteca, existe um exemplo de código no diretório de [exemplos](./exemplos/).
+Para executa-los, copie o arquivo .env.example do diretório .env e edite os campos:
 
-### Autorização
+* CIELO_MERCHANT_ID
+* CIELO_MERCHANT_KEY
 
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Transacao;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
+Você pode obter as credencias diretamente na [documentação](https://docs.cielo.com.br/) da [Cielo](https://www.cielo.com.br/).
 
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-$transacao->setAutorizar(2);
-$transacao->setCapturar(false);
-$transacao->setDataHora(new DateTime());
-$transacao->setDescricao('teste');
-$transacao->setMoeda(986);
-$transacao->setNumero(001);
-$transacao->setParcelas(1);
-$transacao->setValor(1.00);
+## Recursos disponíveis
 
-/* @var $cielo \MrPrompt\Cielo\Cliente */
-$cielo = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
+* **Consulta BIN**
+  * [Consultar BIN do cartão](https://docs.cielo.com.br/ecommerce-cielo/reference/consulta-bin-cartao)
+* **Zero Auth**
+  * [Validar cartão com o Zero Auth](https://docs.cielo.com.br/ecommerce-cielo/reference/validar-cartao)
+  * [Validar cartão tokenizado](https://docs.cielo.com.br/ecommerce-cielo/reference/validar-cartao-tokenizado)
+  * [Validar cartão de e-wallet](https://docs.cielo.com.br/ecommerce-cielo/reference/validar-cartao-e-wallet)
+* **Cartão de crédito**
+  * [Criar pagamento com cartão de crédito](https://docs.cielo.com.br/ecommerce-cielo/reference/criar-pagamento-credito)
+  * [Capturar transação de crédito após a autorização](https://docs.cielo.com.br/ecommerce-cielo/reference/capturar-apos-autorizacao)
+  * [Cancelar transação de crédito via PaymentId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-paymentid)
+  * [Cancelar transação de crédito via MerchantOrderId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-merchantorderid)
+* **Cartão de débito**
+  * [Criar pagamento com cartão de débito](https://docs.cielo.com.br/ecommerce-cielo/reference/debito)
+  * [Cancelar transação de débito via PaymentId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-d%C3%A9bito-paymentid)
+  * [Cancelar transação de débito via MerchantOrderId](https://docs.cielo.com.br/ecommerce-cielo/reference/cancelamento-debito-merchantorderid)
+* **PIX**
+  * [Criar pagamento com QRCode Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/qrcode-pix)
+  * [Solicitar uma devolução Pix](https://docs.cielo.com.br/ecommerce-cielo/reference/devolu%C3%A7ao-pix-api)
+* **Boleto**
+  * [Criar pagamento com boleto](https://docs.cielo.com.br/ecommerce-cielo/reference/boleto-api)
+* **Tokenização**
+  * [Criar cartão tokenizado antes da autorização](https://docs.cielo.com.br/ecommerce-cielo/reference/criar-cardtoken)
 
-try {
-    $requisicao = $cielo->autoriza($transacao);
+## Adicionais
 
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
+Para [Laravel](https://laravel.com/)/[Lumen](https://lumen.laravel.com) foi desenvolvido um _Service Provider_ para facilitar o uso da biblioteca.
+Você pode obter mais detalhes sobre uso ou instalação diretamente no [repositório](https://github.com/mrprompt/cielo-service-provider).
 
-### Autorização Portador
+## Debug
 
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Cartao;
-use MrPrompt\Cielo\Transacao;
-
-/* @var $cielo \MrPrompt\Cielo\Cliente */
-$cielo = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-$transacao->setAutorizar(2);
-$transacao->setCapturar(false);
-$transacao->setDataHora(new DateTime());
-$transacao->setDescricao('teste');
-$transacao->setMoeda(986);
-$transacao->setNumero(001);
-$transacao->setParcelas(1);
-$transacao->setValor(1.00);
-
-/* @var $transacao \MrPrompt\Cielo\Cartao */
-$cartao = new Cartao();
-$cartao->setBandeira('visa');
-$cartao->setCartao('4012001037141112');
-$cartao->setCodigoSeguranca('123');
-$cartao->setIndicador(0);
-$cartao->setNomePortador('Teste');
-$cartao->setValidade('201612');
-
-try {
-    $requisicao = $cielo->autorizaPortador($transacao, $cartao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-### Cancelamento
-
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Transacao;
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-try {
-    $requisicao = $cielo->cancela($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-### Captura
-
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Transacao;
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-try {
-    $requisicao = $cielo->captura($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-### Consulta
-
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Transacao;
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-try {
-    $requisicao = $cielo->consulta($transacao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-### TID
-
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Transacao;
-use MrPrompt\Cielo\Cartao;
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setAutorizar(2);
-$transacao->setCapturar(false);
-$transacao->setDataHora(new DateTime());
-$transacao->setDescricao('teste');
-$transacao->setMoeda(986);
-$transacao->setNumero(001);
-$transacao->setParcelas(1);
-$transacao->setValor(1.00);
-
-/* @var $transacao \MrPrompt\Cielo\Cartao */
-$cartao = new Cartao();
-$cartao->setBandeira('visa');
-$cartao->setCartao('4012001037141112');
-$cartao->setCodigoSeguranca('123');
-$cartao->setIndicador(0);
-$cartao->setNomePortador('Teste');
-$cartao->setValidade('201612');
-
-try {
-    $requisicao = $cielo->tid($transacao, $cartao);
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-### Transação
-
-```php
-use GuzzleHttp\Client;
-use MrPrompt\Cielo\Ambiente\Teste;
-use MrPrompt\Cielo\Autorizacao;
-use MrPrompt\Cielo\Cliente;
-use MrPrompt\Cielo\Idioma\Portugues;
-use MrPrompt\Cielo\Transacao;
-use MrPrompt\Cielo\Cartao;
-
-/* @var $transacao \MrPrompt\Cielo\Transacao */
-$transacao = new Transacao();
-$transacao->setTid('10069930691FB8C01001');
-$transacao->setAutorizar(2);
-$transacao->setCapturar(false);
-$transacao->setDataHora(new DateTime());
-$transacao->setDescricao('teste');
-$transacao->setMoeda(986);
-$transacao->setNumero(001);
-$transacao->setParcelas(1);
-$transacao->setValor(1.00);
-
-/* @var $transacao \MrPrompt\Cielo\Cartao */
-$cartao = new Cartao();
-$cartao->setBandeira('visa');
-$cartao->setCartao('4012001037141112');
-$cartao->setCodigoSeguranca('123');
-$cartao->setIndicador(0);
-$cartao->setNomePortador('Teste');
-$cartao->setValidade('201612');
-
-/* @var $transacao \MrPrompt\Cielo\Cliente */
-$cielo     = new Cliente(
-    new Autorizacao(NUMERO_CIELO, CHAVE_CIELO),
-    new Client(),
-    new Portugues(),
-    new Teste()
-);
-
-try {
-    $requisicao = $cielo->iniciaTransacao($transacao, $cartao, 'http://google.com.br');
-
-    print_r($requisicao);
-} catch (\InvalidArgumentException $ex) {
-    echo "# ERRO: {$ex->getCode()} - {$ex->getMessage()}" . PHP_EOL;
-}
-```
-
-## Versões anteriores
-
-* PHP 5.5 ~ 5.6: Somente a versão 2.2 é compatível com PHP 5.5 e 5.6
-* PHP 5.3 ~ 5.4: Até a versão 2.1, o PHP 5.3 é suportado.
+Para todas as requisições/recursos, você pode obter no retorno as propriedades `jsonEnvio` e `jsonRecebimento`, com o corpo da requisição
+e da resposta da API.

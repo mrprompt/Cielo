@@ -2,27 +2,27 @@
     "name": "mrprompt/cielo",
     "description": "Integration with Cielo gateway.",
     "type": "library",
-    "license": "GPL-3.0+",
-    "keywords": ["cielo", "payment", "gateway", "credit", "card"],
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "cielo", 
+        "payment", 
+        "gateway", 
+        "credit", 
+        "card", 
+        "debit",
+        "token",
+        "payment",
+        "pix",
+        "boleto",
+        "pagamento",
+        "cartão",
+        "crédito",
+        "débito"
+    ],
     "authors": [
         {
             "name": "Thiago Paes",
             "email": "mrprompt@gmail.com",
-            "role": "developer"
-        },
-        {
-            "name": "Luís Otávio Cobucci Oblonczyk",
-            "email": "lcobucci@gmail.com",
-            "role": "developer"
-        },
-        {
-            "name": "William G. Comnisky",
-            "email": "w.comnisky@gmail.com",
-            "role": "developer"
-        },
-        {
-            "name": "Thiago Rodrigues",
-            "email": "xthiago@gmail.com",
             "role": "developer"
         }
     ],
@@ -37,14 +37,16 @@
         }
     },
     "require": {
-        "php": ">=7.1",
-        "respect/validation": "~1.1.15",
-        "guzzlehttp/guzzle": "~6.3.2",
-        "jms/serializer": "^1.11@dev"
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.0",
+        "respect/validation": "^2.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "~7.0.3",
-        "codeclimate/php-test-reporter": "^0.3.0@dev"
+        "phpunit/phpunit": "~11.0",
+        "vlucas/phpdotenv": "^5.6",
+        "phpunit/php-code-coverage": "^11.0"
     },
-    "minimum-stability": "dev"
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox"
+    }
 }

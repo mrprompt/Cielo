@@ -2,6 +2,9 @@
 .buildpath
 .project
 .idea
+.vscode
+.phpunit.cache
+.phpunit.report
 phpunit.xml
 vendor
 build
