@@ -1,6 +1,6 @@
 # Cielo
 
-[![Tests](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml/badge.svg)](https://github.com/mrprompt/cielo-v4/actions/workflows/tests.yml)
+[![Tests](https://github.com/mrprompt/Cielo/actions/workflows/tests.yml/badge.svg)](https://github.com/mrprompt/Cielo/actions/workflows/tests.yml)
 
 Esta é uma biblioteca cliente para a API da [Cielo](https://www.cielo.com.br/).
 
