@@ -4,6 +4,7 @@ namespace MrPrompt\Cielo\Exceptions;
 
 use ArrayObject;
 use Throwable;
+use Exception;
 
 class ValidacaoErrors extends Exception
 {
