@@ -9,7 +9,7 @@ class Documento implements Dto
 {
     public function __construct(public readonly DocumentoTipo $tipo, public readonly string $numero) {}
 
-    public static function fromRequest($request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             tipo: $request->IdentityType ? DocumentoTipo::match($request->IdentityType) : null,
@@ -17,7 +17,7 @@ class Documento implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             tipo: DocumentoTipo::match($data['tipo']),

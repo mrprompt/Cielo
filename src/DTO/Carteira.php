@@ -14,7 +14,7 @@ class Carteira implements Dto
         public ?string $chave = null)
     {}
 
-    public static function fromRequest($request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             tipo: $request->Type ?? null,
@@ -24,7 +24,7 @@ class Carteira implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             tipo: Tipo::match($data['tipo']),

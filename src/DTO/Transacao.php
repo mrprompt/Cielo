@@ -8,7 +8,7 @@ class Transacao implements Dto
 {
     public function __construct(public readonly Ordem $ordem, public readonly Cliente $cliente, public readonly Pagamento $pagamento) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             ordem: Ordem::fromRequest($request),
@@ -17,7 +17,7 @@ class Transacao implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             ordem: Ordem::fromArray($data['ordem']),

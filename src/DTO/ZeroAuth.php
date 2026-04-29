@@ -13,7 +13,7 @@ class ZeroAuth implements Dto
         public ?string $identificador = null
     ) { }
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
            valido: $request->Valid ?? null,
@@ -23,7 +23,7 @@ class ZeroAuth implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             valido: $data['valido'] ?? null,

@@ -14,7 +14,7 @@ class Devolucao implements Dto
         public readonly string $retornoMensagem,
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             status: $request->Status ?? '',
@@ -25,7 +25,7 @@ class Devolucao implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             status: $data['status'] ?? '',
