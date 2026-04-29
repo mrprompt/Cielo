@@ -37,7 +37,7 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.5",
         "guzzlehttp/guzzle": "^7.0",
         "respect/validation": "^2.4"
     },
