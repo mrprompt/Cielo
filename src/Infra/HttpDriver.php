@@ -6,10 +6,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use MrPrompt\Cielo\Exceptions\CieloApiErrors;
 use MrPrompt\Cielo\Contratos\Ambiente as AmbienteInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class HttpDriver
 {
-    private $defaultHeaders = [];
+    private readonly array $defaultHeaders;
 
     public function __construct(
         private readonly AmbienteInterface $ambiente,
@@ -23,55 +24,50 @@ class HttpDriver
         ];
     }
 
-    public function post(string $uri, array $data)
+    public function post(string $uri, array $data): ResponseInterface
     {
         try {
             $content = [
                 'headers' => $this->defaultHeaders,
+                ...($data !== [] ? ['json' => $data] : []),
             ];
-
-            if (count($data) > 0) {
-                $content['json'] = $data;
-            }
 
             return $this->client->post($this->ambiente->transacional() . $uri, $content);
         } catch (RequestException $e) {
-            $cieloException = new CieloApiErrors('Erro, confira em $erros', $e->getCode(), $e->getPrevious());
-            $cieloException->setDetails($e);
-
-            throw $cieloException;
+            $this->handleRequestException($e);
         }
     }
 
-    public function get(string $uri)
+    public function get(string $uri): ResponseInterface
     {
         try {
-            return $this->client->get($this->ambiente->consultas() . $uri, ['headers' => $this->defaultHeaders]);
+            return $this->client->get(
+                $this->ambiente->consultas() . $uri,
+                ['headers' => $this->defaultHeaders]
+            );
         } catch (RequestException $e) {
-            $cieloException = new CieloApiErrors('Erro, confira em $erros', $e->getCode(), $e->getPrevious());
-            $cieloException->setDetails($e);
-
-            throw $cieloException;
+            $this->handleRequestException($e);
         }
     }
 
-    public function put(string $uri, array $data = [])
+    public function put(string $uri, array $data = []): ResponseInterface
     {
         try {
             $content = [
                 'headers' => $this->defaultHeaders,
+                ...($data !== [] ? ['json' => $data] : []),
             ];
-
-            if (count($data) > 0) {
-                $content['json'] = $data;
-            }
 
             return $this->client->put($this->ambiente->transacional() . $uri, $content);
         } catch (RequestException $e) {
-            $cieloException = new CieloApiErrors('Erro, confira em $erros', $e->getCode(), $e->getPrevious());
-            $cieloException->setDetails($e);
-
-            throw $cieloException;
+            $this->handleRequestException($e);
         }
+    }
+
+    private function handleRequestException(RequestException $e): never
+    {
+        $cieloException = new CieloApiErrors('Erro, confira em $erros', $e->getCode(), $e->getPrevious());
+        $cieloException->setDetails($e);
+        throw $cieloException;
     }
 }
