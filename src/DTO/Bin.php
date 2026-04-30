@@ -20,7 +20,7 @@ class Bin implements Dto
         public ?bool $prePago = null
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             tipo: TipoCartao::match($request->CardType ?? TipoCartao::CREDITO->value),
@@ -35,7 +35,7 @@ class Bin implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             tipo: TipoCartao::match($data['tipo'] ?? TipoCartao::CREDITO->value),

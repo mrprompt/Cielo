@@ -15,7 +15,7 @@ class Cancelamento implements Dto
         public readonly string $autorizacao,
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         return new self(
             status: $request->Status ?? '',
@@ -27,7 +27,7 @@ class Cancelamento implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         return new self(
             status: $data['status'] ?? '',

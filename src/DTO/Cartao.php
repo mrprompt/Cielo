@@ -25,9 +25,9 @@ class Cartao implements Dto
         public ?bool $prePago = null
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
-        return new self(
+        return new static(
             tipo: TipoCartao::match($request->CardType ?? TipoCartao::CREDITO->value),
             bandeira: BandeiraCartao::match($request->Brand ?? $request->Provider ?? BandeiraCartao::MASTERCARD->value),
             nome: $request->CustomerName ?? null,
@@ -45,9 +45,9 @@ class Cartao implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
-        return new self(
+        return new static(
             tipo: TipoCartao::match($data['tipo'] ?? TipoCartao::CREDITO->value),
             bandeira: BandeiraCartao::match($data['bandeira'] ?? BandeiraCartao::MASTERCARD->value),
             nome: $data['nome'] ?? null,
@@ -69,18 +69,13 @@ class Cartao implements Dto
     {
         return array_filter([
             'CustomerName' => $this->nome,
-            'CardType' => $this->tipo->value,
+            'CardType' => $this->tipo?->value,
             'CardNumber' => $this->numero,
             'Holder' => $this->portador,
             'ExpirationDate' => $this->validade,
             'SecurityCode' => $this->codigoSeguranca,
-            'Brand' => $this->bandeira->value,
+            'Brand' => $this->bandeira?->value,
             'CardToken' => $this->token,
-            'ForeignCard' => $this->estrangeiro,
-            'CorporateCard' => $this->corporativo,
-            'Issuer' => $this->emissorNome,
-            'IssuerCode' => $this->emissorCodigo,
-            'Prepaid' => $this->prePago,
-        ], fn($value) => !is_null($value) && $value !== '');
+        ], fn($value) => $value !== null && $value !== '');
     }
 }

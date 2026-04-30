@@ -7,21 +7,21 @@ use MrPrompt\Cielo\Contratos\Dto;
 class Captura implements Dto
 {
     public function __construct(
-        public readonly int $status,
-        public readonly int $motivoCodigo,
+        public readonly int|string $status,
+        public readonly int|string $motivoCodigo,
         public readonly string $motivoMensagem,
-        public readonly int $retornoCodigoProvedor,
+        public readonly int|string $retornoCodigoProvedor,
         public readonly string $retornoMensagemProvedor,
-        public readonly int $retornoCodigo,
+        public readonly int|string $retornoCodigo,
         public readonly string $retornoMensagem,
         public readonly string $tid,
         public readonly string $comprovante,
         public readonly string $autorizacao,
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
-        return new self(
+        return new static(
             status: $request->Status ?? '',
             motivoCodigo: $request->ReasonCode ?? '',
             motivoMensagem: $request->ReasonMessage ?? '',
@@ -35,9 +35,9 @@ class Captura implements Dto
         );
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
-        return new self(
+        return new static(
             status: $data['status'] ?? '',
             motivoCodigo: $data['motivoCodigo'] ?? '',
             motivoMensagem: $data['motivoMensagem'] ?? '',

@@ -3,20 +3,23 @@
 namespace MrPrompt\Cielo\Exceptions;
 
 use ArrayObject;
+use Throwable;
 use Exception;
 
 class ValidacaoErrors extends Exception
 {
-    public ArrayObject $erros;
+    public readonly ArrayObject $erros;
 
-    public function __construct($exception = "", $code = 0, $prev = null)
-    {
-        parent::__construct($exception, $code, $prev);
-
+    public function __construct(
+        string $message = "",
+        int $code = 0,
+        ?Throwable $previous = null,
+    ) {
+        parent::__construct($message, $code, $previous);
         $this->erros = new ArrayObject();
     }
 
-    public function setDetails(array $erros)
+    public function setDetails(array $erros): ArrayObject
     {
         array_walk(
             $erros,

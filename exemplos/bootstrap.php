@@ -14,6 +14,13 @@ $dotenv->required(['CIELO_MERCHANT_ID', 'CIELO_MERCHANT_KEY']);
 define('MERCHANT_ID', $_ENV['CIELO_MERCHANT_ID']);
 define('MERCHANT_KEY', $_ENV['CIELO_MERCHANT_KEY']);
 
-$client = new Client;
-$autenticacao = new Autenticacao(MERCHANT_ID, MERCHANT_KEY);
-$driver = new HttpDriver(Ambiente::match('sandbox'), $client, $autenticacao);
+$client = new Client();
+$autenticacao = new Autenticacao(
+    merchantId: MERCHANT_ID,
+    merchantKey: MERCHANT_KEY,
+);
+$driver = new HttpDriver(
+    ambiente: Ambiente::match('sandbox'),
+    client: $client,
+    autenticacao: $autenticacao,
+);

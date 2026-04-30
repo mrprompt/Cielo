@@ -13,17 +13,20 @@ enum Tipo: string
     public static function match(string $value): self
     {
         return match ($value) {
-            'CreditCard' => self::CREDITO,
-            'Crédito' => self::CREDITO,
-            'DebitCard' => self::DEBITO,
-            'Débito' => self::DEBITO,
+            'CreditCard', 'Crédito' => self::CREDITO,
+            'DebitCard', 'Débito' => self::DEBITO,
             'Múltiplo' => self::BOTH,
-            default => throw new ValidacaoErrors("Tipo de cartão inválido: {$value}")
+            default => self::throwInvalidType($value),
         };
     }
 
     public static function tipos(): array
     {
         return array_column(self::cases(), 'value');
+    }
+
+    private static function throwInvalidType(string $value): never
+    {
+        throw new ValidacaoErrors("Tipo de cartão inválido: {$value}");
     }
 }

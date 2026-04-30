@@ -38,9 +38,9 @@ class Pagamento implements Dto
         public ?Retorno $retorno = null
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
-        $object = new self(
+        $object = new static(
             id: $request->PaymentId ?? null,
             tipo: Tipo::match($request->Type),
             valor: $request->Amount ?? null,
@@ -74,9 +74,9 @@ class Pagamento implements Dto
         return $object;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
-        return new self(
+        return new static(
             id: $data['id'] ?? null,
             tipo: array_key_exists('tipo', $data) ? Tipo::match($data['tipo']) : null,
             valor: $data['valor'] ?? null,
@@ -103,24 +103,27 @@ class Pagamento implements Dto
 
     public function toRequest(): array
     {
-        $request = [
-            'Type' => !is_null($this->tipo) ? $this->tipo->value : null,
+        $baseRequest = [
+            'Type' => $this->tipo?->value,
             'Amount' => $this->valor,
-            'Currency' => !is_null($this->moeda) ? $this->moeda->value : null,
-            'Provider' => !is_null($this->provedor) ? $this->provedor->value : null,
+            'Currency' => $this->moeda?->value,
+            'Provider' => $this->provedor?->value,
             'ServiceTaxAmount' => $this->taxas,
             'SoftDescriptor' => $this->descricao,
             'Installments' => $this->parcelas,
-            'Interest' => !is_null($this->parcelas_tipo) ? $this->parcelas_tipo->value : null,
-            'Capture' => $this->captura ?? null,
-            'Authenticate' => $this->autenticacao ?? null,
-            'Recurrent' => $this->recorrente ?? null,
+            'Interest' => $this->parcelas_tipo?->value,
+            'Capture' => $this->captura,
+            'Authenticate' => $this->autenticacao,
+            'Recurrent' => $this->recorrente,
         ];
 
-        if (!is_null($this->cartao)) {
-            $request[ $this->cartao->tipo->value ] = $this->cartao->toRequest();
-        }
+        $cartaoRequest = $this->cartao !== null
+            ? [$this->cartao->tipo?->value => $this->cartao->toRequest()]
+            : [];
 
-        return array_filter($request, fn($value) => !is_null($value) && $value !== '');
+        return array_filter(
+            [...$baseRequest, ...$cartaoRequest],
+            fn($value) => $value !== null && $value !== ''
+        );
     }
 }

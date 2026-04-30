@@ -20,7 +20,7 @@ class Cliente implements Dto
         public ?ArrayObject $enderecos = null,
     ) {}
 
-    public static function fromRequest(object $request): self
+    public static function fromRequest(object $request): static
     {
         $enderecos = new ArrayObject;
         property_exists($request, 'Address') ?? $enderecos->append(Endereco::fromRequest($request->Address, TipoEndereco::PRINCIPAL));
@@ -40,7 +40,7 @@ class Cliente implements Dto
 
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         $enderecos = new ArrayObject;
 
