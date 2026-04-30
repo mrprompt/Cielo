@@ -15,7 +15,7 @@ Esta é uma biblioteca cliente para a API da [Cielo](https://www.cielo.com.br/).
 ## Instalação
 
 ```console
-composer require mrprompt/cielo "^4.0"
+composer require mrprompt/cielo "^4.1"
 ```
 
 ## Exemplos
