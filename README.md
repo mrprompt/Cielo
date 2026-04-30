@@ -10,7 +10,7 @@ Esta é uma biblioteca cliente para a API da [Cielo](https://www.cielo.com.br/).
 
 ## Requisitos
 
-* PHP 8.2+
+* PHP 8.4+
 
 ## Instalação
 
